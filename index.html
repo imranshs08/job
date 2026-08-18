@@ -317,10 +317,12 @@
             </div>
         </div>
 
-        <div class="nav-controls">
+        <div class="controls">
             <button class="btn" onclick="offsetDate(-1)">&#8592; Prev</button>
-            <button class="btn" onclick="resetDate()">Today</button>
-            <div class="date-display" id="target-date-display">Viewing: ...</div>
+            <button class="btn" onclick="resetDate()"
+                style="background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8;">Today</button>
+            <div class="date-display" id="target-date-display"
+                style="font-weight: 700; color: #f1f5f9; letter-spacing: 0.5px; padding: 0 1rem;">Viewing: ...</div>
             <button class="btn" onclick="offsetDate(1)">Next &#8594;</button>
         </div>
 
