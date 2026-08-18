@@ -216,7 +216,7 @@
 
 | Date | Day | CKA Plan (KodeKloud) | Est. Duration | Status |
 |---|---|---|---|---|
-| Aug 18, 2026 | Tue | **Introduction**: Course Introduction / Topics Overview (—)<br>**Core Concepts**: Core Concepts Section Introduction (00:31)<br>**Core Concepts**: Cluster Architecture (08:48) | 9m 19s | ☐ |
+| Aug 18, 2026 | Tue | **Introduction**: Course Introduction / Topics Overview (—)<br>**Core Concepts**: Core Concepts Section Introduction (00:31)<br>**Core Concepts**: Cluster Architecture (08:48) | 9m 19s | ✅ |
 | Aug 19, 2026 | Wed | **Core Concepts**: ETCD for Beginners (07:22)<br>**Core Concepts**: ETCD in Kubernetes (03:17) | 10m 39s | ☐ |
 | Aug 20, 2026 | Thu | **Core Concepts**: ETCD – Commands (Optional) (—)<br>**Core Concepts**: Kube API Server (04:51) | 4m 51s | ☐ |
 | Aug 21, 2026 | Fri | **Core Concepts**: Kube Controller Manager (04:15)<br>**Core Concepts**: Kube Scheduler (03:53) | 8m 8s | ☐ |
