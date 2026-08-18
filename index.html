@@ -308,6 +308,12 @@
                 </ul>
             </div>
 
+            <!-- Career Marketing Card -->
+            <div class="card" style="--accent: #10b981; --accent-glow: rgba(16, 185, 129, 0.3);">
+                <h2>💼 Career Marketing Milestones</h2>
+                <ul class="task-list" id="career-tasks"></ul>
+            </div>
+
             <!-- Videos Card -->
             <div class="card" style="--accent: #f59e0b; --accent-glow: rgba(245, 158, 11, 0.3);">
                 <h2>📺 158-Video Tracker
@@ -506,6 +512,74 @@
             const promptIndex = (viewingDate.getDate() + viewingDate.getMonth()) % aiPrompts.length;
             document.getElementById('ai-prompt-title').innerText = aiPrompts[promptIndex].title;
             document.getElementById('ai-daily-prompt').innerText = aiPrompts[promptIndex].text;
+
+            // -------- DYNAMIC CAREER MARKETING MODULE --------
+            const careerPhases = {
+                phase1: {
+                    title: "Phase 1: Resume Overhaul (Target: End of Oct)",
+                    tasks: [
+                        "Select a clean, standard single-column ATS-friendly template.",
+                        "Write a strong Professional Summary emphasizing Cloud, IaC, and CI/CD.",
+                        "Experience List: Tailor past IT/SysAdmin experience to highlight automation, scripting, and reliability.",
+                        "Projects Section: Prominently link the 5 GitHub Capstone repos."
+                    ]
+                },
+                phase2: {
+                    title: "Phase 2: LinkedIn Optimization (Target: Early Nov)",
+                    tasks: [
+                        "Headline: Change to 'DevOps Engineer | AWS & Azure | Kubernetes | Terraform | CI/CD Builder'",
+                        "About Section: Write a compelling narrative about your passion for zero-trust infrastructure.",
+                        "Skills: Add all 20+ DevOps skills you've mapped. Ask for endorsements.",
+                        "Featured: Pin your best 2 GitHub projects.",
+                        "Status: Turn on 'Open to Work'."
+                    ]
+                },
+                phase3: {
+                    title: "Phase 3: Active Networking & Outreach (Target: Mid-Nov to Dec)",
+                    tasks: [
+                        "Connect with IT Recruiters specifically hiring for Cloud/DevOps.",
+                        "Send 5 targeted messages a week to hiring managers on LinkedIn.",
+                        "Join cloud tech Slack/Discord groups and answer questions.",
+                        "Track applied jobs in a structured spreadsheet."
+                    ]
+                },
+                phase4: {
+                    title: "Phase 4: Interview Readiness (Target: December)",
+                    tasks: [
+                        "Practice 30-second 'Tell me about yourself' elevator pitch.",
+                        "Prepare STAR method stories for: 'Tell me about a time you broke production...'",
+                        "Prepare STAR method stories for: 'How did you automate a painful manual process?'",
+                        "Run systemic mock-interviews with a recruiter or senior engineering friend."
+                    ]
+                },
+                phase5: {
+                    title: "Phase 5: GO LIVE (Jan 2027+)",
+                    tasks: [
+                        "🚀 Apply to high-quality jobs every day.",
+                        "Reach out directly to hiring managers for applied roles.",
+                        "Crush your interviews!"
+                    ]
+                }
+            };
+
+            let activePhase = careerPhases.phase1;
+            const vY = viewingDate.getFullYear();
+            const vM = viewingDate.getMonth(); // 0-indexed (Oct=9, Nov=10, Dec=11)
+            const vD = viewingDate.getDate();
+
+            if (vY < 2026 || (vY === 2026 && vM <= 9)) activePhase = careerPhases.phase1;
+            else if (vY === 2026 && vM === 10 && vD <= 15) activePhase = careerPhases.phase2;
+            else if (vY === 2026 && vM === 10 && vD > 15) activePhase = careerPhases.phase3;
+            else if (vY === 2026 && vM === 11) activePhase = careerPhases.phase4;
+            else activePhase = careerPhases.phase5;
+
+            let careerHtml = `<li class="task-item">
+                <div style="color: var(--accent); font-weight: bold; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">🎯 ${activePhase.title}</div>`;
+            activePhase.tasks.forEach(t => {
+                careerHtml += `<div style="margin-bottom: 0.4rem;">• ${t}</div>`;
+            });
+            careerHtml += `</li>`;
+            document.getElementById('career-tasks').innerHTML = careerHtml;
         }
 
         // Boot
