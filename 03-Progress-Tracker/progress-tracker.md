@@ -211,6 +211,7 @@
 
 | Certification | Status | Target Date | Preparation Milestone |
 |---|---|---|---|
+| **CKA: KodeKloud Course** | ☐ | Oct 15 | [KodeKloud Official Course](https://kodekloud.com/courses/cka-certification-course-certified-kubernetes-administrator) |
 | CKA: Simulator Killer.sh #1 | ☐ | Oct 20 | Clear with > 85% |
 | CKA: Simulator Killer.sh #2 | ☐ | Oct 25 | Clear with > 90% |
 | **CKA: Final Exam Date** | ☐ | **Oct 30** | Pass (Cost: ~$395) |

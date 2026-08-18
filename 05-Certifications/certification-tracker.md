@@ -22,6 +22,7 @@
 
 ### Exam Prep Checklist
 - [ ] Purchase Exam Voucher (Look for Cyber Monday / KubeCon discounts!)
+- [ ] **Complete KodeKloud CKA Course:** [KodeKloud CKA Certification](https://kodekloud.com/courses/cka-certification-course-certified-kubernetes-administrator)
 - [ ] Complete killer.sh simulator (Included with voucher; do not take the real exam until you can clear the simulator)
 - [ ] Memorize essential `kubectl` imperative commands
 - [ ] Master Kubernetes documentation bookmarking (kubernetes.io/docs)

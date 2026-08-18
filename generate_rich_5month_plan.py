@@ -159,6 +159,7 @@ pt_content += """
 
 | Certification | Status | Target Date | Preparation Milestone |
 |---|---|---|---|
+| **CKA: KodeKloud Course** | \u2610 | Oct 15 | [KodeKloud Official Course](https://kodekloud.com/courses/cka-certification-course-certified-kubernetes-administrator) |
 | CKA: Simulator Killer.sh #1 | \u2610 | Oct 20 | Clear with > 85% |
 | CKA: Simulator Killer.sh #2 | \u2610 | Oct 25 | Clear with > 90% |
 | **CKA: Final Exam Date** | \u2610 | **Oct 30** | Pass (Cost: ~$395) |
