@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3-Day AI DevOps Sprint</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #000;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 24pt;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            background: #eee;
+            padding: 10px;
+            border-left: 5px solid #000;
+            font-size: 16pt;
+        }
+
+        .intro {
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 11pt;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #000;
+            margin-right: 15px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .url {
+            display: block;
+            font-family: monospace;
+            font-size: 9pt;
+            color: #444;
+            margin-top: 5px;
+            text-decoration: underline;
+        }
+
+        .quote {
+            margin-top: 50px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+            border-top: 1px dotted #000;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>3-DAY AI DEVOPS SPRINT</h1>
+    <div class="intro">
+        "Sharpen the Axe" — Execute these core AI patterns from July 28-30, 2026,<br>before the 154-Day DevOps Master
+        Bootcamp begins.
+    </div>
+
+    <h2>DAY 1: Advanced AI for DevOps (July 28)</h2>
+    <ul>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>AI for IaC Generation & Validation:</strong> Use tools like K8sGPT or LLM workflows to generate
+                complex architectures. Audit with Checkov.
+                <span class="url">https://www.youtube.com/watch?v=HlkX42XpPzU (45:12)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Automated Incident Response:</strong> Pipeline ELK/Grafana logs or CI/CD logs into an LLM for
+                instant RCA.
+                <span class="url">https://www.youtube.com/watch?v=Lx9bL4PqR_M (32:45)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Building an Internal Knowledge RAG:</strong> Build a private RAG pipeline to parse
+                Confluence/Notion pages and Git repos.
+                <span class="url">https://www.youtube.com/watch?v=Vd3QqzGzVjA (1h 15m)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Multi-Agent Systems:</strong> Explore AutoGPT or CrewAI acting as "Automated SREs".
+                <span class="url">https://www.youtube.com/watch?v=F3cM4X8kOqg (28:30)</span>
+            </div>
+        </li>
+    </ul>
+
+    <h2>DAY 2: AIOps & Cloud FinOps (July 29)</h2>
+    <ul>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>AI Observability:</strong> Research Datadog Watchdog or Dynatrace Davis AI to see how AI
+                correlates logs automatically.
+                <span class="url">https://www.datadoghq.com/product/machine-learning/ (Article - 15m read)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>FinOps Automation:</strong> Explore Kubecost to understand how Kubernetes resource allocation is
+                algorithmically right-sized.
+                <span class="url">https://www.kubecost.com/ (Article - 10m read)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Interview Prep:</strong> Outline a "mock pitch". Explain saving 30% of a company's cloud bill
+                using AI FinOps to a hiring manager.
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Watch:</strong> Datadog AI Masterclass (YouTube)
+                <span class="url">https://www.youtube.com/watch?v=TbzD8Z0yqRw (55:10)</span>
+            </div>
+        </li>
+    </ul>
+
+    <h2>DAY 3: LLMOps Architecture & DevSecOps (July 30)</h2>
+    <ul>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Vector Databases:</strong> Understand Vector DBs (Milvus, Pinecone) and why they are attached to
+                LLMs for "memory" in RAG pipelines.
+                <span class="url">https://milvus.io/ (Documentation - 20m read)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>GPU Provisioning:</strong> Briefly review the NVIDIA Device Plugin for Kubernetes to understand
+                how DevOps provides GPUs.
+                <span class="url">https://github.com/NVIDIA/k8s-device-plugin (Docs - 15m read)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>DevSecOps for AI:</strong> Read the OWASP Top 10 for LLMs. Specifically understand Prompt
+                Injection and Data Poisoning.
+                <span class="url">https://owasp.org/www-project-top-10-for-large-language-model-applications/ (PDF - 45m
+                    read)</span>
+            </div>
+        </li>
+        <li>
+            <div class="checkbox"></div>
+            <div class="content">
+                <strong>Bootcamp Prep:</strong> Print out your `job-tracker.pdf`. Clear your workspace.
+            </div>
+        </li>
+    </ul>
+
+    <div class="quote">
+        “Give me six hours to chop down a tree and I will spend the first four sharpening the axe.” - Abraham Lincoln
+    </div>
+</body>
+
+</html>

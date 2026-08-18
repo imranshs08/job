@@ -1,0 +1,158 @@
+Day-1 | Fundamentals of DevOps | Free DevOps Course | 45 days | #devopscourse #learning - 30:40
+Day-2 | Improve SDLC with DevOps | Free DevOps Course | 45 days | #devopscourse #learning - 26:12
+Absolute Prerequisite for Learning DevOps - 42:12
+Day-3 | Virtual Machines Part-1 | Free DevOps Course | 45 days | #devopscourse #learning #vm - 25:27
+Day-4 | AWS & Azure - How to Create Virtual Machines | Free DevOps Course | 45 days |#devops #aws - 29:38
+HOW TO CONNECT TO EC2 INSTANCE FROM WINDOWS LAPTOP | MOBAXTERM | #aws #devops #abhishekveeramalla - 7:40
+Day-5 | AWS CLI Full Guide | How to connect to EC2 Instance from UI & Terminal | AWS CFT walk though - 30:36
+Day-6 | Linux & Shell Scripting | Complete Shell Scripting Playlist| #aws #azure | #devops - 37:45
+Shell Scripting for DevOps|Shell Scripting Zero 2 Hero|Shell Scripting Interview Questions| #devops - 1:10:04
+Shell Scripting for DevOps | Zero 2 Hero Part-2 | Shell Scripting Interview Q&A | #devops - 1:10:30
+Day-7 |  Live AWS Project using SHELL SCRIPTING for DevOps | AWS DevOps project| #devops #aws #2023 - 28:11
+Day-9 | Git and GitHub | What is GIT ? | What is Version Control ? | #devops #2023 #github #gitlab - 36:31
+Day-10 | Git Branching Strategy | Real World Example | DevOps Interview Question|#devops #k8s #2023 - 22:15
+Day-11 | Git Interview Q&A and Commands for DevOps | Real World Example |#devops #github #git  #2023 - 52:06
+Day 12 | Deploy and expose your First App to AWS | Feat. Kunal Verma | Live Project | #aws projects - 1:03:26
+Day 13 | Top 15 AWS Services that Every DevOps Engineers should learn | #aws #devops - 35:39
+Day-14 | Configuration Management With Ansible |Puppet vs Ansible |Live Projects | #ansible #devops - 36:42
+Day-15 | Ansible Zero to Hero | #ansible #devops - 55:51
+Day-16 | Infrastructure as Code | #terraform #IaC - 21:05
+Day-17 |Everything about Terraform |Write Your First Project |Remote Backend |Modules |Interview Q&A - 1:17:53
+Day-22 | Project Management tools for DevOps | What a DevOps Engineer does in the first week ? #2023 - 24:49
+Day-23 | Introduction to Containers | Learn about containers in easy way #docker #kubernetes #devops - 25:10
+Day-24 | Docker Zero to Hero Part-1 | Must Watch | Basics to Best Practices | #docker #devops - 49:54
+Day-25  | Docker Containerzation for Django | #django #python #devops - 28:34
+Day-26 | Multi Stage Docker Builds | Reduce Image Size by 800 % | Distroless Container Images | #k8s - 31:31
+Day-27 | Docker Volumes and Bind Mounts|Persistent Storage for Docker| #devopstutorialsforbeginners - 35:34
+Day-28 | Docker Networking | Bridge vs Host vs Overlay |Secure containers with custom bridge network - 33:24
+Day-29 | Docker Interview Questions with Answers | How many can you answer ? | Comment your score - 38:16
+Day-30 | KUBERNETES IS EASY  | INTRODUCTION TO KUBERNETES| #k8s #devopscourse #kubernetes #devops - 35:13
+Day-31 | KUBERNETES ARCHITECTURE USING EXAMPLES | Kubernetes is Easy #devops #k8s #devopscourse - 25:30
+Day-32 | How to Manage Hundreds of Kubernetes clusters ??? | KOPS | #k8s #kubernetes #devops - 26:35
+Day-33 | KUBERNETES PODS | DEPLOY YOUR FIRST APP |  #k8s #devopscourse #kubernetes #devops - 35:11
+Day-34 | KUBERNETES DEPLOYMENT | REPLICASETS | #k8s #devopscourse #kubernetes #devops - 27:38
+DAY-35 | EVERYTHING ABOUT KUBERNETES SERVICES | DISCOVERY | LOAD BALANCING | NETWORKING | #devops - 34:37
+Day-36 | KUBERNETES INTERVIEW QUESTIONS PART-1| What's Your Score ? |10/10| #kubernetes #devops #k8s - 29:03
+DAY-37 | KUBERNETES SERVICES DEEP DIVE| LIVE DEMO | LEARN TRAFFIC FLOW USING KUBESHARK | #kubernetes - 44:18
+DAY-38 | KUBERNETES INGRESS | WATCH DEMO USING LINK IN DESCRIPTION | #kubernetes #devops #freecourse - 39:17
+INTRODUCTION TO K8s RBAC | 30 DAYS FREE OPENSHIFT CLUSTER | LEARN RBAC WITH REAL CLUSTER | #devops - 26:40
+DAY-40 | KUBERNETES CUSTOM RESOURCES | CUSTOM CONTROLLER | DEEP DIVE & DETAILED EXPLANATION | #k8s - 39:10
+DAY-41 | KUBERNETES LIVE PROJECT | CONFIGMAPS & SECRETS | HOW TO USE CONFIGMAPS & SECRETS INSIDE POD - 38:06
+DAY-42 | KUBERNETES MONITORING USING PROMETHEUS & GRAFANA |LIVE DEMO |STEPS IN GITHUB | #kubernetes - 40:54
+DAY-43 | AWS LIVE PROJECT | DEPLOY APP USING HTTPD |Feat. Varun Bansal | #aws #devops #apache #http - 54:48
+Day-18 | What is CICD ? | Introduction to CICD | How CICD works ? | #devops #abhishekveeramalla - 33:25
+Day-19 | Jenkins ZERO to HERO | 3 Projects Live |Docker Agent |Interview Questions | #k8s #gitops - 59:26
+Day-20 | GitHub Actions | Actions vs Jenkins | 3 Projects with examples | Configure your own runner - 22:19
+Day-21 | CICD Interview Questions | GitHub Repo with Q&A #cicd #jenkins #github #gitlab #devops - 22:47
+Day - 1 | Fundamentals of Linux | Run Linux using Docker - 38:10
+Day - 2 | Linux Folder Structure Explained | Free Linux Course - 50:41
+Day - 3 | User Management | File Management | Vi Editor Shortcuts - 1:00:39
+Day - 4 | Linux File Permissions Management | Free Linux Course - 44:19
+Day - 5 | Process Management | Monitoring | Networking | Disk Management | Free Linux Course - 1:10:10
+Networking Concepts are Easy | Networking Explained in a simple way - 42:04
+OSI Model Simplified | You will never forget OSI model after this - 30:59
+Day-0 | Course Details | Free AWS Zero to Hero Course for DevOps Engineers #devops #aws #interview - 24:03
+Day-1 | Introduction to AWS | What is Public Cloud ? | Create an AWS Account | #aws #devops #cloud - 28:30
+Day-2 | AWS IAM deep dive with practicals and notes | IAM Project |#devops #aws #abhishekveeramalla - 46:00
+Day-3 | EC2 Deep Dive | Deploy Jenkins on AWS | Available in 1080P Quality | Project | #aws #devops - 42:15
+Day-4 | Best VPC explanation| VPC explained in 30 mins #devops #aws #abhishekveeramalla - 32:49
+Day-5 | AWS Security Group and NACL | Theory + Practical | AWS FREE COURSE by Abhishek |#devops #aws - 48:00
+Day-6 | Route53 explained in 15 mins | AWS FREE COURSE |#devops #aws #abhishekveeramalla - 17:20
+Day-7 | AWS Project Used In Production | Complete Implementation | #aws #abhishekveeramalla #devops - 45:52
+Day-8 |AWS Scenario Based Interview Questions on EC2, IAM and VPC |#aws #devops #abhishekveeramalla - 25:50
+Day-9 | AWS S3 Buckets Deep Dive | 2 Demo Projects with Code | #aws #s3 #abhishekveeramalla - 1:02:59
+Day-10 | AWS CLI Deep Dive | Concept + Installation + Demo | #aws #abhishekveeramalla #devops - 43:57
+Day-11 | IaC with AWS CFT | Tips and Tricks to Write CFT | CFT vs Terraform |  #abhishekveeramalla - 1:11:57
+Day-12 | AWS CICD | AWS CodeCommit | What is CICD on AWS ? |  #abhishekveeramalla #devops #awm - 31:26
+Day-13 | AWS Code Pipeline | Jenkins vs AWS Code Pipeline | Open Source vs AWS Managed | #aws - 26:21
+Day-14 | AWS END TO END CI | REALTIME PROJECT | DEMO WITH NOTES | #aws #devops #abhishekveeramalla - 57:40
+Day-15 | AWS ULTIMATE CICD PIPEPLINE | END TO END DEMO | AWS CODE PIPELINE | #aws #devops #cicd - 1:07:07
+Day-16 | AWS CLOUD WATCH DEEP DIVE | DEMO - LIVE EC2 CPU ALERTING THROUGH SNS | #aws #devops - 57:16
+Day-17 | AWS LAMBDA INTRODUCTION | HOW DEVOPS ENGINEERS USE SERVERLESS ARCHITECTURE ?| #aws #devops - 35:13
+Day-18 | AWS Cost Optimization | Most Popular Cloud and DevOps project| Event Driven Serverless #aws - 44:46
+Day-19 | AWS CLOUD FRONT | Ft: Piyush | Content Delivery Network | #aws #devops #abhishekveeramalla - 38:02
+Day-20 | AWS ECR | ECR vs DockerHub | Free AWS job ready course | #aws #devops #abhishekveeramalla - 29:27
+Day-21 | AWS ECS | ECS vs EKS vs Kubernetes | Free AWS job ready course| #devops #abhishekveeramalla - 55:08
+Day-23 | Secret Management on AWS | Most asked Interview question | #aws #abhishekveeramalla - 17:15
+Day-24 | TERRAFORM WITH AWS PROJECT  | @cloudchamp  | AWS REAL TIME PROJECT #aws - 1:27:23
+Day-25 | AWS Config | Identify Compliant and Non Compliant AWS resources   |#aws #abhishekveeramalla - 30:17
+Day-26 | AWS Load Balancers | ALB vs NLB vs GWLB | Detailed Comparison | #aws #abhishekveeramalla - 31:42
+Day-28 | Migrating applications to AWS cloud | Complete project details |  #aws #abhishekveeramalla - 33:33
+Day-30 | THREE-TIER ARCHITECTURE IMPLEMENTATION ON AWS | #aws #abhishekveeramalla - 17:44
+Day-0 | Azure Zero to Hero Course Syllabus| Azure Job and Certification Ready Course| AZ-900| AZ-104 - 31:47
+Day-1 | Basics of Cloud Computing | Fundamentals of Azure #freeazurecourse - 50:08
+Day-2 | Getting Started With Azure #freeazurecourse - 30:32
+Day-3 | Resource, Resource Groups and Azure Resource Manager | Demo and Usecases #freeazurecourse - 24:33
+Day-4 | Deploy Jenkins on Azure VM | Azure VM Types explained - 43:49
+Day-5 | Azure Virtual Network(VNet) Explained | Beginner Level ✔️ - 18:32
+Day-6 | Azure Networking Basic to Advanced | Best Azure Networking explanation ✔️ - 39:30
+Day-7 | Azure Networking Demo | Azure VNet, Firewall, NSG and Bastion | Beginner Level Azure Project - 37:57
+Day-8 | Azure Networking Interview Questions | Scenario Based Interview Questions | #azure #devops - 34:00
+Day-9 | Azure Storage Services and Usecases | Blob | File | Tables and Queues #freeazurecourse - 24:28
+Day-10 | Automate Azure Resources using Azure CLI | Command Line Interface | #freeazurecourse - 29:01
+Day -11 | Azure Resource Manager Templates in 60 Minutes | ARM templates vs Bicep | ARM vs Terraform - 1:00:04
+Day -12 | Azure IAM from Basics | Azure Managed Identities Demo with Microsoft Entra (With Notes) - 44:40
+Day-13 | Azure DevOps in 20 minutes | How & Why DevOps Engineers use Azure DevOps #freeazurecourse - 19:11
+Day-14 | DevOps Project from Absolute Zero| Project Setup+ CI pipelines implementation| Azure DevOps - 1:21:44
+Day-15 | Ultimate Azure CI/CD Pipeline using Azure Pipelines & Argo CD | Multi Microservice Project - 1:34:06
+Day-16 | AKS vs Self Managed Kubernetes Clusters | Pros and Cons | Azure Interview Questions - 29:11
+Day - 17 | Deploy an E-Commerce Project on Azure Kubernetes Service | Step By Step Guide Project AKS - 1:15:32
+Day-18 | Azure DevOps Scenario Based Interview Questions with Answers #abhishekveeramalla #azure - 34:56
+Day-19 | Creating Effective Monitoring System on Azure | Monitor | Prometheus | Network Watcher - 22:00
+Day-20 | Azure Key Vault Integration with AKS | Kubernetes Secret Store CSI Driver with Azure Vault - 52:03
+Day-21 | Introduction to Serverless using Azure Functions ? Real Time Usecases #abhishekveeramalla - 12:40
+Day-22 | Event Driven Serverless Implementation with Demo | Azure Blob Trigger #freeazurecourse - 51:20
+Day-23 | Azure Zero to Hero | Getting Started with Terraform for Azure | Complete Setup - VS Code - 59:02
+Day-24 | DevOps Resume with Projects from my Zero to Hero Playlists | DevOps Projects Added - 45:10
+Day -25 | No Dockerfile, No K8s Manifests | Setup CI/CD in 5 minutes for any programming language - 24:32
+Day-26 | Scale your Kubernetes Cluster in a Cost Optimized Way | Useful Tips to reduce cost - 30:57
+Day-27 | Make your windows laptop 10X productive for DevOps and Cloud | WSL 2 - 17:13
+Day-0 | Terraform Zero to Hero | Course Syllabus | #abhishekveeramalla - 22:05
+Day-1 | Terraform Zero to Hero | Getting Started with Terraform | #abhishekveeramalla #terraform - 59:58
+Day-2 | Providers, Multi Region, Multi Cloud, Variables & Conditions #terraform #abhishekveeramalla - 41:44
+Day-3 | Terraform Modules | Write your First Module | #terraform #abhishekveeramalla - 49:50
+Day-4 | Terraform State DeepDive | Remote Backend | State Locking #abhishekveeramalla #terraform - 50:31
+Day-5 | Most Common Terraform Task Used in Real-Time | #devops  #abhishekveeramalla #terraform - 39:43
+Day-6 | Terraform Workspaces Demo | Dev - QA - Stage | #terraform #abhishekveeramalla #terraform - 42:23
+Day-7 | Terraform Vault Integration | Secrets Management | #terraform #abhishekveeramalla - 42:48
+Day-8 | Most Asked Interview Scenarios | #terraform #abhishekveeramalla - 22:47
+Day-1 | Introduction to Python | Shell Scripting vs Python | Install and Run | #abhishekveeramalla - 27:01
+Day-0 | Python for DevOps Course Syllabus | Learn Python from Basics | #abhishekveeramalla #python - 19:14
+Day-2 | Data Types | Strings | String Handling Functions | #abhishekveeramalla #python - 32:48
+Day-3 | Keywords, Variables & Best Practices | Global vs Local | #python #abhishekveeramalla - 47:10
+Day-4 | Functions, Modules and Packages | Most Simple Explanation #python  #abhishekveeramalla - 1:08:15
+Day-5 | Command Line Args & Env Vars | Most Simple Explanation #python  #abhishekveeramalla - 29:42
+Day-6 | Operators | Python for DevOps #python  #abhishekveeramalla - 25:33
+Day-7 | Conditional Handling | IF, ELSE, ELSE IF | Python for DevOps #python  #abhishekveeramalla - 14:58
+Day-8 | Lists and Tuples | Interview Concepts | Python for DevOps #python #abhishekveeramalla - 40:11
+Day-9 | Loops in Python | For Loop & While Loop | DevOps UseCases | #abhishekveeramalla - 41:44
+Day-10 | Python For DevOps  | Python Real Time UseCase with Lists & Exceptional Handling - 37:07
+Day-11 | Python For DevOps | Python Real Time UseCase with Dictionaries #abhishekveeramalla - 52:58
+Day-12 | Python For DevOps | Python File Operations | Update Server configuration using Python - 22:28
+Day-13 | Python For DevOps | Boto3 Begineer to Advanced Guide with Projects - 1:48:26
+Day 14 | Python For DevOps | Automate JIRA Creation on a Github Event using Python - 43:31
+Day 15 - Python for DevOps | Part-2 GitHub Jira Integration using Python Flask | DevOps Project - 52:00
+Day-16 | Beginner & Intermediate Level Python Interview Q&A for DevOps | - 34:26
+DAY-0 | AI Assisted DevOps Zero to Hero | Course Syllabus - 15:15
+DAY-1 | Fundamentals of AI Assisted DevOps | Demo and Notes Included - 50:08
+DAY-2 |  AI Assisted DevOps | Prompt Engineer Explained In 30 Minutes - 26:52
+DAY-3 | AI Assisted DevOps | Gen-AI Project For DevOps Engineers - 52:43
+Run Deepseek AI on your machine in 2 steps with user interface. - 12:55
+DAY-4 | AI Assisted Shell Scripting | Write Shell Script like a Pro - 28:25
+Day-5 | AI Assisted DevOps | AIOps Explained with Free Playgrounds - 29:18
+Day-6 | AIOps for Log Analysis | First AIOps Project using Python | Beginner Level with Notes - 44:08
+Day-7 | Create your First AI Agent with zero coding and zero cost | Beginner Level Guide - 29:32
+Docker Model Runner Explained with Demo | Will this replace Ollama ? - 10:46
+Day-8 | AI Agent for your Internal Documentation in 30 mins | Local LLMs | Crew AI | Inhouse Agent - 32:15
+Build Enterprise AI Agent for Internal Documentation in 10 Minutes | Retool - 17:55
+Can AI deploy my app to VM + Container + Kubernetes + Serverless ? | Ultimate Test - 24:13
+Day-1 | Fundamentals of Observability | Observability Zero to Hero Course - 35:16
+Day-2 | Metrics, Monitoring and Prometheus | Basics of Prometheus - 46:34
+Day-3 | Best Prometheus Explanation | Practical Hands on demonstration - 49:03
+Day-4 | Custom Metrics Instrumentation and Scraping using Prom Client | Send Custom Alerts to Email - 37:18
+Day-5 | Logging with EFK Stack | Elastic Search, FluentBit and Kibana - 45:03
+Day-6 | Distributed Tracing with Jaeger in 1 video | Beginner Level Demo with Code - 50:34
+End to End Observability Project | Beginner Level guide for complex micro service project - 33:13
+OpenSearch Stack in 30 minutes | Aiven for OpenSearch | Complete Guide with Demo - 27:35
+PagerDuty Explained in 20 minutes - 17:11
+Multi Cloud Infrastructure Monitoring in no time | Beginner Level Project | Free Setup - 33:40

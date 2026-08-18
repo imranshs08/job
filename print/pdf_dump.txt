@@ -1,0 +1,429 @@
+ENTERPRISE AZURE FRONT DOOR PREMIUM + API MANAGEMENT
+(APIM)
+ZERO-TRUST ARCHITECTURE & COMPLETE STUDY WORKBOOK
+[ A4 PRINT EDITION — 30-PAGE MASTER ARCHITECTURE GUIDE ]
+📋 WORKBOOK OWNERSHIP & PROJECT METADATA
+Lead Cloud Architect: ____________________________________________________________________
+Target Enterprise Domain: api.yourcompany.com
+Subscription ID: ___________________________________ Environment: [ ] Dev    [ ] Staging    [ ] Prod
+APIM Gateway Name: ___________________________________ APIM SKU: [ ] Dev    [ ] Standardv2    [ ] Premium
+Front Door Profile: ___________________________________ WAF Policy: ___________________________________
+Workbook Start Date: _____ / _____ / 2026 Target Sign-Off: _____ / _____ / 2026
+🎯 ARCHITECTURE TOPOLOGY OVERVIEW & CORE OBJECTIVES
+This master guide establishes an enterprise-grade perimeter security and global traffic routing topology. By positioning Azure Front Door (AFD)
+Premium in front of Azure API Management (APIM), the architecture guarantees:
+Global Traffic Acceleration:  Split-TCP Anycast edge routing for minimal latency across points of presence.
+Layer 7 Edge Defense:  Web Application Firewall (WAF) with OWASP CRS Top 10, Bot Manager, and custom rate limiting.
+Zero-Trust Perimeter Lockdown:  Direct access elimination via X-Azure-FDID  header checks, NSG Service Tags, and VNet Private Link.
+Operational Observability:  KQL security queries, health probing ( /status-0123456789 ), and automated TLS lifecycle management.
+🏛️ ARCHITECTURAL PILLARS AT A GLANCE
+[ GLOBAL EDGE ] [ PERIMETER WAF ] [ ZERO-TRUST GATEWAY ]
+• Anycast POP Edge Nodes
+• Auto-Rotating Managed TLS
+• Custom Domain CNAME DNS • Managed OWASP DRS Top 10
+• Bot Protection Rulesets
+• Custom Rate-Limiting Rules • X-Azure-FDID Header Check
+• Subnet NSG Service Tags
+• VNet Private Link Service 
+⚡ QUICK-START INSTRUCTIONS FOR PRINT & STUDY
+1. SCAN QR CODES:  Point your mobile camera at any QR code in the guide to launch video tutorials or Microsoft documentation.
+2. USE RULED PAGES:  Turn to the 3 dedicated 8mm notebook sheets following each phase to draft your notes, parameters, and sketches.
+3. TICK PROGRESS:  Update Page 2 (Master Progress Tracker) after completing each video, document, lab, and security test script.• 
+• 
+• 
+• 
+
+---PAGE---
+
+MASTER LEARNING PROGRESS TRACKER & IMPLEMENTATION DASHBOARD
+Tick off each milestone as you progress through video modules, documentation, notes, and lab deployments
+📊 END-TO-END IMPLEMENTATION PROGRESS CHECKLIST (TICK BOXES)
+Phase Title Video [ ] Docs [ ] Notes [ ] Lab Deployed [ ] Tested [ ] Self-Mastery
+Phase 1: APIM Baseline Setup ★ ★ ★ ★ ★
+Phase 2: Front Door & Custom SSL ★ ★ ★ ★ ★
+Phase 3: WAF OWASP & Rate Limits ★ ★ ★ ★ ★
+Phase 4: Perimeter Lockdown & Private Link ★ ★ ★ ★ ★
+Phase 5: Pen Testing & Bypass Check ★ ★ ★ ★ ★
+Phase 6: Operations Handover & KQL ★ ★ ★ ★ ★
+⏱️ STUDY & LAB HOURS LOG BOOK
+Date Phase Hours Spent Topics Studied & Lab Activities Completed
+__/__/2026 Phase ___ ___ hrs __________________________________________________
+__/__/2026 Phase ___ ___ hrs __________________________________________________
+__/__/2026 Phase ___ ___ hrs __________________________________________________
+__/__/2026 Phase ___ ___ hrs __________________________________________________
+__/__/2026 Phase ___ ___ hrs __________________________________________________
+📌 KEY MILESTONE BADGES & GOAL COMPLETION SIGN-OFF
+🎯 Milestone 1
+APIM + Front Door Live
+ Verified 🛡️ Milestone 2
+WAF OWASP Prevention
+ Verified 🔒 Milestone 3
+Zero-Trust Lockdown
+ Verified 
+
+---PAGE---
+
+PHASE 1: AZURE API MANAGEMENT (APIM) CORE SETUP
+Gateway Provisioning, Backend Integration, Products & Policy Hierarchy
+PHASE 1: AZURE API MANAGEMENT (APIM) BASELINE SETUP Duration: 1-2 Days
+Service Provisioning:  Deploy APIM (Developer, Standard v2, or Premium SKU depending on VNet requirements). Configure
+global settings, custom domain certificates, and managed identity.
+Backend Integration & Products:  Import backend REST/GraphQL microservices into APIM. Organize APIs into logical Products
+(e.g., Public-Starter, Enterprise-Partner).
+Policy Configurations:  Apply product/global policies including rate limiting ( rate-limit-by-key ), JWT validation ( jwt-
+validate ), and CORS.
+Built-in Health Endpoint:  APIM provides a built-in health probe endpoint at /status-0123456789  (returns 200 OK when
+healthy).
+🎥 Video Tutorial Module:
+Azure API Management Deep Dive (John Savill):
+https://www.youtube.com/watch?v=PXtFq5wmGt0• 
+• 
+• 
+• 
+
+
+---PAGE---
+
+PHASE 1 WORKBOOK — SHEET 1 OF 3
+PHASE 1 - APIM BASELINE SETUP: VIDEO KEY TAKEAWAYS & ARCHITECTURE NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 1 WORKBOOK — SHEET 2 OF 3
+PHASE 1 - APIM BASELINE SETUP: CONFIGURATION SPECS & RESOURCE PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 1 WORKBOOK — SHEET 3 OF 3
+PHASE 1 - APIM BASELINE SETUP: COMPONENT FLOW CANVAS & VERIFICATION
+CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 1 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 1 Traffic Flow & Integration Topology ]
+✅ PHASE 1 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+PHASE 2: AZURE FRONT DOOR (AFD) & CUSTOM DOMAIN SETUP
+Profiles, Endpoints, DNS Validation, Managed TLS & Health Probing
+PHASE 2: AZURE FRONT DOOR (AFD) & CUSTOM DOMAIN PROVISIONING Duration: 1-2 Days
+Profile & Endpoint Creation:  Provision Azure Front Door Premium (required for Private Link and advanced WAF capabilities).
+Create AFD Endpoint (e.g., ep-api-prod.azurefd.net ).
+Custom Domain & TLS/SSL:  Add Custom Domain (e.g., api.yourcompany.com ). Create DNS validation records (CNAME /
+TXT). Enable Azure-Managed Certificate or bind custom Key Vault certificate.
+Origin Group & Health Probes:  Point Origin to APIM hostname ( apim-prod.azure-api.net ). Configure Health Probe Path
+to /status-0123456789  on HTTPS Port 443 with 30s probe intervals.
+🎥 Video Tutorial Module:
+Azure Front Door Tutorial: Setup, Configuration & Best Practices:
+https://www.youtube.com/watch?v=cB-jlc6aWXA• 
+• 
+• 
+
+
+---PAGE---
+
+PHASE 2 WORKBOOK — SHEET 1 OF 3
+PHASE 2 - FRONT DOOR & CUSTOM DOMAIN: VIDEO KEY TAKEAWAYS & ARCHITECTURE
+NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 2 WORKBOOK — SHEET 2 OF 3
+PHASE 2 - FRONT DOOR & CUSTOM DOMAIN: CONFIGURATION SPECS & RESOURCE
+PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 2 WORKBOOK — SHEET 3 OF 3
+PHASE 2 - FRONT DOOR & CUSTOM DOMAIN: COMPONENT FLOW CANVAS & VERIFICATION
+CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 2 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 2 Traffic Flow & Integration Topology ]
+✅ PHASE 2 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+PHASE 3: ENTERPRISE WEB APPLICATION FIREWALL (WAF) SECURITY
+Managed OWASP Core Rulesets, Bot Protection & Custom Rate-Limiting
+PHASE 3: ENTERPRISE WAF POLICY & CUSTOM SECURITY RULES Duration: 2 Days
+WAF Mode Assignment:  Attach a WAF Policy to Front Door Security Policies in Prevention Mode .
+Managed Rulesets:  Enable Default Rule Set (DRS / OWASP Top 10) to guard against SQLi, XSS, and RCE attacks. Enable Bot
+Manager Ruleset to block malicious scrapers.
+Custom Rules:  Configure IP Restrictions (Allow/Deny specific CIDR blocks or Geo-locations) and Rate Limiting (e.g., threshold of
+max 500 requests per 5 minutes per client IP).
+🎥 Video Tutorial Module:
+Azure Front Door WAF Tutorial: OWASP & Rate Limiting:
+https://www.youtube.com/watch?v=d76gE0-D-D4• 
+• 
+• 
+
+
+---PAGE---
+
+PHASE 3 WORKBOOK — SHEET 1 OF 3
+PHASE 3 - WAF OWASP & CUSTOM RULES: VIDEO KEY TAKEAWAYS & ARCHITECTURE
+NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 3 WORKBOOK — SHEET 2 OF 3
+PHASE 3 - WAF OWASP & CUSTOM RULES: CONFIGURATION SPECS & RESOURCE
+PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 3 WORKBOOK — SHEET 3 OF 3
+PHASE 3 - WAF OWASP & CUSTOM RULES: COMPONENT FLOW CANVAS & VERIFICATION
+CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 3 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 3 Traffic Flow & Integration Topology ]
+✅ PHASE 3 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+PHASE 4: AFD TO APIM INTEGRATION & ZERO-TRUST PERIMETER LOCKDOWN
+Enforcing X-Azure-FDID Header Validation, NSG Service Tag Filtering, and Private Link
+PHASE 4: DETAILED INTEGRATION & PERIMETER LOCKDOWN MANUAL Duration: 1-2 Days
+1. Header Lockdown via APIM Global Inbound Policy
+Retrieve Front Door Header ID ( X-Azure-FDID ) from Front Door Overview.
+In APIM, navigate to All APIs -> Inbound processing -> Policy editor  and apply:
+<policies>
+  <inbound>
+    <check-header name="X-Azure-FDID" failed-check-httpcode="403" failed-check-error-message="Forbidden:
+Direct access strictly prohibited" ignore-case="false">
+      <value>YOUR-FRONT-DOOR-ID-HERE</value>
+    </check-header>
+    <base />
+  </inbound>
+</policies>
+2. Network Security Group (NSG) Inbound Lockdown
+Attach NSG to APIM Subnet: Source: ServiceTag / AzureFrontDoor.Backend , Protocol: TCP, Port: 443, Action: Allow.
+Deny all other internet traffic.
+3. Zero-Trust Private Link Setup (Front Door Premium)
+Deploy APIM in Internal VNet mode with Private Link Service targeting internal load balancer. Enable Private Link in Front Door
+Origin settings.
+📖 Official Microsoft Guides:
+https://learn.microsoft.com/en-us/azure/api-management/front-door-api-management
+https://learn.microsoft.com/en-us/azure/frontdoor/standard-premium/how-to-enable-private-link-apim• 
+• 
+• 
+• 
+
+
+---PAGE---
+
+PHASE 4 WORKBOOK — SHEET 1 OF 3
+PHASE 4 - ZERO-TRUST PERIMETER LOCKDOWN: VIDEO KEY TAKEAWAYS &
+ARCHITECTURE NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 4 WORKBOOK — SHEET 2 OF 3
+PHASE 4 - ZERO-TRUST PERIMETER LOCKDOWN: CONFIGURATION SPECS & RESOURCE
+PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 4 WORKBOOK — SHEET 3 OF 3
+PHASE 4 - ZERO-TRUST PERIMETER LOCKDOWN: COMPONENT FLOW CANVAS &
+VERIFICATION CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 4 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 4 Traffic Flow & Integration Topology ]
+✅ PHASE 4 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+PHASE 5: SECURITY TESTING & VALIDATION RUNBOOK
+Executing Direct Bypass, Custom Domain Routing, WAF SQLi, and Rate Limit Verification
+PHASE 5: COMPREHENSIVE SECURITY VALIDATION MANUAL Duration: 1 Day
+Execution Commands & Expected Outcomes:
+Direct APIM Bypass Check: curl -i -X GET https://apim-prod.azure-api.net/status-0123456789  → 403
+Forbidden
+Front Door Custom Domain Routing Check: curl -i -X GET https://api.yourcompany.com/v1/health  → 200 OK
+WAF OWASP Injection Test (SQLi): curl -i "https://api.yourcompany.com/v1/users?id=1' OR '1'='1"  → 403
+Forbidden
+WAF Rate Limit Threshold Test:  Execute burst curl loop exceeding threshold → 429 Too Many Requests
+📖 Official Best Practices:
+https://learn.microsoft.com/en-us/azure/frontdoor/best-practices• 
+• 
+• 
+• 
+
+
+---PAGE---
+
+PHASE 5 WORKBOOK — SHEET 1 OF 3
+PHASE 5 - SECURITY PENETRATION TESTING: VIDEO KEY TAKEAWAYS & ARCHITECTURE
+NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 5 WORKBOOK — SHEET 2 OF 3
+PHASE 5 - SECURITY PENETRATION TESTING: CONFIGURATION SPECS & RESOURCE
+PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 5 WORKBOOK — SHEET 3 OF 3
+PHASE 5 - SECURITY PENETRATION TESTING: COMPONENT FLOW CANVAS &
+VERIFICATION CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 5 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 5 Traffic Flow & Integration Topology ]
+✅ PHASE 5 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+PHASE 6: DESIGN REVIEW & OPERATIONS HANDOVER
+Design Sign-off, IaC Deliverables, SecOps Runbooks & Log Analytics Queries
+PHASE 6: OPERATIONAL HANDOVER & MONITORING SPECIFICATIONS Duration: 1 Day
+Design Review:  Review architecture, DNS flow, and TLS certificate renewal strategy with SecOps/Cloud Architecture teams.
+Handover Package Deliverables:  Infrastructure-as-Code (Terraform / Bicep) templates, Log Analytics KQL queries for security
+alerts, and Operations Runbook for WAF tuning.
+AzureDiagnostics
+| where ResourceProvider == "MICROSOFT.CDN" and Category == "FrontDoorWebApplicationFirewallLog"
+| where action_s == "Block"
+| project TimeGenerated, clientIp_s, requestUri_s, ruleName_s, details_matches_s• 
+• 
+
+---PAGE---
+
+PHASE 6 WORKBOOK — SHEET 1 OF 3
+PHASE 6 - DESIGN REVIEW & OPERATIONS HANDOVER: VIDEO KEY TAKEAWAYS &
+ARCHITECTURE NOTES
+Date Studied: ____________________ Study Duration: ________ mins Mastery Level: ★ ★ ★ ★ ★
+🎥 VIDEO TUTORIAL CONCEPTS & ARCHITECTURAL TAKEAWAYS (8MM RULED NOTEBOOK LINES)
+
+
+---PAGE---
+
+PHASE 6 WORKBOOK — SHEET 2 OF 3
+PHASE 6 - DESIGN REVIEW & OPERATIONS HANDOVER: CONFIGURATION SPECS &
+RESOURCE PARAMETERS
+Azure Resource Group: ________________________________________ Subscription ID: ____________________
+⚙️ DETAILED RESOURCE PARAMETERS, POLICIES & CLI COMMANDS (8MM RULED)
+
+
+---PAGE---
+
+PHASE 6 WORKBOOK — SHEET 3 OF 3
+PHASE 6 - DESIGN REVIEW & OPERATIONS HANDOVER: COMPONENT FLOW CANVAS &
+VERIFICATION CHECKLIST
+Deployment Status: [ ] Pending    [ ] In-Progress    [ ] Complete Sign-Off Lead: ____________________
+📐 PHASE 6 ARCHITECTURE DIAGRAM & FLOW CANVAS
+[ Freehand Sketch Canvas for Phase 6 Traffic Flow & Integration Topology ]
+✅ PHASE 6 EXECUTION & VERIFICATION CHECKLIST
+ 1. Watched recommended video tutorial modules and scanned resource QR codes.
+ 2. Read official Microsoft Learn architectural documentation.
+ 3. Provisioned required Azure resources and configured parameters.
+ 4. Executed validation test scripts and verified expected HTTP response codes.
+
+---PAGE---
+
+DETAILED ARCHITECTURE LEARNING & STUDY GUIDE
+Mastering Azure Front Door Premium, WAF Engine & API Management Security Topology
+MODULE 1: APIM ARCHITECTURE & MECHANICS
+Gateway Components:  Proxies requests, enforces policies, validates JWTs, applies rate limits.
+Policy Hierarchy:  Sequential execution: Global > Product > API > Operation  via <base /> .
+🎥 Recommended Video:
+  APIM Deep Dive (John Savill):
+https://www.youtube.com/watch?v=PXtFq5wmGt0
+MODULE 2: GLOBAL ANYCAST ROUTING & EDGE TRAFFIC
+Split-TCP & Anycast:  Terminates TCP at nearest PoP edge node, reducing TLS latency over WAN.
+🎥 Recommended Video:
+  Azure Front Door Setup:
+https://www.youtube.com/watch?v=cB-jlc6aWXA
+MODULE 3: WEB APPLICATION FIREWALL (WAF) & LAYER 7
+OWASP CRS & Bot Rulesets:  Blocks SQLi, XSS, and RCE at the edge before hitting APIM.
+🎥 Recommended Video:
+  Front Door WAF & Rate Limiting:
+https://www.youtube.com/watch?v=d76gE0-D-D4• 
+• 
+• 
+• 
+
+
+---PAGE---
+
+WORKBOOK SHEET 7 OF 10
+ARCHITECTURE & SYSTEM FLOW SKETCHPAD
+Topic / Video: ________________________________________ Module: ____________________
+✏️ NETWORK TOPOLOGY & TRAFFIC FLOW CANVAS (FULL-PAGE DRAWING CANVAS)
+[ Full-Page Freehand Sketching Area for Edge Anycast -> AFD WAF -> Private Link / Header Check -> APIM -> Microservices
+]
+
+---PAGE---
+
+WORKBOOK SHEET 8 OF 10
+APIM POLICY XML & INFRASTRUCTURE-AS-CODE SCRATCHPAD
+Policy Scope: [ ] Global [ ] Product [ ] API [ ] Operation IaC Framework: [ ] Terraform [ ] Bicep
+📜 INBOUND / OUTBOUND POLICY XML DRAFT AREA (LINED RULED CODE CANVAS)
+<!-- Draft your custom policy code (e.g. rate-limit-by-key, jwt-validate, set-header) below: -->
+
+---PAGE---
+
+WORKBOOK SHEET 9 OF 10
+SECOPS LOG ANALYTICS & KQL QUERY DESIGN SHEET
+Log Source: [ ] Front Door WAF Log [ ] APIM Gateway Log Alert Severity: [ ] Sev 0 [ ] Sev 1 [ ] Sev 2
+📊 KQL QUERY WORKSHOP (LINED RULED QUERY CANVAS)
+// Draft custom Log Analytics KQL query for attack detection / anomalous traffic:
+
+---PAGE---
+
+WORKBOOK SHEET 10 OF 10
+TROUBLESHOOTING & INCIDENT RUNBOOK LOG
+Resource Title: ________________________________________ Date Studied: ____________________
+📚 DEEP STUDY NOTES & DIAGNOSTIC COMMANDS (A4 RULED SPACING - 8MM)

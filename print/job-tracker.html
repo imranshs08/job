@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Job Switch 2027 — Master Workbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0;
+            background: #e9ecef;
+            color: #111;
+        }
+        
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 20mm;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        @media print {
+            body { background: white; margin: 0; padding: 0; }
+            .page { 
+                margin: 0; 
+                padding: 15mm; 
+                width: 100%; 
+                min-height: 100vh;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .no-print { display: none !important; }
+        }
+
+        /* Typography */
+        h1 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 5px; color: #0a0a1a; }
+        h2 { font-size: 1.4rem; font-weight: 800; border-bottom: 2px solid #000; padding-bottom: 5px; margin-top: 0; text-transform: uppercase; color: #1a1a2e; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 15px 0 10px 0; color: #333; }
+        p { font-size: 0.9rem; margin-bottom: 10px; color: #444; }
+
+        /* Cover Specifics */
+        .cover-header { border-bottom: 4px solid #000; padding-bottom: 10px; margin-bottom: 30px; }
+        .subtitle { font-size: 1.1rem; font-weight: 600; color: #555; text-transform: uppercase; }
+        .metadata-box { border: 2px solid #000; padding: 20px; margin-bottom: 20px; font-weight: 600; font-size: 1rem; }
+        .metadata-line { margin: 15px 0; border-bottom: 1px dashed #000; padding-bottom: 2px; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.85rem; }
+        th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; }
+        td.check-col { width: 40px; text-align: center; }
+        input[type="checkbox"] { width: 14px; height: 14px; border: 1px solid #000; }
+
+        /* Matrices & Checkboxes */
+        .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
+        .check-item { display: flex; align-items: center; gap: 8px; }
+
+        /* Badges */
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; border: 1px solid #000; }
+
+        /* Notebook Paper Formatting */
+        .ruled-page {
+            background-image: repeating-linear-gradient(transparent, transparent 31px, #ccc 31px, #ccc 32px);
+            min-height: 200mm;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .sketch-box {
+            border: 2px dashed #888;
+            height: 200mm;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            font-size: 0.7rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ccc;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page">
+        <div class="cover-header">
+            <h1>DEVOPS JOB SWITCH 2027</h1>
+            <div class="subtitle">ENTERPRISE MASTER WORKBOOK & ARCHITECTURE GUIDE</div>
+            <p style="margin-top:10px; font-size:0.85rem; color:#666;">A4 PRINT EDITION — 158-VIDEO IMMERSIVE ROADMAP</p>
+        </div>
+
+        <h3>📋 WORKBOOK OWNERSHIP & PROJECT METADATA</h3>
+        <div class="metadata-box">
+            <div class="metadata-line">Lead Engineer / Owner: ____________________________________________________________________</div>
+            <div class="metadata-line">Target Role & Level: ___________________________________ Expected CTC: ______________________</div>
+            <div class="metadata-line">Workbook Start Date: _____ / _____ / 2026      Target Apply Date: 01 / 01 / 2027</div>
+            <div class="metadata-line">Primary Cloud Stack: [ ] AWS    [ ] Azure    [ ] GCP    Primary IaC: [ ] Terraform    [ ] Bicep</div>
+        </div>
+
+        <h3>🎯 ARCHITECTURE TOPOLOGY OVERVIEW & CORE OBJECTIVES</h3>
+        <p>This master guide is designed to transform you into an enterprise-grade DevOps Engineer over the span of 5 months. Following the "DevOps Zero to Hero" blueprint, this workbook establishes the physical trail of your digital learning.</p>
+        <p><strong>1. Global Deployment Confidence:</strong> Automating deployments via CI/CD, Containerization, and AWS/Azure.</p>
+        <p><strong>2. Operational Observability:</strong> Mastering K8s monitoring, ELK stack, and Prometheus.</p>
+        <p><strong>3. Zero-Trust IaC:</strong> Enforcing security natively via Terraform, Ansible, and DevSecOps.</p>
+
+        <h3>⚡ QUICK-START INSTRUCTIONS FOR PRINT & STUDY</h3>
+        <p><strong>1. WATCH & TICK:</strong> As you watch each video (1 to 158), tick the checkbox in the phase tables.</p>
+        <p><strong>2. USE RULED PAGES:</strong> Turn to the dedicated 8mm notebook sheets following each phase video list to draft notes, CLI commands, and concepts.</p>
+        <p><strong>3. SKETCH ARCHITECTURES:</strong> Use the sketch-box pages to draw VPC setups, K8s networking, and Jenkins CI/CD flow diagrams by hand.</p>
+
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Cover Page</span>
+        </div>
+    </div>
+
+    <!-- PAGE 2: MASTER DASHBOARD -->
+    <div class="page">
+        <h2>MASTER LEARNING PROGRESS TRACKER</h2>
+        <p>Tick off each milestone as you progress through video modules, notes, and lab deployments.</p>
+        
+        <h3>📊 END-TO-END IMPLEMENTATION PROGRESS CHECKLIST</h3>
+        <table>
+            <tr>
+                <th>Phase Title</th>
+                <th class="check-col">Video</th>
+                <th class="check-col">Notes</th>
+                <th class="check-col">Lab</th>
+                <th class="check-col">Tested</th>
+                <th class="check-col">Mastery</th>
+            </tr>
+            <tr>
+                <td>Phase 1: Foundations (Linux, Shell, Git, AWS)</td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>Phase 2: Containers & Orchestration (Docker, K8s)</td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>Phase 3: CI/CD & IaC (Jenkins, Terraform, Ansible)</td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>Phase 4: Advanced (Monitoring, Python, DevSecOps)</td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>Phase 5: AI, Capstone & Career Readiness</td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <h3>⏱️ STUDY & LAB HOURS LOG BOOK</h3>
+        <table>
+            <tr><th>Date</th><th>Phase / Topic</th><th>Hours</th><th>Sign-Off</th></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+            <tr><td>__/__/26</td><td>___________________________________</td><td>___ hrs</td><td>________</td></tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Master Dashboard</span>
+        </div>
+    </div>
+
+
+    <!-- PHASE 1 - VIDEOS -->
+    <div class="page">
+        <h2>PHASE 1: FOUNDATIONS (AUG 1 – SEP 4)</h2>
+        <p><strong>Focus:</strong> DevOps Intro, Linux, Shell Scripting, Git, & AWS Basics</p>
+        
+        <table>
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>
+            <tr>
+                <td>#1</td>
+                <td>Day-1 - Fundamentals of DevOps - Free DevOps Course - 45 days - #devopsc...</td>
+                <td>30m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=Ou9j73aWgyE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#2</td>
+                <td>Day-2 - Improve SDLC with DevOps - Free DevOps Course - 45 days - #devop...</td>
+                <td>26m 12s</td>
+                <td><a href="https://www.youtube.com/watch?v=jRqBIpcgO4g" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#3</td>
+                <td>Absolute Prerequisite for Learning DevOps</td>
+                <td>42m 12s</td>
+                <td><a href="https://www.youtube.com/watch?v=neG2MFVFji0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#4</td>
+                <td>Day-3 - Virtual Machines Part-1 - Free DevOps Course - 45 days - #devops...</td>
+                <td>25m 27s</td>
+                <td><a href="https://www.youtube.com/watch?v=lgUwYwBozow" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#5</td>
+                <td>Day-4 - AWS & Azure</td>
+                <td>29m 38s</td>
+                <td><a href="https://www.youtube.com/watch?v=NJkMe9cdYEQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#6</td>
+                <td>HOW TO CONNECT TO EC2 INSTANCE FROM WINDOWS LAPTOP - MOBAXTERM - #aws #d...</td>
+                <td>7m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=MkIRh1mi8Ms" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#7</td>
+                <td>Day-5 - AWS CLI Full Guide - How to connect to EC2 Instance from UI & Te...</td>
+                <td>30m 36s</td>
+                <td><a href="https://www.youtube.com/watch?v=cN4pt5KQ9eA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#8</td>
+                <td>Day-6 - Linux & Shell Scripting - Complete Shell Scripting Playlist- #aw...</td>
+                <td>37m 45s</td>
+                <td><a href="https://www.youtube.com/watch?v=9jw9F6mcQDo" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#9</td>
+                <td>Shell Scripting for DevOps-Shell Scripting Zero 2 Hero-Shell Scripting I...</td>
+                <td>1h 10m</td>
+                <td><a href="https://www.youtube.com/watch?v=zsajhz2_50g" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#10</td>
+                <td>Shell Scripting for DevOps - Zero 2 Hero Part-2 - Shell Scripting Interv...</td>
+                <td>1h 10m</td>
+                <td><a href="https://www.youtube.com/watch?v=CyQtk9f646Q" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#11</td>
+                <td>Day-7 -  Live AWS Project using SHELL SCRIPTING for DevOps - AWS DevOps ...</td>
+                <td>28m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=gx5E47R9fGk" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#12</td>
+                <td>Day-9 - Git and GitHub - What is GIT ? - What is Version Control ? - #de...</td>
+                <td>36m 31s</td>
+                <td><a href="https://www.youtube.com/watch?v=fIMySI_gZJU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#13</td>
+                <td>Day-10 - Git Branching Strategy - Real World Example - DevOps Interview ...</td>
+                <td>22m 15s</td>
+                <td><a href="https://www.youtube.com/watch?v=MCyvYT8FS5w" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#14</td>
+                <td>Day-11 - Git Interview Q&A and Commands for DevOps - Real World Example ...</td>
+                <td>52m 6s</td>
+                <td><a href="https://www.youtube.com/watch?v=mT6qrAx14O4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#15</td>
+                <td>Day 12 - Deploy and expose your First App to AWS - Feat. Kunal Verma - L...</td>
+                <td>1h 3m</td>
+                <td><a href="https://www.youtube.com/watch?v=NLmF64KdLN0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#16</td>
+                <td>Day 13 - Top 15 AWS Services that Every DevOps Engineers should learn - ...</td>
+                <td>35m 39s</td>
+                <td><a href="https://www.youtube.com/watch?v=leWJypzVyQ4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#17</td>
+                <td>Day-14 - Configuration Management With Ansible -Puppet vs Ansible -Live ...</td>
+                <td>36m 42s</td>
+                <td><a href="https://www.youtube.com/watch?v=I5_NF8nvACg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#18</td>
+                <td>Day-15 - Ansible Zero to Hero - #ansible #devops</td>
+                <td>55m 51s</td>
+                <td><a href="https://www.youtube.com/watch?v=Z6T2r3Xhk5k" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#19</td>
+                <td>Day-16 - Infrastructure as Code - #terraform #IaC</td>
+                <td>21m 5s</td>
+                <td><a href="https://www.youtube.com/watch?v=G1BRnIHBBig" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#20</td>
+                <td>Day-17 -Everything about Terraform -Write Your First Project -Remote Bac...</td>
+                <td>1h 17m</td>
+                <td><a href="https://www.youtube.com/watch?v=CzdfdKWRDB8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#21</td>
+                <td>Day-22 - Project Management tools for DevOps - What a DevOps Engineer do...</td>
+                <td>24m 49s</td>
+                <td><a href="https://www.youtube.com/watch?v=h4HdQBnEO04" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#22</td>
+                <td>Day-23 - Introduction to Containers - Learn about containers in easy way...</td>
+                <td>25m 10s</td>
+                <td><a href="https://www.youtube.com/watch?v=7JZP345yVjw" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#23</td>
+                <td>Day-24 - Docker Zero to Hero Part-1 - Must Watch - Basics to Best Practi...</td>
+                <td>49m 54s</td>
+                <td><a href="https://www.youtube.com/watch?v=wodLpta-hoQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#24</td>
+                <td>Day-25  - Docker Containerzation for Django - #django #python #devops</td>
+                <td>28m 34s</td>
+                <td><a href="https://www.youtube.com/watch?v=3IAvr_O6vao" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#25</td>
+                <td>Day-26 - Multi Stage Docker Builds - Reduce Image Size by 800 % - Distro...</td>
+                <td>31m 31s</td>
+                <td><a href="https://www.youtube.com/watch?v=yyJrZgoNal0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#26</td>
+                <td>Day-27 - Docker Volumes and Bind Mounts-Persistent Storage for Docker- #...</td>
+                <td>35m 34s</td>
+                <td><a href="https://www.youtube.com/watch?v=r_LgmqejAkA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#27</td>
+                <td>Day-28 - Docker Networking - Bridge vs Host vs Overlay -Secure container...</td>
+                <td>33m 24s</td>
+                <td><a href="https://www.youtube.com/watch?v=xrUGEoUpa3s" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#28</td>
+                <td>Day-29 - Docker Interview Questions with Answers - How many can you answ...</td>
+                <td>38m 16s</td>
+                <td><a href="https://www.youtube.com/watch?v=I6ZBUEc4LrU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#29</td>
+                <td>Day-30 - KUBERNETES IS EASY  - INTRODUCTION TO KUBERNETES- #k8s #devopsc...</td>
+                <td>35m 13s</td>
+                <td><a href="https://www.youtube.com/watch?v=dfxrdoEQe00" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#30</td>
+                <td>Day-31 - KUBERNETES ARCHITECTURE USING EXAMPLES - Kubernetes is Easy #de...</td>
+                <td>25m 30s</td>
+                <td><a href="https://www.youtube.com/watch?v=gywke3XiNC0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#31</td>
+                <td>Day-32 - How to Manage Hundreds of Kubernetes clusters ??? - KOPS - #k8s...</td>
+                <td>26m 35s</td>
+                <td><a href="https://www.youtube.com/watch?v=44Qk55E6CAA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#32</td>
+                <td>Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP -  #k8s #devopscourse #...</td>
+                <td>35m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=-rDT9m1RKSA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#33</td>
+                <td>Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS - #k8s #devopscourse #kuber...</td>
+                <td>27m 38s</td>
+                <td><a href="https://www.youtube.com/watch?v=lVKLkyuRWCY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#34</td>
+                <td>DAY-35 - EVERYTHING ABOUT KUBERNETES SERVICES - DISCOVERY - LOAD BALANCI...</td>
+                <td>34m 37s</td>
+                <td><a href="https://www.youtube.com/watch?v=xY6Ic7Igzck" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#35</td>
+                <td>Day-36 - KUBERNETES INTERVIEW QUESTIONS PART-1- What's Your Score ? -10/...</td>
+                <td>29m 3s</td>
+                <td><a href="https://www.youtube.com/watch?v=0qy5JD7CbJ4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#36</td>
+                <td>DAY-37 - KUBERNETES SERVICES DEEP DIVE- LIVE DEMO - LEARN TRAFFIC FLOW U...</td>
+                <td>44m 18s</td>
+                <td><a href="https://www.youtube.com/watch?v=fCX8O7GA_lY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#37</td>
+                <td>DAY-38 - KUBERNETES INGRESS - WATCH DEMO USING LINK IN DESCRIPTION - #ku...</td>
+                <td>39m 17s</td>
+                <td><a href="https://www.youtube.com/watch?v=47ck6bh6dfI" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#38</td>
+                <td>INTRODUCTION TO K8s RBAC - 30 DAYS FREE OPENSHIFT CLUSTER - LEARN RBAC W...</td>
+                <td>26m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=1slRgW2IzJY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#39</td>
+                <td>DAY-40 - KUBERNETES CUSTOM RESOURCES - CUSTOM CONTROLLER - DEEP DIVE & D...</td>
+                <td>39m 10s</td>
+                <td><a href="https://www.youtube.com/watch?v=alGEPSQxbLg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#40</td>
+                <td>DAY-41 - KUBERNETES LIVE PROJECT - CONFIGMAPS & SECRETS - HOW TO USE CON...</td>
+                <td>38m 6s</td>
+                <td><a href="https://www.youtube.com/watch?v=f-DqMTxs5z8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#41</td>
+                <td>DAY-42 - KUBERNETES MONITORING USING PROMETHEUS & GRAFANA -LIVE DEMO -ST...</td>
+                <td>40m 54s</td>
+                <td><a href="https://www.youtube.com/watch?v=EeiYpnBHnhY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#42</td>
+                <td>DAY-43 - AWS LIVE PROJECT - DEPLOY APP USING HTTPD -Feat. Varun Bansal -...</td>
+                <td>54m 48s</td>
+                <td><a href="https://www.youtube.com/watch?v=cgsBdVnMV-o" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#43</td>
+                <td>Day-18 - What is CICD ? - Introduction to CICD - How CICD works ? - #dev...</td>
+                <td>33m 25s</td>
+                <td><a href="https://www.youtube.com/watch?v=CmVxoNkkACQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#44</td>
+                <td>Day-19 - Jenkins ZERO to HERO - 3 Projects Live -Docker Agent -Interview...</td>
+                <td>59m 26s</td>
+                <td><a href="https://www.youtube.com/watch?v=zZfhAXfBvVA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#45</td>
+                <td>Day-20 - GitHub Actions - Actions vs Jenkins - 3 Projects with examples ...</td>
+                <td>22m 19s</td>
+                <td><a href="https://www.youtube.com/watch?v=K3RqgDPCjYs" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#46</td>
+                <td>Day-21 - CICD Interview Questions - GitHub Repo with Q&A #cicd #jenkins ...</td>
+                <td>22m 47s</td>
+                <td><a href="https://www.youtube.com/watch?v=LAYV7x_aIC0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#47</td>
+                <td>Day</td>
+                <td>38m 10s</td>
+                <td><a href="https://www.youtube.com/watch?v=SCS51FDPKgQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#48</td>
+                <td>Day</td>
+                <td>50m 41s</td>
+                <td><a href="https://www.youtube.com/watch?v=3WbDexOsVXw" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#49</td>
+                <td>Day</td>
+                <td>1h 0m</td>
+                <td><a href="https://www.youtube.com/watch?v=WNQU9QFK80M" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#50</td>
+                <td>Day</td>
+                <td>44m 19s</td>
+                <td><a href="https://www.youtube.com/watch?v=kqTgHRKeb04" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#51</td>
+                <td>Day</td>
+                <td>1h 10m</td>
+                <td><a href="https://www.youtube.com/watch?v=H9DAWegYpag" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#52</td>
+                <td>Networking Concepts are Easy - Networking Explained in a simple way</td>
+                <td>42m 4s</td>
+                <td><a href="https://www.youtube.com/watch?v=PhTn8RkF0F4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#53</td>
+                <td>OSI Model Simplified - You will never forget OSI model after this</td>
+                <td>30m 59s</td>
+                <td><a href="https://www.youtube.com/watch?v=lomiPKIXdEo" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 1 Tracker</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 1 - TAKEAWEAYS -->
+    <div class="page">
+        <h2>PHASE 1 WORKBOOK — KEY TAKEAWAYS</h2>
+        <p>Date Studied: ______________ &nbsp;&nbsp;&nbsp; Mastery Level: [ ] Entry [ ] Competent [ ] Master</p>
+        <p style="color:#777; font-size:0.8rem">Use the lined area below for notes during your video study.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 1 Sheet 1</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 1 - COMMANDS -->
+    <div class="page">
+        <h2>PHASE 1 WORKBOOK — CONFIG SPECS & COMMANDS</h2>
+        <p>Record core CLI commands, configurations, and Terraform block blueprints.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 1 Sheet 2</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 1 - SKETCHPAD -->
+    <div class="page">
+        <h2>PHASE 1 WORKBOOK — FLOW CANVAS</h2>
+        <p>Verification Check: [ ] Completed Lab</p>
+        <div class="sketch-box">
+            [ Architecture Sketchpad — Draw your Topology & Traffic Flow Here ]
+        </div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 1 Sheet 3</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 2 - VIDEOS -->
+    <div class="page">
+        <h2>PHASE 2: CONTAINERS & K8S (SEP 5 – OCT 19)</h2>
+        <p><strong>Focus:</strong> Docker, Kubernetes Architecture, Helm, and AKS/EKS</p>
+        
+        <table>
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>
+            <tr>
+                <td>#54</td>
+                <td>Day-0 - Course Details - Free AWS Zero to Hero Course for DevOps Enginee...</td>
+                <td>24m 3s</td>
+                <td><a href="https://www.youtube.com/watch?v=GkKNxyLp_V0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#55</td>
+                <td>Day-1 - Introduction to AWS - What is Public Cloud ? - Create an AWS Acc...</td>
+                <td>28m 30s</td>
+                <td><a href="https://www.youtube.com/watch?v=n6RWhajimZg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#56</td>
+                <td>Day-2 - AWS IAM deep dive with practicals and notes - IAM Project -#devo...</td>
+                <td>46m 0s</td>
+                <td><a href="https://www.youtube.com/watch?v=mCLYcsJ0GXQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#57</td>
+                <td>Day-3 - EC2 Deep Dive - Deploy Jenkins on AWS - Available in 1080P Quali...</td>
+                <td>42m 15s</td>
+                <td><a href="https://www.youtube.com/watch?v=Dc0t4LDOySY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#58</td>
+                <td>Day-4 - Best VPC explanation- VPC explained in 30 mins #devops #aws #abh...</td>
+                <td>32m 49s</td>
+                <td><a href="https://www.youtube.com/watch?v=P8g7Z4NYk3Q" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#59</td>
+                <td>Day-5 - AWS Security Group and NACL - Theory + Practical - AWS FREE COUR...</td>
+                <td>48m 0s</td>
+                <td><a href="https://www.youtube.com/watch?v=TtlKFgfN3PU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#60</td>
+                <td>Day-6 - Route53 explained in 15 mins - AWS FREE COURSE -#devops #aws #ab...</td>
+                <td>17m 20s</td>
+                <td><a href="https://www.youtube.com/watch?v=6BoTfTtNsGU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#61</td>
+                <td>Day-7 - AWS Project Used In Production - Complete Implementation - #aws ...</td>
+                <td>45m 52s</td>
+                <td><a href="https://www.youtube.com/watch?v=FZPTL_kNvXc" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#62</td>
+                <td>Day-8 -AWS Scenario Based Interview Questions on EC2, IAM and VPC -#aws ...</td>
+                <td>25m 50s</td>
+                <td><a href="https://www.youtube.com/watch?v=qtkWHhikLh8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#63</td>
+                <td>Day-9 - AWS S3 Buckets Deep Dive - 2 Demo Projects with Code - #aws #s3 ...</td>
+                <td>1h 2m</td>
+                <td><a href="https://www.youtube.com/watch?v=DiWWPo2Qoso" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#64</td>
+                <td>Day-10 - AWS CLI Deep Dive - Concept + Installation + Demo - #aws #abhis...</td>
+                <td>43m 57s</td>
+                <td><a href="https://www.youtube.com/watch?v=TiDSwf8gydk" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#65</td>
+                <td>Day-11 - IaC with AWS CFT - Tips and Tricks to Write CFT - CFT vs Terraf...</td>
+                <td>1h 11m</td>
+                <td><a href="https://www.youtube.com/watch?v=ov4WmWgQgsA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#66</td>
+                <td>Day-12 - AWS CICD - AWS CodeCommit - What is CICD on AWS ? -  #abhishekv...</td>
+                <td>31m 26s</td>
+                <td><a href="https://www.youtube.com/watch?v=n42nFDTkTCI" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#67</td>
+                <td>Day-13 - AWS Code Pipeline - Jenkins vs AWS Code Pipeline - Open Source ...</td>
+                <td>26m 21s</td>
+                <td><a href="https://www.youtube.com/watch?v=Tbp8325cKJ8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#68</td>
+                <td>Day-14 - AWS END TO END CI - REALTIME PROJECT - DEMO WITH NOTES - #aws #...</td>
+                <td>57m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=kOU-7_Sc72U" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#69</td>
+                <td>Day-15 - AWS ULTIMATE CICD PIPEPLINE - END TO END DEMO - AWS CODE PIPELI...</td>
+                <td>1h 7m</td>
+                <td><a href="https://www.youtube.com/watch?v=8ftrKNbSv28" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#70</td>
+                <td>Day-16 - AWS CLOUD WATCH DEEP DIVE - DEMO</td>
+                <td>57m 16s</td>
+                <td><a href="https://www.youtube.com/watch?v=u4XngwbY-O0" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#71</td>
+                <td>Day-17 - AWS LAMBDA INTRODUCTION - HOW DEVOPS ENGINEERS USE SERVERLESS A...</td>
+                <td>35m 13s</td>
+                <td><a href="https://www.youtube.com/watch?v=5fTtmeCpSRw" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#72</td>
+                <td>Day-18 - AWS Cost Optimization - Most Popular Cloud and DevOps project- ...</td>
+                <td>44m 46s</td>
+                <td><a href="https://www.youtube.com/watch?v=OKYJCHHSWb4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#73</td>
+                <td>Day-19 - AWS CLOUD FRONT - Ft: Piyush - Content Delivery Network - #aws ...</td>
+                <td>38m 2s</td>
+                <td><a href="https://www.youtube.com/watch?v=yhieOhvHz6Q" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#74</td>
+                <td>Day-20 - AWS ECR - ECR vs DockerHub - Free AWS job ready course - #aws #...</td>
+                <td>29m 27s</td>
+                <td><a href="https://www.youtube.com/watch?v=-8_r28jJ6AM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#75</td>
+                <td>Day-21 - AWS ECS - ECS vs EKS vs Kubernetes - Free AWS job ready course-...</td>
+                <td>55m 8s</td>
+                <td><a href="https://www.youtube.com/watch?v=nnIFkEOzNp4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#76</td>
+                <td>Day-23 - Secret Management on AWS - Most asked Interview question - #aws...</td>
+                <td>17m 15s</td>
+                <td><a href="https://www.youtube.com/watch?v=FllcHYsBm78" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#77</td>
+                <td>Day-24 - TERRAFORM WITH AWS PROJECT  - @cloudchamp  - AWS REAL TIME PROJ...</td>
+                <td>1h 27m</td>
+                <td><a href="https://www.youtube.com/watch?v=Koabqyopqns" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#78</td>
+                <td>Day-25 - AWS Config - Identify Compliant and Non Compliant AWS resources...</td>
+                <td>30m 17s</td>
+                <td><a href="https://www.youtube.com/watch?v=ig1KxKgN8ls" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#79</td>
+                <td>Day-26 - AWS Load Balancers - ALB vs NLB vs GWLB - Detailed Comparison -...</td>
+                <td>31m 42s</td>
+                <td><a href="https://www.youtube.com/watch?v=bCS9m5RVPyo" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#80</td>
+                <td>Day-28 - Migrating applications to AWS cloud - Complete project details ...</td>
+                <td>33m 33s</td>
+                <td><a href="https://www.youtube.com/watch?v=cAXPA5lqkV4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#81</td>
+                <td>Day-30 - THREE-TIER ARCHITECTURE IMPLEMENTATION ON AWS - #aws #abhishekv...</td>
+                <td>17m 44s</td>
+                <td><a href="https://www.youtube.com/watch?v=PYtgemvmHcU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 2 Tracker</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 2 - TAKEAWEAYS -->
+    <div class="page">
+        <h2>PHASE 2 WORKBOOK — KEY TAKEAWAYS</h2>
+        <p>Date Studied: ______________ &nbsp;&nbsp;&nbsp; Mastery Level: [ ] Entry [ ] Competent [ ] Master</p>
+        <p style="color:#777; font-size:0.8rem">Use the lined area below for notes during your video study.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 2 Sheet 1</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 2 - COMMANDS -->
+    <div class="page">
+        <h2>PHASE 2 WORKBOOK — CONFIG SPECS & COMMANDS</h2>
+        <p>Record core CLI commands, configurations, and Terraform block blueprints.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 2 Sheet 2</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 2 - SKETCHPAD -->
+    <div class="page">
+        <h2>PHASE 2 WORKBOOK — FLOW CANVAS</h2>
+        <p>Verification Check: [ ] Completed Lab</p>
+        <div class="sketch-box">
+            [ Architecture Sketchpad — Draw your Topology & Traffic Flow Here ]
+        </div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 2 Sheet 3</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 3 - VIDEOS -->
+    <div class="page">
+        <h2>PHASE 3: CI/CD & IaC (OCT 20 – NOV 23)</h2>
+        <p><strong>Focus:</strong> Jenkins CI/CD, Terraform Provisioning, Ansible Configuration Mgmt</p>
+        
+        <table>
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>
+            <tr>
+                <td>#82</td>
+                <td>Day-0 - Azure Zero to Hero Course Syllabus- Azure Job and Certification ...</td>
+                <td>31m 47s</td>
+                <td><a href="https://www.youtube.com/watch?v=10jm7Waan8M" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#83</td>
+                <td>Day-1 - Basics of Cloud Computing - Fundamentals of Azure #freeazurecourse</td>
+                <td>50m 8s</td>
+                <td><a href="https://www.youtube.com/watch?v=ksDAQX6MbeE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#84</td>
+                <td>Day-2 - Getting Started With Azure #freeazurecourse</td>
+                <td>30m 32s</td>
+                <td><a href="https://www.youtube.com/watch?v=e99QsTsJPJs" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#85</td>
+                <td>Day-3 - Resource, Resource Groups and Azure Resource Manager - Demo and ...</td>
+                <td>24m 33s</td>
+                <td><a href="https://www.youtube.com/watch?v=0lZAtlwjp_A" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#86</td>
+                <td>Day-4 - Deploy Jenkins on Azure VM - Azure VM Types explained</td>
+                <td>43m 49s</td>
+                <td><a href="https://www.youtube.com/watch?v=ZAJwVLaTnOM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#87</td>
+                <td>Day-5 - Azure Virtual Network(VNet) Explained - Beginner Level ✔️</td>
+                <td>18m 32s</td>
+                <td><a href="https://www.youtube.com/watch?v=6MaGYkDpuJE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#88</td>
+                <td>Day-6 - Azure Networking Basic to Advanced - Best Azure Networking expla...</td>
+                <td>39m 30s</td>
+                <td><a href="https://www.youtube.com/watch?v=a-Irjw7bL7w" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#89</td>
+                <td>Day-7 - Azure Networking Demo - Azure VNet, Firewall, NSG and Bastion - ...</td>
+                <td>37m 57s</td>
+                <td><a href="https://www.youtube.com/watch?v=jJSRYQQEUQc" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#90</td>
+                <td>Day-8 - Azure Networking Interview Questions - Scenario Based Interview ...</td>
+                <td>34m 0s</td>
+                <td><a href="https://www.youtube.com/watch?v=9LuIwVP7n64" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#91</td>
+                <td>Day-9 - Azure Storage Services and Usecases - Blob - File - Tables and Q...</td>
+                <td>24m 28s</td>
+                <td><a href="https://www.youtube.com/watch?v=v3vbwdDRsbE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#92</td>
+                <td>Day-10 - Automate Azure Resources using Azure CLI - Command Line Interfa...</td>
+                <td>29m 1s</td>
+                <td><a href="https://www.youtube.com/watch?v=_ESPvK022TI" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#93</td>
+                <td>Day -11 - Azure Resource Manager Templates in 60 Minutes - ARM templates...</td>
+                <td>1h 0m</td>
+                <td><a href="https://www.youtube.com/watch?v=pHZDkJxd-wE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#94</td>
+                <td>Day -12 - Azure IAM from Basics - Azure Managed Identities Demo with Mic...</td>
+                <td>44m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=ng5n4MsymRE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#95</td>
+                <td>Day-13 - Azure DevOps in 20 minutes - How & Why DevOps Engineers use Azu...</td>
+                <td>19m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=oRylKSePwH8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#96</td>
+                <td>Day-14 - DevOps Project from Absolute Zero- Project Setup+ CI pipelines ...</td>
+                <td>1h 21m</td>
+                <td><a href="https://www.youtube.com/watch?v=aAjH9wqtx9o" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#97</td>
+                <td>Day-15 - Ultimate Azure CI/CD Pipeline using Azure Pipelines & Argo CD -...</td>
+                <td>1h 34m</td>
+                <td><a href="https://www.youtube.com/watch?v=HyTIsLZWkZg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#98</td>
+                <td>Day-16 - AKS vs Self Managed Kubernetes Clusters - Pros and Cons - Azure...</td>
+                <td>29m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=o_7yvVqLZXQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#99</td>
+                <td>Day</td>
+                <td>1h 15m</td>
+                <td><a href="https://www.youtube.com/watch?v=akNSPKX0uIA" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#100</td>
+                <td>Day-18 - Azure DevOps Scenario Based Interview Questions with Answers #a...</td>
+                <td>34m 56s</td>
+                <td><a href="https://www.youtube.com/watch?v=rRl2_5dU5lQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#101</td>
+                <td>Day-19 - Creating Effective Monitoring System on Azure - Monitor - Prome...</td>
+                <td>22m 0s</td>
+                <td><a href="https://www.youtube.com/watch?v=E-4uImsWP_c" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#102</td>
+                <td>Day-20 - Azure Key Vault Integration with AKS - Kubernetes Secret Store ...</td>
+                <td>52m 3s</td>
+                <td><a href="https://www.youtube.com/watch?v=MJ97ZInCXgY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#103</td>
+                <td>Day-21 - Introduction to Serverless using Azure Functions ? Real Time Us...</td>
+                <td>12m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=vPnRtBacbv8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#104</td>
+                <td>Day-22 - Event Driven Serverless Implementation with Demo - Azure Blob T...</td>
+                <td>51m 20s</td>
+                <td><a href="https://www.youtube.com/watch?v=BKEPkZrsFyY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#105</td>
+                <td>Day-23 - Azure Zero to Hero - Getting Started with Terraform for Azure -...</td>
+                <td>59m 2s</td>
+                <td><a href="https://www.youtube.com/watch?v=iNWC40Z_vrM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#106</td>
+                <td>Day-24 - DevOps Resume with Projects from my Zero to Hero Playlists - De...</td>
+                <td>45m 10s</td>
+                <td><a href="https://www.youtube.com/watch?v=5z34I41GQFQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#107</td>
+                <td>Day -25 - No Dockerfile, No K8s Manifests - Setup CI/CD in 5 minutes for...</td>
+                <td>24m 32s</td>
+                <td><a href="https://www.youtube.com/watch?v=io_yBU7vhIo" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#108</td>
+                <td>Day-26 - Scale your Kubernetes Cluster in a Cost Optimized Way - Useful ...</td>
+                <td>30m 57s</td>
+                <td><a href="https://www.youtube.com/watch?v=z2qRGl9hqBU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#109</td>
+                <td>Day-27 - Make your windows laptop 10X productive for DevOps and Cloud - ...</td>
+                <td>17m 13s</td>
+                <td><a href="https://www.youtube.com/watch?v=G1AADw-9j4g" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#110</td>
+                <td>Day-0 - Terraform Zero to Hero - Course Syllabus - #abhishekveeramalla</td>
+                <td>22m 5s</td>
+                <td><a href="https://www.youtube.com/watch?v=h0x-hyZoqt8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#111</td>
+                <td>Day-1 - Terraform Zero to Hero - Getting Started with Terraform - #abhis...</td>
+                <td>59m 58s</td>
+                <td><a href="https://www.youtube.com/watch?v=fgp-t5SqQmM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#112</td>
+                <td>Day-2 - Providers, Multi Region, Multi Cloud, Variables & Conditions #te...</td>
+                <td>41m 44s</td>
+                <td><a href="https://www.youtube.com/watch?v=w-iMDg5fh20" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#113</td>
+                <td>Day-3 - Terraform Modules - Write your First Module - #terraform #abhish...</td>
+                <td>49m 50s</td>
+                <td><a href="https://www.youtube.com/watch?v=xBWmBPVTums" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#114</td>
+                <td>Day-4 - Terraform State DeepDive - Remote Backend - State Locking #abhis...</td>
+                <td>50m 31s</td>
+                <td><a href="https://www.youtube.com/watch?v=UhNpn7lVRBY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#115</td>
+                <td>Day-5 - Most Common Terraform Task Used in Real-Time - #devops  #abhishe...</td>
+                <td>39m 43s</td>
+                <td><a href="https://www.youtube.com/watch?v=JEDp4orr_K8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#116</td>
+                <td>Day-6 - Terraform Workspaces Demo - Dev</td>
+                <td>42m 23s</td>
+                <td><a href="https://www.youtube.com/watch?v=5NJfIsMldA8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#117</td>
+                <td>Day-7 - Terraform Vault Integration - Secrets Management - #terraform #a...</td>
+                <td>42m 48s</td>
+                <td><a href="https://www.youtube.com/watch?v=sIkRK33AY50" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#118</td>
+                <td>Day-8 - Most Asked Interview Scenarios - #terraform #abhishekveeramalla</td>
+                <td>22m 47s</td>
+                <td><a href="https://www.youtube.com/watch?v=-4IMy5ihiiU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 3 Tracker</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 3 - TAKEAWEAYS -->
+    <div class="page">
+        <h2>PHASE 3 WORKBOOK — KEY TAKEAWAYS</h2>
+        <p>Date Studied: ______________ &nbsp;&nbsp;&nbsp; Mastery Level: [ ] Entry [ ] Competent [ ] Master</p>
+        <p style="color:#777; font-size:0.8rem">Use the lined area below for notes during your video study.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 3 Sheet 1</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 3 - COMMANDS -->
+    <div class="page">
+        <h2>PHASE 3 WORKBOOK — CONFIG SPECS & COMMANDS</h2>
+        <p>Record core CLI commands, configurations, and Terraform block blueprints.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 3 Sheet 2</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 3 - SKETCHPAD -->
+    <div class="page">
+        <h2>PHASE 3 WORKBOOK — FLOW CANVAS</h2>
+        <p>Verification Check: [ ] Completed Lab</p>
+        <div class="sketch-box">
+            [ Architecture Sketchpad — Draw your Topology & Traffic Flow Here ]
+        </div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 3 Sheet 3</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 4 - VIDEOS -->
+    <div class="page">
+        <h2>PHASE 4: ADVANCED TOPICS (NOV 24 – DEC 23)</h2>
+        <p><strong>Focus:</strong> Monitoring, Python for DevOps, DevSecOps, & GitOps / ArgoCD</p>
+        
+        <table>
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>
+            <tr>
+                <td>#119</td>
+                <td>Day-1 - Introduction to Python - Shell Scripting vs Python - Install and...</td>
+                <td>27m 1s</td>
+                <td><a href="https://www.youtube.com/watch?v=AgikzDtqgIY" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#120</td>
+                <td>Day-0 - Python for DevOps Course Syllabus - Learn Python from Basics - #...</td>
+                <td>19m 14s</td>
+                <td><a href="https://www.youtube.com/watch?v=H21U4jX_SLQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#121</td>
+                <td>Day-2 - Data Types - Strings - String Handling Functions - #abhishekveer...</td>
+                <td>32m 48s</td>
+                <td><a href="https://www.youtube.com/watch?v=yPlC6Y3OpBM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#122</td>
+                <td>Day-3 - Keywords, Variables & Best Practices - Global vs Local - #python...</td>
+                <td>47m 10s</td>
+                <td><a href="https://www.youtube.com/watch?v=7sWFBuVwScM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#123</td>
+                <td>Day-4 - Functions, Modules and Packages - Most Simple Explanation #pytho...</td>
+                <td>1h 8m</td>
+                <td><a href="https://www.youtube.com/watch?v=k4EJbGI80t4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#124</td>
+                <td>Day-5 - Command Line Args & Env Vars - Most Simple Explanation #python  ...</td>
+                <td>29m 42s</td>
+                <td><a href="https://www.youtube.com/watch?v=1tFB2ux9DWU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#125</td>
+                <td>Day-6 - Operators - Python for DevOps #python  #abhishekveeramalla</td>
+                <td>25m 33s</td>
+                <td><a href="https://www.youtube.com/watch?v=tvdIGMahlNM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#126</td>
+                <td>Day-7 - Conditional Handling - IF, ELSE, ELSE IF - Python for DevOps #py...</td>
+                <td>14m 58s</td>
+                <td><a href="https://www.youtube.com/watch?v=oX1whbilkMU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#127</td>
+                <td>Day-8 - Lists and Tuples - Interview Concepts - Python for DevOps #pytho...</td>
+                <td>40m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=icU23NuF2RU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#128</td>
+                <td>Day-9 - Loops in Python - For Loop & While Loop - DevOps UseCases - #abh...</td>
+                <td>41m 44s</td>
+                <td><a href="https://www.youtube.com/watch?v=rTF7MhUFLBQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#129</td>
+                <td>Day-10 - Python For DevOps  - Python Real Time UseCase with Lists & Exce...</td>
+                <td>37m 7s</td>
+                <td><a href="https://www.youtube.com/watch?v=cpgOgRxZ0r8" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#130</td>
+                <td>Day-11 - Python For DevOps - Python Real Time UseCase with Dictionaries ...</td>
+                <td>52m 58s</td>
+                <td><a href="https://www.youtube.com/watch?v=HvNU4dupQkg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#131</td>
+                <td>Day-12 - Python For DevOps - Python File Operations - Update Server conf...</td>
+                <td>22m 28s</td>
+                <td><a href="https://www.youtube.com/watch?v=EtBlvubz8sU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#132</td>
+                <td>Day-13 - Python For DevOps - Boto3 Begineer to Advanced Guide with Projects</td>
+                <td>1h 48m</td>
+                <td><a href="https://www.youtube.com/watch?v=3ExnySHBO6k" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#133</td>
+                <td>Day 14 - Python For DevOps - Automate JIRA Creation on a Github Event us...</td>
+                <td>43m 31s</td>
+                <td><a href="https://www.youtube.com/watch?v=YVjXwyJlHgg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#134</td>
+                <td>Day 15</td>
+                <td>52m 0s</td>
+                <td><a href="https://www.youtube.com/watch?v=qCeb_DSD3y4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#135</td>
+                <td>Day-16 - Beginner & Intermediate Level Python Interview Q&A for DevOps -</td>
+                <td>34m 26s</td>
+                <td><a href="https://www.youtube.com/watch?v=UzILixH4Odw" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#136</td>
+                <td>DAY-0 - AI Assisted DevOps Zero to Hero - Course Syllabus</td>
+                <td>15m 15s</td>
+                <td><a href="https://www.youtube.com/watch?v=7qN3f4lZ2xo" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#137</td>
+                <td>DAY-1 - Fundamentals of AI Assisted DevOps - Demo and Notes Included</td>
+                <td>50m 8s</td>
+                <td><a href="https://www.youtube.com/watch?v=ej3cJBMG_8s" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#138</td>
+                <td>DAY-2 -  AI Assisted DevOps - Prompt Engineer Explained In 30 Minutes</td>
+                <td>26m 52s</td>
+                <td><a href="https://www.youtube.com/watch?v=jTW4QPE4ARc" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#139</td>
+                <td>DAY-3 - AI Assisted DevOps - Gen-AI Project For DevOps Engineers</td>
+                <td>52m 43s</td>
+                <td><a href="https://www.youtube.com/watch?v=Yr8si-1sTKw" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#140</td>
+                <td>Run Deepseek AI on your machine in 2 steps with user interface.</td>
+                <td>12m 55s</td>
+                <td><a href="https://www.youtube.com/watch?v=JoFQBfI7dOU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#141</td>
+                <td>DAY-4 - AI Assisted Shell Scripting - Write Shell Script like a Pro</td>
+                <td>28m 25s</td>
+                <td><a href="https://www.youtube.com/watch?v=lBrO68xc0Lg" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#142</td>
+                <td>Day-5 - AI Assisted DevOps - AIOps Explained with Free Playgrounds</td>
+                <td>29m 18s</td>
+                <td><a href="https://www.youtube.com/watch?v=ibygpGN51Yk" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#143</td>
+                <td>Day-6 - AIOps for Log Analysis - First AIOps Project using Python - Begi...</td>
+                <td>44m 8s</td>
+                <td><a href="https://www.youtube.com/watch?v=-eOncnzG9tc" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#144</td>
+                <td>Day-7 - Create your First AI Agent with zero coding and zero cost - Begi...</td>
+                <td>29m 32s</td>
+                <td><a href="https://www.youtube.com/watch?v=fLWP5d-1jiM" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#145</td>
+                <td>Docker Model Runner Explained with Demo - Will this replace Ollama ?</td>
+                <td>10m 46s</td>
+                <td><a href="https://www.youtube.com/watch?v=uFaxKSEBr08" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#146</td>
+                <td>Day-8 - AI Agent for your Internal Documentation in 30 mins - Local LLMs...</td>
+                <td>32m 15s</td>
+                <td><a href="https://www.youtube.com/watch?v=Naw35ovkXGc" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#147</td>
+                <td>Build Enterprise AI Agent for Internal Documentation in 10 Minutes - Retool</td>
+                <td>17m 55s</td>
+                <td><a href="https://www.youtube.com/watch?v=4F83nbqTVbU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#148</td>
+                <td>Can AI deploy my app to VM + Container + Kubernetes + Serverless ? - Ult...</td>
+                <td>24m 13s</td>
+                <td><a href="https://www.youtube.com/watch?v=4iTHeukUEWQ" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 4 Tracker</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 4 - TAKEAWEAYS -->
+    <div class="page">
+        <h2>PHASE 4 WORKBOOK — KEY TAKEAWAYS</h2>
+        <p>Date Studied: ______________ &nbsp;&nbsp;&nbsp; Mastery Level: [ ] Entry [ ] Competent [ ] Master</p>
+        <p style="color:#777; font-size:0.8rem">Use the lined area below for notes during your video study.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 4 Sheet 1</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 4 - COMMANDS -->
+    <div class="page">
+        <h2>PHASE 4 WORKBOOK — CONFIG SPECS & COMMANDS</h2>
+        <p>Record core CLI commands, configurations, and Terraform block blueprints.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 4 Sheet 2</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 4 - SKETCHPAD -->
+    <div class="page">
+        <h2>PHASE 4 WORKBOOK — FLOW CANVAS</h2>
+        <p>Verification Check: [ ] Completed Lab</p>
+        <div class="sketch-box">
+            [ Architecture Sketchpad — Draw your Topology & Traffic Flow Here ]
+        </div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 4 Sheet 3</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 5 - VIDEOS -->
+    <div class="page">
+        <h2>PHASE 5: AI, CAPSTONE & CAREER (DEC 24 – 31)</h2>
+        <p><strong>Focus:</strong> AI Prompts, AI Agents, Interview Preps & Capstone Build</p>
+        
+        <table>
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>
+            <tr>
+                <td>#149</td>
+                <td>Day-1 - Fundamentals of Observability - Observability Zero to Hero Course</td>
+                <td>35m 16s</td>
+                <td><a href="https://www.youtube.com/watch?v=otY2_M_pTmU" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#150</td>
+                <td>Day-2 - Metrics, Monitoring and Prometheus - Basics of Prometheus</td>
+                <td>46m 34s</td>
+                <td><a href="https://www.youtube.com/watch?v=OfoQMJJSnUs" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#151</td>
+                <td>Day-3 - Best Prometheus Explanation - Practical Hands on demonstration</td>
+                <td>49m 3s</td>
+                <td><a href="https://www.youtube.com/watch?v=2IfyyteAc5g" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#152</td>
+                <td>Day-4 - Custom Metrics Instrumentation and Scraping using Prom Client - ...</td>
+                <td>37m 18s</td>
+                <td><a href="https://www.youtube.com/watch?v=uEFwvEw9H9E" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#153</td>
+                <td>Day-5 - Logging with EFK Stack - Elastic Search, FluentBit and Kibana</td>
+                <td>45m 3s</td>
+                <td><a href="https://www.youtube.com/watch?v=HGTBANm0VY4" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#154</td>
+                <td>Day-6 - Distributed Tracing with Jaeger in 1 video - Beginner Level Demo...</td>
+                <td>50m 34s</td>
+                <td><a href="https://www.youtube.com/watch?v=U9qInvWTe9w" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#155</td>
+                <td>End to End Observability Project - Beginner Level guide for complex micr...</td>
+                <td>33m 13s</td>
+                <td><a href="https://www.youtube.com/watch?v=w2pnBa7eAbI" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#156</td>
+                <td>OpenSearch Stack in 30 minutes - Aiven for OpenSearch - Complete Guide w...</td>
+                <td>27m 35s</td>
+                <td><a href="https://www.youtube.com/watch?v=OSShB_cXisE" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#157</td>
+                <td>PagerDuty Explained in 20 minutes</td>
+                <td>17m 11s</td>
+                <td><a href="https://www.youtube.com/watch?v=0J9xglafVuI" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td>#158</td>
+                <td>Multi Cloud Infrastructure Monitoring in no time - Beginner Level Projec...</td>
+                <td>33m 40s</td>
+                <td><a href="https://www.youtube.com/watch?v=jRc2vFmkILs" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+        
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 5 Tracker</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 5 - TAKEAWEAYS -->
+    <div class="page">
+        <h2>PHASE 5 WORKBOOK — KEY TAKEAWAYS</h2>
+        <p>Date Studied: ______________ &nbsp;&nbsp;&nbsp; Mastery Level: [ ] Entry [ ] Competent [ ] Master</p>
+        <p style="color:#777; font-size:0.8rem">Use the lined area below for notes during your video study.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 5 Sheet 1</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 5 - COMMANDS -->
+    <div class="page">
+        <h2>PHASE 5 WORKBOOK — CONFIG SPECS & COMMANDS</h2>
+        <p>Record core CLI commands, configurations, and Terraform block blueprints.</p>
+        <div class="ruled-page"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 5 Sheet 2</span>
+        </div>
+    </div>
+    
+    <!-- PHASE 5 - SKETCHPAD -->
+    <div class="page">
+        <h2>PHASE 5 WORKBOOK — FLOW CANVAS</h2>
+        <p>Verification Check: [ ] Completed Lab</p>
+        <div class="sketch-box">
+            [ Architecture Sketchpad — Draw your Topology & Traffic Flow Here ]
+        </div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Phase 5 Sheet 3</span>
+        </div>
+    </div>
+    
+
+    <!-- PARALLEL AI TACK PAGE -->
+    <div class="page">
+        <h2>PARALLEL TRACK: AI-AUGMENTED DEVOPS</h2>
+        <p><strong>Focus:</strong> Becoming a Next-Gen 10x DevOps Engineer alongside your standard syllabus. (Starts Aug 1st)</p>
+
+        <h3>REQUIRED AI SKILLS FOR DEVOPS (2026/2027)</h3>
+        <table style="margin-bottom: 25px;">
+            <tr><th>Skill Area</th><th>Use Case in DevOps</th><th>Mastery</th></tr>
+            <tr>
+                <td><strong>1. Generative LLM for IaC</strong></td>
+                <td>Using Claude 3.5 / ChatGPT to write complex Terraform, Ansible playbooks, and K8s YAML instantly.</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>2. AI Troubleshooting (K8sGPT)</strong></td>
+                <td>Piping cluster logs (CrashLoopBackOffs, OOMKILLED) into AI to auto-diagnose root causes in seconds.</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>3. AI Coding Assistants</strong></td>
+                <td>Using GitHub Copilot inside VS Code to auto-complete CI/CD pipeline scripts (Jenkinsfiles/GitLab CI).</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>4. Agentic Workflows</strong></td>
+                <td>Building lightweight AI agents (Python/LangChain) to automate repetitive JIRA ticket resolution or user provisioning.</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <h3>AI COURSE RECOMMENDED TRACKER</h3>
+        <table>
+            <tr><th>Month</th><th>Recommended Course / Resource</th><th>Target</th><th>Done</th></tr>
+            <tr>
+                <td><strong>Aug</strong> (Foundations)</td>
+                <td><strong>Udemy:</strong> AI Prompt Engineering for IT Pros (ChatGPT, Claude)<br><em>Apply it to Shell Scripting & Linux commands.</em></td>
+                <td>Aug 30</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>Sep</strong> (Kubernetes)</td>
+                <td><strong>YouTube/Free:</strong> K8sGPT & AI Troubleshooting Tutorials<br><em>Use AI to debug your broken Pods and Deployments.</em></td>
+                <td>Sep 30</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>Oct</strong> (CI/CD & IaC)</td>
+                <td><strong>Udemy:</strong> Mastering GitHub Copilot for DevOps Engineers<br><em>Generate Terraform modules and Jenkinsfiles with AI.</em></td>
+                <td>Oct 30</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>Nov</strong> (Cloud)</td>
+                <td><strong>Udemy:</strong> Mastering GenAI for DevSecOps & AIOps<br><em>Use LLMs for security scanning, AWS boto3 automation.</em></td>
+                <td>Nov 30</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td><strong>Dec</strong> (Interview)</td>
+                <td><strong>Project:</strong> Build your own DevOps terminal AI assistant (Python).<br><em>Showcase this on your resume!</em></td>
+                <td>Dec 15</td>
+                <td class="check-col"><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>Parallel AI Track</span>
+        </div>
+    </div>
+
+    <!-- FINAL PAGE: AI & SCRATCHPAD -->
+    <div class="page">
+        <h2>WORKBOOK SHEET — AI PROMPT ENGINEERING LOG</h2>
+        <p>Record your best ChatGPT/Claude prompts and AI optimization strategies.</p>
+        <div class="ruled-page" style="min-height: 240mm;"></div>
+        <div class="page-footer">
+            <span>DevOps Master Workbook 2027</span>
+            <span>AI Prompt Log</span>
+        </div>
+    </div>
+
+</body>
+</html>
