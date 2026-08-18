@@ -126,10 +126,69 @@ for i, v in enumerate(p5_v):
     dur = format_duration(v.get('Duration in seconds', 0))
     t_date = get_target_date(idx)
     status = get_status(idx)
-    pt_content += f"| {idx+1} | [{title}]({url}) | {t_date} | {dur} | {status} | {status} | {status} |\n"
+    pt_content += f"| {idx+1} | \U0001F4FA [{title}]({url}) | {t_date} | {dur} | {status} | {status} | {status} |\n"
+
+# ======================= NEW: LABS TRACKER =======================
+pt_content += """
+---
+## \U0001F9EA Validation Labs & Broken Scenarios Tracker
+> Hands-on tests to execute completely locally (or in cloud) without watching any videos.
+
+| Lab # | Associated Phase | Scenario Description | Target Date | Completed |
+|---|---|---|---|---|
+| Lab 1 | Phase 1 | Linux/AWS: The "Unreachable Server" (Bastion + SSH Agent) | Sep 5 | \u2610 |
+| Lab 2 | Phase 1 | Linux: Shell Scripting Nightmare (Tar, Find, Cron) | Sep 6 | \u2610 |
+| Lab 3 | Phase 1 | Linux: The Zombie Process Swarm (PPID hunting) | Sep 6 | \u2610 |
+| Lab 4 | Phase 1 | AWS: 3-Tier VPC Architecture from Scratch | Sep 10 | \u2610 |
+| Lab 5 | Phase 2 | K8s: The "OOMKilled" Mystery | Oct 10 | \u2610 |
+| Lab 6 | Phase 2 | K8s: Zero-Downtime Rollback (Failed Upgrades) | Oct 12 | \u2610 |
+| Lab 7 | Phase 2 | K8s: CrashLoopBackOff Diagnosis | Oct 15 | \u2610 |
+| Lab 8 | Phase 2 | K8s: Kube-DNS Failure across Namespaces | Oct 18 | \u2610 |
+| Lab 9 | Phase 3 | TF: The Drifted Infrastructure State | Nov 15 | \u2610 |
+| Lab 10 | Phase 3 | TF: State File Lock Hijack (DynamoDB Override) | Nov 18 | \u2610 |
+| Lab 11 | Phase 3 | CI/CD: The Secret Leak in Jenkins (OIDC) | Nov 20 | \u2610 |
+| Lab 12 | Phase 4 | Python: The Boto3 Orphan EC2 Destroyer | Dec 5 | \u2610 |
+| Lab 13 | Phase 5 | PromQL: Metric Alert Panic (>90% CPU Sustained) | Dec 20 | \u2610 |
+"""
+
+# ======================= NEW: CERTIFICATIONS =======================
+pt_content += """
+---
+## \U0001F393 Cloud Certification Tracker
+> Explicit tracking for passing industry-recognized Azure and Kubernetes credentials.
+
+| Certification | Status | Target Date | Preparation Milestone |
+|---|---|---|---|
+| CKA: Simulator Killer.sh #1 | \u2610 | Oct 20 | Clear with > 85% |
+| CKA: Simulator Killer.sh #2 | \u2610 | Oct 25 | Clear with > 90% |
+| **CKA: Final Exam Date** | \u2610 | **Oct 30** | Pass (Cost: ~$395) |
+| AZ-104: TutorialDojo Mock #1 | \u2610 | Nov 25 | Clear with > 80% |
+| AZ-104: TutorialDojo Mock #2 | \u2610 | Nov 28 | Clear with > 90% |
+| **AZ-104: Final Exam Date** | \u2610 | **Dec 5** | Pass (Cost: ~$165) |
+"""
+
+# ======================= NEW: CAREER MARKETING =======================
+pt_content += """
+---
+## \U0001F4BC Interview Prep & Career Marketing Checklist
+> Your technical skills are only 50% of the job. You must market yourself aggressively.
+
+| Task Category | Specific Action Item | Target Date | Completed |
+|---|---|---|---|
+| Resume | Write standard single-column ATS-friendly template | Oct 25 | \u2610 |
+| Resume | Link the 5 GitHub Capstone repos explicitly | Oct 28 | \u2610 |
+| LinkedIn | Change Headline: DevOps Eng. AWS/Azure, TF, K8s | Nov 1 | \u2610 |
+| LinkedIn | Turn on "Open to Work" explicitly for recruiters | Nov 1 | \u2610 |
+| Outreach | Send 5 targeted messages a week to hiring managers | Nov - Dec | \u2610 |
+| Interview | Prep 30-sec "Tell me about yourself" pitch | Dec 15 | \u2610 |
+| Interview | Prep STAR story: "How I broke production..." | Dec 18 | \u2610 |
+| Interview | Prep STAR story: "How I automated a painful manual process" | Dec 20 | \u2610 |
+| Interview | Pass mock-interview with Lead Engineer/Mentor | Dec 28 | \u2610 |
+"""
 
 with open(r'03-Progress-Tracker\progress-tracker.md', 'w', encoding='utf-8') as f:
     f.write(pt_content)
+
 
 
 # 2. GENERATE ROADMAP

@@ -174,13 +174,62 @@
 ### Phase 5: Observability & Interview Readiness (Dec, Vids 149-158)
 | # | Video Title | Target Date | Duration | Watched | Notes | Hands-On |
 |---|-------------|-------------|----------|---------|-------|----------|
-| 149 | [Day-1 - Fundamentals of Observability - Observability Zero to Hero Course](https://www.youtube.com/watch?v=otY2_M_pTmU) | Dec 22 | 35m 16s | ☐ | ☐ | ☐ |
-| 150 | [Day-2 - Metrics, Monitoring and Prometheus - Basics of Prometheus](https://www.youtube.com/watch?v=OfoQMJJSnUs) | Dec 23 | 46m 34s | ☐ | ☐ | ☐ |
-| 151 | [Day-3 - Best Prometheus Explanation - Practical Hands on demonstration](https://www.youtube.com/watch?v=2IfyyteAc5g) | Dec 24 | 49m 3s | ☐ | ☐ | ☐ |
-| 152 | [Day-4 - Custom Metrics Instrumentation and Scraping using Prom Client - Send Custo...](https://www.youtube.com/watch?v=uEFwvEw9H9E) | Dec 25 | 37m 18s | ☐ | ☐ | ☐ |
-| 153 | [Day-5 - Logging with EFK Stack - Elastic Search, FluentBit and Kibana](https://www.youtube.com/watch?v=HGTBANm0VY4) | Dec 26 | 45m 3s | ☐ | ☐ | ☐ |
-| 154 | [Day-6 - Distributed Tracing with Jaeger in 1 video - Beginner Level Demo with Code](https://www.youtube.com/watch?v=U9qInvWTe9w) | Dec 27 | 50m 34s | ☐ | ☐ | ☐ |
-| 155 | [End to End Observability Project - Beginner Level guide for complex micro service ...](https://www.youtube.com/watch?v=w2pnBa7eAbI) | Dec 28 | 33m 13s | ☐ | ☐ | ☐ |
-| 156 | [OpenSearch Stack in 30 minutes - Aiven for OpenSearch - Complete Guide with Demo](https://www.youtube.com/watch?v=OSShB_cXisE) | Dec 29 | 27m 35s | ☐ | ☐ | ☐ |
-| 157 | [PagerDuty Explained in 20 minutes](https://www.youtube.com/watch?v=0J9xglafVuI) | Dec 30 | 17m 11s | ☐ | ☐ | ☐ |
-| 158 | [Multi Cloud Infrastructure Monitoring in no time - Beginner Level Project - Free S...](https://www.youtube.com/watch?v=jRc2vFmkILs) | Dec 31 | 33m 40s | ☐ | ☐ | ☐ |
+| 149 | 📺 [Day-1 - Fundamentals of Observability - Observability Zero to Hero Course](https://www.youtube.com/watch?v=otY2_M_pTmU) | Dec 22 | 35m 16s | ☐ | ☐ | ☐ |
+| 150 | 📺 [Day-2 - Metrics, Monitoring and Prometheus - Basics of Prometheus](https://www.youtube.com/watch?v=OfoQMJJSnUs) | Dec 23 | 46m 34s | ☐ | ☐ | ☐ |
+| 151 | 📺 [Day-3 - Best Prometheus Explanation - Practical Hands on demonstration](https://www.youtube.com/watch?v=2IfyyteAc5g) | Dec 24 | 49m 3s | ☐ | ☐ | ☐ |
+| 152 | 📺 [Day-4 - Custom Metrics Instrumentation and Scraping using Prom Client - Send Custo...](https://www.youtube.com/watch?v=uEFwvEw9H9E) | Dec 25 | 37m 18s | ☐ | ☐ | ☐ |
+| 153 | 📺 [Day-5 - Logging with EFK Stack - Elastic Search, FluentBit and Kibana](https://www.youtube.com/watch?v=HGTBANm0VY4) | Dec 26 | 45m 3s | ☐ | ☐ | ☐ |
+| 154 | 📺 [Day-6 - Distributed Tracing with Jaeger in 1 video - Beginner Level Demo with Code](https://www.youtube.com/watch?v=U9qInvWTe9w) | Dec 27 | 50m 34s | ☐ | ☐ | ☐ |
+| 155 | 📺 [End to End Observability Project - Beginner Level guide for complex micro service ...](https://www.youtube.com/watch?v=w2pnBa7eAbI) | Dec 28 | 33m 13s | ☐ | ☐ | ☐ |
+| 156 | 📺 [OpenSearch Stack in 30 minutes - Aiven for OpenSearch - Complete Guide with Demo](https://www.youtube.com/watch?v=OSShB_cXisE) | Dec 29 | 27m 35s | ☐ | ☐ | ☐ |
+| 157 | 📺 [PagerDuty Explained in 20 minutes](https://www.youtube.com/watch?v=0J9xglafVuI) | Dec 30 | 17m 11s | ☐ | ☐ | ☐ |
+| 158 | 📺 [Multi Cloud Infrastructure Monitoring in no time - Beginner Level Project - Free S...](https://www.youtube.com/watch?v=jRc2vFmkILs) | Dec 31 | 33m 40s | ☐ | ☐ | ☐ |
+
+---
+## 🧪 Validation Labs & Broken Scenarios Tracker
+> Hands-on tests to execute completely locally (or in cloud) without watching any videos.
+
+| Lab # | Associated Phase | Scenario Description | Target Date | Completed |
+|---|---|---|---|---|
+| Lab 1 | Phase 1 | Linux/AWS: The "Unreachable Server" (Bastion + SSH Agent) | Sep 5 | ☐ |
+| Lab 2 | Phase 1 | Linux: Shell Scripting Nightmare (Tar, Find, Cron) | Sep 6 | ☐ |
+| Lab 3 | Phase 1 | Linux: The Zombie Process Swarm (PPID hunting) | Sep 6 | ☐ |
+| Lab 4 | Phase 1 | AWS: 3-Tier VPC Architecture from Scratch | Sep 10 | ☐ |
+| Lab 5 | Phase 2 | K8s: The "OOMKilled" Mystery | Oct 10 | ☐ |
+| Lab 6 | Phase 2 | K8s: Zero-Downtime Rollback (Failed Upgrades) | Oct 12 | ☐ |
+| Lab 7 | Phase 2 | K8s: CrashLoopBackOff Diagnosis | Oct 15 | ☐ |
+| Lab 8 | Phase 2 | K8s: Kube-DNS Failure across Namespaces | Oct 18 | ☐ |
+| Lab 9 | Phase 3 | TF: The Drifted Infrastructure State | Nov 15 | ☐ |
+| Lab 10 | Phase 3 | TF: State File Lock Hijack (DynamoDB Override) | Nov 18 | ☐ |
+| Lab 11 | Phase 3 | CI/CD: The Secret Leak in Jenkins (OIDC) | Nov 20 | ☐ |
+| Lab 12 | Phase 4 | Python: The Boto3 Orphan EC2 Destroyer | Dec 5 | ☐ |
+| Lab 13 | Phase 5 | PromQL: Metric Alert Panic (>90% CPU Sustained) | Dec 20 | ☐ |
+
+---
+## 🎓 Cloud Certification Tracker
+> Explicit tracking for passing industry-recognized Azure and Kubernetes credentials.
+
+| Certification | Status | Target Date | Preparation Milestone |
+|---|---|---|---|
+| CKA: Simulator Killer.sh #1 | ☐ | Oct 20 | Clear with > 85% |
+| CKA: Simulator Killer.sh #2 | ☐ | Oct 25 | Clear with > 90% |
+| **CKA: Final Exam Date** | ☐ | **Oct 30** | Pass (Cost: ~$395) |
+| AZ-104: TutorialDojo Mock #1 | ☐ | Nov 25 | Clear with > 80% |
+| AZ-104: TutorialDojo Mock #2 | ☐ | Nov 28 | Clear with > 90% |
+| **AZ-104: Final Exam Date** | ☐ | **Dec 5** | Pass (Cost: ~$165) |
+
+---
+## 💼 Interview Prep & Career Marketing Checklist
+> Your technical skills are only 50% of the job. You must market yourself aggressively.
+
+| Task Category | Specific Action Item | Target Date | Completed |
+|---|---|---|---|
+| Resume | Write standard single-column ATS-friendly template | Oct 25 | ☐ |
+| Resume | Link the 5 GitHub Capstone repos explicitly | Oct 28 | ☐ |
+| LinkedIn | Change Headline: DevOps Eng. AWS/Azure, TF, K8s | Nov 1 | ☐ |
+| LinkedIn | Turn on "Open to Work" explicitly for recruiters | Nov 1 | ☐ |
+| Outreach | Send 5 targeted messages a week to hiring managers | Nov - Dec | ☐ |
+| Interview | Prep 30-sec "Tell me about yourself" pitch | Dec 15 | ☐ |
+| Interview | Prep STAR story: "How I broke production..." | Dec 18 | ☐ |
+| Interview | Prep STAR story: "How I automated a painful manual process" | Dec 20 | ☐ |
+| Interview | Pass mock-interview with Lead Engineer/Mentor | Dec 28 | ☐ |
