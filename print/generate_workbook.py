@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import os
 import json
 import re
+from datetime import datetime, timedelta
 
 html_template = """<!DOCTYPE html>
 <html lang="en">
@@ -112,7 +114,7 @@ html_template = """<!DOCTYPE html>
             <p style="margin-top:10px; font-size:0.85rem; color:#666;">A4 PRINT EDITION — 158-VIDEO IMMERSIVE ROADMAP</p>
         </div>
 
-        <h3>📋 WORKBOOK OWNERSHIP & PROJECT METADATA</h3>
+        <h3>��� WORKBOOK OWNERSHIP & PROJECT METADATA</h3>
         <div class="metadata-box">
             <div class="metadata-line">Lead Engineer / Owner: <strong>Imran (imranshs08)</strong></div>
             <div class="metadata-line">Target Role & Level: <strong>DevOps/Cloud Engineer</strong> &nbsp;&nbsp;&nbsp;&nbsp; Expected CTC: <strong>TBD</strong></div>
@@ -120,7 +122,7 @@ html_template = """<!DOCTYPE html>
             <div class="metadata-line">Primary Cloud Stack: [<strong>X</strong>] AWS &nbsp;&nbsp; [<strong>X</strong>] Azure &nbsp;&nbsp; [ ] GCP &nbsp;&nbsp; Primary IaC: [<strong>X</strong>] Terraform &nbsp;&nbsp; [ ] Bicep</div>
         </div>
 
-        <h3>🎯 ARCHITECTURE TOPOLOGY OVERVIEW & CORE OBJECTIVES</h3>
+        <h3>��� ARCHITECTURE TOPOLOGY OVERVIEW & CORE OBJECTIVES</h3>
         <p>This master guide is designed to transform you into an enterprise-grade DevOps Engineer over the span of 5 months. Following the "DevOps Zero to Hero" blueprint, this workbook establishes the physical trail of your digital learning.</p>
         <p><strong>1. Global Deployment Confidence:</strong> Automating deployments via CI/CD, Containerization, and AWS/Azure.</p>
         <p><strong>2. Operational Observability:</strong> Mastering K8s monitoring, ELK stack, and Prometheus.</p>
@@ -142,7 +144,7 @@ html_template = """<!DOCTYPE html>
         <h2>MASTER LEARNING PROGRESS TRACKER</h2>
         <p>Tick off each milestone as you progress through video modules, notes, and lab deployments.</p>
         
-        <h3>📊 END-TO-END IMPLEMENTATION PROGRESS CHECKLIST</h3>
+        <h3>��� END-TO-END IMPLEMENTATION PROGRESS CHECKLIST</h3>
         <table>
             <tr>
                 <th>Phase Title</th>
@@ -255,7 +257,7 @@ html_template = """<!DOCTYPE html>
                 <td><strong>Aug</strong> (Foundations)</td>
                 <td><strong>Udemy:</strong> AI Prompt Engineering for IT Pros (ChatGPT, Claude)<br><em>Apply it to Shell Scripting & Linux commands.</em></td>
                 <td>Aug 30</td>
-                <td class="check-col"><input type="checkbox"></td>
+                <td class="check-col"><input type="checkbox" checked></td>
             </tr>
             <tr>
                 <td><strong>Sep</strong> (Kubernetes)</td>
@@ -306,7 +308,6 @@ html_template = """<!DOCTYPE html>
 
 def clean_title(title):
     import re
-    orig_title = title
     for phrase in [
         r'\|?\s*Free DevOps Course.*', 
         r'\|?\s*45 days\s*\|?',
@@ -345,14 +346,21 @@ else:
     print("Could not find video data")
     exit(1)
 
+start_date = datetime(2026, 8, 1)
+def get_target_date(idx):
+    day_offset = int(idx * 153 / 158)
+    d = start_date + timedelta(days=day_offset)
+    return d.strftime('%b %d').replace(' 0', ' ')
+
 def extract_videos(start, end, vids):
     res = []
-    for i, v in enumerate(vids[start:end]):
-        num = start + i + 1
+    for idx, v in enumerate(vids[start:end]):
+        num = start + idx
         t = clean_title(v.get('Title', ''))
         d = format_duration(v.get('Duration in seconds', 0))
         url = v.get('Video url', '')
-        res.append((num, t, d, url))
+        t_date = get_target_date(num)
+        res.append((num + 1, t, d, t_date, num < 9, url))
     return res
 
 phases = {
@@ -394,16 +402,17 @@ for p, data in phases.items():
         <p><strong>Focus:</strong> {data['subtitle']}</p>
         
         <table>
-            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>URL</th><th>Done</th></tr>"""
+            <tr><th>Video #</th><th>Topic Title</th><th>Dur.</th><th>Target Date</th><th>Done</th></tr>"""
             
     for v in data['videos']:
+        checkbox = '<input type="checkbox" checked>' if v[4] else '<input type="checkbox">'
         phases_html += f"""
             <tr>
                 <td>#{v[0]}</td>
-                <td>{v[1]}</td>
+                <td><a href="{v[5]}" target="_blank" style="color:#111;text-decoration:none;">{v[1]}</a></td>
                 <td>{v[2]}</td>
-                <td><a href="{v[3]}" target="_blank" style="color:#0a66c2;text-decoration:none;">Watch Target</a></td>
-                <td class="check-col"><input type="checkbox"></td>
+                <td>{v[3]}</td>
+                <td class="check-col">{checkbox}</td>
             </tr>"""
             
     phases_html += f"""
@@ -467,5 +476,4 @@ out_path = r"C:\Job Tracker\print\job-tracker.html"
 with open(out_path, "w", encoding="utf-8") as f:
     f.write(final_html)
 
-# Also attempt to convert to PDF if wkhtmltopdf or similar is present on windows, or just tell user to print it from chrome.
 print("Workbook HTML generated successfully.")
