@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
+    <script src="data.js"></script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -306,8 +307,10 @@
                             id="ai-prompt-example"></div>
                     </li>
                     <li class="task-item">
-                        <div><strong>🎙️ Interview Prep:</strong> Verbally answer one STAR (Situation, Task, Action,
-                            Result) behavioral question related to troubleshooting systems.</div>
+                        <div style="margin-bottom: 0.4rem;"><strong>🎙️ Interview Prep:</strong></div>
+                        <div id="ai-interview-prep"
+                            style="color: #cbd5e1; font-style: italic; font-size: 0.95rem; border-left: 2px solid #10b981; padding-left: 0.5rem;">
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -348,17 +351,6 @@
     </div>
 
     <script>
-        const quotes = [
-            "Automation is not a luxury, it's a necessity.",
-            "Fix the cause, not the symptom.",
-            "If it hurts, do it more often. (Continuous Integration)",
-            "The most powerful tool we have as developers is automation.",
-            "Don't build your infrastructure, code it.",
-            "Treat your servers like cattle, not pets.",
-            "By failing to prepare, you are preparing to fail.",
-            "A goal without a timeline is just a dream. January 1, 2027 awaits."
-        ];
-
         // Start Live Clocks and Countdowns
         const ckaDate = new Date('2027-01-01T00:00:00').getTime();
         const azDate = new Date('2027-01-15T00:00:00').getTime();
@@ -507,80 +499,9 @@
 
             document.getElementById('ai-weekly-focus').innerText = weeklyFocus;
 
-            const aiPrompts = [
-                {
-                    title: "Infrastructure Generation",
-                    text: '"Generate a Terraform module for [resource] on [cloud provider] with: Remote state backend, Variable-driven configuration, and output the resource ID. Follow naming convention: {env}-{project}-{resource}"',
-                    example: 'e.g., "Generate a Terraform module for an AWS S3 Bucket with: Remote state backend..."'
-                },
-                {
-                    title: "Kubernetes Troubleshooting",
-                    text: '"My Kubernetes cluster has the following issue: [describe]. Cluster: [EKS/AKS/Kind]. Version: [version]. Error: [paste error]. Provide a step-by-step debugging approach with kubectl commands."',
-                    example: 'e.g., "My Kubernetes cluster has the following issue: Nginx pods stuck in CrashLoopBackOff. Cluster: EKS. Version: 1.28. Error: OOMKilled..."'
-                },
-                {
-                    title: "Pipeline Design",
-                    text: '"Design a CI/CD pipeline for: Language: [Python/Node/Go], Deployment target: [K8s/ECS], Requirements: lint -> test -> build -> security scan -> deploy. Include the pipeline-as-code file."',
-                    example: 'e.g., "Design a CI/CD pipeline for: Language: Node.js, Deployment target: AKS..."'
-                },
-                {
-                    title: "Architecture Review",
-                    text: '"Review this DevOps architecture: [paste/describe]. Evaluate against: Reliability (HA, DR), Security (zero-trust), Cost optimization, Scalability, and Operational complexity. Provide specific improvements."',
-                    example: 'e.g., "Review this architecture: AWS API Gateway routing to Lambda functions with DynamoDB backup..."'
-                },
-                {
-                    title: "Security Auditing",
-                    text: '"Act as a DevSecOps engineer. Review this Dockerfile for security vulnerabilities, unnecessary packages, and container best practices: [paste Dockerfile]. Provide a hardened version."',
-                    example: 'e.g., "Review this Dockerfile: FROM node:18, USER root, RUN npm install..."'
-                },
-                {
-                    title: "Cost Optimization",
-                    text: '"Analyze this AWS/Azure architecture and identify the top 3 ways to reduce monthly cloud costs without sacrificing high availability: [describe architecture]."',
-                    example: 'e.g., "Analyze this AWS architecture containing 3 NAT Gateways and heavily over-provisioned RDS instances..."'
-                },
-                {
-                    title: "Incident Post-Mortem",
-                    text: '"Write a blameless incident post-mortem for a production outage caused by [issue]. Follow Google SRE practices. Include sections for: Leadup, Fault, Impact, Detection, Response, and Action Items."',
-                    example: 'e.g., "Write a post-mortem for an outage caused by an expired TLS certificate on the main ingress..."'
-                },
-                {
-                    title: "SRE SLO Definition",
-                    text: '"Define strict Service Level Indicators (SLIs) and Service Level Objectives (SLOs) for a user-facing REST API. Give concrete metrics for latency, error rate, and throughput over a 30-day window."',
-                    example: 'e.g., "Define SLOs for an API where 99.9% of requests must return within 200ms..."'
-                },
-                {
-                    title: "Bash Script Hardening",
-                    text: '"Refactor this Bash script to be more robust for production. Add strict error handling (set -eou pipefail), logging functions, and descriptive comments: [paste script]."',
-                    example: 'e.g., "Refactor this script: #!/bin/bash cd /var/www && git pull && pm2 restart all"'
-                },
-                {
-                    title: "CI/CD Performance",
-                    text: '"Our CI/CD pipeline heavily delayed. Here is the structure: [describe]. Give me 5 advanced optimization strategies (caching, parallelization, multi-stage builds) to drastically reduce build time."',
-                    example: 'e.g., "Our GitHub Actions pipeline takes 45 minutes to build a heavy React JS application..."'
-                },
-                {
-                    title: "Helm Chart Creation",
-                    text: '"Generate a production-ready Helm chart for a [Language] microservice. Include standard resources: Deployment, Service, HPA, and Ingress. Make replicas and limits configurable in values.yaml."',
-                    example: 'e.g., "Generate a Helm chart for a Python FastAPI microservice..."'
-                },
-                {
-                    title: "Behavioral Interview Prep",
-                    text: '"Act as a senior engineering manager. Ask me a tough behavioral interview question about a time a deployment broke production. Wait for my answer, then strictly critique it using the STAR method."',
-                    example: 'e.g., "Act as a strict engineering manager and ask me a behavioral question..."'
-                },
-                {
-                    title: "System Design Prep",
-                    text: '"Give me a system design interview question for designing a globally distributed logging architecture. Interactively evaluate my design piece by piece as I provide the components."',
-                    example: 'e.g., "Give me an interactive design question for a logging ingestion layer..."'
-                },
-                {
-                    title: "Zero-Downtime Migration",
-                    text: '"Design a zero-downtime database migration strategy from [Old System] to [New System]. Include rollout phases, backward compatibility plan, rollback triggers, and data consistency checks."',
-                    example: 'e.g., "Design a zero-downtime migration strategy from PostgreSQL 12 to PostgreSQL 15..."'
-                }
-            ];
-
             const promptIndex = (viewingDate.getDate() + viewingDate.getMonth()) % aiPrompts.length;
+            const intIndex = (viewingDate.getDate() * 2 + viewingDate.getMonth()) % interviewQuestions.length;
+            document.getElementById('ai-interview-prep').innerText = interviewQuestions[intIndex];
             document.getElementById('ai-prompt-title').innerText = aiPrompts[promptIndex].title;
             document.getElementById('ai-daily-prompt').innerText = aiPrompts[promptIndex].text;
             document.getElementById('ai-prompt-example').innerHTML = `<strong>Example:</strong> ${aiPrompts[promptIndex].example}`;
