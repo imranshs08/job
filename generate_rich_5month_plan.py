@@ -255,6 +255,14 @@ for w in range(22):
             wp_content += f"| Vid {curr+1} | [{title}]({url}) | {t_date} | {dur} |\n"
             curr += 1
     wp_content += "\n**Weekly Goal:** Complete listed videos, replicate labs locally, run mock interview questions.\n"
+    
+    if w == 11:
+        wp_content += "> 🚨 **MILESTONE ALERT:** Phase 2 Complete (Kubernetes). Schedule your **CKA Exam** in `05-Certifications`!\n"
+    elif w == 16:
+        wp_content += "> 🚨 **MILESTONE ALERT:** Phase 3 Complete (IaC/Cloud). Schedule your **AZ-104 Exam** in `05-Certifications`! Also, kickoff `06-Career-Marketing` resume building.\n"
+    elif w == 21:
+        wp_content += "> 🚨 **MILESTONE ALERT:** Curriculum Complete! Shift 100% focus to `06-Career-Marketing` and actively applying to jobs!\n"
+        
     wp_content += "- [ ] Complete\n"
     wp_content += "---\n"
 

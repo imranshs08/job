@@ -214,6 +214,7 @@
 | Vid 104 | [Day-22 - Event Driven Serverless Implementation with Demo - Azure Blob Trigger](https://www.youtube.com/watch?v=BKEPkZrsFyY) | Nov 8 | 51m 20s |
 
 **Weekly Goal:** Complete listed videos, replicate labs locally, run mock interview questions.
+> 🚨 **MILESTONE ALERT:** Phase 2 Complete (Kubernetes). Schedule your **CKA Exam** in `05-Certifications`!
 - [ ] Complete
 ---
 
@@ -296,6 +297,7 @@
 | Vid 141 | [DAY-4 - AI Assisted Shell Scripting - Write Shell Script like a Pro](https://www.youtube.com/watch?v=lBrO68xc0Lg) | Dec 14 | 28m 25s |
 
 **Weekly Goal:** Complete listed videos, replicate labs locally, run mock interview questions.
+> 🚨 **MILESTONE ALERT:** Phase 3 Complete (IaC/Cloud). Schedule your **AZ-104 Exam** in `05-Certifications`! Also, kickoff `06-Career-Marketing` resume building.
 - [ ] Complete
 ---
 
@@ -358,5 +360,6 @@
 | Vid 158 | [Multi Cloud Infrastructure Monitoring in no time - Beginner Level Project - Free S...](https://www.youtube.com/watch?v=jRc2vFmkILs) | Dec 31 | 33m 40s |
 
 **Weekly Goal:** Complete listed videos, replicate labs locally, run mock interview questions.
+> 🚨 **MILESTONE ALERT:** Curriculum Complete! Shift 100% focus to `06-Career-Marketing` and actively applying to jobs!
 - [ ] Complete
 ---
