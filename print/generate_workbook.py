@@ -114,10 +114,10 @@ html_template = """<!DOCTYPE html>
 
         <h3>📋 WORKBOOK OWNERSHIP & PROJECT METADATA</h3>
         <div class="metadata-box">
-            <div class="metadata-line">Lead Engineer / Owner: ____________________________________________________________________</div>
-            <div class="metadata-line">Target Role & Level: ___________________________________ Expected CTC: ______________________</div>
-            <div class="metadata-line">Workbook Start Date: _____ / _____ / 2026      Target Apply Date: 01 / 01 / 2027</div>
-            <div class="metadata-line">Primary Cloud Stack: [ ] AWS    [ ] Azure    [ ] GCP    Primary IaC: [ ] Terraform    [ ] Bicep</div>
+            <div class="metadata-line">Lead Engineer / Owner: <strong>Imran (imranshs08)</strong></div>
+            <div class="metadata-line">Target Role & Level: <strong>DevOps/Cloud Engineer</strong> &nbsp;&nbsp;&nbsp;&nbsp; Expected CTC: <strong>TBD</strong></div>
+            <div class="metadata-line">Workbook Start Date: <strong>01 / 08 / 2026</strong> &nbsp;&nbsp;&nbsp;&nbsp; Target Apply Date: <strong>01 / 01 / 2027</strong></div>
+            <div class="metadata-line">Primary Cloud Stack: [<strong>X</strong>] AWS &nbsp;&nbsp; [<strong>X</strong>] Azure &nbsp;&nbsp; [ ] GCP &nbsp;&nbsp; Primary IaC: [<strong>X</strong>] Terraform &nbsp;&nbsp; [ ] Bicep</div>
         </div>
 
         <h3>🎯 ARCHITECTURE TOPOLOGY OVERVIEW & CORE OBJECTIVES</h3>
