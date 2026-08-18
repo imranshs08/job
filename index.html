@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps 2027 Command Center</title>
+    <title>DevOps Target 2027</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -316,7 +318,7 @@
 
             <!-- Videos Card -->
             <div class="card" style="--accent: #f59e0b; --accent-glow: rgba(245, 158, 11, 0.3);">
-                <h2>📺 158-Video Tracker
+                <h2>📺 Core DevOps Engineering Track
                     <a href="https://www.youtube.com/playlist?list=PLBfufR7vyILl5b-gL7Z-yZtfA_yT_v7iP" target="_blank"
                         class="course-link">🔗 Main Playlist</a>
                 </h2>
@@ -425,6 +427,7 @@
             let isToday = (viewingDate.getDate() === systemToday.getDate() && viewingDate.getMonth() === systemToday.getMonth() && viewingDate.getFullYear() === systemToday.getFullYear());
 
             document.getElementById('target-date-display').innerText = (isToday ? "🔥 TODAY: " : "📅 ") + fDateCert;
+            document.title = (isToday ? "🔥 Today | " : "📅 " + fDateVids + " | ") + "DevOps 2027";
 
             let videoHtml = '';
             let ckaHtml = '';
