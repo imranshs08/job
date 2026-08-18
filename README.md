@@ -21,14 +21,16 @@
 
 | # | Section | Description |
 |---|---------|-------------|
+| ⭐ | [🗂️ **Master Tracker**](master-tracker.md) | **All progress in one place — start here** |
 | 1 | [📍 Roadmap](01-Roadmap/roadmap.md) | 5-month master plan with milestones |
 | 2 | [📋 Weekly Plan](02-Weekly-Plan/weekly-plan.md) | Week-by-week study schedule |
-| 3 | [✅ Progress Tracker](03-Progress-Tracker/progress-tracker.md) | Printable checkbox tracker |
+| 3 | [✅ Progress Tracker](03-Progress-Tracker/progress-tracker.md) | Printable checkbox tracker (158 videos) |
 | 4 | [📝 Notes](04-Notes/) | Topic-wise study notes |
 | 5 | [🤖 AI Skills Guide](05-AI-Skills-Guide/ai-devops-guide.md) | Claude, ChatGPT, AI Agents for DevOps |
 | 6 | [🎤 Interview Prep](06-Interview-Prep/interview-prep.md) | Questions, scenarios & behavioral prep |
 | 7 | [🧠 AI Learning Roadmap](07-AI-Learning-Roadmap/ai-learning-roadmap.md) | Parallel AI track with Udemy & YouTube courses |
-| 8 | [🖨️ Print Sheet](print/job-tracker.html) | PDF-ready printable tracker |
+| 8 | [🎓 Certifications](05-Certifications/certification-tracker.md) | CKA (Jan 1) + AZ-104 (Jan 15) tracker |
+| 9 | [🖨️ Print Sheet](print/job-tracker.html) | PDF-ready printable tracker |
 
 ---
 

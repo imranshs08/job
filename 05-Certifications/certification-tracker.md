@@ -20,11 +20,15 @@
 
 ## ☁️ Microsoft AZ-104 (Azure Administrator Associate)
 * **🗓️ Exam Date: January 15, 2027**
-* **Study Period:** December 2026 (parallel revision while completing KodeKloud)
+* **Study Period:** December 1 – January 14, 2026 (27 study days + buffer days)
+* **Tracker:** [Daily Study Notes README](../../../devops-labs/devops-labs/05_AZ_104_Exam/Daily_Study_Notes/README.md) — 27-day plan fully mapped
 
 ### Exam Prep Checklist
 - [ ] Schedule Exam Date (Commit financially to force study cadence)
 - [ ] Complete Microsoft Learn AZ-104 Learning Path
 - [ ] Buy & Complete TutorialDojo Practice Exams (Score >85%)
-- [ ] Review AZ-104 Daily Study Notes repository (from previous deep-dives)
+- [ ] Work through Daily Study Notes Day 1–27 (Dec 1 – Jan 12)
+- [ ] Complete Mock Exam 1 on January 14 (day before exam)
+- [ ] Review AZ-104 Daily Study Notes repository (Days 1–11 fully enhanced with diagrams & exam traps)
+
 
