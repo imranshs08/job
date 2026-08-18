@@ -259,6 +259,10 @@
         <div class="top-bar">
             <div>
                 <span id="live-date" style="color: var(--text-dim);">August 18, 2026</span>
+                <span id="github-status"
+                    style="margin-left: 1rem; padding: 0.2rem 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 6px; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); transition: all 0.3s ease;">
+                    📡 GitHub Status: Checking API...
+                </span>
             </div>
             <div class="time-display" id="live-clock">00:00:00</div>
         </div>
@@ -388,9 +392,35 @@
             renderDashboard();
         }
 
+        async function fetchSystemStatus() {
+            try {
+                const res = await fetch('https://www.githubstatus.com/api/v2/status.json');
+                const data = await res.json();
+                const indicator = data.status.indicator;
+                const desc = data.status.description;
+                const el = document.getElementById('github-status');
+
+                if (indicator === 'none') {
+                    el.innerHTML = `📡 GitHub: <span style="color: #10b981; font-weight: bold;">🟢 ${desc}</span>`;
+                    el.style.borderColor = "rgba(16, 185, 129, 0.4)";
+                } else if (indicator === 'minor') {
+                    el.innerHTML = `📡 GitHub: <span style="color: #f59e0b; font-weight: bold;">🟡 ${desc}</span>`;
+                    el.style.borderColor = "rgba(245, 158, 11, 0.4)";
+                } else {
+                    el.innerHTML = `📡 GitHub: <span style="color: #ef4444; font-weight: bold;">🔴 ${desc}</span>`;
+                    el.style.borderColor = "rgba(239, 68, 68, 0.4)";
+                }
+            } catch (e) {
+                document.getElementById('github-status').innerHTML = `📡 GitHub: <span style="color: #94a3b8;">⚠️ API Unavailable</span>`;
+            }
+        }
+
         async function init() {
             // Pick a daily quote
             document.getElementById('quote').innerText = "💡 " + quotes[new Date().getDate() % quotes.length];
+
+            // Check Live Network APIs
+            fetchSystemStatus();
 
             try {
                 const response = await fetch('./03-Progress-Tracker/progress-tracker.md');
