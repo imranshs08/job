@@ -98,3 +98,26 @@ const interviewQuestions = [
     "Technical Explanation: How does an Ingress Controller route traffic from the raw public internet to a specific container IP residing inside a completely private subnet?",
     "Technical Explanation: Define 'Zero Trust Network Architecture'. How does it practically differ from a traditional VPN-bastian-host moat-and-castle architecture?"
 ];
+
+const quotes = [
+    "The best time to build a robust infrastructure was yesterday. The second best time is today.",
+    "Automation is not a luxury, it's a necessity.",
+    "Fix the cause, not the symptom.",
+    "If it hurts, do it more often. (Continuous Integration)",
+    "The most powerful tool we have as developers is automation.",
+    "Don't build your infrastructure, code it.",
+    "Treat your servers like cattle, not pets.",
+    "By failing to prepare, you are preparing to fail.",
+    "A goal without a timeline is just a dream. January 1, 2027 awaits.",
+    "Hope is not a strategy. Reliability is.",
+    "If you have to do it more than twice, automate it.",
+    "Production is a feature. Staging is a luxury. Local is a myth.",
+    "Data naturally decays. Systems naturally rot. Infrastructure requires continuous care.",
+    "No one wants to be woken up at 3 AM. Write resilient code.",
+    "Observability isn't just about logs, it's about asking your systems questions.",
+    "A deployment should be absolutely boring.",
+    "Stop guessing, start measuring.",
+    "Complex systems run in degraded modes. Plan for the failure.",
+    "Security is everyone's responsibility.",
+    "The obstacle is the way. Stop avoiding the technical debt!"
+];
