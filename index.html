@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps 2027 Daily Plan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-color: #0f172a;
@@ -20,7 +23,7 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: 
+            background-image:
                 radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
             color: var(--text-main);
@@ -118,7 +121,7 @@
 
         /* Loading Spinner */
         .loader {
-            border: 4px solid rgba(255,255,255,0.1);
+            border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid var(--accent);
             border-radius: 50%;
             width: 40px;
@@ -127,12 +130,27 @@
             margin: 40px auto;
         }
 
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -183,8 +201,8 @@
             try {
                 // In GH pages context, fetch relative file path directly from the repo tree
                 const response = await fetch('./03-Progress-Tracker/progress-tracker.md');
-                if(!response.ok) throw new Error("Could not find progress-tracker.md");
-                
+                if (!response.ok) throw new Error("Could not find progress-tracker.md");
+
                 const text = await response.text();
                 const lines = text.split('\n');
 
@@ -203,11 +221,11 @@
                     if (cols.length >= 8 && !isNaN(parseInt(cols[1])) && cols[3] === fDateVids) {
                         const titleRaw = cols[2];
                         const duration = cols[4];
-                        
+
                         // Parse markdown link [text](url)
                         let titleText = titleRaw;
                         const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
-                        if(m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
+                        if (m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
 
                         videoHtml += `<li class="task-item">
                             <div>${titleText}</div>
@@ -222,32 +240,32 @@
                         // My script outputs: 
                         // CKA: | Date | Day | CKA Plan | Est Duration | Status |
                         // AZ-104: | Date | Day | AZ-104 Plan | Status |
-                        
+
                         // We uniquely identify by checking if column 4 is a duration (e.g., 1h 20m) or empty/status
                         // Actually, if it's the CKA table, col[4] is duration, col[5] is checkbox.
                         // AZ-104 table: col[3] is plan, col[4] is checkbox.
-                        
+
                         // Wait, CKA: cols = ['', 'Aug 18, 2026', 'Tue', 'Intro...', '9h 19m', '☐', '']
                         if (cols.length >= 6) {
                             const plan = cols[3];
                             // Clean <br> into distinct lines
                             const planFmt = plan.replace(/<br>/g, '<br>• ');
-                            
+
                             // Distinguish between CKA and AZ-104 by looking at columns
                             if (cols[5] && cols[5].includes('☐')) {
                                 // It's CKA!
                                 const duration = cols[4];
-                                if(plan !== '—') {
+                                if (plan !== '—') {
                                     ckaHtml += `<li class="task-item">
-                                        <div>• ${planFmt}</div>
+                                        <div>• ${planFmt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
                                         <div class="task-meta">⏱️ Estimated: ${duration}</div>
                                     </li>`;
                                 }
                             } else if (cols[4] && cols[4].includes('☐')) {
                                 // It's AZ-104!
-                                if(plan !== '—') {
+                                if (plan !== '—') {
                                     azHtml += `<li class="task-item">
-                                        <div>• ${planFmt}</div>
+                                        <div>• ${planFmt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
                                     </li>`;
                                 }
                             }
@@ -271,4 +289,5 @@
         fetchPlan();
     </script>
 </body>
+
 </html>
