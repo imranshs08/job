@@ -6,6 +6,9 @@
 from datetime import datetime, timedelta
 
 start_date = datetime(2026, 8, 18)
+exam_date  = datetime(2027, 1, 1)   # CKA target exam date
+az104_date = datetime(2027, 1, 15)  # AZ-104 target exam date
+days_available = (exam_date - start_date).days  # 136 study days
 
 # NOTE: Scheduling, App Lifecycle, Cluster Maintenance, Security, Storage,
 # Networking, kubeadm, Helm, Kustomize, Troubleshooting, Mock Exams
@@ -351,7 +354,7 @@ lessons = [
 content = """# \u2638\ufe0f KodeKloud CKA \u2014 Video-by-Video Tracker
 > **Course:** [Certified Kubernetes Administrator (CKA)](https://kodekloud.com/courses/cka-certification-course-certified-kubernetes-administrator)
 > **Instructor:** Mumshad Mannambeth
-> **Start Date:** August 18, 2026 | **Target Exam:** October 30, 2026
+> **Start Date:** August 18, 2026 | **Target CKA Exam:** January 1, 2027 | **AZ-104:** January 15, 2027
 
 > \u26a0\ufe0f **Action Required:** Modules marked with \u26a0\ufe0f are collapsed on the public page.
 > Login to KodeKloud, click \u201cExpand All\u201d, and paste the lesson names here to complete these rows.
@@ -363,7 +366,9 @@ content = """# \u2638\ufe0f KodeKloud CKA \u2014 Video-by-Video Tracker
 """
 
 for idx, (module, title, dur) in enumerate(lessons):
-    target_day = start_date + timedelta(days=idx)
+    # Spread lessons proportionally across the available study days
+    day_offset = int(idx * days_available / len(lessons))
+    target_day = start_date + timedelta(days=day_offset)
     target_str = target_day.strftime('%b %d')
     done = "\u2610"
     dash = "\u2014"
@@ -377,7 +382,7 @@ content += """
 1. Log into KodeKloud and expand the collapsed sections above \u2014 update this file as you go.
 2. After completing all lessons + KodeKloud Mock Exams, move to **killer.sh** (included with exam voucher).
 3. Do NOT book your official exam until you score > **90%** on killer.sh.
-4. **Target: CKA Exam by October 30, 2026**
+4. **Target: CKA Exam — January 1, 2027 | AZ-104 — January 15, 2027**
 """
 
 with open(r'05-Certifications\kodekloud-cka-tracker.md', 'w', encoding='utf-8') as f:
