@@ -55,27 +55,54 @@
 | 43 | **Logging & Monitoring** | Managing Application Logs | 02:16 | Sep 29 | ☐ |
 | 44 | **Logging & Monitoring** | Practice Test Managing Application Logs | — | Sep 30 | ☐ |
 | 45 | **Logging & Monitoring** | Solution: Logging (Optional) | 02:09 | Oct 01 | ☐ |
-| 46 | **Application Lifecycle** | ⚠️ EXPAND ON KODEKLOUD – Module has 28 lessons (login required) | — | Oct 02 | ☐ |
-| 47 | **Cluster Maintenance** | ⚠️ EXPAND ON KODEKLOUD – Module has 19 lessons (login required) | — | Oct 03 | ☐ |
-| 48 | **Security** | ⚠️ EXPAND ON KODEKLOUD – Module has 45 lessons (login required) | — | Oct 04 | ☐ |
-| 49 | **Storage** | ⚠️ EXPAND ON KODEKLOUD – Module has 15 lessons (login required) | — | Oct 05 | ☐ |
-| 50 | **Networking** | ⚠️ EXPAND ON KODEKLOUD – Module has 38 lessons (login required) | — | Oct 06 | ☐ |
-| 51 | **Design and Install** | Design a Kubernetes Cluster | 05:50 | Oct 07 | ☐ |
-| 52 | **Design and Install** | Choosing Kubernetes Infrastructure | 05:52 | Oct 08 | ☐ |
-| 53 | **Design and Install** | Configure High Availability | 07:48 | Oct 09 | ☐ |
-| 54 | **Design and Install** | ETCD in HA | 12:42 | Oct 10 | ☐ |
-| 55 | **Design and Install** | Important Update: Kubernetes the Hard Way | — | Oct 11 | ☐ |
-| 56 | **Install kubeadm** | ⚠️ EXPAND ON KODEKLOUD – Module has 6 lessons (login required) | — | Oct 12 | ☐ |
-| 57 | **Helm Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 11 lessons (login required) | — | Oct 13 | ☐ |
-| 58 | **Kustomize Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required) | — | Oct 14 | ☐ |
-| 59 | **Troubleshooting** | ⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required) | — | Oct 15 | ☐ |
-| 60 | **Other Topics** | Labs – JSON PATH | — | Oct 16 | ☐ |
-| 61 | **Other Topics** | Pre-Requisites – JSON PATH | — | Oct 17 | ☐ |
-| 62 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Oct 18 | ☐ |
-| 63 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Oct 19 | ☐ |
-| 64 | **Lightning Labs** | Lightning Lab Introduction | — | Oct 20 | ☐ |
-| 65 | **Lightning Labs** | Lightning Lab – 1 | — | Oct 21 | ☐ |
-| 66 | **Mock Exams** | ⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required) | — | Oct 22 | ☐ |
+| 46 | **Application Lifecycle** | Application Lifecycle Management – Section Introduction | 00:42 | Oct 02 | ☐ |
+| 47 | **Application Lifecycle** | Rolling Updates and Rollbacks | 06:43 | Oct 03 | ☐ |
+| 48 | **Application Lifecycle** | Practice Test Rolling Updates and Rollbacks | — | Oct 04 | ☐ |
+| 49 | **Application Lifecycle** | Solution: Rolling update | 09:05 | Oct 05 | ☐ |
+| 50 | **Application Lifecycle** | Configure Applications | — | Oct 06 | ☐ |
+| 51 | **Application Lifecycle** | Commands and Arguments in Docker | 07:20 | Oct 07 | ☐ |
+| 52 | **Application Lifecycle** | Commands and Arguments in Kubernetes | 02:39 | Oct 08 | ☐ |
+| 53 | **Application Lifecycle** | Practice Test Commands and Arguments | — | Oct 09 | ☐ |
+| 54 | **Application Lifecycle** | Solution – Commands and Arguments (Optional) | 10:45 | Oct 10 | ☐ |
+| 55 | **Application Lifecycle** | Configure Environment Variables in Applications | 01:15 | Oct 11 | ☐ |
+| 56 | **Application Lifecycle** | Configure ConfigMaps in Applications | 05:19 | Oct 12 | ☐ |
+| 57 | **Application Lifecycle** | Practice Test Env Variables | — | Oct 13 | ☐ |
+| 58 | **Application Lifecycle** | Solution – Env Variables (Optional) | 09:00 | Oct 14 | ☐ |
+| 59 | **Application Lifecycle** | Secrets | 08:20 | Oct 15 | ☐ |
+| 60 | **Application Lifecycle** | Practice Test Secrets | — | Oct 16 | ☐ |
+| 61 | **Application Lifecycle** | Additional Resource | — | Oct 17 | ☐ |
+| 62 | **Application Lifecycle** | Solution – Secrets (Optional) | 09:36 | Oct 18 | ☐ |
+| 63 | **Application Lifecycle** | Demo: Encrypting Secret Data at Rest | 18:47 | Oct 19 | ☐ |
+| 64 | **Application Lifecycle** | A note on Secrets | — | Oct 20 | ☐ |
+| 65 | **Application Lifecycle** | Multi Container Pods | 02:13 | Oct 21 | ☐ |
+| 66 | **Application Lifecycle** | Practice Test – Multi Container Pods | — | Oct 22 | ☐ |
+| 67 | **Application Lifecycle** | Solution – Multi Container Pods (Optional) | 15:09 | Oct 23 | ☐ |
+| 68 | **Application Lifecycle** | Multi-container Pods Design Patterns | — | Oct 24 | ☐ |
+| 69 | **Application Lifecycle** | Init Containers | — | Oct 25 | ☐ |
+| 70 | **Application Lifecycle** | Practice Test – Init Containers | — | Oct 26 | ☐ |
+| 71 | **Application Lifecycle** | Solution – Init Containers (Optional) | 08:02 | Oct 27 | ☐ |
+| 72 | **Application Lifecycle** | Self Healing Applications | — | Oct 28 | ☐ |
+| 73 | **Application Lifecycle** | Download Presentation Deck 4 | — | Oct 29 | ☐ |
+| 74 | **Cluster Maintenance** | ⚠️ EXPAND ON KODEKLOUD – Module has 19 lessons (login required) | — | Oct 30 | ☐ |
+| 75 | **Security** | ⚠️ EXPAND ON KODEKLOUD – Module has 45 lessons (login required) | — | Oct 31 | ☐ |
+| 76 | **Storage** | ⚠️ EXPAND ON KODEKLOUD – Module has 15 lessons (login required) | — | Nov 01 | ☐ |
+| 77 | **Networking** | ⚠️ EXPAND ON KODEKLOUD – Module has 38 lessons (login required) | — | Nov 02 | ☐ |
+| 78 | **Design and Install** | Design a Kubernetes Cluster | 05:50 | Nov 03 | ☐ |
+| 79 | **Design and Install** | Choosing Kubernetes Infrastructure | 05:52 | Nov 04 | ☐ |
+| 80 | **Design and Install** | Configure High Availability | 07:48 | Nov 05 | ☐ |
+| 81 | **Design and Install** | ETCD in HA | 12:42 | Nov 06 | ☐ |
+| 82 | **Design and Install** | Important Update: Kubernetes the Hard Way | — | Nov 07 | ☐ |
+| 83 | **Install kubeadm** | ⚠️ EXPAND ON KODEKLOUD – Module has 6 lessons (login required) | — | Nov 08 | ☐ |
+| 84 | **Helm Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 11 lessons (login required) | — | Nov 09 | ☐ |
+| 85 | **Kustomize Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required) | — | Nov 10 | ☐ |
+| 86 | **Troubleshooting** | ⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required) | — | Nov 11 | ☐ |
+| 87 | **Other Topics** | Labs – JSON PATH | — | Nov 12 | ☐ |
+| 88 | **Other Topics** | Pre-Requisites – JSON PATH | — | Nov 13 | ☐ |
+| 89 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Nov 14 | ☐ |
+| 90 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Nov 15 | ☐ |
+| 91 | **Lightning Labs** | Lightning Lab Introduction | — | Nov 16 | ☐ |
+| 92 | **Lightning Labs** | Lightning Lab – 1 | — | Nov 17 | ☐ |
+| 93 | **Mock Exams** | ⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required) | — | Nov 18 | ☐ |
 
 ---
 
