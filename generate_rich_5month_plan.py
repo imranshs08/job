@@ -45,7 +45,7 @@ if not match:
 
 videos = json.loads(match.group(1))[:158]
 
-start_date = datetime(2026, 8, 1)
+start_date = datetime(2026, 8, 18)
 def get_target_date(idx):
     day_offset = int(idx * 153 / 158)
     d = start_date + timedelta(days=day_offset)
