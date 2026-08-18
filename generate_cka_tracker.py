@@ -243,8 +243,20 @@ lessons = [
     # === KUSTOMIZE BASICS (22 lessons) ===
     ("Kustomize Basics", "⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required)", ""),
 
-    # === TROUBLESHOOTING (13 lessons) ===
-    ("Troubleshooting", "⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required)", ""),
+    # === TROUBLESHOOTING (13 topics) ===
+    ("Troubleshooting", "Troubleshooting – Section Introduction", "00:27"),
+    ("Troubleshooting", "Application Failure", "02:51"),
+    ("Troubleshooting", "Practice Test Application Failure", ""),
+    ("Troubleshooting", "Solution – Application Failure", "22:27"),
+    ("Troubleshooting", "Control Plane Failure", "01:26"),
+    ("Troubleshooting", "Practice Test Control Plane Failure", ""),
+    ("Troubleshooting", "Solution: Control Plane Failure", "15:20"),
+    ("Troubleshooting", "Worker Node Failure", "01:55"),
+    ("Troubleshooting", "Practice Test Worker Node Failure", ""),
+    ("Troubleshooting", "Solutions Worker Node Failure", "10:22"),
+    ("Troubleshooting", "Download Presentation Deck 10", ""),
+    ("Troubleshooting", "Network Troubleshooting", ""),
+    ("Troubleshooting", "Practice Test – Troubleshoot Network", ""),
 
     # === OTHER TOPICS ===
     ("Other Topics", "Labs – JSON PATH", ""),
@@ -256,8 +268,17 @@ lessons = [
     ("Lightning Labs", "Lightning Lab Introduction", ""),
     ("Lightning Labs", "Lightning Lab – 1", ""),
 
-    # === MOCK EXAMS (10 lessons) ===
-    ("Mock Exams", "⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required)", ""),
+    # === MOCK EXAMS (10 topics) ===
+    ("Mock Exams", "Mock Exam – Introduction", ""),
+    ("Mock Exams", "Mock Exam – 1", ""),
+    ("Mock Exams", "Solution – CKA Mock Exam 1 (optional)", "21:15"),
+    ("Mock Exams", "Mock Exam – 2", ""),
+    ("Mock Exams", "Solution – CKA Mock Exam – 2 (Optional)", "43:52"),
+    ("Mock Exams", "Mock Exam – 3", ""),
+    ("Mock Exams", "Solution – CKA Mock Exam – 3 (Optional)", "50:28"),
+    ("Mock Exams", "What's Next?", "07:23"),
+    ("Mock Exams", "All the Best!", ""),
+    ("Mock Exams", "Kubernetes Update and Project Videos – Your Essential Guide", ""),
 ]
 
 content = """# \u2638\ufe0f KodeKloud CKA \u2014 Video-by-Video Tracker

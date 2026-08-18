@@ -214,14 +214,35 @@
 | 202 | **Install kubeadm** | Solution – Install a Kubernetes Cluster using kubeadm | 09:50 | Mar 07 | ☐ |
 | 203 | **Helm Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 11 lessons (login required) | — | Mar 08 | ☐ |
 | 204 | **Kustomize Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required) | — | Mar 09 | ☐ |
-| 205 | **Troubleshooting** | ⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required) | — | Mar 10 | ☐ |
-| 206 | **Other Topics** | Labs – JSON PATH | — | Mar 11 | ☐ |
-| 207 | **Other Topics** | Pre-Requisites – JSON PATH | — | Mar 12 | ☐ |
-| 208 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Mar 13 | ☐ |
-| 209 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Mar 14 | ☐ |
-| 210 | **Lightning Labs** | Lightning Lab Introduction | — | Mar 15 | ☐ |
-| 211 | **Lightning Labs** | Lightning Lab – 1 | — | Mar 16 | ☐ |
-| 212 | **Mock Exams** | ⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required) | — | Mar 17 | ☐ |
+| 205 | **Troubleshooting** | Troubleshooting – Section Introduction | 00:27 | Mar 10 | ☐ |
+| 206 | **Troubleshooting** | Application Failure | 02:51 | Mar 11 | ☐ |
+| 207 | **Troubleshooting** | Practice Test Application Failure | — | Mar 12 | ☐ |
+| 208 | **Troubleshooting** | Solution – Application Failure | 22:27 | Mar 13 | ☐ |
+| 209 | **Troubleshooting** | Control Plane Failure | 01:26 | Mar 14 | ☐ |
+| 210 | **Troubleshooting** | Practice Test Control Plane Failure | — | Mar 15 | ☐ |
+| 211 | **Troubleshooting** | Solution: Control Plane Failure | 15:20 | Mar 16 | ☐ |
+| 212 | **Troubleshooting** | Worker Node Failure | 01:55 | Mar 17 | ☐ |
+| 213 | **Troubleshooting** | Practice Test Worker Node Failure | — | Mar 18 | ☐ |
+| 214 | **Troubleshooting** | Solutions Worker Node Failure | 10:22 | Mar 19 | ☐ |
+| 215 | **Troubleshooting** | Download Presentation Deck 10 | — | Mar 20 | ☐ |
+| 216 | **Troubleshooting** | Network Troubleshooting | — | Mar 21 | ☐ |
+| 217 | **Troubleshooting** | Practice Test – Troubleshoot Network | — | Mar 22 | ☐ |
+| 218 | **Other Topics** | Labs – JSON PATH | — | Mar 23 | ☐ |
+| 219 | **Other Topics** | Pre-Requisites – JSON PATH | — | Mar 24 | ☐ |
+| 220 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Mar 25 | ☐ |
+| 221 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Mar 26 | ☐ |
+| 222 | **Lightning Labs** | Lightning Lab Introduction | — | Mar 27 | ☐ |
+| 223 | **Lightning Labs** | Lightning Lab – 1 | — | Mar 28 | ☐ |
+| 224 | **Mock Exams** | Mock Exam – Introduction | — | Mar 29 | ☐ |
+| 225 | **Mock Exams** | Mock Exam – 1 | — | Mar 30 | ☐ |
+| 226 | **Mock Exams** | Solution – CKA Mock Exam 1 (optional) | 21:15 | Mar 31 | ☐ |
+| 227 | **Mock Exams** | Mock Exam – 2 | — | Apr 01 | ☐ |
+| 228 | **Mock Exams** | Solution – CKA Mock Exam – 2 (Optional) | 43:52 | Apr 02 | ☐ |
+| 229 | **Mock Exams** | Mock Exam – 3 | — | Apr 03 | ☐ |
+| 230 | **Mock Exams** | Solution – CKA Mock Exam – 3 (Optional) | 50:28 | Apr 04 | ☐ |
+| 231 | **Mock Exams** | What's Next? | 07:23 | Apr 05 | ☐ |
+| 232 | **Mock Exams** | All the Best! | — | Apr 06 | ☐ |
+| 233 | **Mock Exams** | Kubernetes Update and Project Videos – Your Essential Guide | — | Apr 07 | ☐ |
 
 ---
 
