@@ -352,10 +352,15 @@
                             id="ai-prompt-example"></div>
                     </li>
                     <li class="task-item">
-                        <div style="margin-bottom: 0.4rem;"><strong>🎙️ Interview Prep:</strong></div>
-                        <div id="ai-interview-prep"
-                            style="color: #cbd5e1; font-style: italic; font-size: 0.95rem; border-left: 2px solid #10b981; padding-left: 0.5rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem;">
+                            <div><strong>🎙️ Interview Prep:</strong></div>
+                            <button onclick="copyInterviewPrompt()" id="copy-interview-btn"
+                                style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1; padding: 0.2rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-family: 'Inter', sans-serif; transition: all 0.2s ease;">📋
+                                Copy</button>
                         </div>
+                        <div style="font-size: 0.9rem; color: var(--text-color); border-left: 2px solid #10b981; padding-left: 0.8rem;"
+                            id="ai-interview-prep"></div>
                     </li>
                 </ul>
             </div>
@@ -426,6 +431,24 @@
         function offsetDate(days) {
             viewingDate.setDate(viewingDate.getDate() + days);
             renderDashboard();
+        }
+
+        function copyInterviewPrompt() {
+            const promptText = document.getElementById('ai-interview-prep').innerText;
+            const cleanText = promptText.replace(/^"|"$/g, '');
+            navigator.clipboard.writeText(cleanText).then(() => {
+                const btn = document.getElementById('copy-interview-btn');
+                btn.innerHTML = "✅ Copied!";
+                btn.style.background = "rgba(16, 185, 129, 0.2)";
+                btn.style.borderColor = "rgba(16, 185, 129, 0.5)";
+                setTimeout(() => {
+                    btn.innerHTML = "📋 Copy";
+                    btn.style.background = "rgba(255,255,255,0.1)";
+                    btn.style.borderColor = "rgba(255,255,255,0.2)";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy clipboard text", err);
+            });
         }
 
         function copyDailyPrompt() {
