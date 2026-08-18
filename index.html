@@ -213,6 +213,40 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .countdown-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .countdown-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .countdown-title {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown-timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
     </style>
 </head>
 
@@ -230,6 +264,17 @@
 
         <div class="quote-container" id="quote">
             "The best time to build a robust infrastructure was yesterday. The second best time is today."
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-card" style="border-bottom: 3px solid var(--k8s-blue);">
+                <div class="countdown-title">☸️ CKA Exam (Jan 1)</div>
+                <div class="countdown-timer" id="cka-count">Loading...</div>
+            </div>
+            <div class="countdown-card" style="border-bottom: 3px solid var(--az-blue);">
+                <div class="countdown-title">☁️ AZ-104 Exam (Jan 15)</div>
+                <div class="countdown-timer" id="az-count">Loading...</div>
+            </div>
         </div>
 
         <div class="nav-controls">
@@ -299,11 +344,27 @@
             "A goal without a timeline is just a dream. January 1, 2027 awaits."
         ];
 
-        // Start Live Clocks
+        // Start Live Clocks and Countdowns
+        const ckaDate = new Date('2027-01-01T00:00:00').getTime();
+        const azDate = new Date('2027-01-15T00:00:00').getTime();
+
         setInterval(() => {
             const now = new Date();
             document.getElementById('live-clock').innerText = now.toLocaleTimeString();
             document.getElementById('live-date').innerText = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            const nowTime = now.getTime();
+
+            // CKA Countdown
+            const ckaDiff = ckaDate - nowTime;
+            if (ckaDiff <= 0) { document.getElementById('cka-count').innerText = "Exam Day!"; }
+            else { document.getElementById('cka-count').innerText = `${Math.floor(ckaDiff / (1000 * 60 * 60 * 24))}d ${Math.floor((ckaDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h`; }
+
+            // AZ-104 Countdown
+            const azDiff = azDate - nowTime;
+            if (azDiff <= 0) { document.getElementById('az-count').innerText = "Exam Day!"; }
+            else { document.getElementById('az-count').innerText = `${Math.floor(azDiff / (1000 * 60 * 60 * 24))}d ${Math.floor((azDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h`; }
+
         }, 1000);
 
         // Subsystem State
