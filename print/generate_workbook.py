@@ -305,10 +305,25 @@ html_template = """<!DOCTYPE html>
 """
 
 def clean_title(title):
-    t = title.split(' - ')[0].replace('|', '-').strip()
-    if len(t) > 75:
-        return t[:72] + '...'
-    return t
+    import re
+    orig_title = title
+    for phrase in [
+        r'\|?\s*Free DevOps Course.*', 
+        r'\|?\s*45 days\s*\|?',
+        r'\|?\s*#.*',
+        r'-\s*Free DevOps Course.*',
+        r'\|?\s*Complete Shell Scripting Playlist.*',
+        r'-\s*Complete Shell Scripting Playlist.*',
+        r'-\s*#.*',
+        r'#\w+'
+    ]:
+        title = re.sub(phrase, '', title, flags=re.IGNORECASE).strip()
+    title = title.replace('|', '-').strip(' -')
+    title = re.sub(r'\s+-\s+', ' - ', title)
+    title = re.sub(r'-{2,}', '-', title)
+    if len(title) > 85:
+        return title[:82] + '...'
+    return title.strip(' -')
 
 def format_duration(seconds):
     if not seconds:
