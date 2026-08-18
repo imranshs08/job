@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps 2027 Daily Plan</title>
+    <title>DevOps 2027 Command Center</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -17,6 +17,7 @@
             --accent-glow: rgba(56, 189, 248, 0.4);
             --k8s-blue: #326ce5;
             --az-blue: #0078d4;
+            --ai-purp: #a855f7;
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
         }
@@ -38,25 +39,76 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .time-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         h1 {
             font-size: 2.5rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 0.5rem;
+            margin: 0.5rem 0;
             background: linear-gradient(to right, #38bdf8, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .date-display {
+        .quote-container {
             text-align: center;
-            color: var(--text-dim);
+            color: #cbd5e1;
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .date-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: bold;
         }
 
         .card {
@@ -80,11 +132,25 @@
             margin-top: 0;
             font-size: 1.5rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
             border-bottom: 1px solid var(--glass-border);
             padding-bottom: 0.75rem;
             margin-bottom: 1rem;
+        }
+
+        .course-link {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+
+        .course-link:hover {
+            background: rgba(56, 189, 248, 0.2);
         }
 
         .task-list {
@@ -119,7 +185,6 @@
             font-style: italic;
         }
 
-        /* Loading Spinner */
         .loader {
             border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid var(--accent);
@@ -154,139 +219,201 @@
 <body>
 
     <div class="container">
+        <div class="top-bar">
+            <div>
+                <span id="live-date" style="color: var(--text-dim);">August 18, 2026</span>
+            </div>
+            <div class="time-display" id="live-clock">00:00:00</div>
+        </div>
+
         <h1>DevOps 2027 Command Center</h1>
-        <div class="date-display" id="date-display">Loading today's date...</div>
+
+        <div class="quote-container" id="quote">
+            "The best time to build a robust infrastructure was yesterday. The second best time is today."
+        </div>
+
+        <div class="nav-controls">
+            <button class="btn" onclick="offsetDate(-1)">&#8592; Prev</button>
+            <button class="btn" onclick="resetDate()">Today</button>
+            <div class="date-display" id="target-date-display">Viewing: ...</div>
+            <button class="btn" onclick="offsetDate(1)">Next &#8594;</button>
+        </div>
 
         <div id="loading" class="loader"></div>
 
         <div id="content" style="display: none;">
+
+            <!-- CI/CD & AI Card -->
+            <div class="card" style="--accent: var(--ai-purp); --accent-glow: rgba(168, 85, 247, 0.3);">
+                <h2>🤖 Continuous Habits: AI & Interviews</h2>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <div><strong>Daily AI Practice:</strong> Spend 15 minutes designing a prompt for Claude/ChatGPT
+                            to solve a DevOps configuration issue or write an automation script.</div>
+                    </li>
+                    <li class="task-item">
+                        <div><strong>Interview Prep:</strong> Verbally answer one STAR (Situation, Task, Action, Result)
+                            behavioral question related to troubleshooting systems.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Videos Card -->
             <div class="card" style="--accent: #f59e0b; --accent-glow: rgba(245, 158, 11, 0.3);">
-                <h2>📺 158-Video Tracker</h2>
-                <ul class="task-list" id="video-tasks">
-                    <li class="empty-state">No videos scheduled for today.</li>
-                </ul>
+                <h2>📺 158-Video Tracker
+                    <a href="https://www.youtube.com/playlist?list=PLBfufR7vyILl5b-gL7Z-yZtfA_yT_v7iP" target="_blank"
+                        class="course-link">🔗 Main Playlist</a>
+                </h2>
+                <ul class="task-list" id="video-tasks"></ul>
             </div>
 
+            <!-- CKA Card -->
             <div class="card" style="--accent: var(--k8s-blue); --accent-glow: rgba(50, 108, 229, 0.3);">
-                <h2>☸️ KodeKloud CKA Track</h2>
-                <ul class="task-list" id="cka-tasks">
-                    <li class="empty-state">No CKA lessons scheduled for today.</li>
-                </ul>
+                <h2>☸️ KodeKloud CKA Track
+                    <a href="https://kodekloud.com/courses/certified-kubernetes-administrator-cka/" target="_blank"
+                        class="course-link">🔗 KodeKloud Login</a>
+                </h2>
+                <ul class="task-list" id="cka-tasks"></ul>
             </div>
 
+            <!-- AZ-104 Card -->
             <div class="card" style="--accent: var(--az-blue); --accent-glow: rgba(0, 120, 212, 0.3);">
-                <h2>☁️ AZ-104 Track</h2>
-                <ul class="task-list" id="az-tasks">
-                    <li class="empty-state">No AZ-104 topics scheduled for today.</li>
-                </ul>
+                <h2>☁️ AZ-104 Track
+                    <a href="https://www.youtube.com/playlist?list=PLlVtbbG169nGlGPWs9xaLKT1KfwqREHbs" target="_blank"
+                        class="course-link">🔗 Savill Masterclass</a>
+                </h2>
+                <ul class="task-list" id="az-tasks"></ul>
             </div>
         </div>
     </div>
 
     <script>
-        // Formatting dates based exactly on Python generation scripts inside progress-tracker.md
-        const today = new Date();
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const mStr = months[today.getMonth()];
-        const dNum = today.getDate();
-        const dPad = dNum < 10 ? '0' + dNum : dNum;
-        const year = today.getFullYear();
+        const quotes = [
+            "Automation is not a luxury, it's a necessity.",
+            "Fix the cause, not the symptom.",
+            "If it hurts, do it more often. (Continuous Integration)",
+            "The most powerful tool we have as developers is automation.",
+            "Don't build your infrastructure, code it.",
+            "Treat your servers like cattle, not pets.",
+            "By failing to prepare, you are preparing to fail.",
+            "A goal without a timeline is just a dream. January 1, 2027 awaits."
+        ];
 
-        const fDateVids = `${mStr} ${dNum}`; // e.g., "Aug 18" (No zero pad)
-        const fDateCert = `${mStr} ${dPad}, ${year}`; // e.g., "Aug 18, 2026"
+        // Start Live Clocks
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
+            document.getElementById('live-date').innerText = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }, 1000);
 
-        document.getElementById('date-display').innerText = `TARGET DATE: ${fDateCert}`;
+        // Subsystem State
+        let currentRawMarkdown = "";
+        let viewingDate = new Date(); // Start at today
 
-        async function fetchPlan() {
+        function offsetDate(days) {
+            viewingDate.setDate(viewingDate.getDate() + days);
+            renderDashboard();
+        }
+
+        function resetDate() {
+            viewingDate = new Date();
+            renderDashboard();
+        }
+
+        async function init() {
+            // Pick a daily quote
+            document.getElementById('quote').innerText = "💡 " + quotes[new Date().getDate() % quotes.length];
+
             try {
-                // In GH pages context, fetch relative file path directly from the repo tree
                 const response = await fetch('./03-Progress-Tracker/progress-tracker.md');
                 if (!response.ok) throw new Error("Could not find progress-tracker.md");
-
-                const text = await response.text();
-                const lines = text.split('\n');
-
-                let videoHtml = '';
-                let ckaHtml = '';
-                let azHtml = '';
-
-                // Parsing Logic
-                lines.forEach(line => {
-                    const l = line.trim();
-                    if (!l.startsWith('|')) return;
-
-                    const cols = l.split('|').map(s => s.trim());
-
-                    // 1. Process Video Tracks (8 cols: | # | Title | Target Date | Duration | ...)
-                    if (cols.length >= 8 && !isNaN(parseInt(cols[1])) && cols[3] === fDateVids) {
-                        const titleRaw = cols[2];
-                        const duration = cols[4];
-
-                        // Parse markdown link [text](url)
-                        let titleText = titleRaw;
-                        const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
-                        if (m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
-
-                        videoHtml += `<li class="task-item">
-                            <div>${titleText}</div>
-                            <div class="task-meta">⏱️ Duration: ${duration}</div>
-                        </li>`;
-                    }
-
-                    // 2. Process Cert Tracks (6 cols: | Date | Day | Plan | Duration/Status | ...)
-                    // Length might be 6 or 7 depending on trailing pipes
-                    if (cols[1] === fDateCert) {
-                        // Check if it's CKA table or AZ-104 table
-                        // My script outputs: 
-                        // CKA: | Date | Day | CKA Plan | Est Duration | Status |
-                        // AZ-104: | Date | Day | AZ-104 Plan | Status |
-
-                        // We uniquely identify by checking if column 4 is a duration (e.g., 1h 20m) or empty/status
-                        // Actually, if it's the CKA table, col[4] is duration, col[5] is checkbox.
-                        // AZ-104 table: col[3] is plan, col[4] is checkbox.
-
-                        // Wait, CKA: cols = ['', 'Aug 18, 2026', 'Tue', 'Intro...', '9h 19m', '☐', '']
-                        if (cols.length >= 6) {
-                            const plan = cols[3];
-                            // Clean <br> into distinct lines
-                            const planFmt = plan.replace(/<br>/g, '<br>• ');
-
-                            // Distinguish between CKA and AZ-104 by looking at columns
-                            if (cols[5] && cols[5].includes('☐')) {
-                                // It's CKA!
-                                const duration = cols[4];
-                                if (plan !== '—') {
-                                    ckaHtml += `<li class="task-item">
-                                        <div>• ${planFmt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
-                                        <div class="task-meta">⏱️ Estimated: ${duration}</div>
-                                    </li>`;
-                                }
-                            } else if (cols[4] && cols[4].includes('☐')) {
-                                // It's AZ-104!
-                                if (plan !== '—') {
-                                    azHtml += `<li class="task-item">
-                                        <div>• ${planFmt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
-                                    </li>`;
-                                }
-                            }
-                        }
-                    }
-                });
-
-                if (videoHtml) document.getElementById('video-tasks').innerHTML = videoHtml;
-                if (ckaHtml) document.getElementById('cka-tasks').innerHTML = ckaHtml;
-                if (azHtml) document.getElementById('az-tasks').innerHTML = azHtml;
-
+                currentRawMarkdown = await response.text();
+                renderDashboard();
             } catch (e) {
                 console.error(e);
-                document.getElementById('video-tasks').innerHTML = `<li class="empty-state">Error loading tracker data. Please ensure progress-tracker.md exists.</li>`;
+                document.getElementById('video-tasks').innerHTML = `<li class="empty-state">Error loading tracker data. Please ensure progress-tracker.md is committed.</li>`;
             } finally {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
             }
         }
 
-        fetchPlan();
+        function renderDashboard() {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const mStr = months[viewingDate.getMonth()];
+            const dNum = viewingDate.getDate();
+            const dPad = dNum < 10 ? '0' + dNum : dNum;
+            const year = viewingDate.getFullYear();
+
+            const fDateVids = `${mStr} ${dNum}`;
+            const fDateCert = `${mStr} ${dPad}, ${year}`;
+
+            // Check if viewing date is TODAY to display nice badge
+            const systemToday = new Date();
+            let isToday = (viewingDate.getDate() === systemToday.getDate() && viewingDate.getMonth() === systemToday.getMonth() && viewingDate.getFullYear() === systemToday.getFullYear());
+
+            document.getElementById('target-date-display').innerText = (isToday ? "🔥 TODAY: " : "📅 ") + fDateCert;
+
+            let videoHtml = '';
+            let ckaHtml = '';
+            let azHtml = '';
+
+            const lines = currentRawMarkdown.split('\n');
+            lines.forEach(line => {
+                const l = line.trim();
+                if (!l.startsWith('|')) return;
+
+                const cols = l.split('|').map(s => s.trim());
+
+                // Video Track Parse
+                if (cols.length >= 8 && !isNaN(parseInt(cols[1])) && cols[3] === fDateVids) {
+                    const titleRaw = cols[2];
+                    const duration = cols[4];
+
+                    let titleText = titleRaw;
+                    const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
+                    if (m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
+
+                    videoHtml += `<li class="task-item">
+                        <div>${titleText}</div>
+                        <div class="task-meta">⏱️ Duration: ${duration}</div>
+                    </li>`;
+                }
+
+                // Cert Track Parse
+                if (cols[1] === fDateCert) {
+                    if (cols.length >= 6) {
+                        const plan = cols[3];
+                        const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                        if (cols[5] && cols[5].includes('☐')) {
+                            const duration = cols[4];
+                            if (plan !== '—') {
+                                ckaHtml += `<li class="task-item">
+                                    <div>• ${planFmt}</div>
+                                    <div class="task-meta">⏱️ Estimated: ${duration}</div>
+                                </li>`;
+                            }
+                        } else if (cols[4] && cols[4].includes('☐')) {
+                            if (plan !== '—') {
+                                azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
+                            }
+                        }
+                    }
+                }
+            });
+
+            if (!videoHtml) videoHtml = `<li class="empty-state">No videos scheduled for ${fDateVids}.</li>`;
+            if (!ckaHtml) ckaHtml = `<li class="empty-state">No CKA lessons scheduled for ${fDateCert}.</li>`;
+            if (!azHtml) azHtml = `<li class="empty-state">No AZ-104 topics scheduled for ${fDateCert}.</li>`;
+
+            document.getElementById('video-tasks').innerHTML = videoHtml;
+            document.getElementById('cka-tasks').innerHTML = ckaHtml;
+            document.getElementById('az-tasks').innerHTML = azHtml;
+        }
+
+        // Boot
+        init();
     </script>
 </body>
 
