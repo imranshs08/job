@@ -209,9 +209,30 @@
 ## 🎓 Cloud Certification Tracker
 > Explicit tracking for passing industry-recognized Azure and Kubernetes credentials.
 
+### ☸️ KodeKloud CKA Module Breakdown
+| KodeKloud Module | Status | Target Date |
+|---|---|---|
+| 01. Core Concepts | ☐ | Oct 1 |
+| 02. Scheduling | ☐ | Oct 3 |
+| 03. Logging & Monitoring | ☐ | Oct 4 |
+| 04. Application Lifecycle Management | ☐ | Oct 5 |
+| 05. Cluster Maintenance | ☐ | Oct 6 |
+| 06. Security | ☐ | Oct 7 |
+| 07. Storage | ☐ | Oct 8 |
+| 08. Networking | ☐ | Oct 9 |
+| 09. Design and Install a Kubernetes Cluster | ☐ | Oct 10 |
+| 10. Install "Kubernetes the kubeadm way" | ☐ | Oct 10 |
+| 11. (2025 Updates) Helm Basics | ☐ | Oct 12 |
+| 12. (2025 Updates) Kustomize Basics | ☐ | Oct 12 |
+| 13. Troubleshooting | ☐ | Oct 15 |
+| 14. Other Topics | ☐ | Oct 16 |
+| 15. Lightning Labs | ☐ | Oct 18 |
+| 16. Mock Exams | ☐ | Oct 20 |
+
+### 🎓 Exam Booking & Simulators
 | Certification | Status | Target Date | Preparation Milestone |
 |---|---|---|---|
-| **CKA: KodeKloud Course** | ☐ | Oct 15 | [KodeKloud Official Course](https://kodekloud.com/courses/cka-certification-course-certified-kubernetes-administrator) |
+| **CKA: KodeKloud Course Finalized** | ☐ | Oct 20 | CodeKloud Mock Exams > 85% |
 | CKA: Simulator Killer.sh #1 | ☐ | Oct 20 | Clear with > 85% |
 | CKA: Simulator Killer.sh #2 | ☐ | Oct 25 | Clear with > 90% |
 | **CKA: Final Exam Date** | ☐ | **Oct 30** | Pass (Cost: ~$395) |
