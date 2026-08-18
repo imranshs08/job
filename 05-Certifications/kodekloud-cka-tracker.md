@@ -147,24 +147,81 @@
 | 135 | **Security** | (2025 Updates) Custom Resource Definition (CRD) | 11:00 | Dec 30 | ☐ |
 | 136 | **Security** | (2025 Updates) Custom Controllers | 03:57 | Dec 31 | ☐ |
 | 137 | **Security** | ⚠️ 1 lesson may be cut off – check KodeKloud Security module | — | Jan 01 | ☐ |
-| 138 | **Storage** | ⚠️ EXPAND ON KODEKLOUD – Module has 15 lessons (login required) | — | Jan 02 | ☐ |
-| 139 | **Networking** | ⚠️ EXPAND ON KODEKLOUD – Module has 38 lessons (login required) | — | Jan 03 | ☐ |
-| 140 | **Design and Install** | Design a Kubernetes Cluster | 05:50 | Jan 04 | ☐ |
-| 141 | **Design and Install** | Choosing Kubernetes Infrastructure | 05:52 | Jan 05 | ☐ |
-| 142 | **Design and Install** | Configure High Availability | 07:48 | Jan 06 | ☐ |
-| 143 | **Design and Install** | ETCD in HA | 12:42 | Jan 07 | ☐ |
-| 144 | **Design and Install** | Important Update: Kubernetes the Hard Way | — | Jan 08 | ☐ |
-| 145 | **Install kubeadm** | ⚠️ EXPAND ON KODEKLOUD – Module has 6 lessons (login required) | — | Jan 09 | ☐ |
-| 146 | **Helm Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 11 lessons (login required) | — | Jan 10 | ☐ |
-| 147 | **Kustomize Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required) | — | Jan 11 | ☐ |
-| 148 | **Troubleshooting** | ⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required) | — | Jan 12 | ☐ |
-| 149 | **Other Topics** | Labs – JSON PATH | — | Jan 13 | ☐ |
-| 150 | **Other Topics** | Pre-Requisites – JSON PATH | — | Jan 14 | ☐ |
-| 151 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Jan 15 | ☐ |
-| 152 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Jan 16 | ☐ |
-| 153 | **Lightning Labs** | Lightning Lab Introduction | — | Jan 17 | ☐ |
-| 154 | **Lightning Labs** | Lightning Lab – 1 | — | Jan 18 | ☐ |
-| 155 | **Mock Exams** | ⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required) | — | Jan 19 | ☐ |
+| 138 | **Storage** | Storage – Section Introduction | 00:45 | Jan 02 | ☐ |
+| 139 | **Storage** | Introduction to Docker Storage | 00:54 | Jan 03 | ☐ |
+| 140 | **Storage** | Storage in Docker | 12:32 | Jan 04 | ☐ |
+| 141 | **Storage** | Volume Driver Plugins in Docker | 01:53 | Jan 05 | ☐ |
+| 142 | **Storage** | Container Storage Interface | 03:44 | Jan 06 | ☐ |
+| 143 | **Storage** | Volumes | 04:30 | Jan 07 | ☐ |
+| 144 | **Storage** | Persistent Volumes | 03:01 | Jan 08 | ☐ |
+| 145 | **Storage** | Persistent Volume Claims | 04:05 | Jan 09 | ☐ |
+| 146 | **Storage** | Using PVC in Pods | — | Jan 10 | ☐ |
+| 147 | **Storage** | Practice Test Persistent Volume Claims | — | Jan 11 | ☐ |
+| 148 | **Storage** | Solution – Persistent Volumes and Persistent Volume Claims (optional) | 18:12 | Jan 12 | ☐ |
+| 149 | **Storage** | Storage Class | 03:59 | Jan 13 | ☐ |
+| 150 | **Storage** | Practice Test – Storage Class | — | Jan 14 | ☐ |
+| 151 | **Storage** | Solution – Storage Class | 10:28 | Jan 15 | ☐ |
+| 152 | **Storage** | Download Presentation Deck 7 | — | Jan 16 | ☐ |
+| 153 | **Networking** | Networking Introduction | 02:04 | Jan 17 | ☐ |
+| 154 | **Networking** | Prerequisite Switching, Routing, Gateways CNI in kubernetes | 12:12 | Jan 18 | ☐ |
+| 155 | **Networking** | Prerequisite DNS | 14:24 | Jan 19 | ☐ |
+| 156 | **Networking** | Prerequisite – CoreDNS | — | Jan 20 | ☐ |
+| 157 | **Networking** | Prerequisite Network Namespaces | 15:09 | Jan 21 | ☐ |
+| 158 | **Networking** | FAQ | — | Jan 22 | ☐ |
+| 159 | **Networking** | Prerequisite Docker Networking | 07:15 | Jan 23 | ☐ |
+| 160 | **Networking** | Prerequisite CNI | 06:10 | Jan 24 | ☐ |
+| 161 | **Networking** | Cluster Networking | 02:11 | Jan 25 | ☐ |
+| 162 | **Networking** | Important Note about CNI and CKA Exam | — | Jan 26 | ☐ |
+| 163 | **Networking** | Practice Test – Explore Environment | — | Jan 27 | ☐ |
+| 164 | **Networking** | Solution – Explore Environment (optional) | 07:14 | Jan 28 | ☐ |
+| 165 | **Networking** | Pod Networking | 09:03 | Jan 29 | ☐ |
+| 166 | **Networking** | CNI in kubernetes | 03:06 | Jan 30 | ☐ |
+| 167 | **Networking** | Note CNI Weave | — | Jan 31 | ☐ |
+| 168 | **Networking** | CNI weave | 05:59 | Feb 01 | ☐ |
+| 169 | **Networking** | Practice Test CNI | — | Feb 02 | ☐ |
+| 170 | **Networking** | Solution – Explore CNI (optional) | 02:12 | Feb 03 | ☐ |
+| 171 | **Networking** | Practice Test – Deploy Network Solution | — | Feb 04 | ☐ |
+| 172 | **Networking** | Solution – Deploy Network Solution (optional) | 03:43 | Feb 05 | ☐ |
+| 173 | **Networking** | ipam weave | 03:21 | Feb 06 | ☐ |
+| 174 | **Networking** | Practice Test – Networking Weave | — | Feb 07 | ☐ |
+| 175 | **Networking** | Solution – Networking Weave (optional) | 05:30 | Feb 08 | ☐ |
+| 176 | **Networking** | Service Networking | 08:51 | Feb 09 | ☐ |
+| 177 | **Networking** | Practice Test Service Networking | — | Feb 10 | ☐ |
+| 178 | **Networking** | Solution – Service Networking (optional) | 05:12 | Feb 11 | ☐ |
+| 179 | **Networking** | DNS in kubernetes | 05:39 | Feb 12 | ☐ |
+| 180 | **Networking** | CoreDNS in Kubernetes | 06:44 | Feb 13 | ☐ |
+| 181 | **Networking** | Practice Test CoreDNS in Kubernetes | — | Feb 14 | ☐ |
+| 182 | **Networking** | Solution – Explore DNS (optional) | 13:03 | Feb 15 | ☐ |
+| 183 | **Networking** | Ingress | 22:34 | Feb 16 | ☐ |
+| 184 | **Networking** | Article: Ingress | — | Feb 17 | ☐ |
+| 185 | **Networking** | Ingress – Annotations and rewrite-target | — | Feb 18 | ☐ |
+| 186 | **Networking** | Practice Test – CKA – Ingress Networking – 1 | — | Feb 19 | ☐ |
+| 187 | **Networking** | Solution – Ingress Networking – 1 (optional) | 15:46 | Feb 20 | ☐ |
+| 188 | **Networking** | Practice Test – CKA – Ingress Networking – 2 | — | Feb 21 | ☐ |
+| 189 | **Networking** | Solution – Ingress Networking – 2 (optional) | 10:39 | Feb 22 | ☐ |
+| 190 | **Networking** | Download Presentation Deck 8 | — | Feb 23 | ☐ |
+| 191 | **Design and Install** | Design a Kubernetes Cluster | 05:50 | Feb 24 | ☐ |
+| 192 | **Design and Install** | Choosing Kubernetes Infrastructure | 05:52 | Feb 25 | ☐ |
+| 193 | **Design and Install** | Configure High Availability | 07:48 | Feb 26 | ☐ |
+| 194 | **Design and Install** | ETCD in HA | 12:42 | Feb 27 | ☐ |
+| 195 | **Design and Install** | Important Update: Kubernetes the Hard Way | — | Feb 28 | ☐ |
+| 196 | **Design and Install** | Download Presentation Deck 9 | — | Mar 01 | ☐ |
+| 197 | **Install kubeadm** | Introduction to Deployment with kubeadm | 02:32 | Mar 02 | ☐ |
+| 198 | **Install kubeadm** | Resources | — | Mar 03 | ☐ |
+| 199 | **Install kubeadm** | Deploy with Kubeadm – Provision VMs with Vagrant | 03:06 | Mar 04 | ☐ |
+| 200 | **Install kubeadm** | Demo – Deployment with Kubeadm | 14:30 | Mar 05 | ☐ |
+| 201 | **Install kubeadm** | Practice Test – Deploy a Kubernetes Cluster using Kubeadm | — | Mar 06 | ☐ |
+| 202 | **Install kubeadm** | Solution – Install a Kubernetes Cluster using kubeadm | 09:50 | Mar 07 | ☐ |
+| 203 | **Helm Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 11 lessons (login required) | — | Mar 08 | ☐ |
+| 204 | **Kustomize Basics** | ⚠️ EXPAND ON KODEKLOUD – Module has 22 lessons (login required) | — | Mar 09 | ☐ |
+| 205 | **Troubleshooting** | ⚠️ EXPAND ON KODEKLOUD – Module has 13 lessons (login required) | — | Mar 10 | ☐ |
+| 206 | **Other Topics** | Labs – JSON PATH | — | Mar 11 | ☐ |
+| 207 | **Other Topics** | Pre-Requisites – JSON PATH | — | Mar 12 | ☐ |
+| 208 | **Other Topics** | Advanced Kubectl Commands | 12:04 | Mar 13 | ☐ |
+| 209 | **Other Topics** | Practice Test – Advanced Kubectl Commands | — | Mar 14 | ☐ |
+| 210 | **Lightning Labs** | Lightning Lab Introduction | — | Mar 15 | ☐ |
+| 211 | **Lightning Labs** | Lightning Lab – 1 | — | Mar 16 | ☐ |
+| 212 | **Mock Exams** | ⚠️ EXPAND ON KODEKLOUD – Module has 10 lessons (login required) | — | Mar 17 | ☐ |
 
 ---
 
