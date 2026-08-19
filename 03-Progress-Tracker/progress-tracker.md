@@ -12,7 +12,7 @@
 | # | Video Title | Target Date | Duration | Watched | Notes | Hands-On |
 |---|-------------|-------------|----------|---------|-------|----------|
 | 1 | [Day-1 - Fundamentals of DevOps](https://www.youtube.com/watch?v=Ou9j73aWgyE) | Aug 18 | 30m 40s | ✅ | ✅ | ✅ |
-| 2 | [Day-2 - Improve SDLC with DevOps](https://www.youtube.com/watch?v=jRqBIpcgO4g) | Aug 19 | 26m 12s | ✅ | ✅ | ✅ |
+| 2 | [Day-2 - Improve SDLC with DevOps](https://www.youtube.com/watch?v=jRqBIpcgO4g) | Aug 19 | 26m 12s | ✅ | Completed 2026-08-19 21:44 IST | ✅ |
 | 3 | [Absolute Prerequisite for Learning DevOps](https://www.youtube.com/watch?v=neG2MFVFji0) | Aug 20 | 42m 12s | ✅ | ✅ | ✅ |
 | 4 | [Day-3 - Virtual Machines Part-1](https://www.youtube.com/watch?v=lgUwYwBozow) | Aug 21 | 25m 27s | ✅ | ✅ | ✅ |
 | 5 | [Day-4 - AWS & Azure - How to Create Virtual Machines](https://www.youtube.com/watch?v=NJkMe9cdYEQ) | Aug 21 | 29m 38s | ✅ | ✅ | ✅ |
