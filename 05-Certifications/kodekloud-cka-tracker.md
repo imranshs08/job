@@ -13,8 +13,8 @@
 | 1 | **Introduction** | Course Introduction / Topics Overview | — | Aug 18 | ☐ |
 | 2 | **Core Concepts** | Core Concepts Section Introduction | 00:31 | Aug 18 | ☐ |
 | 3 | **Core Concepts** | Cluster Architecture | 08:48 | Aug 18 | ☐ |
-| 4 | **Core Concepts** | ETCD for Beginners | 07:22 | Aug 19 | ☐ |
-| 5 | **Core Concepts** | ETCD in Kubernetes | 03:17 | Aug 19 | ☐ |
+| 4 | **Core Concepts** | ETCD for Beginners | 07:22 | Aug 19 | ✅ Completed 2026-08-19 22:02 IST |
+| 5 | **Core Concepts** | ETCD in Kubernetes | 03:17 | Aug 19 | ✅ Completed 2026-08-19 22:02 IST |
 | 6 | **Core Concepts** | ETCD – Commands (Optional) | — | Aug 20 | ☐ |
 | 7 | **Core Concepts** | Kube API Server | 04:51 | Aug 20 | ☐ |
 | 8 | **Core Concepts** | Kube Controller Manager | 04:15 | Aug 21 | ☐ |
