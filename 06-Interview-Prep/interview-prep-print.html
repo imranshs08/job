@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevOps Interview Preparation Guide</title>
+<style>
+
+/* ─── FONTS ──────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ─── PAGE SETUP ────────────────────────────────────────────────────────── */
+@page {
+  size: A4;
+  margin: 20mm 18mm 20mm 18mm;
+}
+@page :first {
+  margin: 0;
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: #1a1a2e;
+  background: #fff;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* ─── COVER PAGE ────────────────────────────────────────────────────────── */
+.cover {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  width: 210mm;
+  height: 297mm;
+  background: linear-gradient(145deg, #0f3460 0%, #16213e 45%, #0f3460 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  top: -100px; left: -100px;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  bottom: -80px; right: -80px;
+}
+.cover-inner {
+  z-index: 1;
+  text-align: center;
+  padding: 0 40px;
+}
+.cover-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #e0e7ff;
+  font-size: 8.5pt;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 50px;
+  margin-bottom: 22px;
+}
+.cover h1 {
+  font-size: 30pt;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.cover h1 span {
+  color: #60a5fa;
+}
+.cover-sub {
+  font-size: 11pt;
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+.cover-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #60a5fa, #818cf8);
+  border-radius: 2px;
+  margin: 0 auto 28px;
+}
+.cover-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.cover-tag {
+  background: rgba(96,165,250,0.15);
+  border: 1px solid rgba(96,165,250,0.3);
+  color: #93c5fd;
+  font-size: 7.5pt;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.cover-meta {
+  font-size: 8.5pt;
+  color: #64748b;
+  margin-top: 10px;
+}
+.cover-meta strong { color: #94a3b8; }
+
+/* ─── CONTENT WRAPPER ───────────────────────────────────────────────────── */
+.content {
+  padding: 0;
+}
+
+/* ─── HEADINGS ──────────────────────────────────────────────────────────── */
+h1 {
+  font-size: 18pt;
+  font-weight: 800;
+  color: #0f3460;
+  border-bottom: 3px solid #0f3460;
+  padding-bottom: 6px;
+  margin: 0 0 20px 0;
+  page-break-after: avoid;
+}
+h2 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: #0f3460;
+  background: linear-gradient(90deg, #e8f0fe, transparent);
+  border-left: 4px solid #0f3460;
+  padding: 7px 12px;
+  margin: 22px 0 10px 0;
+  border-radius: 0 4px 4px 0;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h3 {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 16px 0 8px 0;
+  page-break-after: avoid;
+}
+h4 {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #334155;
+  margin: 12px 0 5px 0;
+  page-break-after: avoid;
+}
+
+/* ─── TABLES ─────────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 16px 0;
+  font-size: 8.5pt;
+  page-break-inside: auto;
+  break-inside: auto;
+}
+thead {
+  display: table-header-group;
+}
+tr {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+thead tr {
+  background: linear-gradient(135deg, #0f3460, #1e4d8c);
+}
+th {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 8pt;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  text-align: left;
+  border: none;
+}
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+  line-height: 1.45;
+}
+tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+tbody tr:hover td {
+  background: #eff6ff;
+}
+tbody tr:last-child td {
+  border-bottom: 2px solid #0f3460;
+}
+td:first-child {
+  font-weight: 600;
+  color: #0f3460;
+  white-space: nowrap;
+  width: 30px;
+}
+
+/* ─── BLOCKQUOTES ───────────────────────────────────────────────────────── */
+blockquote {
+  background: linear-gradient(90deg, #eff6ff, #f8fafc);
+  border-left: 4px solid #3b82f6;
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: #334155;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+blockquote p { margin: 0; }
+
+/* ─── CODE ──────────────────────────────────────────────────────────────── */
+code {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 8pt;
+  background: #f1f5f9;
+  color: #dc2626;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid #e2e8f0;
+}
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8pt;
+  overflow: hidden;
+  margin: 8px 0;
+  page-break-inside: avoid;
+}
+pre code {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+}
+
+/* ─── LISTS ─────────────────────────────────────────────────────────────── */
+ul, ol {
+  margin: 5px 0 5px 18px;
+  padding: 0;
+}
+li {
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+li strong {
+  color: #0f3460;
+}
+
+/* ─── HORIZONTAL RULE ───────────────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 16px 0;
+}
+
+/* ─── PARAGRAPHS ────────────────────────────────────────────────────────── */
+p {
+  margin: 4px 0 8px 0;
+}
+
+/* ─── STRONG ────────────────────────────────────────────────────────────── */
+strong {
+  font-weight: 600;
+  color: #0f3460;
+}
+
+/* ─── DEEP-DIVE SECTION HIGHLIGHT ───────────────────────────────────────── */
+h2:has(+ h3) + h3,
+.scenario-highlight {
+  page-break-inside: avoid;
+}
+
+/* ─── PRINT UTILITIES ───────────────────────────────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  h2 { break-after: avoid; }
+  h3 { break-after: avoid; }
+  table { break-inside: auto; }
+  tr { break-inside: avoid; }
+  thead { display: table-header-group; }
+  blockquote { break-inside: avoid; }
+  pre { break-inside: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">🎯 Phase 5 — December 2026</div>
+    <h1>DevOps Interview<br><span>Preparation Guide</span></h1>
+    <div class="cover-divider"></div>
+    <p class="cover-sub">80+ Questions &nbsp;|&nbsp; 12 Sections &nbsp;|&nbsp; Scenario Deep-Dives</p>
+    <div class="cover-tags">
+      <span class="cover-tag">Linux & Shell</span>
+      <span class="cover-tag">Git</span>
+      <span class="cover-tag">Docker</span>
+      <span class="cover-tag">Kubernetes</span>
+      <span class="cover-tag">CI/CD</span>
+      <span class="cover-tag">Terraform</span>
+      <span class="cover-tag">Cloud (AWS/Azure)</span>
+      <span class="cover-tag">Monitoring</span>
+      <span class="cover-tag">AI/DevOps</span>
+      <span class="cover-tag">Scenarios</span>
+      <span class="cover-tag">Behavioral</span>
+    </div>
+    <p class="cover-meta"><strong>Start Revising:</strong> Week 17 &nbsp;|&nbsp; <strong>Generated:</strong> August 2026</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+<h1>🎤 Interview Preparation — DevOps Engineer</h1>
+<blockquote>
+<p><strong>Phase:</strong> 5 (December 2026) | <strong>Start revising from Week 17</strong></p>
+</blockquote>
+<hr />
+<h2>Preparation Strategy</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Weight</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technical (Tools &amp; Concepts)</td>
+<td>40%</td>
+<td>Deep knowledge of DevOps stack</td>
+</tr>
+<tr>
+<td>Scenario-Based</td>
+<td>30%</td>
+<td>"How would you handle...?"</td>
+</tr>
+<tr>
+<td>System Design</td>
+<td>15%</td>
+<td>Architecture &amp; scalability</td>
+</tr>
+<tr>
+<td>Behavioral</td>
+<td>15%</td>
+<td>STAR method, leadership, teamwork</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. Linux &amp; Shell Scripting (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Explain the Linux boot process</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>What is the difference between a process and a thread?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How do you troubleshoot a server with high CPU usage?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Explain file permissions and the chmod command</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>What are inodes? What happens when you run out?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Write a script to monitor disk usage and alert</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>What is the difference between soft and hard links?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you schedule tasks in Linux?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Explain systemd and how services are managed</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>What are namespaces and cgroups? (Container foundation)</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Git &amp; Version Control (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Explain the difference between git merge and git rebase</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>How do you resolve a merge conflict? Walk through it</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>What branching strategy does your team follow?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>What is git stash and when would you use it?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>How do you revert a commit that's already pushed?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Explain git cherry-pick with a use case</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>What is the difference between git reset and git revert?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you set up branch protection rules?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What are Git hooks? Give 2 practical examples</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>How do you handle large files in Git?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Docker (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is the difference between a container and a VM?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Explain Docker's layered architecture</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>What is the difference between CMD and ENTRYPOINT?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>How do you optimize a Docker image for production?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Explain Docker networking (bridge, host, overlay)</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>How do you handle persistent data in Docker?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>What are multi-stage builds and why are they important?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you scan Docker images for vulnerabilities?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What is Docker Compose and its use case?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>How do you debug a container that keeps crashing?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Kubernetes (15 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Explain Kubernetes architecture and components</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>What is the difference between a Deployment and a StatefulSet?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How does a Service discover backend Pods?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Explain the different Service types and when to use each</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>What is an Ingress Controller and how does it work?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Explain RBAC in Kubernetes with an example</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>How do you handle application configuration in K8s?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>What are Probes? Explain Liveness vs Readiness vs Startup</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>How does Horizontal Pod Autoscaler work?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>What is a CRD and an Operator?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>11</td>
+<td>How do you troubleshoot CrashLoopBackOff?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Explain Network Policies</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>13</td>
+<td>What are Pod Disruption Budgets?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>14</td>
+<td>How do you do rolling updates and rollbacks?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>15</td>
+<td>How do you manage secrets securely in K8s?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. CI/CD (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is the difference between CI, CD, and CD?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Design a CI/CD pipeline for a microservices application</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>What is pipeline as code?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Jenkins declarative vs scripted pipeline</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>How do you handle secrets in CI/CD pipelines?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>What is GitOps and how does ArgoCD implement it?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Explain blue-green vs canary vs rolling deployments</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you implement automated rollback?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What are Jenkins shared libraries?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>How do you set up GitHub Actions for a CI/CD workflow?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. Terraform &amp; IaC (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is Terraform state and how do you manage it?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>What are Terraform modules and why use them?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How do you handle state locking?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>What is terraform import and when is it used?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Count vs for_each — when to use which?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>How do you manage different environments (dev/staging/prod)?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>What are data sources in Terraform?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you handle drift detection?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Terraform vs CloudFormation vs Pulumi</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>How do you implement Terraform in a CI/CD pipeline?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. Cloud (AWS/Azure) (10 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Explain VPC architecture and components</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Security Groups vs NACLs</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How does IAM role assumption work?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Compare EKS vs AKS</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>What is the shared responsibility model?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>6</td>
+<td>How do you implement cost optimization?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Explain multi-region deployment strategies</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>8</td>
+<td>How do you handle disaster recovery?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What is cross-account access in AWS?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Serverless vs containerized — when to choose which?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. Monitoring &amp; Observability (5 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What are the three pillars of observability?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Explain Prometheus + Grafana architecture</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>What are SLIs, SLOs, and SLAs? Give examples</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>How do you implement centralized logging?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>What are the Golden Signals?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>9. AI &amp; DevOps (5 Questions)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>How do you use AI tools in your DevOps workflow?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>2</td>
+<td>What is AIOps?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How can AI improve CI/CD pipelines?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>4</td>
+<td>What is prompt engineering for DevOps?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+<tr>
+<td>5</td>
+<td>How do you ensure AI-generated IaC is secure?</td>
+<td>☐ Low ☐ Med ☐ High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10. Scenario-Based Questions</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Scenario</th>
+<th>My Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Production is down. Users report 500 errors. Walk me through your troubleshooting process.</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>A deployment introduced a bug. How do you rollback safely?</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>The Kubernetes cluster is running out of resources. How do you investigate and fix?</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>A junior engineer accidentally deleted the Terraform state file. What do you do?</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>You need to migrate a monolithic application to microservices. How do you approach it?</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>A CI/CD pipeline takes 45 minutes. How do you optimize it?</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>You discover a critical vulnerability in a base image used by 20+ services. How do you handle it?</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>The monitoring system shows increasing latency over the past week. How do you investigate?</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>A team wants to deploy their first application to Kubernetes. How do you guide them?</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>You're asked to set up a disaster recovery plan. What components do you include?</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Your app relies on a 3rd-party API that went completely offline, bringing your whole app down. How would you have architected this differently?</td>
+<td>Circuit Breaker + Cache + Queue + Graceful Degradation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>11. Behavioral Questions (STAR Method)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Your STAR Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tell me about a time you handled a production outage</td>
+<td>S: T: A: R:</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Describe a situation where you disagreed with a team member</td>
+<td>S: T: A: R:</td>
+</tr>
+<tr>
+<td>3</td>
+<td>How do you prioritize when multiple urgent tasks arise?</td>
+<td>S: T: A: R:</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tell me about a project you're most proud of</td>
+<td>S: T: A: R:</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Describe how you learned a new technology quickly</td>
+<td>S: T: A: R:</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>📊 Confidence Tracker</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Low</th>
+<th>Medium</th>
+<th>High</th>
+<th>Ready?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux &amp; Shell</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Git</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Terraform</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>AI/DevOps</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Scenarios</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Behavioral</td>
+<td></td>
+<td></td>
+<td></td>
+<td>☐</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Tip:</strong> Use Claude to simulate interviews. Prompt: <em>"You are a senior DevOps interviewer at a top tech company. Interview me for 30 minutes covering [topic]. Start with easy questions and increase difficulty. Score my answers."</em></p>
+</blockquote>
+<hr />
+<h2>12. Scenario Deep-Dives (Worked Answers)</h2>
+<h3>Scenario 11 — 3rd-Party API Outage: How to Architect for Resilience</h3>
+<blockquote>
+<p><strong>Question:</strong> Your application relies on an external 3rd-party API that just went completely offline, bringing your whole application down. How would you have architected this differently?</p>
+</blockquote>
+<h4>🔴 Root Cause</h4>
+<p><strong>Tight coupling</strong> — the app has a <strong>single point of failure (SPOF)</strong> on an external dependency with no fallback, cache, or circuit protection.</p>
+<h4>✅ Resilience Architecture — Key Patterns</h4>
+<p><strong>1. Circuit Breaker Pattern</strong><br />
+- Use libraries: <strong>Resilience4j</strong> (Java), <strong>Polly</strong> (.NET), <strong>opossum</strong> (Node.js)<br />
+- When failures exceed threshold → circuit <strong>opens</strong> → requests short-circuit immediately<br />
+- Periodically probes backend → <strong>half-open</strong> state → auto-recovery<br />
+- Prevents thundering-herd problem on recovery</p>
+<p><strong>2. Caching Layer (Stale-While-Revalidate)</strong><br />
+- Cache last-known-good responses in <strong>Redis</strong> or CDN<br />
+- Serve stale data with <code>Cache-Control: stale-if-error</code> headers<br />
+- Label in UI: <em>"Data as of 2 hours ago"</em> — transparency over silent failure</p>
+<p><strong>3. Async / Queue-Based Decoupling</strong><br />
+- Never call the 3rd-party API <strong>synchronously in the request path</strong><br />
+- Push work to a <strong>message queue</strong> (SQS, Azure Service Bus, RabbitMQ)<br />
+- Workers consume from the queue; if API is down, messages queue up safely<br />
+- App stays responsive; backlog is processed on recovery</p>
+<p><strong>4. Graceful Degradation</strong><br />
+- Distinguish <strong>must-have</strong> vs <strong>nice-to-have</strong> features<br />
+- If API powers "recommendations" → hide the widget, don't crash the page<br />
+- Return partial responses with clear status indicators (<code>503</code> header)</p>
+<p><strong>5. Secondary Provider / Fallback</strong><br />
+- Have a <strong>secondary vendor</strong> on standby (e.g., two payment gateways, two SMS providers)<br />
+- Auto-failover via weighted routing or DNS switch (Route 53 / Azure Traffic Manager)</p>
+<p><strong>6. Proactive Observability</strong><br />
+- Add a <strong>synthetic monitor</strong> (Datadog, Dynatrace) polling the 3rd-party endpoint every 60s<br />
+- Alert on latency spike <em>before</em> users notice<br />
+- <code>GET /health</code> endpoint exposes upstream dependency status</p>
+<p><strong>7. Vendor Risk &amp; SLA Assessment</strong><br />
+- 99.9% SLA = ~8.7 hrs/year downtime — acceptable?<br />
+- Negotiate backup endpoints or credits; evaluate if function can be <strong>internalized</strong></p>
+<h4>🧠 One-Liner Summary (say this in interviews)</h4>
+<blockquote>
+<p><em>"The fix is to never couple your app's availability to a 3rd-party's availability. I'd use a circuit breaker for fault isolation, a cache for continuity, a queue for async decoupling, and graceful degradation so core flows stay alive even when the dependency is dead."</em></p>
+</blockquote>
+<h4>📊 Before vs After</h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Before (Bad)</th>
+<th>After (Resilient)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coupling</td>
+<td>Synchronous, tight</td>
+<td>Async, loosely coupled</td>
+</tr>
+<tr>
+<td>Failure mode</td>
+<td>Total app outage</td>
+<td>Degraded but functional</td>
+</tr>
+<tr>
+<td>Recovery</td>
+<td>Manual intervention</td>
+<td>Auto-recovery via circuit breaker</td>
+</tr>
+<tr>
+<td>Visibility</td>
+<td>None</td>
+<td>Proactive alerting + health checks</td>
+</tr>
+<tr>
+<td>User impact</td>
+<td>100% down</td>
+<td>Partial feature unavailability</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+
+</body>
+</html>
