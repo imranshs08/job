@@ -146,6 +146,17 @@ def command_prompt() -> str:
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
+def command_quote() -> str:
+    try:
+        repo = get_repo()
+        content, _ = get_file_content(repo, DATA_PATH)
+        quotes = re.findall(r"\{\s*quote:\s*\"([^\"]+)\",\s*author:\s*\"([^\"]+)\"", content)
+        if not quotes: return "Could not parse quotes."
+        q = random.choice(quotes)
+        return f"💡 <i>\"{q[0]}\"</i>\n— <b>{q[1]}</b>" + FOOTER
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
+
 def command_log(text_to_log: str) -> str:
     try:
         repo = get_repo()
@@ -243,7 +254,8 @@ def webhook():
                 {"text": "🤖 Prompt", "callback_data": "/prompt"}
             ],
             [
-                {"text": "⏪ Undo", "callback_data": "/undo"}
+                {"text": "⏪ Undo", "callback_data": "/undo"},
+                {"text": "💡 Quote", "callback_data": "/quote"}
             ]
         ]
     }
@@ -264,6 +276,10 @@ def webhook():
         send_telegram("⏳ Fetching a random AI prompt...")
         send_telegram(command_prompt())
         
+    elif low_text in ["/quote", "💡 quote"]:
+        send_telegram("⏳ Fetching a random quote...")
+        send_telegram(command_quote())
+        
     elif low_text in ["/status", "📊 status"]:
         send_telegram("⏳ Parsing progress-tracker.md...")
         send_telegram(command_status(), reply_markup=std_markup)
@@ -280,6 +296,7 @@ def webhook():
 /status - Quick progress check
 /interview - Practice an interview question
 /prompt - Test out an AI scenario
+/quote - Get a motivational tech quote
 /log [text] - Append notes to war-journal.md"""
         send_telegram(help_menu + FOOTER, reply_markup=std_markup)
 
