@@ -150,6 +150,7 @@ def build_hook_message(s: dict) -> str:
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
   ☸️  CKA:    {s["cka_done"]} / {s["cka_total"]}  ({cka_pct}%)
   ☸️  CKA Exam in <b>{s["days_cka"]} days</b>
+  ☁️  AZ-104 Exam in <b>{s["days_az"]} days</b>
 
 ✅ Keep the momentum going!"""
 
