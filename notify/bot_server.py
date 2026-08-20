@@ -27,7 +27,7 @@ CKA_EXAM_DATE = date(2027, 1, 1)
 AZ_EXAM_DATE  = date(2027, 1, 15)
 TOTAL_VIDEOS  = 158
 
-FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>"
+FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>\n👨‍💻 <i>Built by Imran</i>"
 
 def send_telegram(text: str, reply_markup: dict = None):
     import urllib.request
