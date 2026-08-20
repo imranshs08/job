@@ -13,7 +13,7 @@
 |---|-------------|-------------|----------|---------|-------|----------|
 | 1 | [Day-1 - Fundamentals of DevOps](https://www.youtube.com/watch?v=Ou9j73aWgyE) | Aug 18 | 30m 40s | ✅ | ✅ | ✅ |
 | 2 | [Day-2 - Improve SDLC with DevOps](https://www.youtube.com/watch?v=jRqBIpcgO4g) | Aug 19 | 26m 12s | ✅ | ✅ | ✅ |
-| 3 | [Absolute Prerequisite for Learning DevOps](https://www.youtube.com/watch?v=neG2MFVFji0) | Aug 20 | 42m 12s | ✅ | ✅ | ✅ |
+| 3 | [Absolute Prerequisite for Learning DevOps](https://www.youtube.com/watch?v=neG2MFVFji0) | Aug 20 | 42m 12s | ☐ | ☐ | ☐ |
 | 4 | [Day-3 - Virtual Machines Part-1](https://www.youtube.com/watch?v=lgUwYwBozow) | Aug 21 | 25m 27s | ✅ | ✅ | ✅ |
 | 5 | [Day-4 - AWS & Azure - How to Create Virtual Machines](https://www.youtube.com/watch?v=NJkMe9cdYEQ) | Aug 21 | 29m 38s | ✅ | ✅ | ✅ |
 | 6 | [HOW TO CONNECT TO EC2 INSTANCE FROM WINDOWS LAPTOP - MOBAXTERM](https://www.youtube.com/watch?v=MkIRh1mi8Ms) | Aug 22 | 7m 40s | ✅ | ✅ | ✅ |
@@ -218,7 +218,7 @@
 |---|---|---|---|---|
 | Aug 18, 2026 | Tue | **Introduction**: Course Introduction / Topics Overview (—)<br>**Core Concepts**: Core Concepts Section Introduction (00:31)<br>**Core Concepts**: Cluster Architecture (08:48) | 9m 19s | ✅ |
 | Aug 19, 2026 | Wed | **Core Concepts**: ETCD for Beginners (07:22)<br>**Core Concepts**: ETCD in Kubernetes (03:17) | 10m 39s | ✅ |
-| Aug 20, 2026 | Thu | **Core Concepts**: ETCD – Commands (Optional) (—)<br>**Core Concepts**: Kube API Server (04:51) | 4m 51s | ✅ |
+| Aug 20, 2026 | Thu | **Core Concepts**: ETCD – Commands (Optional) (—)<br>**Core Concepts**: Kube API Server (04:51) | 4m 51s | ☐ |
 | Aug 21, 2026 | Fri | **Core Concepts**: Kube Controller Manager (04:15)<br>**Core Concepts**: Kube Scheduler (03:53) | 8m 8s | ☐ |
 | Aug 22, 2026 | Sat | **Core Concepts**: Kubelet (01:42)<br>**Core Concepts**: Kube Proxy (03:41)<br>**Core Concepts**: PODs (09:13) | 14m 36s | ☐ |
 | Aug 23, 2026 | Sun | **Core Concepts**: PODs with YAML (07:00)<br>**Core Concepts**: Demo – PODs with YAML (06:17) | 13m 17s | ☐ |
