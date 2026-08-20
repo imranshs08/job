@@ -333,9 +333,13 @@ def webhook():
         send_telegram("⏳ Parsing progress-tracker.md...")
         send_telegram(command_status(), reply_markup=std_markup)
         
-    elif low_text.startswith("/ask "):
-        send_telegram(f"🧠 Asking Gemini AI: {text[5:].strip()}")
-        command_ask(text[5:].strip())
+    elif low_text.startswith("/ask"):
+        query = text[4:].strip()
+        if not query:
+            send_telegram("⚠️ Please provide a prompt! Example: `/ask What is Kubernetes?`", parse_mode="Markdown")
+        else:
+            send_telegram(f"🧠 Asking Gemini AI: {query}")
+            command_ask(query)
         
     elif low_text.startswith("/log "):
         send_telegram("⏳ Writing log entry to GitHub...")
