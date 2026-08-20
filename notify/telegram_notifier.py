@@ -29,6 +29,8 @@ CKA_EXAM_DATE = date(2027, 1, 1)
 AZ_EXAM_DATE  = date(2027, 1, 15)
 TOTAL_VIDEOS  = 158
 
+FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>\n👨‍💻 <i>Built by Imran</i>"
+
 # ── Telegram sender ───────────────────────────────────────────────────────────
 def send_telegram(message: str) -> bool:
     """Send a message to Telegram. Returns True on success."""
@@ -175,7 +177,7 @@ def build_daily_message(s: dict) -> str:
 🎙️ <b>Interview Question:</b>
   {s['daily_interview']}
 
-🔥 Every lesson gets you closer. Let's go! 💪"""
+🔥 Every lesson gets you closer. Let's go! 💪""" + FOOTER
 
 
 def build_hook_message(s: dict) -> str:
@@ -190,7 +192,7 @@ def build_hook_message(s: dict) -> str:
   ☸️  CKA Exam in <b>{s["days_cka"]} days</b> <i>({s["cka_date_str"]})</i>
   ☁️  AZ-104 Exam in <b>{s["days_az"]} days</b> <i>({s["az_date_str"]})</i>
 
-✅ Keep the momentum going!"""
+✅ Keep the momentum going!""" + FOOTER
 
 def build_nightly_message(s: dict) -> str:
     """Nightly status check to see if today's items were completed."""
@@ -219,7 +221,7 @@ def build_nightly_message(s: dict) -> str:
 
 <b>Today's Checklist:</b>
 {status_msg}
-{footer}"""
+{footer}""" + FOOTER
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
