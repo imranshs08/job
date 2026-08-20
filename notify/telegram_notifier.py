@@ -198,10 +198,21 @@ def build_daily_message(s: dict) -> str:
 
 
 def build_hook_message(s: dict) -> str:
+    import subprocess
+    commit_msg = "Progress updated"
+    try:
+        raw_out = subprocess.check_output(["git", "log", "-1", "--pretty=%B"], cwd=r"c:\Job Tracker", shell=True)
+        commit_msg = raw_out.decode("utf-8").strip()
+    except Exception:
+        pass
+        
     vid_pct = round(s["videos_watched"] / s["videos_total"] * 100, 1) if s["videos_total"] else 0
     cka_pct = round(s["cka_done"]       / s["cka_total"]   * 100, 1) if s["cka_total"]   else 0
 
     return f"""🔔 <b>Progress Committed — {s["today_str"]}</b>
+
+💬 <b>Commit:</b>
+<i>{commit_msg}</i>
 
 📊 <b>Current Stats:</b>
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
