@@ -196,6 +196,29 @@ def command_status() -> str:
         cka_date_str = CKA_EXAM_DATE.strftime("%b %d, %Y")
         az_date_str = AZ_EXAM_DATE.strftime("%b %d, %Y")
         
+        today_vid_str = f"{months[today.month-1]} {today.day}"
+        vid_match = re.search(
+            rf"\|\s*\d+\s*\|\s*\[([^\]]+)\]\(([^)]+)\).*?\|\s*{re.escape(today_vid_str)}\s*\|[^|]*?\|\s*(✅|☐)",
+            content
+        )
+        if vid_match:
+            today_video_title = vid_match.group(1)
+            today_video_url = vid_match.group(2)
+            today_video_status = vid_match.group(3)
+            today_sched_line = f"\n\n📅 <b>Today's Video:</b>\n  {today_video_status} 📺 <a href='{today_video_url}'>{today_video_title}</a>"
+        else:
+            # Fallback
+            vid_match2 = re.search(
+                rf"\|\s*\d+\s*\|\s*\[([^\]]+)\].*?\|\s*{re.escape(today_vid_str)}\s*\|[^|]*?\|\s*(✅|☐)",
+                content
+            )
+            if vid_match2:
+                today_video_title = vid_match2.group(1)
+                today_video_status = vid_match2.group(2)
+                today_sched_line = f"\n\n📅 <b>Today's Video:</b>\n  {today_video_status} 📺 {today_video_title}"
+            else:
+                today_sched_line = f"\n\n📅 <b>Today:</b>\n  📺 No video scheduled"
+        
         return f"""📊 <b>DevOps Command Center Status</b>
 
 ⏳ <b>Countdowns:</b>
@@ -204,7 +227,7 @@ def command_status() -> str:
 
 ✅ <b>Progress:</b>
   📺 Videos: {videos_watched} / {TOTAL_VIDEOS} ({vid_pct}%)
-  ☸️  CKA: {cka_done} / {cka_total} ({cka_pct}%)""" + FOOTER
+  ☸️  CKA: {cka_done} / {cka_total} ({cka_pct}%){today_sched_line}""" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 

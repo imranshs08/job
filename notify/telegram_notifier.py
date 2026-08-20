@@ -79,14 +79,25 @@ def parse_tracker() -> dict:
 
     # Find today's video
     today_video = None
+    today_video_url = None
     today_video_status = "☐"
     vid_match = re.search(
-        rf"\|\s*\d+\s*\|\s*\[([^\]]+)\].*?\|\s*{re.escape(today_str_vid)}\s*\|[^|]*?\|\s*(✅|☐)",
+        rf"\|\s*\d+\s*\|\s*\[([^\]]+)\]\(([^)]+)\).*?\|\s*{re.escape(today_str_vid)}\s*\|[^|]*?\|\s*(✅|☐)",
         content
     )
     if vid_match:
         today_video = vid_match.group(1)
-        today_video_status = vid_match.group(2)
+        today_video_url = vid_match.group(2)
+        today_video_status = vid_match.group(3)
+    else:
+        # Fallback if there is no URL
+        vid_match2 = re.search(
+            rf"\|\s*\d+\s*\|\s*\[([^\]]+)\].*?\|\s*{re.escape(today_str_vid)}\s*\|[^|]*?\|\s*(✅|☐)",
+            content
+        )
+        if vid_match2:
+            today_video = vid_match2.group(1)
+            today_video_status = vid_match2.group(2)
 
     # Find today's CKA lesson
     today_cka = None
@@ -136,6 +147,7 @@ def parse_tracker() -> dict:
         "days_cka":       days_cka,
         "days_az":        days_az,
         "today_video":    today_video,
+        "today_video_url": today_video_url,
         "today_video_status": today_video_status,
         "today_cka":      today_cka,
         "today_cka_status": today_cka_status,
@@ -152,7 +164,12 @@ def build_daily_message(s: dict) -> str:
     vid_pct = round(s["videos_watched"] / s["videos_total"] * 100, 1) if s["videos_total"] else 0
     cka_pct = round(s["cka_done"]       / s["cka_total"]   * 100, 1) if s["cka_total"]   else 0
 
-    today_video_line = f"  📺 <b>{s['today_video']}</b>" if s["today_video"] else "  📺 No video scheduled"
+    if s["today_video_url"]:
+        today_video_line = f"  📺 <a href='{s['today_video_url']}'><b>{s['today_video']}</b></a>"
+    elif s["today_video"]:
+        today_video_line = f"  📺 <b>{s['today_video']}</b>"
+    else:
+        today_video_line = "  📺 No video scheduled"
     today_cka_line   = f"  ☸️ {s['today_cka']}"         if s["today_cka"]   else "  ☸️ No CKA lesson scheduled"
     
     quote_block = f'<i>"{s["daily_quote"]}"</i>\n' if s.get("daily_quote") else ""
@@ -200,7 +217,10 @@ def build_nightly_message(s: dict) -> str:
     all_done = True
     
     if s["today_video"]:
-        status_msg += f"{s['today_video_status']} 📺 {s['today_video']}\n"
+        if s.get("today_video_url"):
+            status_msg += f"{s['today_video_status']} 📺 <a href='{s['today_video_url']}'>{s['today_video']}</a>\n"
+        else:
+            status_msg += f"{s['today_video_status']} 📺 {s['today_video']}\n"
         if s["today_video_status"] != "✅":
             all_done = False
             
