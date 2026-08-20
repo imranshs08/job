@@ -65,8 +65,6 @@ def parse_tracker() -> dict:
     videos_watched = sum(1 for _, _, status in video_rows if status == "✅")
 
     # ── CKA stats ──
-    cka_rows = re.findall(r"\|\s*(✅|☐)\s*\|?\s*$", content, re.MULTILINE)
-    # More robust: count status column in CKA table
     cka_all    = re.findall(r"\|\s*(✅|☐)\s*\|?\s*\n", content)
     cka_done   = sum(1 for s in cka_all if s == "✅")
     cka_total  = len(cka_all)
@@ -94,10 +92,31 @@ def parse_tracker() -> dict:
     )
     if cka_match:
         raw = cka_match.group(1).strip()
-        # Strip HTML <br> tags and bold markers
         raw = re.sub(r"<br>", " | ", raw)
         raw = re.sub(r"\*\*(.*?)\*\*", r"\1", raw)
         today_cka = raw[:120]
+
+    # ── Parse data.js for daily routines ──
+    daily_quote, daily_prompt, daily_interview = "", "", ""
+    try:
+        with open(r"c:\Job Tracker\data.js", "r", encoding="utf-8") as f:
+            data_content = f.read()
+            
+        quotes = re.findall(r"^\s*\"([^\"]+)\",*$", data_content, re.MULTILINE)
+        prompts = re.findall(r"\{\s*title:\s*\"([^\"]+)\",\s*text:\s*'\"([^\"]+)\"'", data_content)
+        iqs = re.findall(r"^\s*\"(Behavioral|Scenario|Technical Explanation):([^\"]+)\",*$", data_content, re.MULTILINE)
+        
+        day_of_year = today.timetuple().tm_yday
+        if quotes: daily_quote = quotes[day_of_year % len(quotes)]
+        if prompts:
+            p = prompts[day_of_year % len(prompts)]
+            daily_prompt = f"<b>{p[0]}</b>\n    <i>{p[1]}</i>"
+        if iqs:
+            iq = iqs[day_of_year % len(iqs)]
+            daily_interview = f"<b>{iq[0]}</b> {iq[1]}"
+            
+    except Exception as e:
+        print(f"Failed to parse data.js: {e}")
 
     # ── Countdown ──
     days_cka = (CKA_EXAM_DATE - today).days
@@ -113,6 +132,9 @@ def parse_tracker() -> dict:
         "today_video":    today_video,
         "today_cka":      today_cka,
         "today_str":      today.strftime("%a %b %d"),
+        "daily_quote":    daily_quote,
+        "daily_prompt":   daily_prompt,
+        "daily_interview": daily_interview
     }
 
 # ── Message builders ──────────────────────────────────────────────────────────
@@ -122,9 +144,11 @@ def build_daily_message(s: dict) -> str:
 
     today_video_line = f"  📺 <b>{s['today_video']}</b>" if s["today_video"] else "  📺 No video scheduled"
     today_cka_line   = f"  ☸️ {s['today_cka']}"         if s["today_cka"]   else "  ☸️ No CKA lesson scheduled"
+    
+    quote_block = f'<i>"{s["daily_quote"]}"</i>\n' if s.get("daily_quote") else ""
 
     return f"""☀️ <b>Good Morning! DevOps Daily Brief — {s["today_str"]}</b>
-
+{quote_block}
 ⏳ <b>Exam Countdowns:</b>
   ☸️  CKA  (Jan 01):  <b>{s["days_cka"]} days</b>
   ☁️  AZ-104 (Jan 15): <b>{s["days_az"]} days</b>
@@ -136,6 +160,12 @@ def build_daily_message(s: dict) -> str:
 📅 <b>Today's Schedule:</b>
 {today_video_line}
 {today_cka_line}
+
+🤖 <b>AI Prompt of the Day:</b>
+  {s['daily_prompt']}
+
+🎙️ <b>Interview Question:</b>
+  {s['daily_interview']}
 
 🔥 Every lesson gets you closer. Let's go! 💪"""
 
