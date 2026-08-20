@@ -201,7 +201,7 @@ def webhook():
 /interview - Practice an interview question
 /prompt - Test out an AI scenario
 /log [text] - Append notes to war-journal.md"""
-        send_telegram(help_menu)
+        send_telegram(help_menu + FOOTER)
 
     return jsonify({"status": "ok"}), 200
 
