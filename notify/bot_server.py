@@ -158,10 +158,12 @@ def command_quote() -> str:
     try:
         repo = get_repo()
         content, _ = get_file_content(repo, DATA_PATH)
-        quotes = re.findall(r"\{\s*quote:\s*\"([^\"]+)\",\s*author:\s*\"([^\"]+)\"", content)
+        match = re.search(r"const quotes = \[\s*(.*?)\s*\];", content, re.DOTALL)
+        if not match: return "Could not parse quotes array."
+        quotes = re.findall(r'"([^"\\]*(?:\\.[^"\\]*)*)"', match.group(1))
         if not quotes: return "Could not parse quotes."
         q = random.choice(quotes)
-        return f"💡 <i>\"{q[0]}\"</i>\n— <b>{q[1]}</b>" + FOOTER
+        return f"💡 <i>\"{q}\"</i>" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
@@ -171,7 +173,7 @@ def command_ask(query: str) -> None:
         return
         
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         sys_prompt = "You are a senior DevOps mentor for someone taking the CKA and AZ-104. Be very concise, helpful, and technically accurate."
         response = model.generate_content(f"{sys_prompt}\n\nUser: {query}")
         
