@@ -24,12 +24,18 @@ This file provides the foundational context for Gemini CLI interactions within t
 | `02-Weekly-Plan/` | Granular week-by-week study schedule. |
 | `03-Progress-Tracker/` | Detailed per-video and per-lab checkbox tracker. |
 | `04-Notes/` | Subject-matter notes (K8s, Docker, Terraform, Linux, etc.). |
-| `05-Certifications/` | Specialized trackers for CKA (KodeKloud) and AZ-104 exams. |
-| `06-Career-Marketing/` | Job hunt checklists, resume templates, and LinkedIn strategies. |
-| `06-Interview-Prep/` | Technical and behavioral question banks (STAR method). |
-| `07-Gemini-CLI-Notes/` | Documentation for using Gemini CLI to manage this workspace. |
-| `08-Video-Tracker/` | YouTube playlist tracking and future AI Platform Engineering roadmap. |
-| `print/` | Scripts and templates for generating printable PDF trackers. |
+| `05-Portfolio-Projects/` | Real-world hands-on DevOps projects. |
+| `06-Certifications/` | Specialized trackers for CKA (KodeKloud) and AZ-104 exams. |
+| `07-Interview-Prep/` | Technical and behavioral question banks (STAR method). |
+| `08-Career-Marketing/` | Job hunt checklists, resume templates, and LinkedIn strategies. |
+| `09-AI-Skills-Guide/` | Claude, ChatGPT, AI Agents for DevOps. |
+| `10-AI-Learning-Roadmap/` | Parallel AI track with Udemy & YouTube courses. |
+| `11-Labs-and-Validation/` | Hands-on test labs. |
+| `12-Gemini-CLI-Notes/` | Documentation for using Gemini CLI to manage this workspace. |
+| `13-Video-Tracker/` | YouTube playlist tracking and future AI Platform Engineering roadmap. |
+| `14-Telegram-Bot/` | Render Webhook integration for /done and /ask chat commands. |
+| `15-Print-Templates/` | Scripts and templates for generating printable PDF trackers. |
+| `16-Automation-Scripts/` | Floating autonomous layout and structure builders. |
 | `master-tracker.md` | **The Single Source of Truth** for high-level progress. |
 | `data.js` | Data store for AI prompts and interview questions (used by `index.html`). |
 
@@ -39,15 +45,15 @@ This file provides the foundational context for Gemini CLI interactions within t
 
 This project uses Python and Shell scripts to maintain its documentation state:
 
-- **`generate_3month_plan.py` / `generate_5month_plan.py`**: Regenerates the roadmap, weekly plan, and trackers based on the video list.
-- **`print/update_md.py`**: Injects new sections (like the AI Horizon roadmap) into existing trackers.
-- **`fix_markdown.py`**: Utility to clean up table formatting and encoding issues across the repo.
+- **`16-Automation-Scripts/generate_3month_plan.py`**: Regenerates the roadmap, weekly plan.
+- **`15-Print-Templates/update_md.py`**: Injects new sections into existing trackers.
+- **`16-Automation-Scripts/fix_markdown.py`**: Utility to clean up table formatting and encoding issues across the repo.
 
 ### 📝 Tracking Progress
 When updating progress, follow this hierarchy:
 1.  Check off specific items in `03-Progress-Tracker/progress-tracker.md`.
 2.  Update the high-level summary table in `master-tracker.md`.
-3.  (Optional) Run `python print/update_html.py` to sync the printable tracker.
+3.  (Optional) Run `python 15-Print-Templates/update_html.py` to sync the printable tracker.
 
 ---
 

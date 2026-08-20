@@ -26,11 +26,18 @@
 | 2 | [📋 Weekly Plan](02-Weekly-Plan/weekly-plan.md) | Week-by-week study schedule |
 | 3 | [✅ Progress Tracker](03-Progress-Tracker/progress-tracker.md) | Printable checkbox tracker (158 videos) |
 | 4 | [📝 Notes](04-Notes/) | Topic-wise study notes |
-| 5 | [🤖 AI Skills Guide](05-AI-Skills-Guide/ai-devops-guide.md) | Claude, ChatGPT, AI Agents for DevOps |
-| 6 | [🎤 Interview Prep](06-Interview-Prep/interview-prep.md) | Questions, scenarios & behavioral prep |
-| 7 | [🧠 AI Learning Roadmap](07-AI-Learning-Roadmap/ai-learning-roadmap.md) | Parallel AI track with Udemy & YouTube courses |
-| 8 | [🎓 Certifications](05-Certifications/certification-tracker.md) | CKA (Jan 1) + AZ-104 (Jan 15) tracker |
-| 9 | [🖨️ Print Sheet](print/job-tracker.html) | PDF-ready printable tracker |
+| 5 | [📁 Portfolio Projects](05-Portfolio-Projects/) | Real-world hands-on DevOps projects |
+| 6 | [🎓 Certifications](06-Certifications/certification-tracker.md) | CKA (Jan 1) + AZ-104 (Jan 15) tracker |
+| 7 | [🎤 Interview Prep](07-Interview-Prep/interview-prep.md) | Questions, scenarios & behavioral prep |
+| 8 | [💼 Career Marketing](08-Career-Marketing/) | Resumes, LinkedIn, job applications |
+| 9 | [🤖 AI Skills Guide](09-AI-Skills-Guide/ai-devops-guide.md) | Claude, ChatGPT, AI Agents for DevOps |
+| 10 | [🧠 AI Learning Roadmap](10-AI-Learning-Roadmap/ai-learning-roadmap.md) | Parallel AI track with Udemy & YouTube courses |
+| 11 | [🔬 Labs and Validation](11-Labs-and-Validation/) | Validation labs for CKA |
+| 12 | [♊ Gemini CLI Notes](12-Gemini-CLI-Notes/) | Gemini system prompt and CLI guides |
+| 13 | [📺 Video Tracker](13-Video-Tracker/) | Automated tracking algorithms |
+| 14 | [💬 Telegram Bot](14-Telegram-Bot/README.md) | Active Render Webhook UI |
+| 15 | [🖨️ Print Sheet](15-Print-Templates/job-tracker.html) | PDF-ready printable tracker |
+| 16 | [⚙️ Automation Scripts](16-Automation-Scripts/) | Autonomous root scripts |
 
 ---
 
