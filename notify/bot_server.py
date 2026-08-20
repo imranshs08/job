@@ -82,6 +82,39 @@ def command_done() -> str:
     except Exception as e:
         return f"❌ GitHub API Error: {str(e)}" + FOOTER
 
+def command_undo() -> str:
+    try:
+        repo = get_repo()
+        content, file_m = get_file_content(repo, TRACKER_PATH)
+        
+        today = datetime.today()
+        months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        today_vid_str = f"{months[today.month-1]} {today.day}"
+        today_cert_str = f"{months[today.month-1]} {today.day:02d}, {today.year}"
+        
+        lines = content.split('\n')
+        modified = False
+        new_lines = []
+        for line in lines:
+            if (today_vid_str in line or today_cert_str in line) and "✅" in line:
+                line = line.replace("✅", "☐")
+                modified = True
+            new_lines.append(line)
+            
+        if not modified:
+            return "⚠️ Nothing to undo! Today's tasks are already marked as uncompleted (☐)." + FOOTER
+            
+        repo.update_file(
+            file_m.path,
+            f"progress: undo {today_vid_str} tasks via Telegram Bot",
+            "\n".join(new_lines),
+            file_m.sha,
+            branch="main"
+        )
+        return "⏪ Undone! Today's tasks have been reverted back to ☐ on GitHub." + FOOTER
+    except Exception as e:
+        return f"❌ GitHub API Error: {str(e)}" + FOOTER
+
 def command_interview() -> str:
     try:
         repo = get_repo()
@@ -177,6 +210,10 @@ def webhook():
         send_telegram("⏳ Processing `/done` via GitHub API...")
         send_telegram(command_done())
         
+    elif low_text in ["/undo", "undo"]:
+        send_telegram("⏳ Processing `/undo` via GitHub API...")
+        send_telegram(command_undo())
+        
     elif low_text == "/interview":
         send_telegram("⏳ Fetching a random interview question...")
         send_telegram(command_interview())
@@ -197,6 +234,7 @@ def webhook():
         # Help menu for anything else
         help_menu = """🤖 <b>DevOps Bot Commands:</b>
 /done - Check off today's tasks as ✅
+/undo - Revert today's tasks back to ☐
 /status - Quick progress check
 /interview - Practice an interview question
 /prompt - Test out an AI scenario
