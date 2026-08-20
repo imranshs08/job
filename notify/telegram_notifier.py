@@ -138,6 +138,8 @@ def parse_tracker() -> dict:
         "today_cka":      today_cka,
         "today_cka_status": today_cka_status,
         "today_str":      today.strftime("%a %b %d"),
+        "cka_date_str":   CKA_EXAM_DATE.strftime("%b %d, %Y"),
+        "az_date_str":    AZ_EXAM_DATE.strftime("%b %d, %Y"),
         "daily_quote":    daily_quote,
         "daily_prompt":   daily_prompt,
         "daily_interview": daily_interview
@@ -156,8 +158,8 @@ def build_daily_message(s: dict) -> str:
     return f"""☀️ <b>Good Morning! DevOps Daily Brief — {s["today_str"]}</b>
 {quote_block}
 ⏳ <b>Exam Countdowns:</b>
-  ☸️  CKA  (Jan 01):  <b>{s["days_cka"]} days</b>
-  ☁️  AZ-104 (Jan 15): <b>{s["days_az"]} days</b>
+  ☸️  CKA: <b>{s["days_cka"]} days</b> <i>({s["cka_date_str"]})</i>
+  ☁️  AZ-104: <b>{s["days_az"]} days</b> <i>({s["az_date_str"]})</i>
 
 📊 <b>Overall Progress:</b>
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
@@ -185,8 +187,8 @@ def build_hook_message(s: dict) -> str:
 📊 <b>Current Stats:</b>
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
   ☸️  CKA:    {s["cka_done"]} / {s["cka_total"]}  ({cka_pct}%)
-  ☸️  CKA Exam in <b>{s["days_cka"]} days</b>
-  ☁️  AZ-104 Exam in <b>{s["days_az"]} days</b>
+  ☸️  CKA Exam in <b>{s["days_cka"]} days</b> <i>({s["cka_date_str"]})</i>
+  ☁️  AZ-104 Exam in <b>{s["days_az"]} days</b> <i>({s["az_date_str"]})</i>
 
 ✅ Keep the momentum going!"""
 
