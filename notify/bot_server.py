@@ -29,10 +29,19 @@ TOTAL_VIDEOS  = 158
 
 FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>"
 
-def send_telegram(text: str):
+def send_telegram(text: str, reply_markup: dict = None):
     import urllib.request
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = json.dumps({"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML", "disable_web_page_preview": True}).encode("utf-8")
+    payload_dict = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": text,
+        "parse_mode": "HTML",
+        "disable_web_page_preview": True
+    }
+    if reply_markup:
+        payload_dict["reply_markup"] = reply_markup
+        
+    payload = json.dumps(payload_dict).encode("utf-8")
     req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
     try:
         urllib.request.urlopen(req, timeout=10)
@@ -191,40 +200,70 @@ def webhook():
     if request.method == "GET":
         return "DevOps Bot is live!", 200
         
-    data = request.json
-    if not data or "message" not in data:
+    data = request.json or {}
+    
+    # Handle Button Clicks (Callback Queries)
+    if "callback_query" in data:
+        cb = data["callback_query"]
+        chat_id = str(cb.get("message", {}).get("chat", {}).get("id"))
+        text = cb.get("data", "").strip()
+        low_text = text.lower()
+        
+        # Acknowledge the button press to stop the loading spinner
+        import urllib.request
+        try:
+            cb_id = cb.get("id")
+            urllib.request.urlopen(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/answerCallbackQuery?callback_query_id={cb_id}", timeout=5)
+        except:
+            pass
+            
+    # Handle Normal Text Messages
+    elif "message" in data:
+        msg = data["message"]
+        chat_id = str(msg.get("chat", {}).get("id"))
+        text = msg.get("text", "").strip()
+        low_text = text.lower()
+    else:
         return jsonify({"status": "ignored"}), 200
         
-    msg = data["message"]
-    chat_id = str(msg.get("chat", {}).get("id"))
-    text = msg.get("text", "").strip()
-    
     # Authorized user check
     if chat_id != str(TELEGRAM_CHAT_ID):
         print(f"Unauthorized chat_id {chat_id}")
         return jsonify({"status": "unauthorized"}), 200
 
-    low_text = text.lower()
-    
-    if low_text in ["/done", "done"]:
+    # Main Command Router
+    std_markup = {
+        "inline_keyboard": [
+            [
+                {"text": "📊 Status", "callback_data": "/status"},
+                {"text": "✅ Done", "callback_data": "/done"}
+            ],
+            [
+                {"text": "🎙️ Interview", "callback_data": "/interview"},
+                {"text": "🤖 Prompt", "callback_data": "/prompt"}
+            ]
+        ]
+    }
+
+    if low_text in ["/done", "done", "✅ done"]:
         send_telegram("⏳ Processing `/done` via GitHub API...")
         send_telegram(command_done())
         
-    elif low_text in ["/undo", "undo"]:
+    elif low_text in ["/undo", "undo", "⏪ undo"]:
         send_telegram("⏳ Processing `/undo` via GitHub API...")
         send_telegram(command_undo())
         
-    elif low_text == "/interview":
+    elif low_text in ["/interview", "🎙️ interview"]:
         send_telegram("⏳ Fetching a random interview question...")
         send_telegram(command_interview())
         
-    elif low_text == "/prompt":
+    elif low_text in ["/prompt", "🤖 prompt"]:
         send_telegram("⏳ Fetching a random AI prompt...")
         send_telegram(command_prompt())
         
-    elif low_text == "/status":
+    elif low_text in ["/status", "📊 status"]:
         send_telegram("⏳ Parsing progress-tracker.md...")
-        send_telegram(command_status())
+        send_telegram(command_status(), reply_markup=std_markup)
         
     elif low_text.startswith("/log "):
         send_telegram("⏳ Writing log entry to GitHub...")
@@ -239,7 +278,7 @@ def webhook():
 /interview - Practice an interview question
 /prompt - Test out an AI scenario
 /log [text] - Append notes to war-journal.md"""
-        send_telegram(help_menu + FOOTER)
+        send_telegram(help_menu + FOOTER, reply_markup=std_markup)
 
     return jsonify({"status": "ok"}), 200
 
