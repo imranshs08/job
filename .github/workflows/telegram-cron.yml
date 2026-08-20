@@ -1,0 +1,19 @@
+name: Telegram Scheduled Ping
+
+on:
+  schedule:
+    # Runs at minute 0 past every 6th hour
+    # Note: GitHub Actions cron uses UTC time.
+    - cron: '0 */6 * * *'
+  workflow_dispatch: 
+    # Allows you to click "Run Workflow" inside GitHub Actions manually
+
+jobs:
+  trigger-ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Webhook
+        run: |
+          curl -X POST "https://devops-job-bot.onrender.com/cron" \
+          -H "Content-Type: application/json" \
+          -d '{"chat_id": "7776146606"}'

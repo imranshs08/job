@@ -243,6 +243,14 @@ def webhook():
 
     return jsonify({"status": "ok"}), 200
 
+@app.route("/cron", methods=["POST"])
+def cron_ping():
+    data = request.json or {}
+    if str(data.get("chat_id")) == str(TELEGRAM_CHAT_ID):
+        send_telegram("⏰ <b>6-Hour Scheduled Check-In</b>\n\n" + command_status())
+        return jsonify({"status": "pinged"}), 200
+    return jsonify({"status": "unauthorized"}), 401
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
