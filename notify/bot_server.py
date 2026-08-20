@@ -11,6 +11,7 @@ import random
 from datetime import datetime, date
 from flask import Flask, request, jsonify
 from github import Github
+import google.generativeai as genai
 
 app = Flask(__name__)
 
@@ -18,6 +19,10 @@ app = Flask(__name__)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+
 REPO_NAME = "imranshs08/job"
 TRACKER_PATH = "03-Progress-Tracker/progress-tracker.md"
 DATA_PATH = "data.js"
@@ -29,15 +34,16 @@ TOTAL_VIDEOS  = 158
 
 FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>\n👨‍💻 <i>Built by Imran</i>"
 
-def send_telegram(text: str, reply_markup: dict = None):
+def send_telegram(text: str, reply_markup: dict = None, parse_mode: str = "HTML"):
     import urllib.request
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload_dict = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": text,
-        "parse_mode": "HTML",
         "disable_web_page_preview": True
     }
+    if parse_mode:
+        payload_dict["parse_mode"] = parse_mode
     if reply_markup:
         payload_dict["reply_markup"] = reply_markup
         
@@ -158,6 +164,21 @@ def command_quote() -> str:
         return f"💡 <i>\"{q[0]}\"</i>\n— <b>{q[1]}</b>" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
+
+def command_ask(query: str) -> None:
+    if not GEMINI_API_KEY:
+        send_telegram("⚠️ Gemini API Key not configured! Please add `GEMINI_API_KEY` to your Render environment variables.", parse_mode=None)
+        return
+        
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        sys_prompt = "You are a senior DevOps mentor for someone taking the CKA and AZ-104. Be very concise, helpful, and technically accurate."
+        response = model.generate_content(f"{sys_prompt}\n\nUser: {query}")
+        
+        raw_footer = "\n\n🌐 Dashboard: https://imranshs08.github.io/job/ • 🐙 Repo: https://github.com/imranshs08/job"
+        send_telegram(f"✨ AI Insights:\n\n{response.text}{raw_footer}", parse_mode=None)
+    except Exception as e:
+        send_telegram(f"❌ AI Error: {str(e)}", parse_mode=None)
 
 def command_log(text_to_log: str) -> str:
     try:
@@ -312,6 +333,10 @@ def webhook():
         send_telegram("⏳ Parsing progress-tracker.md...")
         send_telegram(command_status(), reply_markup=std_markup)
         
+    elif low_text.startswith("/ask "):
+        send_telegram(f"🧠 Asking Gemini AI: {text[5:].strip()}")
+        command_ask(text[5:].strip())
+        
     elif low_text.startswith("/log "):
         send_telegram("⏳ Writing log entry to GitHub...")
         send_telegram(command_log(text[5:].strip()))
@@ -324,6 +349,7 @@ def webhook():
 /status - Quick progress check
 /interview - Practice an interview question
 /prompt - Test out an AI scenario
+/ask [query] - Chat directly with Gemini AI
 /quote - Get a motivational tech quote
 /log [text] - Append notes to war-journal.md"""
         send_telegram(help_menu + FOOTER, reply_markup=std_markup)
