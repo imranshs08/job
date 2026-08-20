@@ -77,17 +77,20 @@ def parse_tracker() -> dict:
 
     # Find today's video
     today_video = None
+    today_video_status = "☐"
     vid_match = re.search(
-        rf"\|\s*\d+\s*\|\s*\[([^\]]+)\].*?\|\s*{re.escape(today_str_vid)}\s*\|",
+        rf"\|\s*\d+\s*\|\s*\[([^\]]+)\].*?\|\s*{re.escape(today_str_vid)}\s*\|[^|]*?\|\s*(✅|☐)",
         content
     )
     if vid_match:
         today_video = vid_match.group(1)
+        today_video_status = vid_match.group(2)
 
     # Find today's CKA lesson
     today_cka = None
+    today_cka_status = "☐"
     cka_match = re.search(
-        rf"\|\s*{re.escape(today_str_cert)}\s*\|[^|]+\|\s*([^|]+)\|",
+        rf"\|\s*{re.escape(today_str_cert)}\s*\|[^|]+\|\s*([^|]+)\|\s*[^|]+\|\s*(✅|☐)",
         content
     )
     if cka_match:
@@ -95,6 +98,7 @@ def parse_tracker() -> dict:
         raw = re.sub(r"<br>", " | ", raw)
         raw = re.sub(r"\*\*(.*?)\*\*", r"\1", raw)
         today_cka = raw[:120]
+        today_cka_status = cka_match.group(2)
 
     # ── Parse data.js for daily routines ──
     daily_quote, daily_prompt, daily_interview = "", "", ""
@@ -130,7 +134,9 @@ def parse_tracker() -> dict:
         "days_cka":       days_cka,
         "days_az":        days_az,
         "today_video":    today_video,
+        "today_video_status": today_video_status,
         "today_cka":      today_cka,
+        "today_cka_status": today_cka_status,
         "today_str":      today.strftime("%a %b %d"),
         "daily_quote":    daily_quote,
         "daily_prompt":   daily_prompt,
@@ -184,6 +190,35 @@ def build_hook_message(s: dict) -> str:
 
 ✅ Keep the momentum going!"""
 
+def build_nightly_message(s: dict) -> str:
+    """Nightly status check to see if today's items were completed."""
+    status_msg = ""
+    all_done = True
+    
+    if s["today_video"]:
+        status_msg += f"{s['today_video_status']} 📺 {s['today_video']}\n"
+        if s["today_video_status"] != "✅":
+            all_done = False
+            
+    if s["today_cka"]:
+        status_msg += f"{s['today_cka_status']} ☸️ {s['today_cka']}\n"
+        if s["today_cka_status"] != "✅":
+            all_done = False
+            
+    if not status_msg:
+        return f"🌙 <b>Nightly Check-In</b>\nYou had nothing scheduled for today. Rest up!"
+        
+    if all_done:
+        footer = "🎉 Outstanding! You completed everything today. Great job backing up your goals with action. Rest well!"
+    else:
+        footer = "⚠️ Looks like some items are still pending.\nIf you're done, don't forget to check them off and Git Commit to update your progress!"
+
+    return f"""🌙 <b>Nightly Progress Check — {s['today_str']}</b>
+
+<b>Today's Checklist:</b>
+{status_msg}
+{footer}"""
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "--daily"
@@ -202,8 +237,10 @@ def main():
         msg = build_daily_message(stats)
     elif mode == "--hook":
         msg = build_hook_message(stats)
+    elif mode == "--nightly":
+        msg = build_nightly_message(stats)
     else:
-        print(f"Unknown mode: {mode}. Use --daily, --hook, or --test")
+        print(f"Unknown mode: {mode}. Use --daily, --nightly, --hook, or --test")
         sys.exit(1)
 
     ok = send_telegram(msg)
