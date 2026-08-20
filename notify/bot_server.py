@@ -113,14 +113,15 @@ def command_undo() -> str:
         if not modified:
             return "⚠️ Nothing to undo! Today's tasks are already marked as uncompleted (☐)." + FOOTER
             
+        commit_msg = f"progress: undo {today_vid_str} tasks via Telegram Bot"
         repo.update_file(
             file_m.path,
-            f"progress: undo {today_vid_str} tasks via Telegram Bot",
+            commit_msg,
             "\n".join(new_lines),
             file_m.sha,
             branch="main"
         )
-        return "⏪ Undone! Today's tasks have been reverted back to ☐ on GitHub." + FOOTER
+        return f"⏪ Undone! Today's tasks have been reverted back to ☐ on GitHub.\n\n💬 <b>Commit:</b> <i>{commit_msg}</i>" + FOOTER
     except Exception as e:
         return f"❌ GitHub API Error: {str(e)}" + FOOTER
 
