@@ -177,6 +177,7 @@
 | 8 | The monitoring system shows increasing latency over the past week. How do you investigate? | |
 | 9 | A team wants to deploy their first application to Kubernetes. How do you guide them? | |
 | 10 | You're asked to set up a disaster recovery plan. What components do you include? | |
+| 11 | Your app relies on a 3rd-party API that went completely offline, bringing your whole app down. How would you have architected this differently? | Circuit Breaker + Cache + Queue + Graceful Degradation |
 
 ---
 
@@ -211,3 +212,66 @@
 ---
 
 > **Tip:** Use Claude to simulate interviews. Prompt: *"You are a senior DevOps interviewer at a top tech company. Interview me for 30 minutes covering [topic]. Start with easy questions and increase difficulty. Score my answers."*
+
+---
+
+## 12. Scenario Deep-Dives (Worked Answers)
+
+### Scenario 11 — 3rd-Party API Outage: How to Architect for Resilience
+
+> **Question:** Your application relies on an external 3rd-party API that just went completely offline, bringing your whole application down. How would you have architected this differently?
+
+#### 🔴 Root Cause
+**Tight coupling** — the app has a **single point of failure (SPOF)** on an external dependency with no fallback, cache, or circuit protection.
+
+#### ✅ Resilience Architecture — Key Patterns
+
+**1. Circuit Breaker Pattern**
+- Use libraries: **Resilience4j** (Java), **Polly** (.NET), **opossum** (Node.js)
+- When failures exceed threshold → circuit **opens** → requests short-circuit immediately
+- Periodically probes backend → **half-open** state → auto-recovery
+- Prevents thundering-herd problem on recovery
+
+**2. Caching Layer (Stale-While-Revalidate)**
+- Cache last-known-good responses in **Redis** or CDN
+- Serve stale data with `Cache-Control: stale-if-error` headers
+- Label in UI: *"Data as of 2 hours ago"* — transparency over silent failure
+
+**3. Async / Queue-Based Decoupling**
+- Never call the 3rd-party API **synchronously in the request path**
+- Push work to a **message queue** (SQS, Azure Service Bus, RabbitMQ)
+- Workers consume from the queue; if API is down, messages queue up safely
+- App stays responsive; backlog is processed on recovery
+
+**4. Graceful Degradation**
+- Distinguish **must-have** vs **nice-to-have** features
+- If API powers "recommendations" → hide the widget, don't crash the page
+- Return partial responses with clear status indicators (`503` header)
+
+**5. Secondary Provider / Fallback**
+- Have a **secondary vendor** on standby (e.g., two payment gateways, two SMS providers)
+- Auto-failover via weighted routing or DNS switch (Route 53 / Azure Traffic Manager)
+
+**6. Proactive Observability**
+- Add a **synthetic monitor** (Datadog, Dynatrace) polling the 3rd-party endpoint every 60s
+- Alert on latency spike *before* users notice
+- `GET /health` endpoint exposes upstream dependency status
+
+**7. Vendor Risk & SLA Assessment**
+- 99.9% SLA = ~8.7 hrs/year downtime — acceptable?
+- Negotiate backup endpoints or credits; evaluate if function can be **internalized**
+
+#### 🧠 One-Liner Summary (say this in interviews)
+> *"The fix is to never couple your app's availability to a 3rd-party's availability. I'd use a circuit breaker for fault isolation, a cache for continuity, a queue for async decoupling, and graceful degradation so core flows stay alive even when the dependency is dead."*
+
+#### 📊 Before vs After
+
+| Aspect | Before (Bad) | After (Resilient) |
+|---|---|---|
+| Coupling | Synchronous, tight | Async, loosely coupled |
+| Failure mode | Total app outage | Degraded but functional |
+| Recovery | Manual intervention | Auto-recovery via circuit breaker |
+| Visibility | None | Proactive alerting + health checks |
+| User impact | 100% down | Partial feature unavailability |
+
+---
