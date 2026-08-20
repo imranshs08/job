@@ -193,11 +193,14 @@ def command_status() -> str:
         vid_pct = round(videos_watched / TOTAL_VIDEOS * 100, 1)
         cka_pct = round(cka_done / cka_total * 100, 1) if cka_total else 0
         
+        cka_date_str = CKA_EXAM_DATE.strftime("%b %d, %Y")
+        az_date_str = AZ_EXAM_DATE.strftime("%b %d, %Y")
+        
         return f"""📊 <b>DevOps Command Center Status</b>
 
 ⏳ <b>Countdowns:</b>
-  ☸️  CKA: {days_cka} days
-  ☁️  AZ-104: {days_az} days
+  ☸️  CKA: {days_cka} days <i>({cka_date_str})</i>
+  ☁️  AZ-104: {days_az} days <i>({az_date_str})</i>
 
 ✅ <b>Progress:</b>
   📺 Videos: {videos_watched} / {TOTAL_VIDEOS} ({vid_pct}%)
