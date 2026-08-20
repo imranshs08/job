@@ -173,7 +173,7 @@ def command_ask(query: str) -> None:
         return
         
     try:
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        model = genai.GenerativeModel('gemini-3.6-flash')
         sys_prompt = "You are a senior DevOps mentor for someone taking the CKA and AZ-104. Be very concise, helpful, and technically accurate."
         response = model.generate_content(f"{sys_prompt}\n\nUser: {query}")
         
