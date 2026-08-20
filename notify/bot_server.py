@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Serverless Telegram Webhook for GitHub Progress Tracker
-Designed to be hosted on Render.com Web Services (Free Tier)
+Serverless Telegram Webhook for GitHub Progress Tracker (Render.com)
+Added commands: /done, /interview, /prompt, /status, /log
 """
 import os
 import re
 import json
 import base64
-from datetime import datetime
+import random
+from datetime import datetime, date
 from flask import Flask, request, jsonify
 from github import Github
 
@@ -17,8 +18,14 @@ app = Flask(__name__)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-REPO_NAME = "imranshs08/job"  # Update if repo name changes
-FILE_PATH = "03-Progress-Tracker/progress-tracker.md"
+REPO_NAME = "imranshs08/job"
+TRACKER_PATH = "03-Progress-Tracker/progress-tracker.md"
+DATA_PATH = "data.js"
+JOURNAL_PATH = "04-Notes/war-journal.md"
+
+CKA_EXAM_DATE = date(2027, 1, 1)
+AZ_EXAM_DATE  = date(2027, 1, 15)
+TOTAL_VIDEOS  = 158
 
 def send_telegram(text: str):
     import urllib.request
@@ -30,28 +37,26 @@ def send_telegram(text: str):
     except Exception as e:
         print(f"Failed to reply to Telegram: {e}")
 
-def update_tracker_on_github() -> str:
-    """Uses PyGithub to fetch, modify, and commit progress-tracker.md."""
+def get_repo():
     if not GITHUB_TOKEN:
-        return "❌ Error: GITHUB_TOKEN not set on server."
-    
+        raise Exception("GITHUB_TOKEN not set on server.")
+    g = Github(GITHUB_TOKEN)
+    return g.get_repo(REPO_NAME)
+
+def get_file_content(repo, path: str) -> str:
+    file_content = repo.get_contents(path, ref="main")
+    return base64.b64decode(file_content.content).decode("utf-8"), file_content
+
+def command_done() -> str:
     try:
-        g = Github(GITHUB_TOKEN)
-        repo = g.get_repo(REPO_NAME)
+        repo = get_repo()
+        content, file_m = get_file_content(repo, TRACKER_PATH)
         
-        # Get the file contents
-        file_content = repo.get_contents(FILE_PATH, ref="main")
-        content = base64.b64decode(file_content.content).decode("utf-8")
-        
-        # Identify today's date lines (Aug 21 style)
         today = datetime.today()
         months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
         today_vid_str = f"{months[today.month-1]} {today.day}"
         today_cert_str = f"{months[today.month-1]} {today.day:02d}, {today.year}"
         
-        # We need to replace ☐ with ✅ on lines containing today's date
-        # It's tricky to do general regex replacement without breaking other lines.
-        # Let's split by lines, check if it contains today's date and ☐, and replace.
         lines = content.split('\n')
         modified = False
         new_lines = []
@@ -64,53 +69,140 @@ def update_tracker_on_github() -> str:
         if not modified:
             return "⚠️ Everything for today is already marked as ✅! Nothing to commit."
             
-        new_content = "\n".join(new_lines)
-        
-        # Commit back to GitHub
-        commit_message = f"progress: mark {today_vid_str} tasks complete via Telegram Bot"
         repo.update_file(
-            file_content.path,
-            commit_message,
-            new_content,
-            file_content.sha,
+            file_m.path,
+            f"progress: mark {today_vid_str} tasks complete via Telegram Bot",
+            "\n".join(new_lines),
+            file_m.sha,
             branch="main"
         )
-        
-        return f"🎉 Success! Marked today's lessons as ✅ and committed to GitHub."
-        
+        return "🎉 Success! Marked today's lessons as ✅ and committed to GitHub."
     except Exception as e:
         return f"❌ GitHub API Error: {str(e)}"
+
+def command_interview() -> str:
+    try:
+        repo = get_repo()
+        content, _ = get_file_content(repo, DATA_PATH)
+        iqs = re.findall(r"^\s*\"(Behavioral|Scenario|Technical Explanation):([^\"]+)\",*$", content, re.MULTILINE)
+        if not iqs: return "Could not parse interview questions."
+        iq = random.choice(iqs)
+        return f"🎙️ <b>{iq[0]}</b>\n\n{iq[1].strip()}"
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
+
+def command_prompt() -> str:
+    try:
+        repo = get_repo()
+        content, _ = get_file_content(repo, DATA_PATH)
+        prompts = re.findall(r"\{\s*title:\s*\"([^\"]+)\",\s*text:\s*'\"([^\"]+)\"'", content)
+        if not prompts: return "Could not parse prompts."
+        p = random.choice(prompts)
+        return f"🤖 <b>AI Prompt Sandbox: {p[0]}</b>\n\n<i>{p[1]}</i>"
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
+
+def command_log(text_to_log: str) -> str:
+    try:
+        repo = get_repo()
+        now = datetime.now().strftime("%b %d, %Y - %H:%M")
+        entry = f"\n## 📓 Log: {now}\n{text_to_log}\n"
+        
+        try:
+            content, file_m = get_file_content(repo, JOURNAL_PATH)
+            repo.update_file(file_m.path, "docs: telegram daily log appended", content + entry, file_m.sha, branch="main")
+        except:
+            # File doesn't exist yet
+            repo.create_file(JOURNAL_PATH, "docs: init telegram log journal", f"# DevOps Telegram Action Log\n{entry}", branch="main")
+            
+        return "✅ Logged successfully to `04-Notes/war-journal.md`!"
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
+
+def command_status() -> str:
+    try:
+        repo = get_repo()
+        content, _ = get_file_content(repo, TRACKER_PATH)
+        
+        # Parse basics
+        video_rows = re.findall(r"^\|\s*(\d+)\s*\|.*?\|\s*(Aug|Sep|Oct|Nov|Dec|Jan)\s+\d+.*?\|\s*(\u2705|☐)", content, re.MULTILINE)
+        videos_watched = sum(1 for _, _, status in video_rows if status == "✅")
+        cka_all = re.findall(r"\|\s*(✅|☐)\s*\|?\s*\n", content)
+        cka_done = sum(1 for s in cka_all if s == "✅")
+        cka_total = len(cka_all)
+        
+        today = date.today()
+        days_cka = (CKA_EXAM_DATE - today).days
+        days_az = (AZ_EXAM_DATE - today).days
+        
+        vid_pct = round(videos_watched / TOTAL_VIDEOS * 100, 1)
+        cka_pct = round(cka_done / cka_total * 100, 1) if cka_total else 0
+        
+        return f"""📊 <b>DevOps Command Center Status</b>
+
+⏳ <b>Countdowns:</b>
+  ☸️  CKA: {days_cka} days
+  ☁️  AZ-104: {days_az} days
+
+✅ <b>Progress:</b>
+  📺 Videos: {videos_watched} / {TOTAL_VIDEOS} ({vid_pct}%)
+  ☸️  CKA: {cka_done} / {cka_total} ({cka_pct}%)"""
+    except Exception as e:
+        return f"❌ Error: {str(e)}"
+
 
 @app.route("/", methods=["GET", "POST"])
 def webhook():
     if request.method == "GET":
-        return "DevOps Bot is running!", 200
+        return "DevOps Bot is live!", 200
         
     data = request.json
     if not data or "message" not in data:
-        return jsonify({"status": "no message"}), 200
+        return jsonify({"status": "ignored"}), 200
         
     msg = data["message"]
     chat_id = str(msg.get("chat", {}).get("id"))
-    text = msg.get("text", "").strip().lower()
+    text = msg.get("text", "").strip()
     
     # Authorized user check
     if chat_id != str(TELEGRAM_CHAT_ID):
-        print(f"Unauthorized access attempt from chat_id {chat_id}")
+        print(f"Unauthorized chat_id {chat_id}")
         return jsonify({"status": "unauthorized"}), 200
+
+    low_text = text.lower()
+    
+    if low_text in ["/done", "done"]:
+        send_telegram("⏳ Processing `/done` via GitHub API...")
+        send_telegram(command_done())
         
-    if text in ["/done", "done", "mark done"]:
-        send_telegram("⏳ Processing... Fetching repository from GitHub...")
-        result_msg = update_tracker_on_github()
-        send_telegram(result_msg)
+    elif low_text == "/interview":
+        send_telegram("⏳ Fetching a random interview question...")
+        send_telegram(command_interview())
+        
+    elif low_text == "/prompt":
+        send_telegram("⏳ Fetching a random AI prompt...")
+        send_telegram(command_prompt())
+        
+    elif low_text == "/status":
+        send_telegram("⏳ Parsing progress-tracker.md...")
+        send_telegram(command_status())
+        
+    elif low_text.startswith("/log "):
+        send_telegram("⏳ Writing log entry to GitHub...")
+        send_telegram(command_log(text[5:].strip()))
+        
     else:
-        # Ignore other messages or provide help
-        if text.startswith("/"):
-            send_telegram("Available commands:\n/done - Mark today's tasks as ✅ on GitHub")
+        # Help menu for anything else
+        help_menu = """🤖 <b>DevOps Bot Commands:</b>
+/done - Check off today's tasks as ✅
+/status - Quick progress check
+/interview - Practice an interview question
+/prompt - Test out an AI scenario
+/log [text] - Append notes to war-journal.md"""
+        send_telegram(help_menu)
 
     return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
-    # For Render.com, we configure the port from env
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
