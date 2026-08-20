@@ -27,10 +27,12 @@ CKA_EXAM_DATE = date(2027, 1, 1)
 AZ_EXAM_DATE  = date(2027, 1, 15)
 TOTAL_VIDEOS  = 158
 
+FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>"
+
 def send_telegram(text: str):
     import urllib.request
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = json.dumps({"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"}).encode("utf-8")
+    payload = json.dumps({"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML", "disable_web_page_preview": True}).encode("utf-8")
     req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
     try:
         urllib.request.urlopen(req, timeout=10)
@@ -67,7 +69,7 @@ def command_done() -> str:
             new_lines.append(line)
             
         if not modified:
-            return "⚠️ Everything for today is already marked as ✅! Nothing to commit."
+            return "⚠️ Everything for today is already marked as ✅! Nothing to commit." + FOOTER
             
         repo.update_file(
             file_m.path,
@@ -76,9 +78,9 @@ def command_done() -> str:
             file_m.sha,
             branch="main"
         )
-        return "🎉 Success! Marked today's lessons as ✅ and committed to GitHub."
+        return "🎉 Success! Marked today's lessons as ✅ and committed to GitHub." + FOOTER
     except Exception as e:
-        return f"❌ GitHub API Error: {str(e)}"
+        return f"❌ GitHub API Error: {str(e)}" + FOOTER
 
 def command_interview() -> str:
     try:
@@ -87,7 +89,7 @@ def command_interview() -> str:
         iqs = re.findall(r"^\s*\"(Behavioral|Scenario|Technical Explanation):([^\"]+)\",*$", content, re.MULTILINE)
         if not iqs: return "Could not parse interview questions."
         iq = random.choice(iqs)
-        return f"🎙️ <b>{iq[0]}</b>\n\n{iq[1].strip()}"
+        return f"🎙️ <b>{iq[0]}</b>\n\n{iq[1].strip()}" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
@@ -98,7 +100,7 @@ def command_prompt() -> str:
         prompts = re.findall(r"\{\s*title:\s*\"([^\"]+)\",\s*text:\s*'\"([^\"]+)\"'", content)
         if not prompts: return "Could not parse prompts."
         p = random.choice(prompts)
-        return f"🤖 <b>AI Prompt Sandbox: {p[0]}</b>\n\n<i>{p[1]}</i>"
+        return f"🤖 <b>AI Prompt Sandbox: {p[0]}</b>\n\n<i>{p[1]}</i>" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
@@ -115,7 +117,7 @@ def command_log(text_to_log: str) -> str:
             # File doesn't exist yet
             repo.create_file(JOURNAL_PATH, "docs: init telegram log journal", f"# DevOps Telegram Action Log\n{entry}", branch="main")
             
-        return "✅ Logged successfully to `04-Notes/war-journal.md`!"
+        return "✅ Logged successfully to `04-Notes/war-journal.md`!" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
@@ -146,7 +148,7 @@ def command_status() -> str:
 
 ✅ <b>Progress:</b>
   📺 Videos: {videos_watched} / {TOTAL_VIDEOS} ({vid_pct}%)
-  ☸️  CKA: {cka_done} / {cka_total} ({cka_pct}%)"""
+  ☸️  CKA: {cka_done} / {cka_total} ({cka_pct}%)""" + FOOTER
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
