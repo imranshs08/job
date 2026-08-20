@@ -234,6 +234,7 @@ def command_status() -> str:
         cka_date_str = CKA_EXAM_DATE.strftime("%b %d, %Y")
         az_date_str = AZ_EXAM_DATE.strftime("%b %d, %Y")
         
+        months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
         today_vid_str = f"{months[today.month-1]} {today.day}"
         vid_match = re.search(
             rf"\|\s*\d+\s*\|\s*\[([^\]]+)\]\(([^)]+)\).*?\|\s*{re.escape(today_vid_str)}\s*\|[^|]*?\|\s*(✅|☐)",
