@@ -167,6 +167,19 @@ def command_quote() -> str:
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
+def format_tg_html(text: str) -> str:
+    # 1. Escape HTML special characters
+    text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    # 2. Block code
+    text = re.sub(r'```[\w-]*\n([\s\S]*?)```', r'<pre>\1</pre>', text)
+    # 3. Inline code
+    text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+    # 4. Bold
+    text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text)
+    # 5. Lists (convert * or - to nice bullets)
+    text = re.sub(r'^\s*[-*]\s+', '• ', text, flags=re.MULTILINE)
+    return text
+
 def command_ask(query: str) -> None:
     if not GEMINI_API_KEY:
         send_telegram("⚠️ Gemini API Key not configured! Please add `GEMINI_API_KEY` to your Render environment variables.", parse_mode=None)
@@ -177,8 +190,8 @@ def command_ask(query: str) -> None:
         sys_prompt = "You are a senior DevOps mentor for someone taking the CKA and AZ-104. Be very concise, helpful, and technically accurate."
         response = model.generate_content(f"{sys_prompt}\n\nUser: {query}")
         
-        raw_footer = "\n\n🌐 Dashboard: https://imranshs08.github.io/job/ • 🐙 Repo: https://github.com/imranshs08/job"
-        send_telegram(f"✨ AI Insights:\n\n{response.text}{raw_footer}", parse_mode=None)
+        formatted_text = format_tg_html(response.text)
+        send_telegram(f"✨ <b>AI Insights:</b>\n\n{formatted_text}" + FOOTER, parse_mode="HTML")
     except Exception as e:
         send_telegram(f"❌ AI Error: {str(e)}", parse_mode=None)
 
