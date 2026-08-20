@@ -80,14 +80,15 @@ def command_done() -> str:
         if not modified:
             return "⚠️ Everything for today is already marked as ✅! Nothing to commit." + FOOTER
             
+        commit_msg = f"progress: mark {today_vid_str} tasks complete via Telegram Bot"
         repo.update_file(
             file_m.path,
-            f"progress: mark {today_vid_str} tasks complete via Telegram Bot",
+            commit_msg,
             "\n".join(new_lines),
             file_m.sha,
             branch="main"
         )
-        return "🎉 Success! Marked today's lessons as ✅ and committed to GitHub." + FOOTER
+        return f"🎉 Success! Marked today's lessons as ✅ and committed to GitHub.\n\n💬 <b>Commit:</b> <i>{commit_msg}</i>" + FOOTER
     except Exception as e:
         return f"❌ GitHub API Error: {str(e)}" + FOOTER
 
