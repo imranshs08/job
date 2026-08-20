@@ -241,6 +241,9 @@ def webhook():
             [
                 {"text": "🎙️ Interview", "callback_data": "/interview"},
                 {"text": "🤖 Prompt", "callback_data": "/prompt"}
+            ],
+            [
+                {"text": "⏪ Undo", "callback_data": "/undo"}
             ]
         ]
     }
