@@ -1,5 +1,5 @@
 # #1 — Introduction & Setup
-> 🔗 [Watch Video](https://www.youtube.com/watch?v=1AF5pFGwRTM) | **Status:** ☐ Watched
+> 🔗 [Watch Video](https://www.youtube.com/watch?v=1AF5pFGwRTM) | **Status:** ✅ Watched
 
 ---
 
@@ -21,22 +21,76 @@ npm install -g @google/gemini-cli
 # Launch Gemini CLI in your project folder
 cd your-project/
 gemini
-
-# First launch: opens browser to authenticate with Google account
-# After auth, you're in the interactive REPL
 ```
 
 ## 🔧 First-Run Flow
 1. Run `gemini` in terminal
-2. Browser opens → Sign in with Google
+2. Browser opens → Sign in with Google *(or use API key — see below)*
 3. Auth token saved locally
 4. REPL starts — type your first prompt
 
-## ❓ Questions / Unclear Points
-- Does it work offline? (No — requires internet for API calls)
-- Is there a usage limit on the free tier? (Yes — check Google AI Studio for quotas)
+---
+
+## ⚠️ Real-World Gotchas (From My First Session — Aug 21, 2026)
+
+### Gotcha 1: OAuth login is deprecated for individuals
+**Error:**
+```
+Failed to sign in. This client is no longer supported for Gemini Code Assist for individuals.
+```
+**Fix:** Use an API key instead of Google account OAuth login.
+```powershell
+# 1. Get free API key from: https://aistudio.google.com/apikey
+# 2. Set it in PowerShell (not Git Bash):
+[Environment]::SetEnvironmentVariable("GEMINI_API_KEY", "your-key-here", "User")
+# 3. Close all terminals, reopen, then run: gemini
+```
+
+### Gotcha 2: Run from your PROJECT folder, not system32
+```bash
+# ❌ Wrong — no project context
+C:\WINDOWS\system32> gemini
+
+# ✅ Right — Gemini reads your files
+cd "c:\Job Tracker"
+gemini
+```
+
+### Gotcha 3: Default model (gemini-3-flash-preview) gets 503 errors
+**Error:**
+```
+✕ [API Error: 503 - This model is currently experiencing high demand]
+```
+**Fix:** Switch to the stable model inside the REPL:
+```
+/model gemini-2.0-flash
+```
+Or set permanently in `~/.gemini/settings.json`:
+```json
+{ "model": "gemini-2.0-flash" }
+```
+
+### Gotcha 4: PATH not set after install on Windows
+**Error:**
+```
+claude : The term 'gemini' is not recognized...
+```
+**Fix:** Add `C:\Users\<you>\.local\bin` to User PATH via System Properties → Environment Variables, then restart terminal.
+
+---
+
+## 🎯 First Session Results
+- ✅ Installed via `npm install -g @google/gemini-cli`
+- ✅ Authenticated using Gemini API key (AI Studio free key)
+- ✅ Ran from `c:\Job Tracker` — Gemini read the project files
+- ✅ It correctly identified the repo as "DevOps Job Switch 2027 Command Center"
+- ✅ Explained `renderDashboard()` function from `index.html`
+- ✅ Switched model to `gemini-2.0-flash` to fix 503 errors
 
 ## ✅ Action Items
-- [ ] Install Gemini CLI: `npm install -g @google/gemini-cli`
-- [ ] Authenticate with Google account
-- [ ] Run `gemini` in your Job Tracker folder and explore
+- [x] Install Gemini CLI: `npm install -g @google/gemini-cli`
+- [x] Get API key from https://aistudio.google.com/apikey
+- [x] Set `GEMINI_API_KEY` as User environment variable
+- [x] Run `gemini` from project folder
+- [x] Fix model: `/model gemini-2.0-flash`
+- [ ] Create a `GEMINI.md` in the project root for persistent context
