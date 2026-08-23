@@ -2,11 +2,11 @@ name: Telegram Scheduled Ping
 
 on:
   schedule:
-    # Runs at minute 0 past every 6th hour
-    # Note: GitHub Actions cron uses UTC time.
-    - cron: "0 */6 * * *"
+    # GitHub Actions cron runs in UTC.
+    # UTC + 5:30 = IST.
+    - cron: "30 2 * * *" # 8:00 AM IST
+    - cron: "30 16 * * *" # 10:00 PM IST
   workflow_dispatch:
-    # Allows you to click "Run Workflow" inside GitHub Actions manually
 
 jobs:
   trigger-ping:
@@ -21,9 +21,16 @@ jobs:
           -H "Content-Type: application/json" \
           -d "{\"chat_id\": \"${{ secrets.TELEGRAM_CHAT_ID }}\"}"
 
-      - name: Execute Daily Email Notification (SMTP)
+      - name: Execute Notification Engines (Email)
         env:
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
-          python 14-Telegram-Bot/email_notifier.py --daily
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -eq 16 ]; then
+            echo "Running Nightly Status Check (10:00 PM IST)"
+            python 14-Telegram-Bot/email_notifier.py --nightly
+          else
+            echo "Running Daily Morning Brief (8:00 AM IST)"
+            python 14-Telegram-Bot/email_notifier.py --daily
+          fi

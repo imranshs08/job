@@ -13,7 +13,9 @@ import sys
 import urllib.request
 import urllib.parse
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
+
+IST = timezone(timedelta(hours=5, minutes=30))
 
 # ── Load config ──────────────────────────────────────────────────────────────
 try:
@@ -72,7 +74,7 @@ def parse_tracker() -> dict:
     cka_total  = len(cka_all)
 
     # ── Today's schedule ──
-    today = date.today()
+    today = datetime.now(IST).date()
     months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     today_str_vid  = f"{months[today.month-1]} {today.day}"
     today_str_cert = f"{months[today.month-1]} {today.day:02d}, {today.year}"
