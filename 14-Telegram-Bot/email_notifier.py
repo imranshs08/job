@@ -149,6 +149,7 @@ def send_email(subject: str, html_body: str) -> bool:
     msg = MIMEMultipart()
     msg['From'] = f"DevOps Command Center <{GMAIL_ADDRESS}>"
     msg['To'] = GMAIL_ADDRESS
+    msg['Cc'] = "jamiaxpress@gmail.com"
     msg['Subject'] = subject
     msg.attach(MIMEText(html_body, 'html'))
     try:
