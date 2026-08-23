@@ -10,11 +10,11 @@ In a Zero-Trust architecture, perimeter defense (like a single firewall) is cons
 ```mermaid
 flowchart TD
     %% External Actors
-    User([Public User])
+    User(["Public User"])
     
     %% Perimeter Edge (WAF & DDoS)
     subgraph Edge ["Global Edge (AWS CloudFront / Azure Front Door)"]
-        WAF[Web Application Firewall (WAF)]
+        WAF["Web Application Firewall (WAF)"]
     end
     
     %% VNet / VPC Boundary
@@ -22,19 +22,19 @@ flowchart TD
         
         %% Presentation Tier
         subgraph WebTier ["Presentation Tier (Public Subnet)"]
-            LB[Application Load Balancer / App Gateway]
-            Web[Web Servers / UI Containers]
+            LB["Application Load Balancer / App Gateway"]
+            Web["Web Servers / UI Containers"]
         end
         
         %% Logic Tier
         subgraph AppTier ["Logic Tier (Private Subnet)"]
-            AppLB[Internal Load Balancer]
-            App[App / API Microservices]
+            AppLB["Internal Load Balancer"]
+            App["App / API Microservices"]
         end
         
         %% Data Tier
         subgraph DataTier ["Data Tier (Isolated Subnet)"]
-            DB[(PaaS Database / RDS / SQL)]
+            DB[("PaaS Database / RDS / SQL")]
         end
         
     end
