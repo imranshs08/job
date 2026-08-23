@@ -1,0 +1,35 @@
+| **Phase 2 (CKA)** | Aug 18 – Dec 31 | KodeKloud CKA Course (300 lessons) | 🟨 In Progress |
+| **Phase 3 (AZ-104)** | Dec 1 – Jan 14 | AZ-104 Study Notes (27 days) | ⬜ Not Started |
+| **🎯 CKA Exam** | **January 1, 2027** | Certified Kubernetes Administrator | ⬜ |
+| **🎯 AZ-104 Exam** | **January 15, 2027** | Azure Administrator Associate | ⬜ |
+| **🎯 Job Applications** | **January 1, 2027** | Resume live, applying to roles | ⬜ |
+
+> **Legend:** ⬜ Not Started | 🟨 In Progress | ✅ Complete
+
+--
+## ☸️ Section 2 — CKA: KodeKloud Course (Aug 18 – Dec 31)
+
+> **Full lesson-by-lesson tracker:** [kodekloud-cka-tracker.md](./05-Certifications/kodekloud-cka-tracker.md) — 300 lessons
+> **Exam Date:** January 1, 2027 | **Pace:** ~2.2 lessons/day
+
+### Module Summary
+--
+### CKA Exam Prep Checklist
+
+- [ ] Purchase Exam Voucher (watch for Cyber Monday / KubeCon discounts)
+- [ ] Complete all 300 KodeKloud lessons
+- [ ] Score >85% on KodeKloud Mock Exams
+- [ ] killer.sh Simulator #1 — score >85%
+--
+- [ ] Book CKA exam only after >90% on killer.sh
+- [ ] **🎯 CKA Exam — January 1, 2027**
+
+---
+
+## ☁️ Section 3 — AZ-104 Study Plan (Dec 1, 2026 – Jan 15, 2027)
+
+--
+| ☸️ CKA Lesson Tracker | [kodekloud-cka-tracker.md](./05-Certifications/kodekloud-cka-tracker.md) |
+| ☁️ AZ-104 Daily Notes | [AZ-104 README](../devops-labs/devops-labs/05_AZ_104_Exam/Daily_Study_Notes/README.md) |
+| 🎤 Interview Prep | [interview-prep.md](./06-Interview-Prep/interview-prep.md) |
+| 🖨️ Print Sheet | [job-tracker.html](./print/job-tracker.html) |

@@ -12,8 +12,18 @@ jobs:
   trigger-ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Render Webhook
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Ping Render Webhook (Telegram)
         run: |
           curl -X POST "https://devops-job-bot.onrender.com/cron" \
           -H "Content-Type: application/json" \
           -d "{\"chat_id\": \"${{ secrets.TELEGRAM_CHAT_ID }}\"}"
+
+      - name: Execute Daily Email Notification (SMTP)
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python 14-Telegram-Bot/email_notifier.py --daily
