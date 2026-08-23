@@ -147,7 +147,7 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
 # ── Email sender ───────────────────────────────────────────────────────────
 def send_email(subject: str, html_body: str) -> bool:
     msg = MIMEMultipart()
-    msg['From'] = GMAIL_ADDRESS
+    msg['From'] = f"DevOps Command Center <{GMAIL_ADDRESS}>"
     msg['To'] = GMAIL_ADDRESS
     msg['Subject'] = subject
     msg.attach(MIMEText(html_body, 'html'))
