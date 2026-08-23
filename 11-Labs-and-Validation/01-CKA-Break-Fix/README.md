@@ -17,8 +17,22 @@ In this directory, you will find two intentionally corrupted YAML manifests. The
 - Fix the manifest so it properly scales 3 Nginx replicas.
 
 ## How to Submit
-Once you've identified the bugs, reply to the chat with:
-1. What was broken in the Pod?
-2. What was broken in the ReplicaSet?
+Once you've identified the bugs, try to run `kubectl apply --dry-run=client -f <file.yaml>` to see how the Kubernetes API catches the errors!
 
-I will review your fixes and provide Senior-level feedback on your troubleshooting deductions!
+---
+
+## 🔑 Answer Key & Explanations
+
+### `broken-pod.yaml`
+1. **Invalid Image Tag Format**: `image: nginx-1.21.3`
+   - *Explanation*: Docker images mandate a colon `:` to separate the repository name from the version tag. Using a hyphen makes Kubernetes assume the tag is missing, and it tries to pull an image literally named "nginx-1.21.3" from dockerhub (which results in `ImagePullBackOff`). The fix is `nginx:1.21.3`.
+2. **Invalid YAML Syntax Case**: `restart_policy: Always`
+   - *Explanation*: Kubernetes strictly enforces `camelCase` for all API specifications. Snake case (`_`) is invalid. It must be `restartPolicy: Always`. 
+3. **Plural Array Requirements**: `port:` (User modification)
+   - *Explanation*: Containers can expose multiple ports (e.g., 80, 443). Because it's an array of objects `[ - containerPort: 80 ]`, the key must strictly be pluralized as `ports:`.
+
+### `broken-replicaset.yaml`
+1. **Selector and Template Label Mismatch**: 
+   - `selector.matchLabels` has `tier: backend`.
+   - `template.metadata.labels` has `tier: frontend`.
+   - *Explanation*: This is a **fatal logical error**. A ReplicaSet controller uses the `selector` to count how many pods are running. Since the template spins up pods labeled `frontend`, the ReplicaSet will never see them because it is blindly looking for `backend` pods. It will just keep creating infinite pods endlessly until your cluster crashes! The selector labels *must* exactly match the template labels.
