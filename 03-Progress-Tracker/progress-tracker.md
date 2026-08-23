@@ -13,9 +13,9 @@
 |---|-------------|-------------|----------|---------|-------|----------|
 | 1 | [Day-1 - Fundamentals of DevOps](https://www.youtube.com/watch?v=Ou9j73aWgyE) | Aug 18 | 30m 40s | ✅ | ✅ | ✅ |
 | 2 | [Day-2 - Improve SDLC with DevOps](https://www.youtube.com/watch?v=jRqBIpcgO4g) | Aug 19 | 26m 12s | ✅ | ✅ | ✅ |
-| 3 | [Absolute Prerequisite for Learning DevOps](https://www.youtube.com/watch?v=neG2MFVFji0) | Aug 20 | 42m 12s | ☐ | ☐ | ☐ |
-| 4 | [Day-3 - Virtual Machines Part-1](https://www.youtube.com/watch?v=lgUwYwBozow) | Aug 21 | 25m 27s | ☐ | ☐ | ☐ |
-| 5 | [Day-4 - AWS & Azure - How to Create Virtual Machines](https://www.youtube.com/watch?v=NJkMe9cdYEQ) | Aug 21 | 29m 38s | ☐ | ☐ | ☐ |
+| 3 | [Absolute Prerequisite for Learning DevOps](https://www.youtube.com/watch?v=neG2MFVFji0) | Aug 20 | 42m 12s | ✅ | ✅ | ✅ |
+| 4 | [Day-3 - Virtual Machines Part-1](https://www.youtube.com/watch?v=lgUwYwBozow) | Aug 21 | 25m 27s | ✅ | ✅ | ✅ |
+| 5 | [Day-4 - AWS & Azure - How to Create Virtual Machines](https://www.youtube.com/watch?v=NJkMe9cdYEQ) | Aug 21 | 29m 38s | ✅ | ✅ | ✅ |
 | 6 | [HOW TO CONNECT TO EC2 INSTANCE FROM WINDOWS LAPTOP - MOBAXTERM](https://www.youtube.com/watch?v=MkIRh1mi8Ms) | Aug 22 | 7m 40s | ✅ | ✅ | ✅ |
 | 7 | [Day-5 - AWS CLI Full Guide - How to connect to EC2 Instance from UI & Terminal - A...](https://www.youtube.com/watch?v=cN4pt5KQ9eA) | Aug 23 | 30m 36s | ✅ | ✅ | ✅ |
 | 8 | [Day-6 - Linux & Shell Scripting](https://www.youtube.com/watch?v=9jw9F6mcQDo) | Aug 24 | 37m 45s | ✅ | ✅ | ✅ |
