@@ -530,34 +530,62 @@
                 if (cols.length >= 8 && !isNaN(parseInt(cols[1])) && cols[3] === fDateVids) {
                     const titleRaw = cols[2];
                     const duration = cols[4];
+                    const isDone = cols[5].includes('✅'); // Column 5 is 'Watched'
 
                     let titleText = titleRaw;
                     const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
                     if (m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
 
-                    videoHtml += `<li class="task-item">
-                        <div>${titleText}</div>
-                        <div class="task-meta">⏱️ Duration: ${duration}</div>
-                    </li>`;
+                    if (isDone) {
+                        videoHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                            <div style="text-decoration: line-through;">✅ ${titleText}</div>
+                            <div class="task-meta">⏱️ Duration: ${duration} (Completed)</div>
+                        </li>`;
+                    } else {
+                        videoHtml += `<li class="task-item">
+                            <div>${titleText}</div>
+                            <div class="task-meta">⏱️ Duration: ${duration}</div>
+                        </li>`;
+                    }
                 }
 
                 // Cert Track Parse
                 if (cols[1] === fDateCert) {
-                    if (cols.length >= 6) {
+                    if (cols.length >= 5) {
                         const plan = cols[3];
                         const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-                        if (cols[5] && cols[5].includes('☐')) {
+                        // CKA Track has length >= 6 and duration is in cols[4]
+                        if (cols.length >= 6 && cols[5]) {
                             const duration = cols[4];
+                            const isDone = cols[5].includes('✅');
+
                             if (plan !== '—') {
-                                ckaHtml += `<li class="task-item">
-                                    <div>• ${planFmt}</div>
-                                    <div class="task-meta">⏱️ Estimated: ${duration}</div>
-                                </li>`;
+                                if (isDone) {
+                                    ckaHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                                        <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
+                                        <div class="task-meta">⏱️ Estimated: ${duration} (Completed)</div>
+                                    </li>`;
+                                } else {
+                                    ckaHtml += `<li class="task-item">
+                                        <div>• ${planFmt}</div>
+                                        <div class="task-meta">⏱️ Estimated: ${duration}</div>
+                                    </li>`;
+                                }
                             }
-                        } else if (cols[4] && cols[4].includes('☐')) {
+                        }
+                        // AZ-104 Track has length 5 and watched mark is in cols[4]
+                        else if (cols.length === 5 && cols[4]) {
+                            const isDone = cols[4].includes('✅');
+
                             if (plan !== '—') {
-                                azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
+                                if (isDone) {
+                                    azHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                                        <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
+                                    </li>`;
+                                } else {
+                                    azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
+                                }
                             }
                         }
                     }
