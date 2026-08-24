@@ -1,5 +1,10 @@
 # 🚀 Lab Guide: RHEL Minor & Major Architecture Migrations (Azure)
 
+> [!NOTE]
+> 🌐 **Interactive Web Manual Available!**
+> You are currently viewing the raw GitHub repository source code. For the absolute best reading experience (featuring dark-mode glassmorphism and 1-Click Copy-to-Clipboard integration), view the live production deployment of this lab here:
+> 👉 **[Launch the DevOps Command Center UI](https://imranshs08.github.io/job/11-Labs-and-Validation/02-Azure-RHEL-Upgrade/)**
+
 ## 📚 Architect's Reference: RHEL Lifecycles & Upgrade Topology
 > [!NOTE]
 > Before triggering a destructive OS upgrade, Senior Engineers must mathematically understand the architectural boundary between an ABI-Stable Minor Update and a Kernel-swapping Major Migration. 
