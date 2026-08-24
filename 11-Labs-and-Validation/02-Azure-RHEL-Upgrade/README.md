@@ -103,6 +103,10 @@ sudo dnf clean all
 > sudo dnf clean all
 > ```
 
+> [!CAUTION]
+> **Enterprise Rollback Architecture**
+> Because this is a Minor Upgrade, `dnf history undo` is highly volatile for core packages. The Golden Rule dictates that you **must** have an LVM Snapshot (`lvcreate --snapshot`) of the `/root` logical volume before pulling this trigger. *(Since this is a disposable Sandbox, you are authorized to ignore this rule).*
+
 ### 2. Execute the Upgrade
 Review the pending package updates, then trigger the upgrade.
 ```bash
@@ -212,6 +216,10 @@ Reports summary:
     Errors:                      0
     Inhibitors:                  0
 ```
+
+> [!CAUTION]
+> **Catastrophic Rollback Architecture**
+> `Leapp` is mathematically a **One-Way Street**. There is no OS-level rollback. If the initramfs kernel panics, the node is dead. You **MUST** have an immutable Cloud Hypervisor Snapshot of the OS disk to survive a failure. *(Since this is a disposable Sandbox, proceed fearlessly!).*
 
 With zero inhibitors blocking the transition, initialize the structural transition:
 
