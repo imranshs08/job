@@ -34,7 +34,7 @@ az vm create \
   --name rhel-node-01 \
   --image "$RHEL_URN" \
   --admin-username azureuser \
-  --generate-ssh-keys \
+  --admin-password "KodeKloud@2027!" \
   --size Standard_B2s
 ```
 *(Copy the `publicIpAddress` from the JSON output once it completes)*
