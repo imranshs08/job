@@ -26,11 +26,8 @@ if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     try:
         from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
     except ImportError:
-        pass
-
-if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
-    print("ERROR: TELEGRAM credentials not found in env vars or config.py.")
-    sys.exit(1)
+        TELEGRAM_BOT_TOKEN = None
+        TELEGRAM_CHAT_ID = None
 
 import os
 # ── Constants ─────────────────────────────────────────────────────────────────
@@ -46,6 +43,10 @@ FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> •
 # ── Telegram sender ───────────────────────────────────────────────────────────
 def send_telegram(message: str) -> bool:
     """Send a message to Telegram. Returns True on success."""
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+        print("ERROR: Telegram Bot Token or Chat ID not found/configured.")
+        return False
+        
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = json.dumps({
         "chat_id": TELEGRAM_CHAT_ID,
