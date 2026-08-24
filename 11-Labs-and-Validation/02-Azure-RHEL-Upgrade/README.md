@@ -1,5 +1,13 @@
 # 🚀 Lab Guide: RHEL 8.6 to 8.10 Minor Version Upgrade (Azure)
 
+## 📚 Architect's Reference: RHEL Lifecycles & Upgrade Topology
+> [!NOTE]
+> Before triggering a destructive OS upgrade, Senior Engineers must mathematically understand the architectural boundary between an ABI-Stable Minor Update and a Kernel-swapping Major Migration. 
+> 
+> For the exhaustive master reference on RHEL's **10-Year EOL Matrix**, **EUS Locks**, and the mechanical differences between `dnf` and `leapp`, study the core documentation node:
+> 👉 [**Red Hat (RHEL) Lifecycle & Upgrade Methodology**](../../04-Notes/rhel-lifecycle.md)
+
+---
 ## 🧠 Core Concept: Minor vs. Major Upgrades
 In the Red Hat Enterprise Linux ecosystem, upgrades are classified in two ways:
 1. **Major Upgrade (e.g., RHEL 7 to RHEL 8):** Involves profound architectural shifts (new Kernels, switching from `yum` to `dnf`). This requires heavy, complex tooling like the **Leapp** framework to migrate data.
