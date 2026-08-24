@@ -206,7 +206,14 @@ sudo leapp preupgrade --no-rhsm
 > ```
 
 ### 3. Execution & The Transitional Ramdisk
-Once the pre-upgrade passes smoothly, initialize the structural transition:
+Once the pre-upgrade passes smoothly, you must explicitly look for the following authorization output at the bottom of the report:
+```text
+Reports summary:
+    Errors:                      0
+    Inhibitors:                  0
+```
+
+With zero inhibitors blocking the transition, initialize the structural transition:
 
 ```bash
 sudo leapp upgrade --no-rhsm
@@ -216,7 +223,12 @@ sudo leapp upgrade --no-rhsm
 ```bash
 sudo reboot
 ```
-*During reboot, the VM boots into a temporary **Leapp Upgrade Ramdisk environment (Initramfs)** where the real magic happens. SSH will be completely dead for 15-30 minutes while packages are extracted and the RHEL 8 binaries are systematically destroyed and replaced by RHEL 9.*
+
+> [!WARNING]
+> **The Invisible OS Swap**
+> When you issue the reboot command, your SSH session will violently terminate. **DO NOT PANIC.** The server is not dead. It is actively booting into an invisible, temporary **Leapp Upgrade Ramdisk (Initramfs)**. 
+> 
+> *During this phase (10-30 minutes), the RHEL 8 binaries are being systematically stripped and replaced by RHEL 9. Wait patiently until the node responds to pings again before establishing a fresh SSH session.*
 
 ### 4. Final Validation
 Once SSH comes back alive, authenticate and verify you have successfully crossed into a new Major architecture tier!
