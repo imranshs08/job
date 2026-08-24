@@ -68,9 +68,6 @@ System upgrades in Red Hat are categorized into three distinct tiers of operatio
 *   **Risk Level:** Low to Medium.
 *   **Execution:** Since the Application Binary Interface (ABI) is guaranteed not to break, minor upgrades are typically seamless operations executed via the native package manager.
     ```bash
-    # Unlock the node from any EUS tracking pins
-    sudo subscription-manager release --unset
-    
     # Flush the local daemon caches
     sudo dnf clean all
     
