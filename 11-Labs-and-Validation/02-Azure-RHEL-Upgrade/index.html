@@ -254,8 +254,8 @@
             fetch('../../04-Notes/rhel-lifecycle.md').then(res => res.ok ? res.text() : Promise.reject('Failed to load rhel-lifecycle.md'))
         ])
             .then(([readmeText, lifecycleText]) => {
-                // Concatenate both documents, placing the Lifecycle Theory at the end
-                const fullPayload = readmeText + "\n\n<hr style='border:1px solid rgba(0,242,254,0.3); margin: 3rem 0;' />\n\n" + lifecycleText;
+                // Concatenate both documents, placing the Lifecycle Theory at the top chronologically
+                const fullPayload = lifecycleText + "\n\n<hr style='border:1px solid rgba(0,242,254,0.3); margin: 3rem 0;' />\n\n" + readmeText;
 
                 // Parse unified markdown blob into HTML using marked.js
                 document.getElementById('content').innerHTML = marked.parse(fullPayload);
