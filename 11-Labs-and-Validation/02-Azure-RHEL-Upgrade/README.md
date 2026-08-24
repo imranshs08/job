@@ -1,4 +1,4 @@
-# 🚀 Lab Guide: RHEL 8.6 to 8.10 Minor Version Upgrade (Azure)
+# 🚀 Lab Guide: RHEL Minor & Major Architecture Migrations (Azure)
 
 ## 📚 Architect's Reference: RHEL Lifecycles & Upgrade Topology
 > [!NOTE]
