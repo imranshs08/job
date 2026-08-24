@@ -3,6 +3,7 @@
 *This document serves as the absolute truth for all AI-generated Azure configurations and Terraform deployments in this repository. Ensure all commands rigidly adhere to these SKUs to prevent Sandbox Access Denial.*
 
 ## Compute Constraints
+* **Compute OS Disks:** Premium OS Disks are absolutely prohibited. Storage configuration MUST be forced to `< 128GB` limit, explicitly demanding `--storage-sku Standard_LRS`.
 * **Virtual Machines:** `Standard_D2s_v3`, `Standard_B2s`, `Standard_B1s`, `Standard_DS1_v2`
 * **Virtual Machine Scale Sets:** Count Max = 3. SKUs: `Standard_D2s_v3`, `Standard_K8S2_v1`, `Standard_K8S_v1`, `Standard_B2s`, `Standard_B1s`, `Standard_DS1_v2`, `Standard_B4ms`
 * **Azure Kubernetes Service (AKS):** Agent Pool SKU = `Standard_D2s_v3`. Max Node Pools = 1. Max Nodes per Pool = 2.

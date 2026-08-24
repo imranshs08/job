@@ -35,7 +35,8 @@ az vm create \
   --image "$RHEL_URN" \
   --admin-username azureuser \
   --admin-password "KodeKloud@2027!" \
-  --size Standard_B2s
+  --size Standard_B2s \
+  --storage-sku Standard_LRS
 ```
 *(Copy the `publicIpAddress` from the JSON output once it completes)*
 
@@ -51,7 +52,8 @@ az vm create \
   --image "$RHEL_URN" \
   --admin-username azureuser \
   --admin-password "KodeKloud@2027!" \
-  --size Standard_B2s
+  --size Standard_B2s \
+  --storage-sku Standard_LRS
 ```
 
 ---
