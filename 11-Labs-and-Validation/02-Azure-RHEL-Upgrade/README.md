@@ -71,7 +71,7 @@ cat /etc/redhat-release
 # Desired Output: Red Hat Enterprise Linux release 8.6 (Ootpa)
 
 uname -r
-# Note down the Kernel signature
+# Target Baseline Kernel: 4.18.0-372.9.1.el8.x86_64
 ```
 
 ---
