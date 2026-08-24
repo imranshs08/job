@@ -30,7 +30,7 @@ We will deploy a `Standard_B2s` tier VM (which is guaranteed to be whitelisted b
 az vm create \
   --resource-group "$SANDBOX_RG" \
   --name rhel-node-01 \
-  --image RedHat:RHEL:8_6:latest \
+  --image RedHat:RHEL:8_6:8.6.2022052401 \
   --admin-username azureuser \
   --generate-ssh-keys \
   --size Standard_B2s
