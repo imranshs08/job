@@ -17,12 +17,19 @@ from datetime import date, datetime, timedelta, timezone
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
+import os
 # ── Load config ──────────────────────────────────────────────────────────────
-try:
-    from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
-except ImportError:
-    print("ERROR: notify/config.py not found.")
-    print("Copy notify/config.example.py to notify/config.py and fill in your credentials.")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+
+if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+    try:
+        from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+    except ImportError:
+        pass
+
+if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+    print("ERROR: TELEGRAM credentials not found in env vars or config.py.")
     sys.exit(1)
 
 # ── Constants ─────────────────────────────────────────────────────────────────
