@@ -83,17 +83,17 @@ System upgrades in Red Hat are categorized into three distinct tiers of operatio
 *   **Risk Level:** High (Requires Pre-Flight testing).
 *   **Execution:** Major upgrades cannot be performed with `dnf`. They utilize a dedicated Python-based framework called **Leapp** that calculates a massive dependency matrix, generates a pre-upgrade risk report, creates a dedicated `initramfs` bootloader, and swaps the entire OS out during a system restart.
     ```bash
-    # Install the Leapp Framework
-    sudo dnf install -y leapp-upgrade
+    # (Azure) Install the Leapp Framework and the Azure Cloud Integration Plugin
+    sudo dnf install -y leapp-upgrade leapp-rhui-azure
     
-    # Generate the Pre-Upgrade Risk Assessment Report
-    sudo leapp preupgrade
+    # Generate the Pre-Upgrade Risk Assessment Report (Bypass Subscription Manager)
+    sudo leapp preupgrade --no-rhsm
     
     # Review the report generated at /var/log/leapp/leapp-report.txt
     # Mitigate any blocking issues.
     
     # Execute the massive OS transition payload
-    sudo leapp upgrade
+    sudo leapp upgrade --no-rhsm
     
     # Reboot into the Leapp Initramfs to overwrite the OS
     sudo reboot
