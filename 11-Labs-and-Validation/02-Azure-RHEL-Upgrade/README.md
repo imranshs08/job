@@ -39,6 +39,21 @@ az vm create \
 ```
 *(Copy the `publicIpAddress` from the JSON output once it completes)*
 
+### 4. ⚡ Optional: The One-Click Quick Deployment Script
+*(If you want to skip manually running steps 1-3, simply copy and paste this unified block straight into your Cloud Shell).*
+```bash
+export SANDBOX_RG=$(az group list --query "[0].name" -o tsv)
+export RHEL_URN=$(az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].urn" -o tsv)
+
+az vm create \
+  --resource-group "$SANDBOX_RG" \
+  --name rhel-node-01 \
+  --image "$RHEL_URN" \
+  --admin-username azureuser \
+  --admin-password "KodeKloud@2027!" \
+  --size Standard_B2s
+```
+
 ---
 
 ## 🔑 Step 2: Establish SSH and Pre-Flight Validation
