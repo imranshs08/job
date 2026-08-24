@@ -79,14 +79,8 @@ uname -r
 ## ⚙️ Step 3: Perform the Operational Upgrade
 Since we are using Azure, the VM is pre-connected to RHUI. However, some 8.6 images may have the release locked to Extended Update Support (EUS).
 
-### 1. Clear caches and release locks
+### 1. Flush the Local Cache
 ```bash
-# Verify if the version is locked to 8.6
-sudo subscription-manager release --show
-
-# Force the release lock to clear so it targets the latest 8.x repository (8.10)
-sudo subscription-manager release --unset
-
 # Clean the DNF cache for a fresh repository pull
 sudo dnf clean all
 ```
