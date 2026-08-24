@@ -19,10 +19,11 @@ export SANDBOX_RG=$(az group list --query "[0].name" -o tsv)
 echo "Active Sandbox Resource Group: $SANDBOX_RG"
 ```
 
-### 2. Locate the Exact RHEL 8.6 URN (Read-Only)
-*(Azure Marketplace frequently cycles image references. This command fetches the precise URN string).*
+### 2. Export the Active RHEL 8.6 URN
+*(Azure Marketplace frequently cycles image references. Use sub-shell expansion to assign the live URN dynamically).*
 ```bash
-az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].urn" -o tsv
+export RHEL_URN=$(az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].urn" -o tsv)
+echo "Active Image URN: $RHEL_URN"
 ```
 
 ### 3. Deploy the Virtual Machine
@@ -31,7 +32,7 @@ We will deploy a `Standard_B2s` tier VM (which is guaranteed to be whitelisted b
 az vm create \
   --resource-group "$SANDBOX_RG" \
   --name rhel-node-01 \
-  --image RedHat:RHEL:8_6:8.6.2022052401 \
+  --image "$RHEL_URN" \
   --admin-username azureuser \
   --generate-ssh-keys \
   --size Standard_B2s
