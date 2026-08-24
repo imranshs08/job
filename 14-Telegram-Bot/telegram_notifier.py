@@ -37,6 +37,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKER_PATH = os.path.join(BASE_DIR, "03-Progress-Tracker", "progress-tracker.md")
 FOOTER_URL = "https://imranshs08.github.io/job/"
+CKA_EXAM_DATE = date(2027, 1, 1)
+AZ_EXAM_DATE  = date(2027, 1, 15)
 TOTAL_VIDEOS  = 158
 
 FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>\n👨‍💻 <i>Built by Imran</i>"
