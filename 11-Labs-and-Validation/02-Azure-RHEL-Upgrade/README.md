@@ -85,6 +85,16 @@ Since we are using Azure, the VM is pre-connected to RHUI. However, some 8.6 ima
 sudo dnf clean all
 ```
 
+> [!WARNING]
+> **Troubleshooting `Status code: 400` Errors**
+> If your Sandbox deployed an image where the Extended Update Support (EUS) certificates have expired, `dnf clean all` or `upgrade` will crash with **Status code: 400**. To fix this, you must nuke the EUS lock and fetch the master repositories directly from Azure Blob:
+> ```bash
+> sudo rm -f /etc/yum/vars/releasever /etc/dnf/vars/releasever
+> sudo dnf --disablerepo='*' remove -y rhui-azure-rhel8-eus
+> sudo dnf --config='https://rhelimage.blob.core.windows.net/repositories/rhui-microsoft-azure-rhel8.config' install -y rhui-azure-rhel8
+> sudo dnf clean all
+> ```
+
 ### 2. Execute the Upgrade
 Review the pending package updates, then trigger the upgrade.
 ```bash
