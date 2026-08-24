@@ -124,3 +124,48 @@ Never leave sandbox infrastructure running. Return to your Azure Cloud Shell and
 ```bash
 az group delete --name RHEL-Upgrade-Lab-RG --yes --no-wait
 ```
+
+---
+
+## 🚀 Advanced Tier: Major Upgrade (RHEL 8 ➡️ RHEL 9)
+If you decide you want to upgrade your freshly minted `8.10` machine completely into the `RHEL 9.x` architecture, `dnf upgrade` is instantly useless. You must rely on Red Hat's **Leapp Framework**, which handles deep architectural and Python binary shifts.
+
+### 1. Azure-Specific Leapp Preparation
+In Azure, the Pay-As-You-Go VMs route through specialized RHUI servers. You cannot upgrade without installing the Azure-specific RHUI routing packages designed for RHEL 9.
+
+```bash
+# Remove the old RHEL 8 cloud configurations
+sudo dnf remove -y rhui-azure-rhel8 
+
+# Install the Leapp upgrade architecture and Azure's RHEL 9 RHUI package
+sudo dnf install -y rhui-azure-rhel9 leapp-upgrade
+```
+
+### 2. The Leapp Pre-Upgrade Assessment
+Never run a major upgrade blindly. The framework first analyzes your OS, hardware drivers, and installed software to predict if a migration will crash the server.
+
+```bash
+sudo leapp preupgrade --no-rhsm
+```
+*If this fails, you must open `/var/log/leapp/leapp-report.txt` to find and resolve the blocking anomalies (e.g., deprecated Python packages, incompatible third-party drivers) before proceeding.*
+
+### 3. Execution & The Transitional Ramdisk
+Once the pre-upgrade passes smoothly, initialize the structural transition:
+
+```bash
+sudo leapp upgrade --no-rhsm
+```
+*(This downloads the massive RHEL 9 payloads and configures them securely into a boot partition).*
+
+```bash
+sudo reboot
+```
+*During reboot, the VM boots into a temporary **Leapp Upgrade Ramdisk environment (Initramfs)** where the real magic happens. SSH will be completely dead for 15-30 minutes while packages are extracted and the RHEL 8 binaries are systematically destroyed and replaced by RHEL 9.*
+
+### 4. Final Validation
+Once SSH comes back alive, authenticate and verify you have successfully crossed into a new Major architecture tier!
+
+```bash
+cat /etc/redhat-release
+# Desired Output: Red Hat Enterprise Linux release 9.x (Plow)
+```
