@@ -1,0 +1,19 @@
+trigger-ping	Execute Notification Engines (Email)	﻿2026-08-24T18:36:08.5187479Z ##[group]Run HOUR=$(date -u +%H)
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5187933Z ^[[36;1mHOUR=$(date -u +%H)^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5188365Z ^[[36;1mif [ "$HOUR" -eq 16 ]; then^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5188807Z ^[[36;1m  echo "Running Nightly Status Check (10:00 PM IST)"^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5189566Z ^[[36;1m  python 14-Telegram-Bot/email_notifier.py --nightly^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5190023Z ^[[36;1melse^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5190414Z ^[[36;1m  echo "Running Daily Morning Brief (8:00 AM IST)"^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5190894Z ^[[36;1m  python 14-Telegram-Bot/email_notifier.py --daily^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5191260Z ^[[36;1mfi^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5212013Z shell: /usr/bin/bash -e {0}
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5212324Z env:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5212777Z   GMAIL_ADDRESS: ***
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5213031Z   GMAIL_APP_PASSWORD: ***
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5213287Z   TELEGRAM_BOT_TOKEN: 
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5213556Z   TELEGRAM_CHAT_ID: ***
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5213810Z ##[endgroup]
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5257928Z Running Daily Morning Brief (8:00 AM IST)
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5655303Z ERROR: TELEGRAM credentials not found in env vars or config.py.
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:36:08.5722443Z ##[error]Process completed with exit code 1.

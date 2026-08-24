@@ -1,0 +1,44 @@
+trigger-ping	Execute Notification Engines (Email)	﻿2026-08-24T18:06:19.9210891Z ##[debug]Evaluating: secrets.GMAIL_ADDRESS
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9211281Z ##[debug]Evaluating Index:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9211552Z ##[debug]..Evaluating secrets:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9211858Z ##[debug]..=> Object
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9212181Z ##[debug]..Evaluating String:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9212893Z ##[debug]..=> 'GMAIL_ADDRESS'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9213805Z ##[debug]=> '***'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9214170Z ##[debug]Result: '***'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9215002Z ##[debug]Evaluating: secrets.GMAIL_APP_PASSWORD
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9215342Z ##[debug]Evaluating Index:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9215607Z ##[debug]..Evaluating secrets:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9215880Z ##[debug]..=> Object
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9216127Z ##[debug]..Evaluating String:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9216405Z ##[debug]..=> 'GMAIL_APP_PASSWORD'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9216746Z ##[debug]=> '***'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9217016Z ##[debug]Result: '***'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9224992Z ##[debug]Evaluating condition for step: 'Execute Notification Engines (Email)'
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9227007Z ##[debug]Evaluating: success()
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9227399Z ##[debug]Evaluating success:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9227822Z ##[debug]=> true
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9228217Z ##[debug]Result: true
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9228845Z ##[debug]Starting: Execute Notification Engines (Email)
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9240453Z ##[debug]Loading inputs
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9241668Z ##[debug]Loading env
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9247630Z ##[group]Run HOUR=$(date -u +%H)
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9247928Z ^[[36;1mHOUR=$(date -u +%H)^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9248225Z ^[[36;1mif [ "$HOUR" -eq 16 ]; then^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9248557Z ^[[36;1m  echo "Running Nightly Status Check (10:00 PM IST)"^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9248963Z ^[[36;1m  python 14-Telegram-Bot/email_notifier.py --nightly^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9249317Z ^[[36;1melse^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9249581Z ^[[36;1m  echo "Running Daily Morning Brief (8:00 AM IST)"^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9249965Z ^[[36;1m  python 14-Telegram-Bot/email_notifier.py --daily^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9250273Z ^[[36;1mfi^[[0m
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9288511Z shell: /usr/bin/bash -e {0}
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9288765Z env:
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9289049Z   GMAIL_ADDRESS: ***
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9289313Z   GMAIL_APP_PASSWORD: ***
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9289549Z ##[endgroup]
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9327472Z ##[debug]/usr/bin/bash -e /home/runner/work/_temp/a5651780-6097-46ba-a3e1-196508560133.sh
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9360263Z Running Daily Morning Brief (8:00 AM IST)
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9923810Z ERROR: notify/config.py not found.
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:19.9924762Z Copy notify/config.example.py to notify/config.py and fill in your credentials.
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:20.0018458Z ##[error]Process completed with exit code 1.
+trigger-ping	Execute Notification Engines (Email)	2026-08-24T18:06:20.0030764Z ##[debug]Finishing: Execute Notification Engines (Email)
