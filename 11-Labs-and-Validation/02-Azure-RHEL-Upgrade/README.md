@@ -178,8 +178,8 @@ In Azure, the Pay-As-You-Go VMs route through specialized RHUI servers. You cann
 # Remove the old RHEL 8 cloud configurations
 sudo dnf remove -y rhui-azure-rhel8 
 
-# Install the Leapp upgrade architecture and Azure's RHEL 9 RHUI package
-sudo dnf install -y rhui-azure-rhel9 leapp-upgrade
+# Install the Leapp upgrade architecture and Azure's native RHUI integration plugin
+sudo dnf install -y leapp-upgrade leapp-rhui-azure
 ```
 
 ### 2. The Leapp Pre-Upgrade Assessment
