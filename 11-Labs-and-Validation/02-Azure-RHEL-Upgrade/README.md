@@ -138,12 +138,21 @@ sudo dnf update
 
 ---
 
-## 🗑️ Step 5: Clean Up / Teardown
-Never leave sandbox infrastructure running. Since you are in a protected Sandbox, simply closing the training session will automatically purge the resources.
+## 🗑️ Step 5: Clean Up (Emergency Reset)
+If your deployment fails midway or you want to start over *without* closing the active Sandbox session, you cannot delete the entire Resource Group (since KodeKloud owns it). Instead, you must surgically delete the VM and its orphaned dependencies (Disks, NICs, Public IPs). 
+
+Run this advanced Bash pipeline to cleanly hunt down and purge every resource attached to the `rhel-node-01` prefix:
+
 ```bash
-# If running on a personal account, you would normally run:
-# az group delete --name <YOUR_SANDBOX_RG> --yes --no-wait
+export SANDBOX_RG=$(az group list --query "[0].name" -o tsv)
+
+# Fetch all resources matching the VM name and systematically delete their IDs
+az resource list \
+  --resource-group "$SANDBOX_RG" \
+  --query "[?starts_with(name, 'rhel-node-01')].id" \
+  -o tsv | xargs -r -n1 az resource delete --ids
 ```
+*(If you are done for the day, you can skip this. KodeKloud automatically vaporizes everything when the session timer hits zero).*
 
 ---
 
