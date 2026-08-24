@@ -21,6 +21,11 @@ A modern RHEL major version (RHEL 8 & 9) is supported for **10 years**, divided 
 > **Extended Update Support (EUS)**
 > For enterprises that cannot upgrade minor versions every 6 months, Red Hat offers EUS. An EUS release (usually even numbers like 8.4, 8.6, 9.2, 9.4) allows you to stay on that specific minor version and receive critical security patches for up to **24 months** without breaking applications.
 
+### ☁️ Cloud-Native (PAYG) vs On-Premise Subscriptions
+A critical architectural difference exists between physical datacenters and Cloud (Azure/AWS) RHEL deployments:
+*   **On-Premise / BYOL:** You must forcefully authenticate a machine to Red Hat via the `subscription-manager` utility to pull packages. If a release lock occurs, you use `subscription-manager release --unset`.
+*   **Cloud-Native PAYG:** Azure natively injects a background engine called **RHUI (Red Hat Update Infrastructure)**. RHUI completely bypasses the local `subscription-manager` binary. If a Cloud VM gets stuck on a deprecated EUS minor branch, you cannot use `subscription-manager` to fix it. You must physically delete the lock file (`/etc/yum/vars/releasever`) and reinstall the Cloud-native repository RPMs (e.g., `rhui-azure-rhel8`).
+
 ---
 
 ## ⏳ Critical End-of-Life (EOL) Timelines
