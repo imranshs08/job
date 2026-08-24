@@ -31,7 +31,7 @@ We will deploy a `Standard_B2s` tier VM (which is guaranteed to be whitelisted b
 ```bash
 az vm create \
   --resource-group "$SANDBOX_RG" \
-  --name rhel-node-01 \
+  --name rhel-node-02 \
   --image "$RHEL_URN" \
   --admin-username azureuser \
   --admin-password "KodeKloud@2027!" \
@@ -48,7 +48,7 @@ export RHEL_URN=$(az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].u
 
 az vm create \
   --resource-group "$SANDBOX_RG" \
-  --name rhel-node-01 \
+  --name rhel-node-02 \
   --image "$RHEL_URN" \
   --admin-username azureuser \
   --admin-password "KodeKloud@2027!" \
@@ -141,7 +141,7 @@ sudo dnf update
 ## 🗑️ Step 5: Clean Up (Emergency Reset)
 If your deployment fails midway or you want to start over *without* closing the active Sandbox session, you cannot delete the entire Resource Group (since KodeKloud owns it). Instead, you must surgically delete the VM and its orphaned dependencies (Disks, NICs, Public IPs). 
 
-Run this advanced Bash pipeline to cleanly hunt down and purge every resource attached to the `rhel-node-01` prefix:
+Run this advanced Bash pipeline to cleanly hunt down and purge every resource attached to the `rhel-node-02` prefix:
 
 ```bash
 export SANDBOX_RG=$(az group list --query "[0].name" -o tsv)
