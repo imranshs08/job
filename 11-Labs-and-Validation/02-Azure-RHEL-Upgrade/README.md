@@ -12,11 +12,10 @@ In the Red Hat Enterprise Linux ecosystem, upgrades are classified in two ways:
 ## 🛠️ Step 1: Provision the Azure RHEL 8.6 Instance
 Open the **Azure Cloud Shell (Bash)** and run the following commands to scaffold your environment.
 
-### 1. Identify your Sandbox Resource Group
-*(Sandbox environments strictly prohibit creating new resource groups. Locate your pre-assigned resource group name first).*
+### 1. Set your Sandbox Resource Group
+*(Sandbox environments require deployments to target a pre-assigned resource group. Export it as an environment variable to streamline your commands).*
 ```bash
-az group list --query "[0].name" -o tsv
-# Note this output. We will refer to it as <YOUR_SANDBOX_RG>
+export SANDBOX_RG="kml_rg_main-2f69cde953d845d3"
 ```
 
 ### 2. Locate the Exact RHEL 8.6 URN (Read-Only)
@@ -29,7 +28,7 @@ az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].urn" -o tsv
 We will deploy a `Standard_B2s` tier VM (which is guaranteed to be whitelisted by your Sandbox).
 ```bash
 az vm create \
-  --resource-group <YOUR_SANDBOX_RG> \
+  --resource-group "$SANDBOX_RG" \
   --name rhel-node-01 \
   --image RedHat:RHEL:8_6:latest \
   --admin-username azureuser \
