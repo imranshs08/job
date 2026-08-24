@@ -248,17 +248,17 @@
     </div>
 
     <script>
-        // Fetch the README.md dynamically from the same directory
-        fetch('README.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(text => {
-                // Parse markdown into HTML using marked.js
-                document.getElementById('content').innerHTML = marked.parse(text);
+        // Use Promise.all to fetch the primary lab guide AND the lifecycle notes asynchronously
+        Promise.all([
+            fetch('README.md').then(res => res.ok ? res.text() : Promise.reject('Failed to load README.md')),
+            fetch('../../04-Notes/rhel-lifecycle.md').then(res => res.ok ? res.text() : Promise.reject('Failed to load rhel-lifecycle.md'))
+        ])
+            .then(([readmeText, lifecycleText]) => {
+                // Concatenate both documents, placing the Lifecycle Theory at the end
+                const fullPayload = readmeText + "\n\n<hr style='border:1px solid rgba(0,242,254,0.3); margin: 3rem 0;' />\n\n" + lifecycleText;
+
+                // Parse unified markdown blob into HTML using marked.js
+                document.getElementById('content').innerHTML = marked.parse(fullPayload);
 
                 // Scaffold dynamic Copy Buttons onto code blocks
                 document.querySelectorAll('#content pre').forEach(pre => {
@@ -287,13 +287,13 @@
                 document.getElementById('content').style.display = 'block';
             })
             .catch(error => {
-                console.error('Error fetching markdown:', error);
+                console.error('Error fetching markdown modules:', error);
                 document.getElementById('loader').innerHTML = `
-                    <div style="color: #ef4444; font-weight: bold; text-align: center;">
-                        ❌ Authentication Failure<br>
-                        <span style="font-size: 0.9rem; font-weight: 300;">Unable to load the RHEL architecture payload.</span>
-                    </div>
-                `;
+                <div style="color: #ef4444; font-weight: bold; text-align: center;">
+                    ❌ Telemetry Resolution Failure<br>
+                    <span style="font-size: 0.9rem; font-weight: 300;">Unable to locate the requisite markdown payload architectures.</span>
+                </div>
+            `;
             });
     </script>
 </body>
