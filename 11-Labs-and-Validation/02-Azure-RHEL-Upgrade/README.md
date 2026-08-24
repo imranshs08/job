@@ -12,27 +12,28 @@ In the Red Hat Enterprise Linux ecosystem, upgrades are classified in two ways:
 ## 🛠️ Step 1: Provision the Azure RHEL 8.6 Instance
 Open the **Azure Cloud Shell (Bash)** and run the following commands to scaffold your environment.
 
-### 1. Create a Resource Group
+### 1. Identify your Sandbox Resource Group
+*(Sandbox environments strictly prohibit creating new resource groups. Locate your pre-assigned resource group name first).*
 ```bash
-az group create --name RHEL-Upgrade-Lab-RG --location eastus
+az group list --query "[0].name" -o tsv
+# Note this output. We will refer to it as <YOUR_SANDBOX_RG>
 ```
 
-### 2. Locate the Exact RHEL 8.6 URN (Read-Only Step)
-*(Azure Marketplace changes image references frequently. This command helps you locate the exact URN if the deployment string fails).*
+### 2. Locate the Exact RHEL 8.6 URN (Read-Only)
+*(Azure Marketplace frequently cycles image references. This command fetches the precise URN string).*
 ```bash
 az vm image list -p RedHat -f RHEL -s 8_6 --all --query "[0].urn" -o tsv
 ```
 
 ### 3. Deploy the Virtual Machine
-We will deploy a `Standard_B2s` tier VM with an explicit RHEL 8.6 image.
+We will deploy a `Standard_B2s` tier VM (which is guaranteed to be whitelisted by your Sandbox).
 ```bash
 az vm create \
-  --resource-group RHEL-Upgrade-Lab-RG \
+  --resource-group <YOUR_SANDBOX_RG> \
   --name rhel-node-01 \
   --image RedHat:RHEL:8_6:latest \
   --admin-username azureuser \
   --generate-ssh-keys \
-  --public-ip-sku Standard \
   --size Standard_B2s
 ```
 *(Copy the `publicIpAddress` from the JSON output once it completes)*
@@ -120,9 +121,10 @@ sudo dnf update
 ---
 
 ## 🗑️ Step 5: Clean Up / Teardown
-Never leave sandbox infrastructure running. Return to your Azure Cloud Shell and nuke the resource group to stop billing.
+Never leave sandbox infrastructure running. Since you are in a protected Sandbox, simply closing the training session will automatically purge the resources.
 ```bash
-az group delete --name RHEL-Upgrade-Lab-RG --yes --no-wait
+# If running on a personal account, you would normally run:
+# az group delete --name <YOUR_SANDBOX_RG> --yes --no-wait
 ```
 
 ---
