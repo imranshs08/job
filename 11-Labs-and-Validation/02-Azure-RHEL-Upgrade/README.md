@@ -188,7 +188,22 @@ Never run a major upgrade blindly. The framework first analyzes your OS, hardwar
 ```bash
 sudo leapp preupgrade --no-rhsm
 ```
-*If this fails, you must open `/var/log/leapp/leapp-report.txt` to find and resolve the blocking anomalies (e.g., deprecated Python packages, incompatible third-party drivers) before proceeding.*
+
+> [!WARNING]
+> **Troubleshooting Leapp Inhibitors**
+> On Azure RHEL 8 instances, Leapp will almost always halt with an "Inhibitor" regarding the Firewalld `AllowZoneDrifting` configuration, because RHEL 9 deprecates this feature.
+> 
+> *To find the exact inhibitor in the massive log file:*
+> ```bash
+> sudo grep -i inhibitor /var/log/leapp/leapp-report.txt -A 10
+> ```
+> 
+> *To fix the Firewalld blocker, inject this Red Hat approved `sed` string and re-run the assessment:*
+> ```bash
+> sudo sed -i s/^AllowZoneDrifting=.*/AllowZoneDrifting=no/ /etc/firewalld/firewalld.conf
+> 
+> sudo leapp preupgrade --no-rhsm
+> ```
 
 ### 3. Execution & The Transitional Ramdisk
 Once the pre-upgrade passes smoothly, initialize the structural transition:
