@@ -32,10 +32,11 @@ if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     print("ERROR: TELEGRAM credentials not found in env vars or config.py.")
     sys.exit(1)
 
+import os
 # ── Constants ─────────────────────────────────────────────────────────────────
-TRACKER_PATH = r"c:\Job Tracker\03-Progress-Tracker\progress-tracker.md"
-CKA_EXAM_DATE = date(2027, 1, 1)
-AZ_EXAM_DATE  = date(2027, 1, 15)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TRACKER_PATH = os.path.join(BASE_DIR, "03-Progress-Tracker", "progress-tracker.md")
+FOOTER_URL = "https://imranshs08.github.io/job/"
 TOTAL_VIDEOS  = 158
 
 FOOTER = "\n\n🌐 <a href='https://imranshs08.github.io/job/'>Dashboard</a> • 🐙 <a href='https://github.com/imranshs08/job'>Repository</a>\n👨‍💻 <i>Built by Imran</i>"
