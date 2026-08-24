@@ -13,9 +13,10 @@ In the Red Hat Enterprise Linux ecosystem, upgrades are classified in two ways:
 Open the **Azure Cloud Shell (Bash)** and run the following commands to scaffold your environment.
 
 ### 1. Set your Sandbox Resource Group
-*(Sandbox environments require deployments to target a pre-assigned resource group. Export it as an environment variable to streamline your commands).*
+*(Your sandbox dynamically generates a new Resource Group string every session. Use bash sub-shell expansion to automatically fetch and export it).*
 ```bash
-export SANDBOX_RG="kml_rg_main-2f69cde953d845d3"
+export SANDBOX_RG=$(az group list --query "[0].name" -o tsv)
+echo "Active Sandbox Resource Group: $SANDBOX_RG"
 ```
 
 ### 2. Locate the Exact RHEL 8.6 URN (Read-Only)
