@@ -390,6 +390,32 @@
                 </ul>
             </div>
 
+            <!-- Cold Email Template Card -->
+            <div class="card" style="--accent: #ec4899; --accent-glow: rgba(236, 72, 153, 0.3);">
+                <h2>📧 Cold Email Template
+                    <button onclick="copyEmailTemplate()" id="copy-email-btn"
+                        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1; padding: 0.3rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-family: 'Inter', sans-serif; transition: all 0.2s ease;">📋
+                        Copy</button>
+                </h2>
+                <div style="background: rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 1rem; border-left: 4px solid var(--accent); line-height: 1.6; font-size: 0.95rem; color: #f1f5f9;"
+                    id="email-template-text">
+                    <strong style="color: var(--accent);">Subject:</strong> Application for DevOps Engineer - [Your
+                    Name]<br><br>
+                    Hi Sarath,<br><br>
+                    I'm reaching out to express my interest in the DevOps Engineer position at Bridgeflair.<br><br>
+                    With my strong background in cloud infrastructure, CI/CD automation, Kubernetes, and IaC
+                    (Terraform), my skills closely align with your team's needs.<br><br>
+                    I have attached my resume for your review. I would welcome the opportunity to discuss how my
+                    technical expertise and proactive problem-solving approach can benefit Bridgeflair's engineering
+                    operations.<br><br>
+                    Looking forward to hearing from you.<br><br>
+                    Best regards,<br>
+                    [Your Name]<br>
+                    [LinkedIn URL]<br>
+                    [Phone Number]
+                </div>
+            </div>
+
             <!-- Career Marketing Card -->
             <div class="card" style="--accent: #10b981; --accent-glow: rgba(16, 185, 129, 0.3);">
                 <h2>💼 Career Marketing Milestones</h2>
@@ -463,6 +489,24 @@
             const cleanText = promptText.replace(/^"|"$/g, '');
             navigator.clipboard.writeText(cleanText).then(() => {
                 const btn = document.getElementById('copy-interview-btn');
+                btn.innerHTML = "✅ Copied!";
+                btn.style.background = "rgba(16, 185, 129, 0.2)";
+                btn.style.borderColor = "rgba(16, 185, 129, 0.5)";
+                setTimeout(() => {
+                    btn.innerHTML = "📋 Copy";
+                    btn.style.background = "rgba(255,255,255,0.1)";
+                    btn.style.borderColor = "rgba(255,255,255,0.2)";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy clipboard text", err);
+            });
+        }
+
+        function copyEmailTemplate() {
+            const templateHtml = document.getElementById('email-template-text').innerHTML;
+            const plainText = templateHtml.replace(/<br\s*[\/]?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
+            navigator.clipboard.writeText(plainText).then(() => {
+                const btn = document.getElementById('copy-email-btn');
                 btn.innerHTML = "✅ Copied!";
                 btn.style.background = "rgba(16, 185, 129, 0.2)";
                 btn.style.borderColor = "rgba(16, 185, 129, 0.5)";
