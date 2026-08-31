@@ -19,9 +19,8 @@
 
 ### 🔥 The "Guaranteed" Exam Tasks (Most Important Areas)
 
-> 🚨 **[PRACTICE NOW: The CKA Ultimate Mock Scenarios (Top 20)](19-CKA-Actual-Questions-Mock.md)** 
-> 📚 **[MEGA BANK: 60 Real Rotating Exam Questions](21-CKA-Mega-Question-Bank.md)** 
-> *Dedicated files containing the exact phrasing, scenarios, and fast-imperative solutions you will encounter on exam day.*
+> 🚨 **[PRACTICE NOW: The Ultimate CKA Mega-Bank (80 Questions)](19-CKA-Actual-Questions-Mock.md)** 
+> *A unified, dedicated file containing the exact phrasing, scenarios, and fast-imperative solutions you will encounter on exam day (including KodeKloud & KillerCoda classics).*
 
 You *must* be able to do these flawlessly from memory or by using `kubectl --help`:
 - **ETCD Backup & Restore**: Taking a snapshot and restoring it to a new directory.
