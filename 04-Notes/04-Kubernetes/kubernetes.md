@@ -18,6 +18,10 @@
 5. **Storage (10%)**
 
 ### 🔥 The "Guaranteed" Exam Tasks (Most Important Areas)
+
+> 🚨 **[PRACTICE NOW: The CKA Ultimate Mock Scenarios](19-CKA-Actual-Questions-Mock.md)** 
+> *A dedicated file containing the exact phrasing, scenarios, and fast-imperative solutions you will encounter on exam day.*
+
 You *must* be able to do these flawlessly from memory or by using `kubectl --help`:
 - **ETCD Backup & Restore**: Taking a snapshot and restoring it to a new directory.
 - **Cluster Upgrades**: Upgrading the primary node and a worker node from e.g. v1.34 to v1.35 using `kubeadm`.
