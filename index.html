@@ -357,6 +357,9 @@
             <div class="date-display" id="target-date-display"
                 style="font-weight: 700; color: #f1f5f9; letter-spacing: 0.5px; padding: 0 1rem;">Viewing: ...</div>
             <button class="btn" onclick="offsetDate(1)">Next &#8594;</button>
+            <button class="btn" id="refresh-btn" onclick="manualRefresh()"
+                style="background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #34d399;"
+                title="Force re-fetch tracker data">🔄 Refresh</button>
         </div>
 
         <div id="loading" class="loader"></div>
@@ -596,18 +599,35 @@
             renderDashboard();
         }
 
-        async function init() {
-            // Pick a daily quote
-            document.getElementById('quote').innerText = "💡 " + quotes[new Date().getDate() % quotes.length];
-
+        async function fetchAndRender() {
             try {
-                const response = await fetch('./03-Progress-Tracker/progress-tracker.md');
-                if (!response.ok) throw new Error("Could not find progress-tracker.md");
+                const response = await fetch('./03-Progress-Tracker/progress-tracker.md?t=' + Date.now());
+                if (!response.ok) throw new Error('Could not find progress-tracker.md');
                 currentRawMarkdown = await response.text();
                 renderDashboard();
             } catch (e) {
                 console.error(e);
                 document.getElementById('video-tasks').innerHTML = `<li class="empty-state">Error loading tracker data. Please ensure progress-tracker.md is committed.</li>`;
+            }
+        }
+
+        async function manualRefresh() {
+            const btn = document.getElementById('refresh-btn');
+            btn.innerHTML = '⏳ Loading...';
+            btn.disabled = true;
+            await fetchAndRender();
+            btn.innerHTML = '✅ Done';
+            setTimeout(() => { btn.innerHTML = '🔄 Refresh'; btn.disabled = false; }, 1500);
+        }
+
+        async function init() {
+            // Pick a daily quote
+            document.getElementById('quote').innerText = "💡 " + quotes[new Date().getDate() % quotes.length];
+
+            try {
+                await fetchAndRender();
+            } catch (e) {
+                console.error(e);
             } finally {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
@@ -886,11 +906,7 @@
         // Auto-refresh tracker data every 2 hours
         setInterval(async () => {
             try {
-                const resp = await fetch('./03-Progress-Tracker/progress-tracker.md?t=' + Date.now());
-                if (resp.ok) {
-                    currentRawMarkdown = await resp.text();
-                    renderDashboard();
-                }
+                await fetchAndRender();
             } catch (e) { console.warn('Auto-refresh failed:', e); }
         }, 2 * 60 * 60 * 1000);
     </script>
