@@ -303,3 +303,85 @@ spec:
       - image: nginx
 ```
 *(If the question explicitly asks for `nodeAffinity`, you must use the longer `affinity:` block).*
+
+---
+
+## 🚀 PART 2: KillerCoda Playground Classics (Advanced)
+
+*KillerCoda exercises test your JSONPath parsing, contextual awareness, and speed. These represent the hardest questions you might face to achieve a perfect 100%.*
+
+### 16. JSONPath List Extraction
+**📝 Exam Scenario:**
+> Output the names of all deployments in the `kube-system` namespace to `/opt/deployments.txt`. You must use `jsonpath` to extract only the names, not the standard wide output.
+
+**✅ Solution:**
+```bash
+kubectl get deployments -n kube-system -o jsonpath='{.items[*].metadata.name}' > /opt/deployments.txt
+```
+
+### 17. Context Switching & Cluster Info
+**📝 Exam Scenario:**
+> You are provided with multiple clusters. Switch to the `cluster2` context. Count how many nodes are in a `Ready` state in that cluster and write the raw number (e.g., `3`) to `/opt/ready-nodes.txt`.
+
+**✅ Solution:**
+```bash
+kubectl config use-context cluster2
+# Count the ready nodes manually or via grep
+kubectl get nodes | grep -i "\bReady\b" | wc -l > /opt/ready-nodes.txt
+```
+
+### 18. Cluster Troubleshooting (Static Pod Hijack)
+**📝 Exam Scenario:**
+> The `kube-apiserver` in cluster `k8s-prod` is crashing. The cluster is inaccessible via kubectl. Identify the issue on the control plane node and fix it.
+
+**✅ Solution:**
+1. You can't use `kubectl`. SSH into the control plane directly.
+2. `cd /etc/kubernetes/manifests`
+3. Inspect the static pod: `cat kube-apiserver.yaml`
+4. Usually, KillerCoda places a typo on this layer, such as changing `--authorization-mode=Node,RBAC` to `--authorization-mode=Node,RBCA` (Typo).
+5. Open `vi kube-apiserver.yaml`, fix the typo, save & exit.
+6. The `kubelet` will detect the file change and automatically reboot the API server within 30 seconds. Test with `kubectl get nodes`.
+
+### 19. Advanced RBAC (Contextual Verification)
+**📝 Exam Scenario:**
+> Create a ClusterRole `deployment-manager` that can `create, get, list, update, delete` deployments. Create a ServiceAccount `cicd-bot` in the `dev` namespace. Bind the ClusterRole to the ServiceAccount across the ENTIRE cluster. Verify that `cicd-bot` can delete deployments in the `prod` namespace.
+
+**✅ Solution:**
+```bash
+# Provide the permissions
+kubectl create clusterrole deployment-manager --verb=create,get,list,update,delete --resource=deployments
+
+# Create the bot
+kubectl create serviceaccount cicd-bot -n dev
+
+# Bind across the ENTIRE cluster (Requires a ClusterRoleBinding, NOT a RoleBinding!)
+kubectl create clusterrolebinding cicd-bot-global --clusterrole=deployment-manager --serviceaccount=dev:cicd-bot
+
+# Verification (The auth can-i matrix)
+kubectl auth can-i delete deployments --as=system:serviceaccount:dev:cicd-bot -n prod
+# Should output: yes
+```
+
+### 20. Multi-Container EmptyDir Logging (JSONPath Output)
+**📝 Exam Scenario:**
+> Create a pod `log-generator` running `ubuntu`. Container 1 runs `sh -c 'echo "hello cka" > /var/log/data.txt; sleep 3600'`. Mount an `emptyDir` at `/var/log`. 
+> Wait for the pod to run, then extract the IP address of the pod using `jsonpath` and save it to `/opt/pod-ip.txt`.
+
+**✅ Solution:**
+```bash
+# 1. Generate YAML
+kubectl run log-generator --image=ubuntu --dry-run=client -o yaml > pod.yaml
+
+# 2. Add the command and volume syntax in vi
+# volumeMounts:
+# - name: data-vol
+#   mountPath: /var/log
+# volumes:
+# - name: data-vol
+#   emptyDir: {}
+
+kubectl apply -f pod.yaml
+
+# 3. Use JSONPath to grab the IP (Highly useful syntax to memorize!)
+kubectl get pod log-generator -o jsonpath='{.status.podIP}' > /opt/pod-ip.txt
+```
