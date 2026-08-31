@@ -296,6 +296,155 @@
             margin-top: 0.4rem;
             font-family: 'JetBrains Mono', monospace;
         }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — TABLET  (≤ 768px)
+        ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .countdown-card {
+                min-width: 140px;
+                padding: 0.6rem 1rem;
+            }
+
+            .countdown-timer {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — MOBILE  (≤ 640px)
+        ═══════════════════════════════════════ */
+        @media (max-width: 640px) {
+
+            /* Base layout */
+            body {
+                padding: 1rem 0.75rem;
+            }
+
+            /* Top bar: stack vertically */
+            .top-bar {
+                flex-direction: column !important;
+                gap: 0.6rem;
+                text-align: center;
+            }
+
+            .top-bar>div,
+            .top-bar>script {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* Visit counter pill — full width, centered */
+            .top-bar div[style*="busuanzi"] {
+                justify-content: center;
+                width: auto;
+            }
+
+            /* Live clock smaller */
+            .time-display {
+                font-size: 1rem !important;
+            }
+
+            /* Hero title */
+            h1 {
+                font-size: 1.9rem !important;
+                letter-spacing: -0.5px !important;
+            }
+
+            /* Subtitle */
+            header p {
+                font-size: 1rem !important;
+            }
+
+            /* Quote */
+            .quote-container {
+                padding: 1rem 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Controls: wrap and tighten */
+            .controls {
+                flex-wrap: wrap;
+                gap: 0.6rem;
+                padding: 0.75rem;
+                margin: 1.5rem 0 2.5rem 0;
+            }
+
+            .controls .date-display {
+                width: 100%;
+                text-align: center;
+                font-size: 0.95rem;
+                order: -1;
+                /* Date at top */
+            }
+
+            .btn {
+                padding: 0.45rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            /* Countdown cards: fill row evenly */
+            .countdown-container {
+                gap: 0.75rem;
+            }
+
+            .countdown-card {
+                flex: 1 1 calc(50% - 0.75rem);
+                min-width: unset;
+                padding: 0.6rem 0.5rem;
+            }
+
+            .countdown-timer {
+                font-size: 1rem;
+            }
+
+            .countdown-title {
+                font-size: 0.75rem;
+            }
+
+            /* Cards */
+            .card {
+                padding: 1rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .card h2 {
+                font-size: 1.1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .course-link {
+                font-size: 0.8rem;
+                padding: 0.2rem 0.5rem;
+            }
+
+            /* Task items */
+            .task-item,
+            .backlog-item {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .task-meta,
+            .backlog-meta {
+                font-size: 0.78rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE — SMALL PHONES (≤ 380px)
+        ═══════════════════════════════════════ */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.5rem !important;
+            }
+
+            .countdown-card {
+                flex: 1 1 100%;
+            }
+        }
     </style>
 </head>
 
