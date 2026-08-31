@@ -263,6 +263,39 @@
             font-weight: bold;
             text-shadow: 0 0 10px var(--accent-glow);
         }
+
+        /* ── Backlog Cards ── */
+        .backlog-card {
+            --accent: #f97316;
+            --accent-glow: rgba(249, 115, 22, 0.3);
+            border-color: rgba(249, 115, 22, 0.35) !important;
+            background: rgba(249, 115, 22, 0.04) !important;
+        }
+
+        .backlog-card h2 {
+            color: #fb923c;
+        }
+
+        .backlog-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #f97316;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .backlog-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .backlog-meta {
+            font-size: 0.8rem;
+            color: #fb923c;
+            margin-top: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
     </style>
 </head>
 
@@ -329,6 +362,20 @@
         <div id="loading" class="loader"></div>
 
         <div id="content" style="display: none;">
+
+            <!-- Backlog Cards (hidden until populated) -->
+            <div id="backlog-video-card" class="card backlog-card" style="display:none;">
+                <h2>🔴 Backlog — Core DevOps Track</h2>
+                <ul class="task-list" id="backlog-video-tasks"></ul>
+            </div>
+            <div id="backlog-cka-card" class="card backlog-card" style="display:none;">
+                <h2>🔴 Backlog — CKA Track</h2>
+                <ul class="task-list" id="backlog-cka-tasks"></ul>
+            </div>
+            <div id="backlog-az-card" class="card backlog-card" style="display:none;">
+                <h2>🔴 Backlog — AZ-104 Track</h2>
+                <ul class="task-list" id="backlog-az-tasks"></ul>
+            </div>
 
             <!-- CI/CD & AI Card -->
             <div class="card" style="--accent: var(--ai-purp); --accent-glow: rgba(168, 85, 247, 0.3);">
@@ -567,6 +614,23 @@
             }
         }
 
+        // ── Helper: convert tracker date strings to Date objects ──
+        function parseVideoDate(dateStr) {
+            // Format: "Aug 26" — assume current year, no year in string
+            const months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+            const parts = dateStr.trim().split(' ');
+            if (parts.length < 2) return null;
+            const y = new Date().getFullYear();
+            return new Date(y, months[parts[0]], parseInt(parts[1]));
+        }
+        function parseCertDate(dateStr) {
+            // Format: "Aug 26, 2026"
+            const months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+            const parts = dateStr.trim().replace(',', '').split(' ');
+            if (parts.length < 3) return null;
+            return new Date(parseInt(parts[2]), months[parts[0]], parseInt(parts[1]));
+        }
+
         function renderDashboard() {
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const mStr = months[viewingDate.getMonth()];
@@ -579,7 +643,9 @@
 
             // Check if viewing date is TODAY to display nice badge
             const systemToday = new Date();
-            let isToday = (viewingDate.getDate() === systemToday.getDate() && viewingDate.getMonth() === systemToday.getMonth() && viewingDate.getFullYear() === systemToday.getFullYear());
+            systemToday.setHours(0, 0, 0, 0);
+            const viewDay = new Date(viewingDate); viewDay.setHours(0, 0, 0, 0);
+            let isToday = viewDay.getTime() === systemToday.getTime();
 
             document.getElementById('target-date-display').innerText = (isToday ? "🔥 TODAY: " : "📅 ") + fDateCert;
             document.title = (isToday ? "🔥 Today | " : "📅 " + fDateVids + " | ") + "DevOps 2027";
@@ -587,6 +653,9 @@
             let videoHtml = '';
             let ckaHtml = '';
             let azHtml = '';
+            let backlogVideoHtml = '';
+            let backlogCkaHtml = '';
+            let backlogAzHtml = '';
 
             const lines = currentRawMarkdown.split('\n');
             lines.forEach(line => {
@@ -595,68 +664,101 @@
 
                 const cols = l.split('|').map(s => s.trim());
 
-                // Video Track Parse
-                if (cols.length >= 8 && !isNaN(parseInt(cols[1])) && cols[3] === fDateVids) {
+                // ── Video Track ──
+                if (cols.length >= 8 && !isNaN(parseInt(cols[1]))) {
+                    const rowDateStr = cols[3];
+                    const rowDate = parseVideoDate(rowDateStr);
+                    if (!rowDate) return;
+                    rowDate.setHours(0, 0, 0, 0);
+
                     const titleRaw = cols[2];
                     const duration = cols[4];
-                    const isDone = cols[5].includes('✅'); // Column 5 is 'Watched'
+                    const isDone = cols[5] && cols[5].includes('✅');
 
                     let titleText = titleRaw;
                     const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
                     if (m) titleText = `<a href="${m[2]}" target="_blank">${m[1]}</a>`;
 
-                    if (isDone) {
-                        videoHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
-                            <div style="text-decoration: line-through;">✅ ${titleText}</div>
-                            <div class="task-meta">⏱️ Duration: ${duration} (Completed)</div>
-                        </li>`;
-                    } else {
-                        videoHtml += `<li class="task-item">
-                            <div>${titleText}</div>
-                            <div class="task-meta">⏱️ Duration: ${duration}</div>
+                    if (rowDateStr === fDateVids) {
+                        // Today's videos
+                        if (isDone) {
+                            videoHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                                <div style="text-decoration: line-through;">✅ ${titleText}</div>
+                                <div class="task-meta">⏱️ Duration: ${duration} (Completed)</div>
+                            </li>`;
+                        } else {
+                            videoHtml += `<li class="task-item">
+                                <div>${titleText}</div>
+                                <div class="task-meta">⏱️ Duration: ${duration}</div>
+                            </li>`;
+                        }
+                    } else if (rowDate < systemToday && !isDone && isToday) {
+                        // Backlog: past date, not done, viewing today
+                        backlogVideoHtml += `<li class="backlog-item">
+                            <div>🔴 ${titleText}</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE &nbsp;|&nbsp; ⏱️ ${duration}</div>
                         </li>`;
                     }
                 }
 
-                // Cert Track Parse
-                if (cols[1] === fDateCert) {
-                    if (cols.length >= 5) {
-                        const plan = cols[3];
-                        const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // ── CKA Track ──
+                if (cols.length >= 6 && cols[5] && (cols[5].includes('✅') || cols[5].includes('☐'))) {
+                    const rowDateStr = cols[1];
+                    const rowDate = parseCertDate(rowDateStr);
+                    if (!rowDate) return;
+                    rowDate.setHours(0, 0, 0, 0);
 
-                        // CKA Track has length >= 6 and duration is in cols[4]
-                        if (cols.length >= 6 && cols[5]) {
-                            const duration = cols[4];
-                            const isDone = cols[5].includes('✅');
+                    const plan = cols[3];
+                    if (!plan || plan === '—' || plan.startsWith('-')) return;
+                    const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    const duration = cols[4];
+                    const isDone = cols[5].includes('✅');
 
-                            if (plan !== '—') {
-                                if (isDone) {
-                                    ckaHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
-                                        <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
-                                        <div class="task-meta">⏱️ Estimated: ${duration} (Completed)</div>
-                                    </li>`;
-                                } else {
-                                    ckaHtml += `<li class="task-item">
-                                        <div>• ${planFmt}</div>
-                                        <div class="task-meta">⏱️ Estimated: ${duration}</div>
-                                    </li>`;
-                                }
-                            }
+                    if (rowDateStr === fDateCert) {
+                        if (isDone) {
+                            ckaHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                                <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
+                                <div class="task-meta">⏱️ Estimated: ${duration} (Completed)</div>
+                            </li>`;
+                        } else {
+                            ckaHtml += `<li class="task-item">
+                                <div>• ${planFmt}</div>
+                                <div class="task-meta">⏱️ Estimated: ${duration}</div>
+                            </li>`;
                         }
-                        // AZ-104 Track has length 5 and watched mark is in cols[4]
-                        else if (cols.length === 5 && cols[4]) {
-                            const isDone = cols[4].includes('✅');
+                    } else if (rowDate < systemToday && !isDone && isToday) {
+                        backlogCkaHtml += `<li class="backlog-item">
+                            <div>🔴 • ${planFmt}</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE &nbsp;|&nbsp; ⏱️ ${duration}</div>
+                        </li>`;
+                    }
+                }
 
-                            if (plan !== '—') {
-                                if (isDone) {
-                                    azHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
-                                        <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
-                                    </li>`;
-                                } else {
-                                    azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
-                                }
-                            }
+                // ── AZ-104 Track ──
+                if (cols.length === 5 && cols[4] && (cols[4].includes('✅') || cols[4].includes('☐'))) {
+                    const rowDateStr = cols[1];
+                    const rowDate = parseCertDate(rowDateStr);
+                    if (!rowDate) return;
+                    rowDate.setHours(0, 0, 0, 0);
+
+                    const plan = cols[3];
+                    if (!plan || plan === '—' || plan.startsWith('-') || plan.startsWith('Date')) return;
+                    const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    const isDone = cols[4].includes('✅');
+
+                    if (rowDateStr === fDateCert) {
+                        if (isDone) {
+                            azHtml += `<li class="task-item" style="opacity: 0.5; border-left-color: #10b981; background: rgba(16, 185, 129, 0.05);">
+                                <div style="text-decoration: line-through;">✅ • ${planFmt}</div>
+                            </li>`;
+                        } else {
+                            azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
                         }
+                    } else if (rowDate < systemToday && !isDone && isToday) {
+                        backlogAzHtml += `<li class="backlog-item">
+                            <div>🔴 • ${planFmt}</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE</div>
+                        </li>`;
                     }
                 }
             });
@@ -668,6 +770,17 @@
             document.getElementById('video-tasks').innerHTML = videoHtml;
             document.getElementById('cka-tasks').innerHTML = ckaHtml;
             document.getElementById('az-tasks').innerHTML = azHtml;
+
+            // ── Show/hide backlog cards ──
+            const bvCard = document.getElementById('backlog-video-card');
+            const bcCard = document.getElementById('backlog-cka-card');
+            const baCard = document.getElementById('backlog-az-card');
+            if (backlogVideoHtml) { document.getElementById('backlog-video-tasks').innerHTML = backlogVideoHtml; bvCard.style.display = ''; }
+            else bvCard.style.display = 'none';
+            if (backlogCkaHtml) { document.getElementById('backlog-cka-tasks').innerHTML = backlogCkaHtml; bcCard.style.display = ''; }
+            else bcCard.style.display = 'none';
+            if (backlogAzHtml) { document.getElementById('backlog-az-tasks').innerHTML = backlogAzHtml; baCard.style.display = ''; }
+            else baCard.style.display = 'none';
 
             // -------- DYNAMIC AI MODULE SYNC --------
             const syllabusStart = new Date('2026-08-18T00:00:00');
@@ -766,6 +879,17 @@
 
         // Boot
         init();
+
+        // Auto-refresh tracker data every 2 hours
+        setInterval(async () => {
+            try {
+                const resp = await fetch('./03-Progress-Tracker/progress-tracker.md?t=' + Date.now());
+                if (resp.ok) {
+                    currentRawMarkdown = await resp.text();
+                    renderDashboard();
+                }
+            } catch (e) { console.warn('Auto-refresh failed:', e); }
+        }, 2 * 60 * 60 * 1000);
     </script>
 </body>
 
