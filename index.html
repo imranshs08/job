@@ -694,9 +694,10 @@
                         }
                     } else if (rowDate < systemToday && !isDone && isToday) {
                         // Backlog: past date, not done, viewing today
+                        const daysOver = Math.round((systemToday - rowDate) / (1000 * 60 * 60 * 24));
                         backlogVideoHtml += `<li class="backlog-item">
                             <div>🔴 ${titleText}</div>
-                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE &nbsp;|&nbsp; ⏱️ ${duration}</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — ${daysOver} day${daysOver !== 1 ? 's' : ''} overdue &nbsp;|&nbsp; ⏱️ ${duration}</div>
                         </li>`;
                     }
                 }
@@ -727,9 +728,10 @@
                             </li>`;
                         }
                     } else if (rowDate < systemToday && !isDone && isToday) {
+                        const daysOver = Math.round((systemToday - rowDate) / (1000 * 60 * 60 * 24));
                         backlogCkaHtml += `<li class="backlog-item">
                             <div>🔴 • ${planFmt}</div>
-                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE &nbsp;|&nbsp; ⏱️ ${duration}</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — ${daysOver} day${daysOver !== 1 ? 's' : ''} overdue &nbsp;|&nbsp; ⏱️ ${duration}</div>
                         </li>`;
                     }
                 }
@@ -755,9 +757,10 @@
                             azHtml += `<li class="task-item"><div>• ${planFmt}</div></li>`;
                         }
                     } else if (rowDate < systemToday && !isDone && isToday) {
+                        const daysOver = Math.round((systemToday - rowDate) / (1000 * 60 * 60 * 24));
                         backlogAzHtml += `<li class="backlog-item">
                             <div>🔴 • ${planFmt}</div>
-                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — OVERDUE</div>
+                            <div class="backlog-meta">⚠️ Scheduled: ${rowDateStr} — ${daysOver} day${daysOver !== 1 ? 's' : ''} overdue</div>
                         </li>`;
                     }
                 }
