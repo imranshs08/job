@@ -9,8 +9,8 @@
 | Concept | Notes |
 |---------|-------|
 | K8s Architecture (control plane, workers) | |
-| Pods (single, multi-container, init) | Smallest deployable unit. Ephemeral, shares network/storage namespace. |
-| Deployments & ReplicaSets | [✅ See Cheat Sheet](CKA-Deployments-CheatSheet.md): Manages stateless apps, declarative rollouts, self-healing. |
+| Pods (single, multi-container, init) | [✅ See Cheat Sheet](CKA-Pods-CheatSheet.md): Smallest deployable unit. Ephemeral, shares network/storage namespace. |
+| Deployments & ReplicaSets | [✅ See Deployments](CKA-Deployments-CheatSheet.md) \| [✅ See ReplicaSets](CKA-ReplicaSets-CheatSheet.md): Manages stateless apps, declarative rollouts, self-healing. |
 | Services (ClusterIP, NodePort, LoadBalancer) | [✅ See Cheat Sheet](CKA-Services-CheatSheet.md): Exposes pods to network via labels. ClusterIP (internal), NodePort (static port). |
 | Ingress & Ingress Controllers | [✅ See Guide](AGIC-to-AGC-Migration.md): External L7 routing (e.g. NGINX, AGC). |
 | Namespaces | [✅ See Cheat Sheet](CKA-Namespaces-CheatSheet.md): Virtual clusters for isolation & resource quotas. |
