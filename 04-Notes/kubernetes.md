@@ -14,17 +14,17 @@
 | Services (ClusterIP, NodePort, LoadBalancer) | [✅ See Cheat Sheet](CKA-Services-CheatSheet.md): Exposes pods to network via labels. ClusterIP (internal), NodePort (static port). |
 | Ingress & Ingress Controllers | [✅ See Guide](AGIC-to-AGC-Migration.md): External L7 routing (e.g. NGINX, AGC). |
 | Namespaces | [✅ See Cheat Sheet](CKA-Namespaces-CheatSheet.md): Virtual clusters for isolation & resource quotas. |
-| ConfigMaps & Secrets | |
-| Persistent Volumes & PVCs | |
-| StatefulSets | |
-| DaemonSets | |
-| RBAC (Roles, ClusterRoles, Bindings) | |
-| Probes (Liveness, Readiness, Startup) | |
-| Resource Limits & Requests | |
-| Horizontal Pod Autoscaler | |
-| Network Policies | |
-| Custom Resource Definitions (CRDs) | |
-| Operators | |
+| ConfigMaps & Secrets | [✅ See Cheat Sheet](CKA-ConfigMaps-Secrets-CheatSheet.md): Configuration decoupling and base64 encoded secrets. |
+| Persistent Volumes & PVCs | [✅ See Storage](CKA-Storage-PV-PVC-CheatSheet.md): StorageClasses, dynamic provisioning, and PV binding. |
+| StatefulSets | [✅ See Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Ordered deployment, sticky identity, headless services. |
+| DaemonSets | [✅ See Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Running a pod clone on every node (logs/monitoring). |
+| RBAC (Roles, ClusterRoles, Bindings) | [✅ See Cheat Sheet](CKA-RBAC-CheatSheet.md): Managing access scopes. RoleBinding vs ClusterRoleBinding. |
+| Probes (Liveness, Readiness, Startup) | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): Health checks that trigger restarts or block routing. |
+| Resource Limits & Requests | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): CPU/Mem baseline requests and throttling limits. |
+| Horizontal Pod Autoscaler | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): Native load-based scaling requiring metrics-server. |
+| Network Policies | [✅ See Cheat Sheet](CKA-NetworkPolicies-CheatSheet.md): K8s firewalls. Ingress/Egress Default Deny strategies. |
+| Custom Resource Definitions (CRDs) | [✅ See CRDs & Operators](CKA-CRD-Operators-CheatSheet.md): Extending the K8s API with custom schemas. |
+| Operators | [✅ See CRDs & Operators](CKA-CRD-Operators-CheatSheet.md): Custom controllers executing the CRD logic in real-time. |
 
 ---
 
