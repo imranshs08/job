@@ -44,8 +44,8 @@
 ## 🌟 Featured Resources & Dashboards
 
 - 🌐 **[Command Center Dashboard](https://imranshs08.github.io/job/)** — Auto-refreshing, glassmorphic UI tracking overdue backlog items, live visits, and study progress.
-- 🚀 **[AGIC to AGC Migration Guide](https://imranshs08.github.io/job/04-Notes/AGIC-to-AGC-Migration.html)** — Premium Zero-Downtime Migration guide for Azure Application Gateway for Containers (with embedded video labs).
-- ☸️ **[EKS NGINX Ingress Controller](04-Notes/EKS-NGINX-Ingress.md)** — Production-grade Ingress template featuring TLS termination, path-based routing, and rate limiting (DDoS protection).
+- 🚀 **[AGIC to AGC Migration Guide](https://imranshs08.github.io/job/04-Notes/05-Cloud-AWS-Azure/AGIC-to-AGC-Migration.html)** — Premium Zero-Downtime Migration guide for Azure Application Gateway for Containers (with embedded video labs).
+- ☸️ **[EKS NGINX Ingress Controller](04-Notes/04-Kubernetes/EKS-NGINX-Ingress.md)** — Production-grade Ingress template featuring TLS termination, path-based routing, and rate limiting (DDoS protection).
 
 ---
 
