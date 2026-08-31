@@ -1,0 +1,33 @@
+name: Scheduled Page Refresh
+
+# Runs every 30 minutes to bust GitHub Pages CDN cache by updating a timestamp file.
+# This ensures the dashboard always fetches the freshest progress-tracker.md data.
+on:
+  schedule:
+    - cron: "*/30 * * * *" # Every 30 minutes (UTC)
+  workflow_dispatch: # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update Refresh Timestamp
+        run: |
+          echo '{"refreshed":"'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'","note":"Auto-refresh to bust GitHub Pages CDN cache"}' > last-refresh.json
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add last-refresh.json
+
+          # Only commit if something changed (first run will always change; subsequent runs with exact same content won't)
+          if git diff --staged --quiet; then
+            echo "No changes to commit — skipping."
+          else
+            git commit -m "chore: scheduled page refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
