@@ -32,20 +32,23 @@ You *must* be able to do these flawlessly from memory or by using `kubectl --hel
 
 | Concept | Notes | 🚨 Actual CKA / Similar Mock Task |
 |---------|-------|------------------------------------|
-| Pods | [✅ Cheat Sheet](CKA-Pods-CheatSheet.md): Smallest deployable unit. Ephemeral, shares network/storage namespace. | *Create a multi-container pod running `nginx` and a sidecar `busybox` container writing to a shared emptyDir.* |
-| Deployments & ReplicaSets | [✅ Deployments](CKA-Deployments-CheatSheet.md) \| [✅ ReplicaSets](CKA-ReplicaSets-CheatSheet.md): Stateless apps, rollouts, self-healing. | *Scale a deployment to 5 replicas. Then perform a rolling update of the image to `nginx:1.19` and record it.* |
-| Services | [✅ Cheat Sheet](CKA-Services-CheatSheet.md): Exposes pods to network via labels. ClusterIP (internal), NodePort (static port). | *Expose an existing deployment via a NodePort service on port 30080 using imperative commands.* |
-| Ingress Controllers | [✅ Guide](EKS-NGINX-Ingress.md): External L7 routing (e.g. NGINX, AGC). | *Create an Ingress resource routing `/app1` to service A and `/app2` to service B.* |
-| Namespaces | [✅ Cheat Sheet](CKA-Namespaces-CheatSheet.md): Virtual clusters for isolation & resource quotas. | *Find all pods across all namespaces consuming the highest CPU and write their names to a file.* |
-| ConfigMaps & Secrets | [✅ Cheat Sheet](CKA-ConfigMaps-Secrets-CheatSheet.md): Configuration decoupling and base64 encoded secrets. | *Create a secret from literal keys, mount it as an environmental variable in a specific pod.* |
-| PVs & PVCs | [✅ Storage](CKA-Storage-PV-PVC-CheatSheet.md): StorageClasses, dynamic provisioning, and PV binding. | *Create a 2Gi PVC requesting ReadWriteOnce. Create a pod that mounts it to `/var/www/html`.* |
-| StatefulSets & DaemonSets | [✅ Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Ordered deployment (DBs) and per-node agents. | *Identify all nodes without a specific taint and deploy a DaemonSet onto them.* |
-| RBAC | [✅ Cheat Sheet](CKA-RBAC-CheatSheet.md): Managing access scopes. RoleBinding vs ClusterRoleBinding. | *Create a ClusterRole allowing `get/list` on Secrets, and bound it to the user `john`.* |
-| Network Policies | [✅ Cheat Sheet](CKA-NetworkPolicies-CheatSheet.md): K8s firewalls. Ingress/Egress Default Deny strategies. | *Create a NetworkPolicy blocking all traffic to namespace `finance`, except from pods labeled `team=audit`.* |
-| Advanced Scheduling | [✅ Cheat Sheet](CKA-Scheduling-Taints-Affinity.md): Taints, Tolerations, Node Affinity. | *Taint a node with `gpu=true:NoSchedule`. Create a pod with a matching toleration to land on it.* |
-| Cluster Upgrades | [✅ Cheat Sheet](CKA-Kubeadm-Upgrades-CheatSheet.md): Kubeadm upgrade master vs worker nodes. | *Drain node01 gracefully. Upgrade kubeadm, kubelet, and kubectl to the next minor version.* |
-| ETCD | [✅ Cheat Sheet](CKA-ETCD-Backup-Reset-CheatSheet.md): Snapshotting the cluster brain. | *Take an etcd snapshot using the certificates located in `/etc/kubernetes/pki/etcd/`.* |
-| Troubleshooting | [✅ Cheat Sheet](CKA-Advanced-Troubleshooting.md): Kubelet crashes, CNI failures, static pods. | *A worker node is `NotReady`. Find out why `kubelet` is crash-looping and restore the node.* |
+| Pods | [✅ 01 Pods](01-CKA-Pods.md): Smallest deployable unit. Ephemeral. | *Create a multi-container pod running `nginx` & sidecar `busybox` writing to emptyDir.* |
+| Deployments & ReplicaSets | [✅ 02 ReplicaSets](02-CKA-ReplicaSets.md) \| [✅ 03 Deployments](03-CKA-Deployments.md) | *Scale deployment to 5. Rolling update image to `nginx:1.19` & record it.* |
+| Services | [✅ 04 Services](04-CKA-Services.md): Exposes pods to network via labels. | *Expose existing deployment via NodePort 30080 using imperative commands.* |
+| Namespaces | [✅ 05 Namespaces](05-CKA-Namespaces.md): Isolation & resource quotas. | *Find all pods across namespaces consuming highest CPU and save to file.* |
+| ConfigMaps & Secrets | [✅ 06 CM/Secrets](06-CKA-ConfigMaps-Secrets.md): Configuration decoupling. | *Create a secret from literal keys, mount as an environmental variable.* |
+| PVs & PVCs | [✅ 07 Storage](07-CKA-Storage.md): StorageClasses & dynamic provisioning. | *Create 2Gi PVC (ReadWriteOnce). Create pod that mounts it to `/var/www/html`.* |
+| StatefulSets & DaemonSets | [✅ 08 Workloads](08-CKA-StatefulSets-DaemonSets.md): Ordered deployment (DBs). | *Identify all untainted nodes and deploy a DaemonSet onto them.* |
+| Probes, Resources, HPA | [✅ 09 Probes/HPA](09-CKA-Probes-Resources-HPA.md): Health checks/scaling. | *Add an HTTP Readiness probe to a pod so it only routes traffic when ready.* |
+| RBAC | [✅ 10 RBAC](10-CKA-RBAC.md): Managing access scopes. | *Create ClusterRole allowing `get/list` on Secrets, bound to user `john`.* |
+| Network Policies | [✅ 11 Network Policies](11-CKA-NetworkPolicies.md): K8s firewalls. | *Create NetworkPolicy blocking all traffic to `finance`, except from `team=audit`.* |
+| Advanced Scheduling | [✅ 12 Scheduling](12-CKA-Scheduling.md): Taints, Tolerations, Affinity. | *Taint a node with `gpu=true:NoSchedule`. Create pod with matching toleration.* |
+| CRDs & Operators | [✅ 13 CRDs](13-CKA-CRDs-Operators.md): Extending the K8s API. | *Identify all custom resource definitions currently active in the cluster.* |
+| Cluster Upgrades | [✅ 14 Upgrades](14-CKA-Upgrades.md): Kubeadm upgrade nodes. | *Drain node01 gracefully. Upgrade kubeadm, kubelet, and kubectl.* |
+| ETCD | [✅ 15 ETCD](15-CKA-ETCD-Backup.md): Snapshotting the cluster brain. | *Take an etcd snapshot using certificates in `/etc/kubernetes/pki/etcd/`.* |
+| Troubleshooting | [✅ 16 Troubleshooting](16-CKA-Troubleshooting.md): Kubelet, CNI. | *A worker node is `NotReady`. Find why `kubelet` is crash-looping and restore it.* |
+| CoreDNS & Networking | [✅ 17 CoreDNS](17-CKA-CoreDNS.md): DNS resolution & FQDNs. | *Run an nslookup on a service from a busybox pod and resolve its cluster IP.* |
+| Ingress Controllers | [✅ 18 Ingress](18-EKS-NGINX-Ingress.md): External L7 routing. | *Create Ingress resource routing `/app1` to service A and `/app2` to service B.* |
 
 ---
 
