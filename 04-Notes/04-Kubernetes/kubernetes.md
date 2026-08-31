@@ -53,6 +53,7 @@ You *must* be able to do these flawlessly from memory or by using `kubectl --hel
 | Troubleshooting | [✅ 16 Troubleshooting](16-CKA-Troubleshooting.md): Kubelet, CNI. | *A worker node is `NotReady`. Find why `kubelet` is crash-looping and restore it.* |
 | CoreDNS & Networking | [✅ 17 CoreDNS](17-CKA-CoreDNS.md): DNS resolution & FQDNs. | *Run an nslookup on a service from a busybox pod and resolve its cluster IP.* |
 | Ingress Controllers | [✅ 18 Ingress](18-EKS-NGINX-Ingress.md): External L7 routing. | *Create Ingress resource routing `/app1` to service A and `/app2` to service B.* |
+| **Helm** *(Beyond CKA)* | [✅ 20 Helm](20-Helm-CheatSheet.md): K8s Package Management (DevOps Course). | *Install the bitnami/mysql chart via helm, overriding the root password.* |
 
 ---
 
