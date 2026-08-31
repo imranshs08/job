@@ -1,109 +1,86 @@
-# 📝 Kubernetes — Study Notes
+# 📝 Kubernetes — CKA Study Hub & Strategy
 
-> **Phase:** 2 (September 2026) | **Playlist:** Day 21–28
-
----
-
-## Key Concepts
-
-| Concept | Notes |
-|---------|-------|
-| K8s Architecture (control plane, workers) | |
-| Pods (single, multi-container, init) | [✅ See Cheat Sheet](CKA-Pods-CheatSheet.md): Smallest deployable unit. Ephemeral, shares network/storage namespace. |
-| Deployments & ReplicaSets | [✅ See Deployments](CKA-Deployments-CheatSheet.md) \| [✅ See ReplicaSets](CKA-ReplicaSets-CheatSheet.md): Manages stateless apps, declarative rollouts, self-healing. |
-| Services (ClusterIP, NodePort, LoadBalancer) | [✅ See Cheat Sheet](CKA-Services-CheatSheet.md): Exposes pods to network via labels. ClusterIP (internal), NodePort (static port). |
-| Ingress & Ingress Controllers | [✅ See Guide](AGIC-to-AGC-Migration.md): External L7 routing (e.g. NGINX, AGC). |
-| Namespaces | [✅ See Cheat Sheet](CKA-Namespaces-CheatSheet.md): Virtual clusters for isolation & resource quotas. |
-| ConfigMaps & Secrets | [✅ See Cheat Sheet](CKA-ConfigMaps-Secrets-CheatSheet.md): Configuration decoupling and base64 encoded secrets. |
-| Persistent Volumes & PVCs | [✅ See Storage](CKA-Storage-PV-PVC-CheatSheet.md): StorageClasses, dynamic provisioning, and PV binding. |
-| StatefulSets | [✅ See Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Ordered deployment, sticky identity, headless services. |
-| DaemonSets | [✅ See Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Running a pod clone on every node (logs/monitoring). |
-| RBAC (Roles, ClusterRoles, Bindings) | [✅ See Cheat Sheet](CKA-RBAC-CheatSheet.md): Managing access scopes. RoleBinding vs ClusterRoleBinding. |
-| Probes (Liveness, Readiness, Startup) | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): Health checks that trigger restarts or block routing. |
-| Resource Limits & Requests | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): CPU/Mem baseline requests and throttling limits. |
-| Horizontal Pod Autoscaler | [✅ See Probes & Scaling](CKA-Probes-Resources-HPA-CheatSheet.md): Native load-based scaling requiring metrics-server. |
-| Network Policies | [✅ See Cheat Sheet](CKA-NetworkPolicies-CheatSheet.md): K8s firewalls. Ingress/Egress Default Deny strategies. |
-| Custom Resource Definitions (CRDs) | [✅ See CRDs & Operators](CKA-CRD-Operators-CheatSheet.md): Extending the K8s API with custom schemas. |
-| Operators | [✅ See CRDs & Operators](CKA-CRD-Operators-CheatSheet.md): Custom controllers executing the CRD logic in real-time. |
+> **Phase:** 2 (September 2026) | **Target:** January 1, 2027
 
 ---
 
-## Commands Cheat Sheet
+## 🎯 CKA Exam Breakdown & Strategy
+
+- **Format:** Performance-based, Terminal-only. 15-20 Tasks. 2 Hours.
+- **Passing Score:** 66%
+- **Kubernetes Version:** ~v1.35 (As of late 2026)
+
+### 📊 Official Weightage
+1. **Troubleshooting (30%)** — *Highest Priority*
+2. **Cluster Architecture, Install, Config (25%)**
+3. **Services & Networking (20%)**
+4. **Workloads & Scheduling (15%)**
+5. **Storage (10%)**
+
+### 🔥 The "Guaranteed" Exam Tasks (Most Important Areas)
+You *must* be able to do these flawlessly from memory or by using `kubectl --help`:
+- **ETCD Backup & Restore**: Taking a snapshot and restoring it to a new directory.
+- **Cluster Upgrades**: Upgrading the primary node and a worker node from e.g. v1.34 to v1.35 using `kubeadm`.
+- **Node Troubleshooting**: SSH'ing into a node, finding `kubelet` is dead because of a typo in `/var/lib/kubelet/config.yaml`, and fixing it.
+- **Network Policies**: Creating a "default deny" policy and opening ingress specifically on port 80 for a specific pod.
+- **Persistent Storage**: Creating a PVC and attaching it to a Pod.
+- **RBAC**: Creating a specific ServiceAccount, Role, and RoleBinding to give an app restricted read-only permissions.
+
+---
+
+## 📚 Key Concepts & CKA Mock Tasks
+
+| Concept | Notes | 🚨 Actual CKA / Similar Mock Task |
+|---------|-------|------------------------------------|
+| Pods | [✅ Cheat Sheet](CKA-Pods-CheatSheet.md): Smallest deployable unit. Ephemeral, shares network/storage namespace. | *Create a multi-container pod running `nginx` and a sidecar `busybox` container writing to a shared emptyDir.* |
+| Deployments & ReplicaSets | [✅ Deployments](CKA-Deployments-CheatSheet.md) \| [✅ ReplicaSets](CKA-ReplicaSets-CheatSheet.md): Stateless apps, rollouts, self-healing. | *Scale a deployment to 5 replicas. Then perform a rolling update of the image to `nginx:1.19` and record it.* |
+| Services | [✅ Cheat Sheet](CKA-Services-CheatSheet.md): Exposes pods to network via labels. ClusterIP (internal), NodePort (static port). | *Expose an existing deployment via a NodePort service on port 30080 using imperative commands.* |
+| Ingress Controllers | [✅ Guide](EKS-NGINX-Ingress.md): External L7 routing (e.g. NGINX, AGC). | *Create an Ingress resource routing `/app1` to service A and `/app2` to service B.* |
+| Namespaces | [✅ Cheat Sheet](CKA-Namespaces-CheatSheet.md): Virtual clusters for isolation & resource quotas. | *Find all pods across all namespaces consuming the highest CPU and write their names to a file.* |
+| ConfigMaps & Secrets | [✅ Cheat Sheet](CKA-ConfigMaps-Secrets-CheatSheet.md): Configuration decoupling and base64 encoded secrets. | *Create a secret from literal keys, mount it as an environmental variable in a specific pod.* |
+| PVs & PVCs | [✅ Storage](CKA-Storage-PV-PVC-CheatSheet.md): StorageClasses, dynamic provisioning, and PV binding. | *Create a 2Gi PVC requesting ReadWriteOnce. Create a pod that mounts it to `/var/www/html`.* |
+| StatefulSets & DaemonSets | [✅ Workloads](CKA-StatefulSets-DaemonSets-CheatSheet.md): Ordered deployment (DBs) and per-node agents. | *Identify all nodes without a specific taint and deploy a DaemonSet onto them.* |
+| RBAC | [✅ Cheat Sheet](CKA-RBAC-CheatSheet.md): Managing access scopes. RoleBinding vs ClusterRoleBinding. | *Create a ClusterRole allowing `get/list` on Secrets, and bound it to the user `john`.* |
+| Network Policies | [✅ Cheat Sheet](CKA-NetworkPolicies-CheatSheet.md): K8s firewalls. Ingress/Egress Default Deny strategies. | *Create a NetworkPolicy blocking all traffic to namespace `finance`, except from pods labeled `team=audit`.* |
+| Advanced Scheduling | [✅ Cheat Sheet](CKA-Scheduling-Taints-Affinity.md): Taints, Tolerations, Node Affinity. | *Taint a node with `gpu=true:NoSchedule`. Create a pod with a matching toleration to land on it.* |
+| Cluster Upgrades | [✅ Cheat Sheet](CKA-Kubeadm-Upgrades-CheatSheet.md): Kubeadm upgrade master vs worker nodes. | *Drain node01 gracefully. Upgrade kubeadm, kubelet, and kubectl to the next minor version.* |
+| ETCD | [✅ Cheat Sheet](CKA-ETCD-Backup-Reset-CheatSheet.md): Snapshotting the cluster brain. | *Take an etcd snapshot using the certificates located in `/etc/kubernetes/pki/etcd/`.* |
+| Troubleshooting | [✅ Cheat Sheet](CKA-Advanced-Troubleshooting.md): Kubelet crashes, CNI failures, static pods. | *A worker node is `NotReady`. Find out why `kubelet` is crash-looping and restore the node.* |
+
+---
+
+## ⚡ CKA Imperative Commands Cheat Sheet
+
+*Write YAML fast during the exam to save precious minutes!*
 
 ```bash
-# Cluster Info
-kubectl cluster-info
-kubectl get nodes
-kubectl get all -A
+# Generate Pod YAML without creating
+kubectl run my-nginx --image=nginx --dry-run=client -o yaml > pod.yaml
 
-# Pods
-kubectl run nginx --image=nginx
-kubectl get pods -o wide
-kubectl describe pod <name>
-kubectl logs <pod> -f
-kubectl exec -it <pod> -- bash
-kubectl delete pod <name>
-
-# Deployments
+# Create Deployment instantly
 kubectl create deployment app --image=img --replicas=3
-kubectl scale deployment app --replicas=5
-kubectl rollout status deployment app
-kubectl rollout undo deployment app
 
-# Services
-kubectl expose deployment app --port=80 --type=NodePort
-kubectl get svc
+# Expose a Deployment via NodePort instantly
+kubectl expose deployment frontend --name=frontend-svc --type=NodePort --port=80 --target-port=8080
 
-# Config
-kubectl create configmap cm --from-literal=key=val
-kubectl create secret generic sec --from-literal=pw=123
+# Change Context (Fastly switch namespaces)
+kubectl config set-context --current --namespace=web-prod
 
-# Troubleshooting
-kubectl get events --sort-by='.lastTimestamp'
-kubectl top pods
-kubectl top nodes
+# Find dead pods
+kubectl get pods --field-selector=status.phase=Failed -A
+
+# Test RBAC Permissions
+kubectl auth can-i delete pods --as=system:serviceaccount:dev:john -n dev
 ```
 
 ---
 
-## Hands-On Lab Notes
+## 🎤 Interview Q&A Bank
 
-### Lab 1: _______________
-**Date:** ______ | **Status:** ☐ Complete
-```
-Notes:
-
-
-```
-
-### Lab 2: _______________
-**Date:** ______ | **Status:** ☐ Complete
-```
-Notes:
-
-
-```
-
----
-
-## Interview Q&A
-
-| # | Question | My Answer |
-|---|----------|-----------|
-| 1 | Explain Kubernetes architecture | |
-| 2 | What is the difference between Deployment and StatefulSet? | |
-| 3 | How does a Service discover Pods? | |
-| 4 | What are Probes and why are they important? | |
-| 5 | Explain RBAC in Kubernetes | |
-| 6 | How does Horizontal Pod Autoscaler work? | |
-| 7 | What is an Ingress Controller? | |
-| 8 | How do you handle secrets in K8s? | |
-| 9 | What is a CRD and Operator? | |
-| 10 | How do you troubleshoot a pod stuck in CrashLoopBackOff? | |
-
----
-
-## Resources
-- [ ] Playlist: Day 21–28
-- [ ] Kubernetes Documentation (kubernetes.io)
-- [ ] KillerCoda (interactive labs)
+| # | Question | Core Answer Frame (STAR Method prep) |
+|---|----------|----------------------------------------|
+| 1 | Explain Kubernetes architecture | *Control plane (API, etcd, scheduler, CM) vs Worker (Kubelet, Kube-proxy, Container Runtime).* |
+| 2 | Deployment vs StatefulSet? | *Deployments are stateless (random hash). StatefulSets have sticky identity (db-0, db-1) and ordered spin-ups.* |
+| 3 | How does a Service discover Pods? | *Through matching the `selector` against pod labels, which automatically populates an `Endpoints` object.* |
+| 4 | Explain RBAC in Kubernetes | *Role (what you can do) + RoleBinding (who you are tying it to).* |
+| 5 | How do you troubleshoot a CrashLoopBackOff? | *1. `kubectl describe pod` for events. 2. `kubectl logs <pod>` for app errors. 3. Check OOMKill or Liveness probe failures.* |
