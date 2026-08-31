@@ -226,9 +226,9 @@
 | Aug 25, 2026 | Tue | **Core Concepts**: Solution – Pods (optional) (07:39)<br>**Core Concepts**: ReplicaSets (16:09) | 23m 48s | ✅ |
 | Aug 26, 2026 | Wed | **Core Concepts**: Practice Test – ReplicaSets (—)<br>**Core Concepts**: Solution – ReplicaSets (optional) (07:46) | 7m 46s | ✅ |
 | Aug 27, 2026 | Thu | **Core Concepts**: Deployments (04:26)<br>**Core Concepts**: Certification Tip! (—)<br>**Core Concepts**: Practice Tests – Deployments (—) | 4m 26s | ✅ |
-| Aug 28, 2026 | Fri | **Core Concepts**: Solution: Deployment (optional) (05:08)<br>**Core Concepts**: Services (13:50) | 18m 58s | ☐ |
-| Aug 29, 2026 | Sat | **Core Concepts**: Services Cluster IP (04:02)<br>**Core Concepts**: Services – Loadbalancer (03:42) | 7m 44s | ☐ |
-| Aug 30, 2026 | Sun | **Core Concepts**: Practice Test Services (—)<br>**Core Concepts**: Solution: Services (optional) (05:01) | 5m 1s | ☐ |
+| Aug 28, 2026 | Fri | **Core Concepts**: Solution: Deployment (optional) (05:08)<br>**Core Concepts**: Services (13:50) | 18m 58s | ✅ |
+| Aug 29, 2026 | Sat | **Core Concepts**: Services Cluster IP (04:02)<br>**Core Concepts**: Services – Loadbalancer (03:42) | 7m 44s | ✅ |
+| Aug 30, 2026 | Sun | **Core Concepts**: Practice Test Services (—)<br>**Core Concepts**: Solution: Services (optional) (05:01) | 5m 1s | ✅ |
 | Aug 31, 2026 | Mon | **Core Concepts**: Namespaces (08:23)<br>**Core Concepts**: Practice Test Namespaces (—) | 8m 23s | ☐ |
 | Sep 01, 2026 | Tue | **Core Concepts**: Solution: Namespaces (optional) (05:03)<br>**Core Concepts**: Imperative vs Declarative (13:06)<br>**Core Concepts**: Certification Tips – Imperative Commands with Kubectl (—) | 18m 9s | ☐ |
 | Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ☐ |
