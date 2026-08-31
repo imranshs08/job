@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGIC to AGC Migration Guide | DevOps 2027</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --purp: #a855f7;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(56, 189, 248, 0.15));
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--accent);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.75rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--purp);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #c084fc;
+            text-decoration: underline;
+        }
+
+        .alert {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            color: #fcd34d;
+        }
+
+        .learning-seq li {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--purp);
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .learning-seq strong {
+            color: var(--text-main);
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+        }
+
+        .nav-back:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            th,
+            td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to Command Center</a>
+
+        <div class="header">
+            <h1>AGIC to AGC Migration Guide</h1>
+            <div style="color: var(--text-dim); font-size: 1.1rem;">Azure Application Gateway for Containers</div>
+            <div class="status-badge">🟢 Production-Ready (Replaces AGIC)</div>
+        </div>
+
+        <div class="card">
+            <h2>🏗️ Architectural Differences: AGIC vs. AGC</h2>
+            <p>For a long time, the standard Layer 7 ingress for AKS was the <strong>Application Gateway Ingress
+                    Controller (AGIC)</strong>. However, AGIC suffered from architectural limitations (specifically
+                translating configurations into slow Azure ARM API calls).</p>
+            <p><strong>Application Gateway for Containers (AGC/ALB)</strong> was built from the ground up for
+                Kubernetes. It is the designated evolution and replacement for AGIC.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Legacy AGIC</th>
+                        <th>New AGC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Control Plane</strong></td>
+                        <td>Relied on Azure ARM API (slow)</td>
+                        <td>Dedicated ALB Controller (near real-time)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kubernetes APIs</strong></td>
+                        <td>Standard <code>Ingress</code> only</td>
+                        <td>Supports both <code>Ingress</code> and the <strong>Gateway API</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deploy Time</strong></td>
+                        <td>Minutes (often 5+ min)</td>
+                        <td>Milliseconds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Routing</strong></td>
+                        <td>Clunky via annotations</td>
+                        <td>Weight-based routing natively via Gateway API</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>⚠️ Azure Application Routing Add-on</h2>
+            <div class="alert">
+                <strong>Important Distinction:</strong> The Application Routing Add-on is <em>not</em> Application
+                Gateway for Containers.
+            </div>
+            <p>The Application Routing Add-on is a fully managed <strong>NGINX Ingress Controller</strong> running
+                inside your AKS cluster as Pods.</p>
+            <ul>
+                <li><strong>Use AGC when:</strong> You want a heavy, scalable Layer 7 load balancer outside your cluster
+                    (offloads compute).</li>
+                <li><strong>Use App Routing when:</strong> You want a fast, simple, in-cluster NGINX setup for dev/test
+                    or internal traffic, with auto-Key Vault integration.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🚀 4-Phase Migration Strategy (Zero-Downtime)</h2>
+            <p>Microsoft recommends a side-by-side coexistence strategy. You do not need to delete AGIC to start using
+                AGC.</p>
+
+            <h3>Phase 1: Preparation & Deployment</h3>
+            <ol>
+                <li>Deploy the new ALB controller in your AKS cluster.</li>
+                <li>Provision the AGC Resources (Frontend, Subnet association) in Azure.</li>
+                <li>Review existing Ingress YAMLs and map AGIC annotations (<code>appgw.ingress.kubernetes.io/*</code>)
+                    to ALB annotations (<code>alb.ingress.azure.com/*</code>) or modern HTTPRoute resources.</li>
+            </ol>
+
+            <h3>Phase 2: Coexistence & Validation</h3>
+            <ol>
+                <li>Deploy a duplicate Ingress/HTTPRoute targeting the exact same internal Pods, but using the
+                    <code>alb</code> ingress class.</li>
+                <li>Traffic to the old public IP remains untouched on AGIC.</li>
+                <li>Access the <em>new</em> public IP generated by AGC to validate routing and SSL.</li>
+            </ol>
+
+            <h3>Phase 3: Cutover using DNS</h3>
+            <ol>
+                <li>Update public DNS (e.g., Azure DNS, Cloudflare) to point your domain from the old AGIC IP to the new
+                    AGC IP.</li>
+                <li>Monitor telemetry for 200 OKs.</li>
+            </ol>
+
+            <h3>Phase 4: Decommission</h3>
+            <ol>
+                <li>Delete the legacy AGIC Ingress resources.</li>
+                <li>Delete the legacy App Gateway v2 resource to save cloud costs.</li>
+            </ol>
+            <p style="text-align: right; margin-top: 1rem;"><a
+                    href="https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/migrate-from-agic-to-agc"
+                    target="_blank">📚 Official Docs: Migration Guide →</a></p>
+        </div>
+
+        <div class="card">
+            <h2>📺 Recommended Learning Sequence</h2>
+            <ul class="learning-seq">
+                <li>
+                    <strong>1. The Architecture Introduction (July 2023)</strong>
+                    <a href="https://www.youtube.com/watch?v=W4Z9F7N4tJk" target="_blank">Brand New Application Gateway
+                        for Containers Solution</a><br>
+                    <span style="font-size: 0.9rem; color: var(--text-dim);">Goal: Understand why it was built and the
+                        separation of Data Plane and Control Plane.</span>
+                </li>
+                <li>
+                    <strong>2. The Modern Deep Dive — Gateway API & AI (May 2026)</strong>
+                    <a href="https://www.youtube.com/watch?v=yYyP5sW8eF4" target="_blank">Modern Ingress for AKS:
+                        Introducing Application Gateway for Containers</a><br>
+                    <span style="font-size: 0.9rem; color: var(--text-dim);">Goal: Learn how AGC uses HTTPRoute for
+                        advanced traffic splitting and AI inference routing.</span>
+                </li>
+                <li>
+                    <strong>3. Hands-On Lab: Managed Add-On Setup (Feb 2026)</strong>
+                    <a href="https://www.youtube.com/watch?v=1F2yH-FpYJ8" target="_blank">AKS Application Gateway for
+                        Containers Addon - Part 18</a><br>
+                    <span style="font-size: 0.9rem; color: var(--text-dim);">Goal: The easy way to provision identity
+                        and deploy the ALB controller via AKS add-on.</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
