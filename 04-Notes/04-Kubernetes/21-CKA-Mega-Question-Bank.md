@@ -412,3 +412,474 @@ spec:
 kubectl run temp-test --image=busybox:1.28 -it --rm --restart=Never -- nslookup db-service.backend.svc.cluster.local > /opt/db-ip.txt
 # (Trim the txt file to leave just the IP address if you piped it directly!)
 ```
+
+---
+
+## 🏗️ PART 3: The Expanding Workloads Collection
+
+**Q23. Custom Resource Definitions (CRDs)**
+> **Context:** `kubectl config use-context k8s-admin-2`
+> **Weight:** 2%
+> 
+> **Task:**
+> Find the names of all Custom Resource Definitions (CRDs) available in the cluster and write them to `/opt/crds.txt`.
+
+**✅ Solution:**
+`kubectl get crds -o name > /opt/crds.txt`
+
+---
+
+**Q24. Rolling Updates & History**
+> **Context:** `kubectl config use-context k8s-web-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> A deployment `web-app` exists in `prod`. 
+> Change its image to `nginx:1.21.1`. Record it. Then undo the rollout back to the previous version.
+
+**✅ Solution:**
+```bash
+kubectl set image deployment/web-app nginx=nginx:1.21.1 -n prod --record
+kubectl rollout undo deployment/web-app -n prod
+```
+
+---
+
+**Q25. Deployment Scaling**
+> **Context:** `kubectl config use-context k8s-web-2`
+> **Weight:** 2%
+> 
+> **Task:**
+> Scale the `payment-gateway` deployment in the `finance` namespace to `6` replicas.
+
+**✅ Solution:**
+`kubectl scale deployment payment-gateway -n finance --replicas=6`
+
+---
+
+**Q26. Manual Pod Creation**
+> **Context:** `kubectl config use-context k8s-sched-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Create a pod named `manual-job` running image `redis:alpine` with CPU memory limits set to `64Mi`.
+
+**✅ Solution:**
+`kubectl run manual-job --image=redis:alpine --limits=memory=64Mi`
+
+---
+
+**Q27. Taint Removal**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Node `worker-2` has a taint `app=database:NoExecute`. Remove this taint.
+
+**✅ Solution:**
+`kubectl taint node worker-2 app=database:NoExecute-`
+
+---
+
+**Q28. Multiple Environment Variables**
+> **Context:** `kubectl config use-context k8s-dev-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> Create a pod `env-pod` running `nginx`. Pass the environment variable `APP_ENV=prod` and `RATE_LIMIT=100` into it natively.
+
+**✅ Solution:**
+`kubectl run env-pod --image=nginx --env=APP_ENV=prod --env=RATE_LIMIT=100`
+
+---
+
+**Q29. InitContainers File Creation**
+> **Context:** `kubectl config use-context k8s-dev-1`
+> **Weight:** 6%
+> 
+> **Task:**
+> Deploy a pod `setup-pod` (image `nginx`). Add an initContainer (image `busybox`) that creates an empty file at `/work-dir/ready.txt`. 
+
+**✅ Solution:** Sub the pod. Add the `initContainers:` block overriding the command to `touch /work-dir/ready.txt`.
+
+---
+
+**Q30. Multi-container Sidecar pattern**
+> **Context:** `kubectl config use-context k8s-log-1`
+> **Weight:** 6%
+> 
+> **Task:**
+> Deploy a pod `multi-log`. Container 1 (nginx). Container 2 (busybox reading nginx logs). No volume required.
+
+**✅ Solution:** Stub with `kubectl run... > pod.yaml`. Duplicate the container block inside the file.
+
+---
+
+**Q31. Multi-Port Service**
+> **Context:** `kubectl config use-context k8s-net-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> Expose pod `dual-app` on two ports internally: `8080` to target `80`, and `9090` to target `443`.
+
+**✅ Solution:** Export to YAML `kubectl expose pod ... --dry-run=client -o yaml` and manually add the second port block.
+
+---
+
+**Q32. Ingress Fan-Out Routing**
+> **Context:** `kubectl config use-context k8s-net-1`
+> **Weight:** 8%
+> 
+> **Task:**
+> Create an Ingress named `web-ingress`. 
+> Route `/video` to service `video-svc` on port 80.
+> Route `/audio` to service `audio-svc` on port 8080.
+
+**✅ Solution:** Use `kubectl create ingress web-ingress --rule="/video*=video-svc:80" --rule="/audio*=audio-svc:8080"` (Or search K8s docs for Ingress YAML).
+
+---
+
+**Q33. Network Policy: Allow Egress**
+> **Context:** `kubectl config use-context k8s-sec-1`
+> **Weight:** 7%
+> 
+> **Task:**
+> Create a network policy `allow-dns` in the `backend` namespace allowing egress ONLY to port 53 (UDP/TCP).
+
+**✅ Solution:** Search Network Policy in docs. Add an `egress:` block with `ports:` 53.
+
+---
+
+**Q34. ExternalName Service**
+> **Context:** `kubectl config use-context k8s-net-2`
+> **Weight:** 3%
+> 
+> **Task:**
+> Create a service `google-svc` that resolves to `google.com`.
+
+**✅ Solution:** 
+`kubectl create service externalname google-svc --external-name google.com`
+
+---
+
+**Q35. Service Endpoint Inspection**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Output the endpoint IPs of the service `db-svc` to `/opt/db-endpoints.txt`.
+
+**✅ Solution:**
+`kubectl get endpoints db-svc -o jsonpath='{.subsets[*].addresses[*].ip}' > /opt/db-endpoints.txt`
+*(Or manually copy from `kubectl get ep db-svc`).*
+
+---
+
+**Q36. ConfigMap Volumes**
+> **Context:** `kubectl config use-context k8s-store-1`
+> **Weight:** 5%
+> 
+> **Task:**
+> Create a ConfigMap `app-vars` from literal `ENV=dev`. Mount it inside a pod `cfg-pod` at `/app/config`.
+
+**✅ Solution:**
+Create CM imperatively. Sub pod to YAML. Add `volumes: - configMap: name: app-vars` and `volumeMounts`.
+
+---
+
+**Q37. Persistent Volume Reclaim Policy**
+> **Context:** `kubectl config use-context k8s-store-2`
+> **Weight:** 3%
+> 
+> **Task:**
+> Change the reclaim policy of the PV `pv-legacy` to `Retain`.
+
+**✅ Solution:**
+`kubectl patch pv pv-legacy -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'`
+
+---
+
+**Q38. Sorting PVs by Capacity**
+> **Context:** `kubectl config use-context k8s-store-3`
+> **Weight:** 4%
+> 
+> **Task:**
+> Output the names of all Persistent Volumes sorted by their storage capacity to `/opt/pvs.txt`.
+
+**✅ Solution:**
+`kubectl get pv --sort-by=.spec.capacity.storage -o name > /opt/pvs.txt`
+
+---
+
+**Q39. Secret Configuration**
+> **Context:** `kubectl config use-context k8s-sec-2`
+> **Weight:** 4%
+> 
+> **Task:**
+> Create a Secret `api-key` containing `key=123AB`. Inject it as an environmental variable `API_KEY` into pod `api-pod`.
+
+**✅ Solution:** Create secret imperatively. Edit pod YAML: `valueFrom: secretKeyRef ...`
+
+---
+
+**Q40. StorageClass Default Verification**
+> **Context:** `kubectl config use-context k8s-store-1`
+> **Weight:** 2%
+> 
+> **Task:**
+> Determine which StorageClass is marked as default in the cluster and write its name to `/opt/default-sc.txt`.
+
+**✅ Solution:**
+`kubectl get sc` (Look for the one with `(default)`).
+
+---
+
+## 🛠️ PART 4: Deep Troubleshooting & Architecture
+
+**Q41. Node Uncordoning**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 2%
+> 
+> **Task:**
+> Node `worker-2` is marked as `SchedulingDisabled`. Fix it so it accepts pods again.
+
+**✅ Solution:**
+`kubectl uncordon worker-2`
+
+---
+
+**Q42. Worker Node Upgrade Preparation**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> Drain `worker-2` safely for an OS reboot. Ignore daemonsets and force eviction.
+
+**✅ Solution:**
+`kubectl drain worker-2 --ignore-daemonsets --force`
+
+---
+
+**Q43. Kubeadm Worker Upgrade**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 6%
+> 
+> **Task:**
+> Upgrade `kubeadm` on `worker-2` to `1.35.0-00`, then upgrade the local node configuration.
+
+**✅ Solution:**
+SSH into node. `apt install kubeadm=1.35.0-00 && kubeadm upgrade node`.
+
+---
+
+**Q44. Static Pod Creation**
+> **Context:** `kubectl config use-context k8s-admin-2`
+> **Weight:** 5%
+> 
+> **Task:**
+> Create a static pod named `static-web` running `nginx:alpine` on the master node without using the API server.
+
+**✅ Solution:**
+SSH into master. `kubectl run static-web --image=nginx:alpine --dry-run=client -o yaml > /etc/kubernetes/manifests/static-web.yaml`
+
+---
+
+**Q45. Role Creation**
+> **Context:** `kubectl config use-context k8s-rbac-2`
+> **Weight:** 4%
+> 
+> **Task:**
+> Create a Role `pod-reader` in namespace `development` that can `get, list, watch` pods.
+
+**✅ Solution:**
+`kubectl create role pod-reader -n development --verb=get,list,watch --resource=pods`
+
+---
+
+**Q46. Role Binding Generation**
+> **Context:** `kubectl config use-context k8s-rbac-2`
+> **Weight:** 4%
+> 
+> **Task:**
+> Bind the `pod-reader` Role to the ServiceAccount `developer` in the `development` namespace.
+
+**✅ Solution:**
+`kubectl create rolebinding pod-reader-bind -n development --role=pod-reader --serviceaccount=development:developer`
+
+---
+
+**Q47. Event Output Parsing**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> Output all cluster events sorted by creation timestamp into `/opt/events.txt`.
+
+**✅ Solution:**
+`kubectl get events -A --sort-by=.metadata.creationTimestamp > /opt/events.txt`
+
+---
+
+**Q48. CoreDNS IP Extraction**
+> **Context:** `kubectl config use-context k8s-net-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Find the ClusterIP address of the `kube-dns` service and save it to `/opt/dns-ip.txt`.
+
+**✅ Solution:**
+`kubectl get svc -n kube-system kube-dns -o jsonpath='{.spec.clusterIP}' > /opt/dns-ip.txt`
+
+---
+
+**Q49. Check DaemonSet Status**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Identify which DaemonSet is running in the `kube-system` namespace to provide networking.
+
+**✅ Solution:**
+`kubectl get daemonsets -n kube-system` (Likely kube-proxy, calico, or weave).
+
+---
+
+**Q50. Node Capacity Filtering**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> Out of all nodes, find the one with the most CPU capacity. Write its name to `/opt/max-cpu.txt`.
+
+**✅ Solution:**
+`kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.cpu}{"\n"}{end}'` -> Pick the biggest one.
+
+---
+
+**Q51. HostNetwork Pods**
+> **Context:** `kubectl config use-context k8s-net-5`
+> **Weight:** 4%
+> 
+> **Task:**
+> Create a pod `host-net` running `nginx`. It must bypass the CNI and bind directly to the worker node's network interface.
+
+**✅ Solution:** Add `hostNetwork: true` to the pod spec.
+
+---
+
+**Q52. ETCD Alternative Restore**
+> **Context:** `kubectl config use-context k8s-admin-3`
+> **Weight:** 10%
+> 
+> **Task:**
+> Restore the snapshot located at `/opt/old-snap.db` to `/var/lib/etcd-alt`. Update the ETCD static pod to point to it.
+
+**✅ Solution:**
+`ETCDCTL_API=3 etcdctl snapshot restore /opt/old-snap.db --data-dir=/var/lib/etcd-alt`. Then edit `/etc/kubernetes/manifests/etcd.yaml`.
+
+---
+
+**Q53. Forced Pod Deletion**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 2%
+> 
+> **Task:**
+> A pod `stuck-pod` is trapped in the `Terminating` state forever. Delete it forcefully immediately.
+
+**✅ Solution:**
+`kubectl delete pod stuck-pod --force --grace-period=0`
+
+---
+
+**Q54. Liveness Probe Configuration**
+> **Context:** `kubectl config use-context k8s-web-3`
+> **Weight:** 6%
+> 
+> **Task:**
+> Add an HTTP GET Liveness probe to the `app` container in the `web-pod` YAML. It should hit port 80 at `/healthz`.
+
+**✅ Solution:** Edit pod YAML, add:
+```yaml
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 80
+```
+
+---
+
+**Q55. Container Runtime Logs**
+> **Context:** `kubectl config use-context k8s-trouble-1`
+> **Weight:** 4%
+> 
+> **Task:**
+> The `containerd` runtime on node `worker-1` is acting up. Extract the last 20 lines of its systemd journal.
+
+**✅ Solution:**
+`ssh worker-1`, then `journalctl -u containerd -n 20`
+
+---
+
+**Q56. CNI Binaries Inspection**
+> **Context:** `kubectl config use-context k8s-net-1`
+> **Weight:** 2%
+> 
+> **Task:**
+> Find the directory where CNI configuration files are stored on the master node.
+
+**✅ Solution:** Look in `/etc/cni/net.d/`.
+
+---
+
+**Q57. Testing Role Permissions**
+> **Context:** `kubectl config use-context k8s-rbac-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Verify without authenticating if the ServiceAccount `test-user` in namespace `qa` can delete configmaps.
+
+**✅ Solution:**
+`kubectl auth can-i delete configmaps --as=system:serviceaccount:qa:test-user -n qa`
+
+---
+
+**Q58. Finding specific Annotations**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 3%
+> 
+> **Task:**
+> Output the annotations of the pod `nginx-ann` to a file `/opt/ann.txt`.
+
+**✅ Solution:**
+`kubectl get pod nginx-ann -o jsonpath='{.metadata.annotations}' > /opt/ann.txt`
+
+---
+
+**Q59. Port-Forwarding (Internal Testing)**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 2%
+> 
+> **Task:**
+> The `db` pod doesn't have a service. Forward traffic from your local terminal port `8080` to the pod's port `5432`.
+
+**✅ Solution:**
+`kubectl port-forward pod/db 8080:5432`
+
+---
+
+**Q60. Final Boss: Control Plane Total Failure**
+> **Context:** `kubectl config use-context k8s-admin-x`
+> **Weight:** 15%
+> 
+> **Task:**
+> Cluster is completely down. `kubectl` says connection refused.
+> Identify the failed static pod and return the cluster to a healthy state.
+
+**✅ Solution:**
+1. Check `systemctl status kubelet`. If dead, start it.
+2. If `kubelet` is running, `cd /etc/kubernetes/manifests`.
+3. Read the logs using the container runtime directly! `crictl ps -a` -> `crictl logs <id>`.
+4. Locate the YAML typo (usually `kube-apiserver.yaml` has a misspelled flag like `--etcd-servers=htts://...`). Fix the typo.
+
+---
+*End of CKA Mega Bank.*
