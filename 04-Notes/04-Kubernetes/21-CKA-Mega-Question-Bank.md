@@ -303,3 +303,112 @@ kubectl uncordon controlplane
 
 **✅ Solution:**
 `kubectl top nodes --sort-by=cpu` -> See the top node. -> `echo node01 > /opt/high-cpu.txt`.
+
+---
+
+## 🌩️ PART 2: KodeKloud Mock Exam Classics
+
+*KodeKloud is renowned for having the most accurate mock exams. These scenarios are ripped straight from the patterns seen in KodeKloud Mock 1, 2, and 3.*
+
+**Q18. Broken Kubeconfig (KodeKloud Classic)**
+> **Context:** `kubectl config use-context k8s-debug-1`
+> **Weight:** 8%
+> 
+> **Task:**
+> The kubeconfig file located at `/root/.kube/config` is misconfigured. You cannot connect to the cluster.
+> - Identify the issue within the kubeconfig file and fix it so `kubectl` commands work again.
+
+**✅ Solution:**
+1. Run `cat /root/.kube/config`. Look at the `server: https://192.168.1.10:6433` line.
+2. The default port for the Kube-API server is `6443`, not `6433` (a very common KodeKloud trick).
+3. `vi /root/.kube/config`, change the port to `6443`, save and quit.
+4. Test with `kubectl get nodes`.
+
+---
+
+**Q19. Extracting Internal Node IPs via JSONPath**
+> **Context:** `kubectl config use-context k8s-admin-1`
+> **Weight:** 5%
+> 
+> **Task:**
+> - Find the `InternalIP` of node `node01`.
+> - Extract ONLY the IP address using JSONPath.
+> - Write this IP address to the file `/opt/node01_ip.txt`.
+
+**✅ Solution:**
+```bash
+# JSONPath to dig into the addresses array and extract the InternalIP
+kubectl get node node01 -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' > /opt/node01_ip.txt
+```
+
+---
+
+**Q20. Deploying with a specific ServiceAccount**
+> **Context:** `kubectl config use-context k8s-rbac-1`
+> **Weight:** 6%
+> 
+> **Task:**
+> - Create a ServiceAccount named `web-sa` in the `default` namespace.
+> - Create a Pod named `web-pod` using image `nginx`.
+> - The Pod MUST use the `web-sa` ServiceAccount instead of the `default` ServiceAccount.
+
+**✅ Solution:**
+```bash
+kubectl create sa web-sa
+kubectl run web-pod --image=nginx --dry-run=client -o yaml > pod.yaml
+# Edit pod.yaml and add 'serviceAccountName: web-sa' under spec:
+# spec:
+#   serviceAccountName: web-sa
+#   containers:
+kubectl apply -f pod.yaml
+```
+
+---
+
+**Q21. PersistentVolume Binding by Label (Mock 2 Variant)**
+> **Context:** `kubectl config use-context k8s-store-1`
+> **Weight:** 7%
+> 
+> **Task:**
+> A PersistentVolume named `pv-secure` already exists in the cluster. It has the label `storageTier: gold`.
+> - Create a Persistent Volume Claim named `pvc-secure` that requests `500Mi`.
+> - Do NOT use a StorageClass.
+> - Use a `selector` in your PVC to ensure it binds EXACTLY to `pv-secure` via the `storageTier: gold` label.
+
+**✅ Solution:**
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-secure
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+  selector:
+    matchLabels:
+      storageTier: gold
+```
+*Apply it and verify `kubectl get pvc` displays `Bound` immediately!*
+
+---
+
+**Q22. CoreDNS Service Resolution Test**
+> **Context:** `kubectl config use-context k8s-net-4`
+> **Weight:** 4%
+> 
+> **Task:**
+> - A deployment `db-backend` and its ClusterIP service `db-service` exist in the `backend` namespace.
+> - Spin up a temporary pod using `busybox:1.28` in the `default` namespace.
+> - Perform an `nslookup` on the `db-service` from the temporary pod.
+> - Record the IP address returned by the DNS query in `/opt/db-ip.txt`.
+
+**✅ Solution:**
+```bash
+# Since the pod is in default, and service is in backend, use the FQDN!
+kubectl run temp-test --image=busybox:1.28 -it --rm --restart=Never -- nslookup db-service.backend.svc.cluster.local > /opt/db-ip.txt
+# (Trim the txt file to leave just the IP address if you piped it directly!)
+```
