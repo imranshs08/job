@@ -129,3 +129,177 @@ apt-get install -y kubelet=1.35.0-00 kubectl=1.35.0-00
 systemctl daemon-reload && systemctl restart kubelet
 kubectl uncordon controlplane
 ```
+
+---
+
+## 8. 🛡️ Network Policies
+
+**📝 Exam Scenario:**
+> In the `finance` namespace, create a NetworkPolicy named `deny-all-ingress` that denies all incoming traffic to all pods in the namespace.
+
+**✅ Solution:**
+```yaml
+# You must write this from memory or K8s docs
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-ingress
+  namespace: finance
+spec:
+  podSelector: {} # Empty selector selects all pods
+  policyTypes:
+  - Ingress
+  # Leaving the 'ingress' block empty denies everything by default
+```
+
+---
+
+## 9. 🧠 Scheduling (Taints & Tolerations)
+
+**📝 Exam Scenario:**
+> Taint node `node02` with `key=disktype`, `value=nvme`, and effect `NoSchedule`. Then create a pod named `fast-db` with image `redis` that can tolerate this taint and schedule onto `node02`.
+
+**✅ Solution:**
+```bash
+# 1. Taint the node
+kubectl taint nodes node02 disktype=nvme:NoSchedule
+
+# 2. Stub the pod
+kubectl run fast-db --image=redis --dry-run=client -o yaml > pod.yaml
+
+# 3. Add the toleration to pod.yaml under spec:
+#  tolerations:
+#  - key: "disktype"
+#    operator: "Equal"
+#    value: "nvme"
+#    effect: "NoSchedule"
+
+kubectl apply -f pod.yaml
+```
+
+---
+
+## 10. 🔐 Secrets & Env Variables
+
+**📝 Exam Scenario:**
+> Create a secret named `db-creds` with the key `password` and value `secure123!`. Then, create a pod named `webapp` using image `nginx` that loads this secret into an environment variable named `DB_PASS`.
+
+**✅ Solution:**
+```bash
+# 1. Create the secret imperatively
+kubectl create secret generic db-creds --from-literal=password=secure123!
+
+# 2. Stub the pod
+kubectl run webapp --image=nginx --dry-run=client -o yaml > pod.yaml
+
+# 3. Modify pod.yaml -> under containers[0], add:
+#    env:
+#    - name: DB_PASS
+#      valueFrom:
+#        secretKeyRef:
+#          name: db-creds
+#          key: password
+
+kubectl apply -f pod.yaml
+```
+
+---
+
+## 11. 🔍 Log Analysis & Grep
+
+**📝 Exam Scenario:**
+> Find the pod in the `production` namespace that is generating the error `OutOfMemory`. Extract that specific log line and write it to `/opt/oom-error.txt`.
+
+**✅ Solution:**
+```bash
+# Loop through pods or guess the failing one based on `kubectl get pods -n production` restarts.
+kubectl logs <failing-pod-name> -n production | grep "OutOfMemory" > /opt/oom-error.txt
+```
+
+---
+
+## 12. 📊 Sorting & Fields (Very Common!)
+
+**📝 Exam Scenario:**
+> Find the node in the cluster that has the highest memory utilization and write its name to `/opt/highest-mem-node.txt`.
+
+**✅ Solution:**
+```bash
+# Use kubernetes metrics-server output
+kubectl top nodes --sort-by=memory
+# Look at the top node, then write its name to the file:
+echo "node01" > /opt/highest-mem-node.txt
+```
+
+---
+
+## 13. 📦 Multi-Container Pods (EmptyDir)
+
+**📝 Exam Scenario:**
+> Create a pod named `shared-log-app`. 
+> Container 1: named `app`, image `busybox`, running `while true; do echo 'app running' >> /var/log/app.log; sleep 5; done`.
+> Container 2: named `sidecar`, image `busybox`, running `tail -f /var/log/app.log`.
+> They must share an `emptyDir` volume mounted at `/var/log`.
+
+**✅ Solution:**
+1. Generate pod stub: `kubectl run shared-log-app --image=busybox --dry-run=client -o yaml > pod.yaml`
+2. Hand-edit the manifest to add the second container, the commands, and the volume mounts:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shared-log-app
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: ["/bin/sh", "-c", "while true; do echo 'app running' >> /var/log/app.log; sleep 5; done"]
+    volumeMounts:
+    - name: log-volume
+      mountPath: /var/log
+  - name: sidecar
+    image: busybox
+    command: ["/bin/sh", "-c", "tail -f /var/log/app.log"]
+    volumeMounts:
+    - name: log-volume
+      mountPath: /var/log
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+```
+
+---
+
+## 14. ⏱️ Init Containers
+
+**📝 Exam Scenario:**
+> Create a pod named `db-init-test` running image `mysql`. The pod should not start until an InitContainer named `wait-for-service` running `busybox` successfully pings `10.0.0.1`.
+
+**✅ Solution:**
+1. Stub it out.
+2. Add the `initContainers` block directly above the `containers` block:
+```yaml
+  initContainers:
+  - name: wait-for-service
+    image: busybox
+    command: ['sh', '-c', 'until ping -c 1 10.0.0.1; do echo waiting; sleep 2; done;']
+```
+
+---
+
+## 15. 📍 Node Affinity
+
+**📝 Exam Scenario:**
+> Create a deployment named `gpu-workload` with 2 replicas using image `nginx`. Ensure these pods are scheduled *only* on nodes carrying the label `hardware=gpu`. (Assume the nodes are already labeled).
+
+**✅ Solution:**
+1. `kubectl create deployment gpu-workload --image=nginx --replicas=2 --dry-run=client -o yaml > dep.yaml`
+2. Add the `nodeSelector` (the simplest form of affinity) under the pod spec template (NOT the deployment spec!):
+```yaml
+    spec:
+      nodeSelector:
+        hardware: gpu
+      containers:
+      - image: nginx
+```
+*(If the question explicitly asks for `nodeAffinity`, you must use the longer `affinity:` block).*
