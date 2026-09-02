@@ -161,12 +161,28 @@ Create a file called `failover-test-job.yaml` and upload it to Rundeck:
   sequence:
     commands:
     - exec: |
-        echo "Starting resilience test..."
-        for i in {1..100}; do
+        #!/bin/bash
+        STATE_FILE="/tmp/rundeck_job_state.txt"
+        START_POINT=1
+
+        # IDEMPOTENCY CHECK: Did the DB failover crash us halfway through?
+        # If so, we read the state file and resume exactly where we left off!
+        if [ -f "$STATE_FILE" ]; then
+          START_POINT=$(cat $STATE_FILE)
+          echo "[IDEMPOTENCY TRIGGERED] Resuming job from previous failure point at heartbeat $START_POINT!"
+        else
+          echo "[START] Initiating fresh resilience test..."
+        fi
+
+        for i in $(seq $START_POINT 100); do
           echo "Simulating work... heartbeat $i"
+          echo $i > $STATE_FILE # Save our state constantly
           sleep 5
         done
-        echo "Test completed locally."
+        
+        # Cleanup state upon true completion
+        rm -f $STATE_FILE
+        echo "[SUCCESS] Test definitively completed. State wiped."
     keepgoing: false
     strategy: node-first
 ```
