@@ -1,0 +1,12 @@
+{
+  "name": "02-azure-rhel-upgrade",
+  "version": "1.0.0",
+  "description": "> [!NOTE]\r > Before triggering a destructive OS upgrade, Senior Engineers must mathematically understand the architectural boundary between an ABI-Stable Minor Update and a Kernel-swapping Major Migration. \r > \r > For the exhaustive master reference on RHEL's **10-Year EOL Matrix**, **EUS Locks**, and the mechanical differences between `dnf` and `leapp`, study the core documentation node:\r > 👉 [**Red Hat (RHEL) Lifecycle & Upgrade Methodology**](../../04-Notes/rhel-lifecycle.md)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
