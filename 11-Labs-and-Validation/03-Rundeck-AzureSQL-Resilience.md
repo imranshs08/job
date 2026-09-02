@@ -60,6 +60,17 @@ To deploy Rundeck into AKS smoothly, we pass the JDBC and SMTP parameters native
 
 Create `rundeck-deployment.yaml`:
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  ports:
+  - port: 4440
+  selector:
+    app: rundeck
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -139,6 +150,17 @@ To deploy Rundeck into AKS, you must use the official Docker image and map the C
 
 Create `rundeck-deployment.yaml`:
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  ports:
+  - port: 4440
+  selector:
+    app: rundeck
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

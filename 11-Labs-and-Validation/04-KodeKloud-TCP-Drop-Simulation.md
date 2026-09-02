@@ -40,6 +40,17 @@ spec:
   selector:
     app: postgres # Routes traffic to our DB pod
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  ports:
+  - port: 4440
+  selector:
+    app: rundeck
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -88,6 +99,17 @@ data:
 ### Create Rundeck Deployment (Env Var Configuration)
 Create and apply `rundeck-sandbox.yaml`:
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  ports:
+  - port: 4440
+  selector:
+    app: rundeck
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
