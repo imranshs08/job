@@ -72,6 +72,13 @@ data:
     grails.mail.props.mail.smtp.auth = true
 ```
 
+> **🔑 How to generate your Gmail App Password:**
+> Google no longer allows plain-text passwords in external apps. To get your 16-character password:
+> 1. Go to your **Google Account -> Security**.
+> 2. Ensure **2-Step Verification** is turned ON.
+> 3. Search for **App Passwords** and create one named "Rundeck AKS".
+> 4. Paste the 16-character string into `grails.mail.password` above (no spaces).
+
 ### Step 1.5: Rundeck Deployment (The Image & Mounting)
 To deploy Rundeck into AKS, you must use the official Docker image and map the ConfigMap you just created into the container's configuration path.
 
