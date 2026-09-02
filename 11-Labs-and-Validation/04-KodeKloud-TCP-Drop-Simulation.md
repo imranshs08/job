@@ -6,6 +6,24 @@ This step-by-step guide walks you through deploying a local database, binding Ru
 
 ---
 
+## 💻 Pre-requisite: Local Windows Sandbox Setup (Minikube)
+If you do not have an active KodeKloud workspace, you can spin up this exact Kubernetes cluster securely on your local Windows PC. Open **PowerShell as Administrator** and execute:
+
+```powershell
+# 1. Install Minikube and Kubernetes CLI via Windows Package Manager
+winget install minikube
+winget install Kubernetes.kubectl
+
+# 2. Start the Minikube cluster (Docker Desktop must be running)
+minikube start --driver=docker --memory=4096 --cpus=2
+
+# 3. Verify the cluster is running
+kubectl get nodes
+```
+*(Once your node says `Ready`, you can proceed to Step 1 below!)*
+
+---
+
 ## Step 1: Deploy the Sandbox Database
 Instead of paying for Azure SQL, we will spin up a transient PostgreSQL pod inside the cluster.
 
