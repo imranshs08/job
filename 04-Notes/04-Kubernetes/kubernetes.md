@@ -21,6 +21,8 @@
 
 > 🚨 **[PRACTICE NOW: The Ultimate CKA Mega-Bank (80 Questions)](19-CKA-Actual-Questions-Mock.md)** 
 > *A unified, dedicated file containing the exact phrasing, scenarios, and fast-imperative solutions you will encounter on exam day (including KodeKloud & KillerCoda classics).*
+> 💡 **[MUST READ: Core Exam CLI Skills & Offline Docs](21-CKA-Core-CLI-Commands.md)** 
+> *The ultimate CKA survival guide: using `kubectl explain`, `api-resources`, and the Imperative-vs-Declarative hybrid strategy.*
 
 You *must* be able to do these flawlessly from memory or by using `kubectl --help`:
 - **ETCD Backup & Restore**: Taking a snapshot and restoring it to a new directory.
