@@ -186,7 +186,7 @@ vt_content = """# 📺 Complete Video Tracker — 158 Videos
 3. Review progress every Sunday evening.
 4. If you fall behind, skip the specialized cloud videos (e.g. advanced Azure if you focus on AWS) and revisit later.
 """
-with open(r'13-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
+with open(r'08-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
     f.write(vt_content)
 
 print("SUCCESS: 3-MONTH PLAN GENERATED ACCURATELY ACROSS ALL 4 FILES!")

@@ -1,4 +1,4 @@
-with open(r'c:\Job Tracker\13-Video-Tracker\video-tracker.md', 'r', encoding='utf-8') as f: doc = f.read()
+with open(r'c:\Job Tracker\08-Video-Tracker\video-tracker.md', 'r', encoding='utf-8') as f: doc = f.read()
 
 md_block = '''
 ## 2027 HORIZON: AI PLATFORM ENGINEERING (MLOps & LLMOps)
@@ -30,4 +30,4 @@ md_block = '''
 '''
 
 doc += '\n\n' + md_block
-with open(r'c:\Job Tracker\13-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f: f.write(doc)
+with open(r'c:\Job Tracker\08-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f: f.write(doc)

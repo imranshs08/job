@@ -1,6 +1,6 @@
 import re
 
-with open(r'c:\Job Tracker\13-Video-Tracker\video-tracker.md', 'r', encoding='utf-8') as f:
+with open(r'c:\Job Tracker\08-Video-Tracker\video-tracker.md', 'r', encoding='utf-8') as f:
     doc = f.read()
 
 # Using a generic regex so we don't hardcode emojis in python string literals if not strictly needed
@@ -11,7 +11,7 @@ if match:
     doc = doc.replace(block, '') # remove from bottom
     target = r'## 📖 Phase 1: Foundations'
     doc = doc.replace(target, block + '\n' + target)
-    with open(r'c:\Job Tracker\13-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
+    with open(r'c:\Job Tracker\08-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
         f.write(doc)
     print("MD Successfully moved!")
 
