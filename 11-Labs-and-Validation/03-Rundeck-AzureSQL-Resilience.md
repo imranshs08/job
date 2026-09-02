@@ -116,9 +116,39 @@ kubectl rollout status deployment rundeck -n rundeck
 
 To prove that the connection drops are handled gracefully by Rundeck, you can force a manual failover on the Azure SQL MI via the portal or CLI, and simultaneously watch the Rundeck pod logs.
 
-**Test Execution:**
-1. Start a long-running, looping job in Rundeck via the GUI (e.g. A bash script that echoes numbers every 5 seconds for 5 minutes).
-2. During the job execution, initiate a manual SQL MI failover using the Azure CLI:
+### Step 1: Create the Rundeck Validation Job
+You can manually click through the GUI, or you can simply import this exact Rundeck Job YAML into your project to deploy the resilience tester.
+
+Create a file called `failover-test-job.yaml` and upload it to Rundeck:
+```yaml
+- defaultTab: nodes
+  description: Simulates a long-running task to test TCP connection resilience during an Azure SQL MI failover.
+  executionEnabled: true
+  id: azure-failover-test
+  loglevel: INFO
+  name: Database Resilience Tester
+  nodeFilterEditable: false
+  retry:
+    delay: 1m
+    retry: 3
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - exec: |
+        echo "Starting resilience test..."
+        for i in {1..100}; do
+          echo "Simulating work... heartbeat $i"
+          sleep 5
+        done
+        echo "Test completed locally."
+    keepgoing: false
+    strategy: node-first
+```
+*Note the `retry` block! This is what ensures Rundeck tries again 1 minute later after the 60-second TCP KeepAlive successfully kills the dead database connection lock!*
+
+### Step 2: Test Execution & Failover
+1. Run the `Database Resilience Tester` job inside Rundeck. It will run for roughly 8 minutes.
+2. While the job is running (around heartbeat 10), initiate a manual SQL MI failover using the Azure CLI:
 ```bash
 az sql mi failover \
   --resource-group rg-devops \
@@ -131,4 +161,4 @@ kubectl logs -l app=rundeck -n rundeck -f
 
 **Expected Result (Success):**
 Instead of hanging for 4 hours, within **exactly 60 seconds**, the Rundeck pod will throw a `SocketTimeoutException`. The HikariCP connection pool will instantly shred the dead JDBC connections.
-If you have configured **Job Retries** in the Rundeck GUI (e.g., Retry 3 times, Delay 1 minute), the Rundeck scheduler will cleanly restart the job 1 minute later, completely bypassing the maintenance interruption.
+The Rundeck scheduler will recognize the failure, apply the native Job Retry logic, and cleanly restart the job 1 minute later (connecting to the newly stabilized Azure SQL secondary instance), completely bypassing the maintenance outage!
