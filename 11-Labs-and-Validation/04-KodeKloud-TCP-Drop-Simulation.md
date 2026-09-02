@@ -131,6 +131,10 @@ spec:
         ports:
         - containerPort: 4440
         env:
+        # --- GUI Access Route ---
+        - name: RUNDECK_GRAILS_URL
+          value: "http://localhost:4440"
+
         # --- Critical TCP Resilience Parameters ---
         - name: RUNDECK_DATABASE_URL
           value: "jdbc:postgresql://db-svc:5432/postgres?socketTimeout=60000&tcpKeepAlive=true"

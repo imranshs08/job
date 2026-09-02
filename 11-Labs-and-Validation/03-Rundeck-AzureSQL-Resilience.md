@@ -92,6 +92,10 @@ spec:
         ports:
         - containerPort: 4440
         env:
+        # --- GUI Access Route ---
+        - name: RUNDECK_GRAILS_URL
+          value: "http://localhost:4440"
+
         # --- Critical TCP Resilience Parameters ---
         - name: RUNDECK_DATABASE_URL
           value: "jdbc:sqlserver://<your-sql-mi>.database.windows.net:1433;databaseName=rundeck;socketTimeout=60000;loginTimeout=30;tcpKeepAlive=true"
