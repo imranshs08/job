@@ -132,7 +132,59 @@ kubectl get pods -w -n rundeck
 
 Once Rundeck is online, log into its GUI via `kubectl port-forward svc/rundeck 4440:4440`. 
 
-Create a job with a 3-minute sleep loop, a **Retry configuration (Retry: 3, Delay: 1m)**, and an **Email Notification** (On Retry/On Failure routing to `imranshs08@gmail.com`).
+### Step 2.5: Create the Validation Job
+You can manually click through the GUI, or you can import this exact Rundeck Job YAML into your project to deploy the resilience tester.
+
+Create a file called `failover-test-job.yaml` and upload it to Rundeck:
+```yaml
+- defaultTab: nodes
+  description: Simulates a long-running task to test TCP connection resilience during an Azure SQL MI failover.
+  executionEnabled: true
+  id: kodekloud-failover-test
+  loglevel: INFO
+  name: Database Resilience Tester
+  nodeFilterEditable: false
+  notification:
+    onfailure:
+      email:
+        recipients: imranshs08@gmail.com
+        subject: "[ALERT] Rundeck Azure SQL Connectivity Failure"
+    onretry:
+      email:
+        recipients: imranshs08@gmail.com
+        subject: "[RETRY] Rundeck TCP KeepAlive triggered automated Retry"
+  retry:
+    delay: 1m
+    retry: 3
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - exec: |
+        #!/bin/bash
+        STATE_FILE="/tmp/rundeck_job_state.txt"
+        START_POINT=1
+
+        # IDEMPOTENCY CHECK: Did the DB failover crash us halfway through?
+        # If so, we read the state file and resume exactly where we left off!
+        if [ -f "$STATE_FILE" ]; then
+          START_POINT=$(cat $STATE_FILE)
+          echo "[IDEMPOTENCY TRIGGERED] Resuming job from previous failure point at heartbeat $START_POINT!"
+        else
+          echo "[START] Initiating fresh resilience test..."
+        fi
+
+        for i in $(seq $START_POINT 100); do
+          echo "Simulating work... heartbeat $i"
+          echo $i > $STATE_FILE # Save our state constantly
+          sleep 5
+        done
+        
+        # Cleanup state upon true completion
+        rm -f $STATE_FILE
+        echo "[SUCCESS] Test definitively completed. State wiped."
+    keepgoing: false
+    strategy: node-first
+```
 
 **Execute the test exactly in this sequence:**
 1. Start the Job in the Rundeck GUI.
