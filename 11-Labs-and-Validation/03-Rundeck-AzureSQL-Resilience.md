@@ -60,6 +60,13 @@ data:
     
     # Ensure connections don't live longer than Azure's gateway TCP idle timeout (10 mins)
     dataSource.maxLifetime = 600000 
+
+    # --- SMTP Email Notifications ---
+    grails.mail.host = smtp.sendgrid.net
+    grails.mail.port = 587
+    grails.mail.username = apikey
+    grails.mail.password = your-smtp-password-here
+    grails.mail.default.from = rundeck@yourcompany.com
 ```
 
 ### Step 1.5: Rundeck Deployment (The Image & Mounting)
@@ -128,6 +135,15 @@ Create a file called `failover-test-job.yaml` and upload it to Rundeck:
   loglevel: INFO
   name: Database Resilience Tester
   nodeFilterEditable: false
+  notification:
+    onfailure:
+      email:
+        recipients: devops-alerts@yourcompany.com
+        subject: "🚨 Rundeck Azure SQL Connectivity Failure Alert"
+    onretry:
+      email:
+        recipients: devops-alerts@yourcompany.com
+        subject: "🔄 Rundeck TCP KeepAlive triggered automated Retry"
   retry:
     delay: 1m
     retry: 3
