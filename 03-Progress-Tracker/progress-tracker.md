@@ -230,8 +230,8 @@
 | Aug 29, 2026 | Sat | **Core Concepts**: Services Cluster IP (04:02)<br>**Core Concepts**: Services – Loadbalancer (03:42) | 7m 44s | ✅ |
 | Aug 30, 2026 | Sun | **Core Concepts**: Practice Test Services (—)<br>**Core Concepts**: Solution: Services (optional) (05:01) | 5m 1s | ✅ |
 | Aug 31, 2026 | Mon | **Core Concepts**: Namespaces (08:23)<br>**Core Concepts**: Practice Test Namespaces (—) | 8m 23s | ✅ |
-| Sep 01, 2026 | Tue | ✅ **Core Concepts**: Solution: Namespaces (optional) (05:03)<br>**Core Concepts**: Imperative vs Declarative (13:06)<br>**Core Concepts**: Certification Tips – Imperative Commands with Kubectl (—) | 18m 9s | ☐ |
-| Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ☐ |
+| Sep 01, 2026 | Tue | ✅ **Core Concepts**: Solution: Namespaces (optional) (05:03)<br>**Core Concepts**: Imperative vs Declarative (13:06)<br>**Core Concepts**: Certification Tips – Imperative Commands with Kubectl (—) | 18m 9s | ✅ |
+| Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ✅ |
 | Sep 03, 2026 | Thu | **Core Concepts**: Kubectl Apply Command (04:38)<br>**Scheduling**: Scheduling Section Introduction (00:54) | 5m 32s | ☐ |
 | Sep 04, 2026 | Fri | **Scheduling**: Manual Scheduling (02:31)<br>**Scheduling**: Practice Test Manual Scheduling (—) | 2m 31s | ☐ |
 | Sep 05, 2026 | Sat | **Scheduling**: Solution: Manual Scheduling (optional) (03:22)<br>**Scheduling**: Labels and Selectors (05:47) | 9m 9s | ☐ |
