@@ -189,7 +189,7 @@ Create a file called `failover-test-job.yaml` and upload it to Rundeck:
       email:
         recipients: imranshs08@gmail.com
         subject: "[ALERT] Rundeck Azure SQL Connectivity Failure"
-    onretry:
+    onretryablefailure:
       email:
         recipients: imranshs08@gmail.com
         subject: "[RETRY] Rundeck TCP KeepAlive triggered automated Retry"
