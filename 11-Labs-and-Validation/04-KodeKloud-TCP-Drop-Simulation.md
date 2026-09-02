@@ -14,13 +14,13 @@ Create and apply `database.yaml`:
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-svc
+  name: db-svc # The internal cluster DNS name Rundeck will use to connect
   namespace: rundeck
 spec:
   ports:
-  - port: 5432
+  - port: 5432 # Standard PostgreSQL port
   selector:
-    app: postgres
+    app: postgres # Routes traffic to our DB pod
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,10 +39,10 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: postgres:15-alpine
+        image: postgres:15-alpine # Lightweight Alpine image for fast lab provisioning
         env:
         - name: POSTGRES_PASSWORD
-          value: "mypassword"
+          value: "mypassword" # Hardcoded for lab purposes only
 ```
 ```bash
 kubectl create namespace rundeck
@@ -63,11 +63,16 @@ metadata:
   namespace: rundeck
 data:
   rundeck-config.properties: |-
+    # --- Critical TCP Resilience Parameters ---
+    # socketTimeout=60000 -> Forces Java to abort hanging queries after 60s
+    # tcpKeepAlive=true -> Forces OS to send idle heartbeats to the postgres service
     dataSource.url = jdbc:postgresql://db-svc:5432/postgres?socketTimeout=60000&tcpKeepAlive=true
     dataSource.username = postgres
     dataSource.password = mypassword
-    dataSource.testOnBorrow = true
-    dataSource.validationQuery = "SELECT 1"
+    
+    # --- Hikari Connection Pool Safety ---
+    dataSource.testOnBorrow = true # Validates connection is alive before assigning to a job
+    dataSource.validationQuery = "SELECT 1" # The dummy query used for validation
 
     # --- FREE SMTP Email Notifications (via Gmail) ---
     grails.mail.host = smtp.gmail.com
@@ -75,7 +80,7 @@ data:
     grails.mail.username = imranshs08@gmail.com
     grails.mail.password = your-16-char-app-password
     grails.mail.default.from = imranshs08@gmail.com
-    grails.mail.props.mail.smtp.starttls.enable = true
+    grails.mail.props.mail.smtp.starttls.enable = true # Enforces TLS for Google Security
     grails.mail.props.mail.smtp.auth = true
 ---
 apiVersion: apps/v1
@@ -84,7 +89,7 @@ metadata:
   name: rundeck
   namespace: rundeck
 spec:
-  replicas: 1
+  replicas: 1 # Open-source Rundeck does not support multi-replica clustering
   selector:
     matchLabels:
       app: rundeck
@@ -95,13 +100,13 @@ spec:
     spec:
       containers:
       - name: rundeck
-        image: rundeck/rundeck:4.17.0
+        image: rundeck/rundeck:4.17.0 # Official fixed image tag to prevent layout breakage
         ports:
         - containerPort: 4440
         volumeMounts:
         - name: rundeck-config-volume
           mountPath: /home/rundeck/server/config/rundeck-config.properties
-          subPath: rundeck-config.properties
+          subPath: rundeck-config.properties # CRITICAL: Prevents the ConfigMap from wiping out the rest of the /config directory!
       volumes:
       - name: rundeck-config-volume
         configMap:
