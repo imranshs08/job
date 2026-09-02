@@ -189,6 +189,17 @@ kubectl logs -l app=rundeck -n rundeck -f
 Instead of hanging for 4 hours, within **exactly 60 seconds**, the Rundeck pod will throw a `SocketTimeoutException`. The HikariCP connection pool will instantly shred the dead JDBC connections.
 The Rundeck scheduler will recognize the failure, apply the native Job Retry logic, and cleanly restart the job 1 minute later (connecting to the newly stabilized Azure SQL secondary instance), completely bypassing the maintenance outage!
 
+### 🧪 Alternative: Free Local Simulation (KodeKloud / Minikube)
+Azure SQL MI is extremely expensive ($700+/mo) and takes hours to provision. You can perfectly simulate this exact TCP drop behavior 100% for free using a local Kubernetes Sandbox.
+
+1. **Deploy a Free Database Pod:** Instead of Azure SQL, deploy a basic `postgres` pod in your cluster and expose it via a ClusterIP service (`db-svc`). Update the ConfigMap JDBC string to point to `jdbc:postgresql://db-svc:5432/...`.
+2. **Execute the Rundeck Job:** Trigger the 8-minute "Database Resilience Tester" job.
+3. **Trigger the Chaos (The Failover Simulation):** While the Rundeck job is running, forcefully crash the database pod to mimic Azure dropping the node natively:
+   ```bash
+   kubectl delete pod postgres-0 --force --grace-period=0
+   ```
+4. **Observe the Exact Same Success Pattern:** Kubernetes instantly severs the network route. Rundeck hits the 60-second KeepAlive timeout, cleanly drops the socket, and initiates the 1-minute retry bypass!
+
 ---
 
 ## 🌩️ Real-World Interview & Business Case Deep Dive
