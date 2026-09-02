@@ -199,7 +199,7 @@ Create a file called `failover-test-job.yaml` and upload it to Rundeck:
   scheduleEnabled: true
   sequence:
     commands:
-    - exec: |
+    - script: |
         #!/bin/bash
         STATE_FILE="/tmp/rundeck_job_state.txt"
         START_POINT=1
