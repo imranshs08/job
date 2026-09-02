@@ -52,8 +52,22 @@ kubectl apply -f database.yaml
 ---
 
 ## Step 2: Deploy Rundeck with Defensive JDBC Tuning
-Here we inject the critical `socketTimeout=60000` and `tcpKeepAlive=true` parameters into the ConfigMap.
 
+### Create Kubernetes Secret (Security Best Practice)
+Create and apply `rundeck-secret.yaml`:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rundeck-secrets
+  namespace: rundeck
+type: Opaque
+data:
+  # Generate this placeholder by running in terminal: echo -n 'abcd efgh ijkl mnop' | base64
+  SMTP_APP_PASSWORD: <BASE64_ENCODED_APP_PASSWORD_PLACEHOLDER> 
+```
+
+### Create Rundeck Configuration & Deployment
 Create and apply `rundeck-sandbox.yaml`:
 ```yaml
 apiVersion: v1
@@ -78,7 +92,7 @@ data:
     grails.mail.host = smtp.gmail.com
     grails.mail.port = 587
     grails.mail.username = imranshs08@gmail.com
-    grails.mail.password = your-16-char-app-password
+    grails.mail.password = ${SMTP_APP_PASSWORD}
     grails.mail.default.from = imranshs08@gmail.com
     grails.mail.props.mail.smtp.starttls.enable = true # Enforces TLS for Google Security
     grails.mail.props.mail.smtp.auth = true
@@ -101,6 +115,12 @@ spec:
       containers:
       - name: rundeck
         image: rundeck/rundeck:4.17.0 # Official fixed image tag to prevent layout breakage
+        env:
+        - name: SMTP_APP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rundeck-secrets
+              key: SMTP_APP_PASSWORD
         ports:
         - containerPort: 4440
         volumeMounts:

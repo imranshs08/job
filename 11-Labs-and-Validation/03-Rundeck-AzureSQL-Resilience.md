@@ -39,9 +39,23 @@ az sql mi create \
 
 The root cause of silent connection drops is Java's default indefinite wait time for TCP packets. When Azure fails over the database, Java doesn't know. 
 
-### Step 1: Update Rundeck ConfigMap or Secret
-You must inject aggressive timeout settings into the JDBC driver.
+### Step 1: Create the Kubernetes Secret (Security Best Practice)
+Never hardcode passwords in a ConfigMap! We will store the Google App Password inside a K8s Secret and inject it as an environment variable.
 
+Create `rundeck-secret.yaml`:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rundeck-secrets
+  namespace: rundeck
+type: Opaque
+data:
+  # Generate this placeholder by running in terminal: echo -n 'abcd efgh ijkl mnop' | base64
+  SMTP_APP_PASSWORD: <BASE64_ENCODED_APP_PASSWORD_PLACEHOLDER> 
+```
+
+### Step 2: Update Rundeck ConfigMap
 Create or update the `rundeck-config.yaml` Kubernetes manifest:
 ```yaml
 apiVersion: v1
@@ -65,7 +79,7 @@ data:
     grails.mail.host = smtp.gmail.com
     grails.mail.port = 587
     grails.mail.username = imranshs08@gmail.com
-    grails.mail.password = your-16-char-app-password
+    grails.mail.password = ${SMTP_APP_PASSWORD}
     grails.mail.default.from = imranshs08@gmail.com
     # Required for Gmail's TLS enforcement:
     grails.mail.props.mail.smtp.starttls.enable = true
@@ -102,6 +116,12 @@ spec:
       containers:
       - name: rundeck
         image: rundeck/rundeck:4.17.0 # Pin your image tag in production!
+        env:
+        - name: SMTP_APP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rundeck-secrets
+              key: SMTP_APP_PASSWORD
         ports:
         - containerPort: 4440
         volumeMounts:
