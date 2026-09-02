@@ -1,0 +1,70 @@
+Name:             rundeck-54ddb79c4f-84gvc
+Namespace:        rundeck
+Priority:         0
+Service Account:  default
+Node:             rundeck-lab/192.168.49.2
+Start Time:       Thu, 03 Sep 2026 04:44:13 +0530
+Labels:           app=rundeck
+                  pod-template-hash=54ddb79c4f
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.4
+IPs:
+  IP:           10.244.0.4
+Controlled By:  ReplicaSet/rundeck-54ddb79c4f
+Containers:
+  rundeck:
+    Container ID:   docker://4954b197884264634f28b8843625220408bd849a44216152d08c461851b30000
+    Image:          rundeck/rundeck:4.17.0
+    Image ID:       docker-pullable://rundeck/rundeck@sha256:4999ee3b4d46c5c10d640df72eb4a946892ce884555978cb6f2b85ed42471928
+    Port:           4440/TCP
+    Host Port:      0/TCP
+    State:          Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Thu, 03 Sep 2026 04:46:40 +0530
+      Finished:     Thu, 03 Sep 2026 04:46:40 +0530
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Thu, 03 Sep 2026 04:46:10 +0530
+      Finished:     Thu, 03 Sep 2026 04:46:10 +0530
+    Ready:          False
+    Restart Count:  3
+    Environment:
+      SMTP_APP_PASSWORD:  <set to the key 'SMTP_APP_PASSWORD' in secret 'rundeck-secrets'>  Optional: false
+    Mounts:
+      /home/rundeck/server/config/rundeck-config.properties from rundeck-config-volume (rw,path="rundeck-config.properties")
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vjpjm (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  rundeck-config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      rundeck-config
+    Optional:  false
+  kube-api-access-vjpjm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  2m49s              default-scheduler  Successfully assigned rundeck/rundeck-54ddb79c4f-84gvc to rundeck-lab
+  Normal   Pulling    2m48s              kubelet            Pulling image "rundeck/rundeck:4.17.0"
+  Normal   Pulled     70s                kubelet            Successfully pulled image "rundeck/rundeck:4.17.0" in 1m37.642s (1m37.642s including waiting). Image size: 663197581 bytes.
+  Normal   Created    22s (x4 over 65s)  kubelet            Container created
+  Normal   Started    22s (x4 over 65s)  kubelet            Container started
+  Normal   Pulled     22s (x3 over 65s)  kubelet            Container image "rundeck/rundeck:4.17.0" already present on machine and can be accessed by the pod
+  Warning  BackOff    21s (x4 over 64s)  kubelet            Back-off restarting failed container rundeck in pod rundeck-54ddb79c4f-84gvc_rundeck(d5173e1e-fe32-4ddf-813e-c250efaf2361)
