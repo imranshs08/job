@@ -242,3 +242,27 @@ Create a file called `failover-test-job.yaml` and upload it to Rundeck:
 You will see Rundeck hang for exactly **60 seconds** (dictated by `socketTimeout=60000`). Then, it will throw a violent `SocketTimeoutException` inside the logs and kill the job attempt. 
 
 The scheduler will wait **1 minute** (your configured delay) and automatically retry the job. By that time, the Kubernetes ReplicaSet will have already replaced the dead `postgres` pod. The job will successfully reconnect and finish! You have officially proven enterprise resilience without spending a dime in Azure!
+
+
+---
+
+## Post-Lab Analysis: Azure SQL vs. Local Minikube Sandbox
+In this lab, when you severed the target Postgres Pod, you successfully validated the `socketTimeout=60000` Fail-Fast JVM abort threshold. However, you likely encountered a `500 Internal Server Error (relation "project" does not exist)` upon reloading the Rundeck UI.
+
+### Why did the GUI crash after the Fail-Fast?
+Because this Minikube sandbox deployed PostgreSQL as a **Stateless Pod** rather than a StatefulSet with a Persistent Volume (PVC), when Kubernetes aggressively respawned the destroyed database, it mounted an **empty hard drive**. Rundeck aggressively retried the JDBC connection, successfully authenticated into the new database, but crashed attempting to read the `project` tables because the schema was mathematically vaporized!
+
+### The True Cloud Enterprise Behavior
+In a production **Azure SQL Managed Instance** environment:
+1. Microsoft orchestrates the Failover event.
+2. The active network socket is silently severed (triggering our 60-second tripwire).
+3. Rundeck catches the SQL Exception and triggers the Retry block.
+4. **The Storage Remains Intact**: Because Azure SQL separates Compute from Storage, the secondary Azure node spins up with perfectly healthy `project` tables. 
+5. Rundeck successfully connects, reconstructs the schema metadata, and seamlessly achieves Idempotent Job Completion!
+
+### How to reset your Sandbox
+To force Rundeck to rebuild the SQL tables from scratch on your newly spawned empty Postgres pod, you simply must bounce the Rundeck JVM:
+```bash
+kubectl delete pod -n rundeck -l app=rundeck --force
+```
+*(Wait 1-2 minutes for the JVM to spin up before re-establishing your `kubectl port-forward`!)*
