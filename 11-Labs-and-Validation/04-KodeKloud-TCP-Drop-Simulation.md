@@ -68,6 +68,15 @@ data:
     dataSource.password = mypassword
     dataSource.testOnBorrow = true
     dataSource.validationQuery = "SELECT 1"
+
+    # --- FREE SMTP Email Notifications (via Gmail) ---
+    grails.mail.host = smtp.gmail.com
+    grails.mail.port = 587
+    grails.mail.username = imranshs08@gmail.com
+    grails.mail.password = your-16-char-app-password
+    grails.mail.default.from = imranshs08@gmail.com
+    grails.mail.props.mail.smtp.starttls.enable = true
+    grails.mail.props.mail.smtp.auth = true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -98,6 +107,14 @@ spec:
         configMap:
           name: rundeck-config
 ```
+
+> **🔑 Gmail App Password Setup:**
+> You must generate a secure 16-character App Password to allow Rundeck to route emails through Google.
+> 1. Go to your **Google Account -> Security**.
+> 2. Ensure **2-Step Verification** is turned ON.
+> 3. Search for **App Passwords** and create one named "Rundeck Sandbox".
+> 4. Paste the 16-character string into `grails.mail.password` in the ConfigMap above!
+
 ```bash
 kubectl apply -f rundeck-sandbox.yaml
 # Wait for the Rundeck pod to become completely Ready
@@ -108,7 +125,9 @@ kubectl get pods -w -n rundeck
 
 ## Step 3: Trigger The Chaos (Simulation)
 
-Once Rundeck is online, log into its GUI via `kubectl port-forward svc/rundeck 4440:4440`, and create a job with a 3-minute sleep loop and a **Retry configuration (Retry: 3, Delay: 1m)**.
+Once Rundeck is online, log into its GUI via `kubectl port-forward svc/rundeck 4440:4440`. 
+
+Create a job with a 3-minute sleep loop, a **Retry configuration (Retry: 3, Delay: 1m)**, and an **Email Notification** (On Retry/On Failure routing to `imranshs08@gmail.com`).
 
 **Execute the test exactly in this sequence:**
 1. Start the Job in the Rundeck GUI.
