@@ -55,27 +55,68 @@ data:
   SMTP_APP_PASSWORD: <BASE64_ENCODED_APP_PASSWORD_PLACEHOLDER> 
 ```
 
-### Step 2: Update Rundeck ConfigMap
-Create or update the `rundeck-config.yaml` Kubernetes manifest:
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: rundeck-config
-  namespace: rundeck
-data:
-  rundeck-config.properties: |-
-    # Aggressive Socket Timeouts & TCP KeepAlive
-    dataSource.url = jdbc:sqlserver://sqlmi-rundeck-backend.database.windows.net:1433;databaseName=rundeck;socketTimeout=60000;loginTimeout=30;tcpKeepAlive=true
-    
-    # HikariCP Connection Validation (Test on Borrow)
-    dataSource.testOnBorrow = true
-    dataSource.validationQuery = "SELECT 1"
-    
-    # Ensure connections don't live longer than Azure's gateway TCP idle timeout (10 mins)
-    dataSource.maxLifetime = 600000 
+### Step 2: Rundeck Deployment (Env Var Configuration)
+To deploy Rundeck into AKS smoothly, we pass the JDBC and SMTP parameters natively as Environment Variables to prevent permissions crashes!
 
-    # --- FREE SMTP Email Notifications (via Gmail) ---
+Create `rundeck-deployment.yaml`:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: rundeck
+  template:
+    metadata:
+      labels:
+        app: rundeck
+    spec:
+      containers:
+      - name: rundeck
+        image: rundeck/rundeck:4.17.0 
+        ports:
+        - containerPort: 4440
+        env:
+        # --- Critical TCP Resilience Parameters ---
+        - name: RUNDECK_DATABASE_URL
+          value: "jdbc:sqlserver://<your-sql-mi>.database.windows.net:1433;databaseName=rundeck;socketTimeout=60000;loginTimeout=30;tcpKeepAlive=true"
+        - name: RUNDECK_DATABASE_USERNAME
+          value: "sqladmin"
+        - name: RUNDECK_DATABASE_PASSWORD
+          value: "your-complex-db-password"
+        
+        # --- SMTP Email Notifications ---
+        - name: RUNDECK_GRAILS_MAIL_HOST
+          value: "smtp.gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_PORT
+          value: "587"
+        - name: RUNDECK_GRAILS_MAIL_USERNAME
+          value: "imranshs08@gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_DEFAULT_FROM
+          value: "imranshs08@gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_PROPS_MAIL_SMTP_STARTTLS_ENABLE
+          value: "true"
+        - name: RUNDECK_GRAILS_MAIL_PROPS_MAIL_SMTP_AUTH
+          value: "true"
+        - name: SMTP_APP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rundeck-secrets
+              key: SMTP_APP_PASSWORD
+        - name: RUNDECK_GRAILS_MAIL_PASSWORD
+          value: "$(SMTP_APP_PASSWORD)"
+```
+
+```bash
+kubectl apply -f rundeck-deployment.yaml
+# Wait for pods to stabilize
+kubectl get pods -n rundeck -w
+```
+--- FREE SMTP Email Notifications (via Gmail) ---
     grails.mail.host = smtp.gmail.com
     grails.mail.port = 587
     grails.mail.username = imranshs08@gmail.com

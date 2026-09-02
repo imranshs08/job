@@ -85,43 +85,16 @@ data:
   SMTP_APP_PASSWORD: <BASE64_ENCODED_APP_PASSWORD_PLACEHOLDER> 
 ```
 
-### Create Rundeck Configuration & Deployment
+### Create Rundeck Deployment (Env Var Configuration)
 Create and apply `rundeck-sandbox.yaml`:
 ```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: rundeck-config
-  namespace: rundeck
-data:
-  rundeck-config.properties: |-
-    # --- Critical TCP Resilience Parameters ---
-    # socketTimeout=60000 -> Forces Java to abort hanging queries after 60s
-    # tcpKeepAlive=true -> Forces OS to send idle heartbeats to the postgres service
-    dataSource.url = jdbc:postgresql://db-svc:5432/postgres?socketTimeout=60000&tcpKeepAlive=true
-    dataSource.username = postgres
-    dataSource.password = mypassword
-    
-    # --- Hikari Connection Pool Safety ---
-    dataSource.testOnBorrow = true # Validates connection is alive before assigning to a job
-    dataSource.validationQuery = "SELECT 1" # The dummy query used for validation
-
-    # --- FREE SMTP Email Notifications (via Gmail) ---
-    grails.mail.host = smtp.gmail.com
-    grails.mail.port = 587
-    grails.mail.username = imranshs08@gmail.com
-    grails.mail.password = ${SMTP_APP_PASSWORD}
-    grails.mail.default.from = imranshs08@gmail.com
-    grails.mail.props.mail.smtp.starttls.enable = true # Enforces TLS for Google Security
-    grails.mail.props.mail.smtp.auth = true
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rundeck
   namespace: rundeck
 spec:
-  replicas: 1 # Open-source Rundeck does not support multi-replica clustering
+  replicas: 1 
   selector:
     matchLabels:
       app: rundeck
@@ -132,41 +105,44 @@ spec:
     spec:
       containers:
       - name: rundeck
-        image: rundeck/rundeck:4.17.0 # Official fixed image tag to prevent layout breakage
+        image: rundeck/rundeck:4.17.0 
+        ports:
+        - containerPort: 4440
         env:
+        # --- Critical TCP Resilience Parameters ---
+        - name: RUNDECK_DATABASE_URL
+          value: "jdbc:postgresql://db-svc:5432/postgres?socketTimeout=60000&tcpKeepAlive=true"
+        - name: RUNDECK_DATABASE_USERNAME
+          value: "postgres"
+        - name: RUNDECK_DATABASE_PASSWORD
+          value: "mypassword"
+        
+        # --- FREE SMTP Email Notifications (via Gmail) ---
+        - name: RUNDECK_GRAILS_MAIL_HOST
+          value: "smtp.gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_PORT
+          value: "587"
+        - name: RUNDECK_GRAILS_MAIL_USERNAME
+          value: "imranshs08@gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_DEFAULT_FROM
+          value: "imranshs08@gmail.com"
+        - name: RUNDECK_GRAILS_MAIL_PROPS_MAIL_SMTP_STARTTLS_ENABLE
+          value: "true"
+        - name: RUNDECK_GRAILS_MAIL_PROPS_MAIL_SMTP_AUTH
+          value: "true"
         - name: SMTP_APP_PASSWORD
           valueFrom:
             secretKeyRef:
               name: rundeck-secrets
               key: SMTP_APP_PASSWORD
-        ports:
-        - containerPort: 4440
-        volumeMounts:
-        - name: rundeck-config-volume
-          mountPath: /home/rundeck/server/config/rundeck-config.properties
-          subPath: rundeck-config.properties # CRITICAL: Prevents the ConfigMap from wiping out the rest of the /config directory!
-      volumes:
-      - name: rundeck-config-volume
-        configMap:
-          name: rundeck-config
+        - name: RUNDECK_GRAILS_MAIL_PASSWORD
+          value: "$(SMTP_APP_PASSWORD)"
 ```
-
-> **🔑 Gmail App Password Setup:**
-> You must generate a secure 16-character App Password to allow Rundeck to route emails through Google.
-> 1. Go to your **Google Account -> Security**.
-> 2. Ensure **2-Step Verification** is turned ON.
-> 3. Search for **App Passwords** and create one named "Rundeck Sandbox".
-> 4. Paste the 16-character string into `grails.mail.password` in the ConfigMap above!
-
 ```bash
 kubectl apply -f rundeck-sandbox.yaml
 # Wait for the Rundeck pod to become completely Ready
 kubectl get pods -w -n rundeck
 ```
-
----
-
-## Step 3: Trigger The Chaos (Simulation)
 
 Once Rundeck is online, log into its GUI via `kubectl port-forward svc/rundeck 4440:4440`. 
 
