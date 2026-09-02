@@ -213,7 +213,7 @@ vt_content = """# 📺 Complete Video Tracker — 158 Videos
 3. Review progress every Sunday evening.
 4. Focus is key. Consistent 1-2 videos a day will let you hit Jan 1 completely ready.
 """
-with open(r'08-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
+with open(r'13-Video-Tracker\video-tracker.md', 'w', encoding='utf-8') as f:
     f.write(vt_content)
 
 print("SUCCESS: 5-MONTH PLAN REGENERATED!")
