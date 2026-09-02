@@ -62,6 +62,42 @@ data:
     dataSource.maxLifetime = 600000 
 ```
 
+### Step 1.5: Rundeck Deployment (The Image & Mounting)
+To deploy Rundeck into AKS, you must use the official Docker image and map the ConfigMap you just created into the container's configuration path.
+
+Create `rundeck-deployment.yaml`:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rundeck
+  namespace: rundeck
+spec:
+  replicas: 1 # Rundeck clustered mode is a paid enterprise feature; open-source usually runs as a single robust replica
+  selector:
+    matchLabels:
+      app: rundeck
+  template:
+    metadata:
+      labels:
+        app: rundeck
+    spec:
+      containers:
+      - name: rundeck
+        image: rundeck/rundeck:4.17.0 # Pin your image tag in production!
+        ports:
+        - containerPort: 4440
+        volumeMounts:
+        - name: rundeck-config-volume
+          mountPath: /home/rundeck/server/config/rundeck-config.properties
+          subPath: rundeck-config.properties
+      volumes:
+      - name: rundeck-config-volume
+        configMap:
+          name: rundeck-config
+```
+*Note: We use the `subPath` volume mount trick here so we can inject only the properties file without overwriting the entire default `/home/rundeck/server/config/` directory!*
+
 ### Step 2: Apply the Configuration and Rollout
 ```bash
 # 1. Apply the new config map
