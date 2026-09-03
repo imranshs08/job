@@ -161,21 +161,6 @@ To prove that our new Architecture defeats Domain Controller LDAP Blindness:
 
 ---
 
-## Step 5: Simulating Distributed Linux Logins (Optional)
-To simulate a network node (like a Dynatrace active gate or standard Linux App Server) cross-authenticating to your domain:
-
-1. Spin up a transient Linux pod simulating an external server:
-   ```bash
-   kubectl run mock-linux-server -it --image=ubuntu --rm -- bash
-   ```
-2. Once dropped into the root prompt of the remote server, execute:
-   ```bash
-   apt-get update && apt-get install -y ldap-utils
-   ldapwhoami -x -D "uid=imran,dc=enterprise,dc=local" -w mysecurepassword -H ldap://mock-ad-svc:389
-   ```
-
----
-
 ## Alternative 1: The Native Bash Audit Exporter (No SIEM Required)
 If your organization does not have an active Splunk indexer, route the logs to a text file and natively email them out daily.
 
@@ -227,3 +212,34 @@ $ExtractedData = $AuditLogs | Where-Object { $_.Properties[8].Value -eq 2 -or $_
 $ExtractedData | Export-Csv -Path $ReportPath -NoTypeInformation
 ```
 2. Attach `DC_Audit_Report.csv` via the Email plugin and Save!
+
+---
+
+## Alternative 3: Dynatrace ActiveGate Log Ingestion (Grail)
+Since Dynatrace natively serves as the core monitoring platform in this environment, routing Jenkins Syslog natively into **Dynatrace Log Monitoring v2 (Grail)** is the ultimate unified architectural decision. Dynatrace uniquely allows you to configure your **Environment ActiveGate** as a Syslog Receiver, completely eliminating the need to install a OneAgent directly inside the Jenkins container!
+
+### 1. Enable ActiveGate Syslog Listener
+On your physical ActiveGate instance, edit the `custom.properties` file:
+```ini
+# /var/lib/dynatrace/gateway/config/custom.properties
+[collector]
+UDPSyslogPort = 514
+```
+*Restart the ActiveGate service (`systemctl restart dynatracegateway`).*
+
+### 2. Route Jenkins to Dynatrace
+1. Inside the Jenkins GUI, go to **Manage Jenkins** ➡️ **System** ➡️ **Audit Trail**.
+2. Click **Add Logger** ➡️ **Syslog Server**.
+3. **Syslog Server Hostname:** `<YOUR_ACTIVEGATE_IP_ADDRESS>`
+4. **Port:** `514`
+5. **Facility:** `AUTH`
+6. **Message Format:** `RFC3164`
+7. Click **Save**.
+
+### 3. Davis AI Log Metric Extraction
+Inside the Dynatrace SaaS UI, navigate to **Logs**. You will instantly start receiving the raw Jenkins UDP payloads!
+To bind this data directly to the Davis AI engine for intelligent alerting:
+1. Go to **Settings** ➡️ **Log Monitoring** ➡️ **Log metrics**.
+2. Create a new metric key: `jenkins.auth.success`
+3. **Log query:** `content contains "auth: SUCCESS User" AND process.name="Jenkins"`
+4. Davis AI will automatically profile this metric over time and generate an alert if anomalous authentication spikes occur outside of standard operational baselines!
