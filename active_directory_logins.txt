@@ -1,0 +1,5 @@
+=== JENKINS DOMAIN LOGINS FOR 2026-09-03 ===
+
+No AD Logins tracked today.
+
+End of Report.
