@@ -1,0 +1,14 @@
+dn: uid=imran,dc=enterprise,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: imran
+sn: Imran
+givenName: H
+cn: Imran H
+displayName: Imran H
+uidNumber: 10000
+gidNumber: 10000
+userPassword: mysecurepassword
+homeDirectory: /home/imran
+loginShell: /bin/bash

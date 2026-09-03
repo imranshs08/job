@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-siem
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mock-siem
+  template:
+    metadata:
+      labels:
+        app: mock-siem
+    spec:
+      containers:
+      - name: mock-siem
+        image: busybox:latest
+        command: ["nc", "-lu", "-p", "514"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mock-siem-svc
+  namespace: default
+spec:
+  ports:
+  - port: 514
+    protocol: UDP
+  selector:
+    app: mock-siem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-ad
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mock-ad
+  template:
+    metadata:
+      labels:
+        app: mock-ad
+    spec:
+      containers:
+      - name: mock-ad
+        image: osixia/openldap:1.5.0
+        env:
+        - name: LDAP_ORGANISATION
+          value: "Enterprise"
+        - name: LDAP_DOMAIN
+          value: "enterprise.local"
+        - name: LDAP_ADMIN_PASSWORD
+          value: "adminpassword"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mock-ad-svc
+  namespace: default
+spec:
+  ports:
+  - port: 389
+  selector:
+    app: mock-ad
