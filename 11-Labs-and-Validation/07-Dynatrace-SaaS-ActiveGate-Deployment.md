@@ -1,4 +1,4 @@
-# Lab 08: Dynatrace SaaS ActiveGate Syslog Deployment
+# Lab 07: Dynatrace SaaS ActiveGate Syslog Deployment
 
 ## Architecture Objective
 To validate the **Jenkins Authentication -> Syslog -> Dynatrace Log Monitoring v2** pipeline discussed in Lab 06 physically, we must deploy a true Enterprise Environment ActiveGate into our Minikube cluster. 
