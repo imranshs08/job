@@ -100,3 +100,29 @@ kubectl apply -f jenkins.yaml
 ```
 
 *Time the logs! It will hit "Jenkins is fully up and running" in less than 15 seconds!*
+
+
+---
+
+## Step 5: Bypassing the Setup Wizard (GUI Validation)
+Because we passed `ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"` inside our Dockerfile, Jenkins will completely skip the infamous 15-minute "Unlock Jenkins" and "Install Suggested Plugins" screens!
+
+To access the pure, instantly-loaded dashboard, open a tunnel to the Kubernetes service:
+```bash
+kubectl port-forward svc/jenkins-svc 8080:8080 -n default
+```
+1. Open your browser and navigate to `http://localhost:8080`.
+2. Notice you drop directly into the Dashboard! *(For true enterprise production, you would mount a JCasC `casc.yaml` ConfigMap to automatically generate the `admin` user and lock the Security Realm, but for this Sandbox validation, anonymous admin access allows us to instantly verify the plugins!)*
+
+---
+
+## Step 6: Validating the Pre-Baked Immutable Plugins
+The final step is to prove our immutable architecture worked and we did not download any plugins over the internet during pod startup!
+
+1. In the Jenkins Dashboard, click **Manage Jenkins** (gear icon on the left).
+2. Click **Plugins**.
+3. Click the **Installed plugins** tab on the left.
+4. Search for `Configuration as Code` or `Kubernetes`.
+5. You will see they are fully installed, loaded, and active! 
+
+Because they were baked into the Docker Image filesystem at compile time natively, Jenkins loaded them off the solid-state drive into memory in milliseconds. This enables infinite Horizontal Pod Autoscaling (HPA) of Jenkins Controllers without network bottlenecks!
