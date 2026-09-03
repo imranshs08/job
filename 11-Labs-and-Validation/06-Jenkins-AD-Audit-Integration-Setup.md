@@ -197,3 +197,56 @@ echo "End of Report." >> $REPORT_FILE
 5. Click **Save** and trigger a test execution! 
 
 This achieves perfect compliance reporting, isolating the Active Directory footprint without requiring a centralized logging environment!
+
+
+---
+
+## Alternative Step 5: Power-Extracting from the Domain Controller directly
+If your architecture firmly mandates that all logs are physically parsed from the Domain Controller itself (where your Linux Dynatrace active gates and Windows Servers push their authentications), Jenkins can act as the Central Automation Orchestrator querying the Windows Server via WinRM!
+
+### The Architecture:
+To ensure Jenkins logins show up on the DC, you must use the **Active Directory Plugin** natively on a Domain-Joined Jenkins Server (relying on ADSI/SSPI), OR wrap Jenkins behind an IIS/Nginx reverse proxy enforcing explicit Kerberos ticket negotiations. 
+
+Once your logs are safely landing on the Domain Controller, we use Jenkins to harvest them over PowerShell and dispatch the Email!
+
+### The Jenkins DC-Polling Job:
+1. Create a `Freestyle Project` named `DC-Security-Daily-Report`.
+2. Under **Build Environment**, inject a credential for `DOMAIN\\SVC_JENKINS_AUDIT` (a service account with WinRM reading privileges).
+3. Under **Build Steps**, select **Execute Windows batch command** (or PowerShell):
+
+```powershell
+# jenkins_dc_audit.ps1
+param (
+    [string]$DomainController = "DC01.enterprise.local"
+)
+
+$Yesterday = (Get-Date).AddDays(-1)
+$ReportPath = "${env:WORKSPACE}\\DC_Audit_Report.csv"
+
+# Query the physical Domain Controller for Event ID 4624 (Successful Logons)
+Write-Output "Connecting to Domain Controller: $DomainController..."
+$AuditLogs = Get-WinEvent -ComputerName $DomainController -FilterHashtable @{
+    LogName = "Security"
+    Id = 4624
+    StartTime = $Yesterday
+} -ErrorAction SilentlyContinue
+
+# Filter for legitimate Interactive (Type 2) or Network (Type 3) authentications
+$ExtractedData = $AuditLogs | Where-Object { 
+    $_.Properties[8].Value -eq 2 -or $_.Properties[8].Value -eq 3 
+} | Select-Object TimeCreated, 
+                  @{Name="User";Expression={$_.Properties[5].Value}},
+                  @{Name="Source IP";Expression={$_.Properties[18].Value}}
+
+$ExtractedData | Export-Csv -Path $ReportPath -NoTypeInformation
+Write-Output "Audit physically extracted to $ReportPath"
+```
+
+### Dispatching the Report:
+1. Under **Post-build Actions**, click **Editable Email Notification**.
+2. **Project Recipient List:** `security-team@enterprise.local`
+3. **Subject:** `Global Enterprise DC Login Audit - $BUILD_ID`
+4. **Attachments:** `DC_Audit_Report.csv`
+5. Click **Save** and build!
+
+This forces Jenkins to systematically execute a Secure RPC call to your Domain Controller, crunch the global `4624` security events (which now include your Windows VMs, Linux nodes, AND Jenkins logins), format them natively into a clean `.csv` spreadsheet, and automatically email them out!
