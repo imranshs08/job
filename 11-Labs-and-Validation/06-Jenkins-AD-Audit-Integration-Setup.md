@@ -105,3 +105,49 @@ kubectl get pods -n default
 ```
 
 Once running, we will re-configure your Jenkins Security Administration to validate against `mock-ad-svc` instead of the internal realm, proving 100% active parity!
+
+
+---
+
+## Step 3: Integrating Jenkins to the Mock Subsystems
+Now that our Mock Active Directory and Mock Splunk indexers are running, we must link Jenkins.
+
+1. Port-forward the Jenkins instance: `kubectl port-forward svc/jenkins-svc 8080:8080 -n default`
+2. Open your browser and navigate to `http://localhost:8080`.
+
+### Binding Active Directory
+1. Go to **Manage Jenkins** ➡️ **Plugins** ➡️ **Available Plugins**.
+2. Install the **LDAP** plugin and **Audit Trail** plugin. (Click "Install without restart").
+3. Go to **Manage Jenkins** ➡️ **Security**.
+4. Under `Security Realm`, click the dropdown and choose **LDAP**.
+5. **Server:** `ldap://mock-ad-svc:389`
+6. **root DN:** `dc=enterprise,dc=local`
+7. **Manager DN:** `cn=admin,dc=enterprise,dc=local`
+8. **Manager Password:** `adminpassword`
+9. Click **Test LDAP settings**. It should say `Success!`. Click **Save**.
+
+### Binding the Syslog SIEM
+1. Go to **Manage Jenkins** ➡️ **System**.
+2. Scroll to the bottom to **Audit Trail**.
+3. Click **Add Logger** ➡️ **Syslog Server**.
+4. **Syslog Server Hostname:** `mock-siem-svc`
+5. **Port:** `514`
+6. **Facility:** `AUTH`
+7. **Message Name:** `Jenkins`
+8. **Message Format:** `RFC3164`
+9. Click **Save**.
+
+---
+
+## Step 4: Validating the Architecture
+To prove that our new Architecture defeats Domain Controller LDAP Blindness:
+
+1. Open an Incognito Window and access `http://localhost:8080`.
+2. Attempt to log in to Jenkins.
+3. Behind the scenes, Jenkins asks the `osixia/openldap` mock container on port 389 for verification.
+4. Jenkins then blasts a Syslog User trace off to Port 514 UDP.
+5. In your terminal, check the Mock Splunk indexer:
+   ```bash
+   kubectl logs deploy/mock-siem -n default
+   ```
+6. You will see the literal raw UDP packet representing the Interactive Logon hit standard output! We have successfully pushed Identity context layer parsing out to the SIEM boundary!
