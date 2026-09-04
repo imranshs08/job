@@ -852,7 +852,7 @@
 
                     const titleRaw = cols[2];
                     const duration = cols[4];
-                    const isDone = cols[5] && cols[5].includes('✅');
+                    const isDone = cols[5] && (cols[5].includes('✅') || cols[5].includes('☑'));
 
                     let titleText = titleRaw;
                     const m = titleRaw.match(/\[(.*?)\]\((.*?)\)/);
@@ -892,7 +892,7 @@
                     if (!plan || plan === '—' || plan.startsWith('-')) return;
                     const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                     const duration = cols[4];
-                    const isDone = cols[5].includes('✅');
+                    const isDone = cols[5].includes('✅') || cols[5].includes('☑');
 
                     if (rowDateStr === fDateCert) {
                         if (isDone) {
@@ -925,7 +925,7 @@
                     const plan = cols[3];
                     if (!plan || plan === '—' || plan.startsWith('-') || plan.startsWith('Date')) return;
                     const planFmt = plan.replace(/<br>/g, '<br>• ').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                    const isDone = cols[4].includes('✅');
+                    const isDone = cols[4].includes('✅') || cols[4].includes('☑');
 
                     if (rowDateStr === fDateCert) {
                         if (isDone) {
