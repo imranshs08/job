@@ -21,7 +21,7 @@
 | 8 | [Day-6 - Linux & Shell Scripting](https://www.youtube.com/watch?v=9jw9F6mcQDo) | Aug 24 | 37m 45s | ✅ | ✅ | ✅ |
 | 9 | [Shell Scripting for DevOps-Shell Scripting Zero 2 Hero-Shell Scripting Interview Q...](https://www.youtube.com/watch?v=zsajhz2_50g) | Aug 25 | 1h 10m | ✅ | ✅ | ✅ |
 | 10 | [Shell Scripting for DevOps - Zero 2 Hero Part-2 - Shell Scripting Interview Q| 10 | [Shell Scripting for DevOps - Zero 2 Hero Part-2 - Shell Scripting Interview Q&A](https://www.youtube.com/watch?v=CyQtk9f646Q) | Aug 26 | 1h 10m | ✅ | ✅ | ✅ |A](https://www.youtube.com/watch?v=F384u5s_0qI) | Aug 26 | 1h 10m | ✅ | ✅ | ✅ |
-| 11 | [Day-7 - Live AWS Project using SHELL SCRIPTING for DevOps - AWS DevOps project](https://www.youtube.com/watch?v=gx5E47R9fGk) | Aug 27 | 28m 11s | ☐ | ☐ | ☐ |
+| 11 | [Day-7 - Live AWS Project using SHELL SCRIPTING for DevOps - AWS DevOps project](https://www.youtube.com/watch?v=gx5E47R9fGk) | Aug 27 | 28m 11s | ☑ | ☑ | ☐ |
 | 12 | [Day-9 - Git and GitHub - What is GIT ? - What is Version Control ?](https://www.youtube.com/watch?v=fIMySI_gZJU) | Aug 27 | 36m 31s | ☐ | ☐ | ☐ |
 | 13 | [Day-10 - Git Branching Strategy - Real World Example - DevOps Interview Question](https://www.youtube.com/watch?v=MCyvYT8FS5w) | Aug 28 | 22m 15s | ☐ | ☐ | ☐ |
 | 14 | [Day-11 - Git Interview Q&A and Commands for DevOps - Real World Example](https://www.youtube.com/watch?v=mT6qrAx14O4) | Aug 29 | 52m 6s | ☐ | ☐ | ☐ |
