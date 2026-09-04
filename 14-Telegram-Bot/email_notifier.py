@@ -17,14 +17,18 @@ from email.mime.text import MIMEText
 import telegram_notifier
 
 # ── Load config ──────────────────────────────────────────────────────────────
-GMAIL_ADDRESS = os.environ.get("GMAIL_ADDRESS")
-GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD")
+GMAIL_ADDRESS      = os.environ.get("GMAIL_ADDRESS")       # sender display address
+BREVO_LOGIN        = os.environ.get("BREVO_LOGIN")
+GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD")  # Brevo SMTP key
 
 if not GMAIL_ADDRESS or not GMAIL_APP_PASSWORD:
     try:
-        from config import GMAIL_ADDRESS, GMAIL_APP_PASSWORD
+        from config import GMAIL_ADDRESS, GMAIL_APP_PASSWORD, BREVO_LOGIN
     except ImportError:
         pass
+
+if not BREVO_LOGIN:
+    BREVO_LOGIN = "b7e208001@smtp-brevo.com"
 
 if not GMAIL_ADDRESS or not GMAIL_APP_PASSWORD:
     print("ERROR: GMAIL credentials not found.")
@@ -153,9 +157,9 @@ def send_email(subject: str, html_body: str) -> bool:
     msg['Subject'] = subject
     msg.attach(MIMEText(html_body, 'html'))
     try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP('smtp-relay.brevo.com', 587)
         server.starttls()
-        server.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
+        server.login(BREVO_LOGIN, GMAIL_APP_PASSWORD)
         server.send_message(msg)
         server.quit()
         return True
