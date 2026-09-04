@@ -46,8 +46,8 @@
 | 34 | **Core Concepts** | Certification Tips – Imperative Commands with Kubectl | — | Sep 01 | ☐ |
 | 35 | **Core Concepts** | Practice Test – Imperative Commands | — | Sep 02 | ☐ |
 | 36 | **Core Concepts** | Solution: Imperative Commands (optional) | 07:52 | Sep 02 | ☐ |
-| 37 | **Core Concepts** | Kubectl Apply Command | 04:38 | Sep 03 | ☐ |
-| 38 | **Scheduling** | Scheduling Section Introduction | 00:54 | Sep 03 | ☐ |
+| 37 | **Core Concepts** | Kubectl Apply Command | 04:38 | Sep 03 | ☑ |
+| 38 | **Scheduling** | Scheduling Section Introduction | 00:54 | Sep 03 | ☑ |
 | 39 | **Scheduling** | Manual Scheduling | 02:31 | Sep 04 | ☐ |
 | 40 | **Scheduling** | Practice Test Manual Scheduling | — | Sep 04 | ☐ |
 | 41 | **Scheduling** | Solution: Manual Scheduling (optional) | 03:22 | Sep 05 | ☐ |
