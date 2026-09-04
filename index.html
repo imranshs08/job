@@ -983,8 +983,8 @@
 
             document.getElementById('ai-weekly-focus').innerText = weeklyFocus;
 
-            const promptIndex = (viewingDate.getDate() + viewingDate.getMonth()) % aiPrompts.length;
-            const intIndex = (viewingDate.getDate() * 2 + viewingDate.getMonth()) % interviewQuestions.length;
+            const promptIndex = Math.floor(Math.random() * aiPrompts.length);
+            const intIndex = Math.floor(Math.random() * interviewQuestions.length);
             document.getElementById('ai-interview-prep').innerText = interviewQuestions[intIndex];
             document.getElementById('ai-prompt-title').innerText = aiPrompts[promptIndex].title;
             document.getElementById('ai-daily-prompt').innerText = aiPrompts[promptIndex].text;
