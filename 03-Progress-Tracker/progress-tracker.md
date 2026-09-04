@@ -31,7 +31,7 @@
 | 18 | [Day-15 - Ansible Zero to Hero](https://www.youtube.com/watch?v=Z6T2r3Xhk5k) | Sep 2 | 55m 51s | ☐ | ☐ | ☐ |
 | 19 | [Day-16 - Infrastructure as Code](https://www.youtube.com/watch?v=G1BRnIHBBig) | Sep 2 | 21m 5s | ☐ | ☐ | ☐ |
 | 20 | [Day-17 -Everything about Terraform -Write Your First Project -Remote Backend -Modu...](https://www.youtube.com/watch?v=CzdfdKWRDB8) | Sep 3 | 1h 17m | ☐ | ☐ | ☐ |
-| 21 | [Day-22 - Project Management tools for DevOps - What a DevOps Engineer does in the ...](https://www.youtube.com/watch?v=h4HdQBnEO04) | Sep 4 | 24m 49s | ☐ | ☐ | ☐ |
+| 21 | [Day-22 - Project Management tools for DevOps - What a DevOps Engineer does in the ...](https://www.youtube.com/watch?v=h4HdQBnEO04) | Sep 4 | 24m 49s | ✅ | ✅ | ✅ |
 | 22 | [Day-23 - Introduction to Containers - Learn about containers in easy way](https://www.youtube.com/watch?v=7JZP345yVjw) | Sep 5 | 25m 10s | ☐ | ☐ | ☐ |
 | 23 | [Day-24 - Docker Zero to Hero Part-1 - Must Watch - Basics to Best Practices](https://www.youtube.com/watch?v=wodLpta-hoQ) | Sep 6 | 49m 54s | ☐ | ☐ | ☐ |
 | 24 | [Day-25 - Docker Containerzation for Django](https://www.youtube.com/watch?v=3IAvr_O6vao) | Sep 7 | 28m 34s | ☐ | ☐ | ☐ |
@@ -233,7 +233,7 @@
 | Sep 01, 2026 | Tue | ✅ **Core Concepts**: Solution: Namespaces (optional) (05:03)<br>**Core Concepts**: Imperative vs Declarative (13:06)<br>**Core Concepts**: Certification Tips – Imperative Commands with Kubectl (—) | 18m 9s | ✅ |
 | Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ✅ |
 | Sep 03, 2026 | Thu | **Core Concepts**: Kubectl Apply Command (04:38)<br>**Scheduling**: Scheduling Section Introduction (00:54) | 5m 32s | ☑ |
-| Sep 04, 2026 | Fri | **Scheduling**: Manual Scheduling (02:31)<br>**Scheduling**: Practice Test Manual Scheduling (—) | 2m 31s | ☐ |
+| Sep 04, 2026 | Fri | **Scheduling**: Manual Scheduling (02:31)<br>**Scheduling**: Practice Test Manual Scheduling (—) | 2m 31s | ✅ |
 | Sep 05, 2026 | Sat | **Scheduling**: Solution: Manual Scheduling (optional) (03:22)<br>**Scheduling**: Labels and Selectors (05:47) | 9m 9s | ☐ |
 | Sep 06, 2026 | Sun | **Scheduling**: Practice Test Labels and Selectors (—)<br>**Scheduling**: Solution: Labels and Selectors (05:34)<br>**Scheduling**: Taints and Tolerations (09:42) | 15m 16s | ☐ |
 | Sep 07, 2026 | Mon | **Scheduling**: Practice Test – Taints and Tolerations (—)<br>**Scheduling**: Solution – Taints and Toleration (Optional) (08:02) | 8m 2s | ☐ |
