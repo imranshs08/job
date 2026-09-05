@@ -5,6 +5,15 @@
 - **Namespace:** Operating System Level (`/opt/app`)
 - **Symptom:** A massive Go API binary running in the background suffered a memory leak. Because it was running loosely without constraints (e.g., via `nohup` or a basic init script), it consumed 100% of the host RAM, triggering a catastrophic Out-Of-Memory (OOM) kernel panic that brought down the entire Linux node.
 
+## 🧠 Core Concepts: Systemd & Hardening Fundamentals
+Before debugging, ensure you understand these fundamental Linux mechanics:
+* **Systemd:** The modern init system (PID 1) used by almost all Linux distributions (Ubuntu, RHEL) to manage boot processes, services, and daemons.
+* **Unit File (`.service`):** A declarative configuration file placed in `/etc/systemd/system/` that tells systemd precisely *how* to run, restart, and restrict an application.
+* **Cgroups (Control Groups):** A foundational Linux kernel feature seamlessly integrated into systemd. It is the mechanism that actually enforces the `MemoryLimit` and `CPUQuota` restrictions.
+* **Journald:** The native logging system for systemd. It automatically captures all standard output (`stdout`) and standard error (`stderr`) from your service without external log rotation tools.
+
+---
+
 ## 📋 Phase 1: Triage — Confirm the Problem
 Immediate commands to inspect what killed the node and what the current state of the application is:
 
