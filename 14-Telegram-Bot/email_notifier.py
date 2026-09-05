@@ -154,6 +154,12 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
         """
 
     html += f"""
+          <!-- Signature -->
+          <div style="margin-top: 35px; color: #334155; font-size: 15px; line-height: 1.5;">
+            Keep pushing forward, <br><br>
+            <strong>Imran</strong><br>
+            <span style="color: #64748b; font-size: 13px;">Future DevOps & Platform Engineer</span>
+          </div>
         </div>
         <!-- Footer -->
         <div style="background: #ffffff; padding: 25px; text-align: center; border-top: 1px solid #f1f5f9;">
