@@ -77,7 +77,13 @@ When you are inside the `claude` prompt, you can use slash commands to manage th
 
 ---
 
-## 🧪 6. Free Playgrounds & Labs
+## 📚 6. Official Course Resources
+
+* **Course Repository:** [JeremyMorgan/Claude-Code-Reviewing-Prompts](https://github.com/JeremyMorgan/Claude-Code-Reviewing-Prompts) - The official GitHub repository accompanying this Claude Code curriculum. It contains sample codebases and prompts specifically designed for testing terminal AI interactions.
+
+---
+
+## 🧪 7. Free Playgrounds & Labs
 
 If you want to practice terminal-based AI tools without risking your own local machine or accidentally executing dangerous commands, try these browser-based sandboxes:
 
