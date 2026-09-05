@@ -144,6 +144,12 @@ Sep 06 02:48:15 node-1 rundeckd[10452]: [INFO ] BootStrap - Starting Rundeck...
 - [x] Configure Java JVM limits (`-Xmx2g`) to always be *smaller* than the Systemd limit to allow overhead buffer space.
 - [x] Ensure `User=rundeck` and `NoNewPrivileges=true` to prevent horizontal privilege escalation if a Rundeck job is compromised.
 
+### 🛑 What happens when Systemd Limit is breached?
+When the `MemoryLimit` boundary is hit, the impact is divided into two areas:
+1. **The Server Impact (🟢 Highly Positive):** The host OS is saved. The kernel doesn't panic. SSH stays up, and other databases on the same server are completely unaffected because the memory theft was contained in a cgroup sandbox.
+2. **The App Impact (🔴 Highly Destructive):** Systemd executes the Rundeck process with a violent `SIGKILL` (Exit 137). It does not let Rundeck gracefully save data or finish database transactions, resulting in immediate downtime and aborted jobs. 
+*That is why we configure `Restart=always` to recover immediately, and set our Java `-Xmx` limit lower than the Systemd limit so Java can exit gracefully on its own first (as a `java.lang.OutOfMemoryError`) before Systemd has to use a `SIGKILL`!*
+
 ## 🧠 Debug Decision Tree
 
 ```text
