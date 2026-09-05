@@ -192,6 +192,8 @@ def build_daily_message(s: dict) -> str:
     vid_pct = round(s["videos_watched"] / s["videos_total"] * 100, 1) if s["videos_total"] else 0
     cka_pct = round(s["cka_done"]       / s["cka_total"]   * 100, 1) if s["cka_total"]   else 0
 
+    labs_pct = round(s["labs_done"]      / s["labs_total"]   * 100, 1) if s["labs_total"]  else 0
+
     if s["today_video_url"]:
         today_video_line = f"  📺 <a href='{s['today_video_url']}'><b>{s['today_video']}</b></a>"
     elif s["today_video"]:
@@ -199,6 +201,7 @@ def build_daily_message(s: dict) -> str:
     else:
         today_video_line = "  📺 No video scheduled"
     today_cka_line   = f"  ☸️ {s['today_cka']}"         if s["today_cka"]   else "  ☸️ No CKA lesson scheduled"
+    next_lab_line    = f"  🧪 <b>Next Lab:</b> {s['next_lab']}" if s.get("next_lab") else "  🧪 <b>Next Lab:</b> All done!"
     
     quote_block = f'<i>"{s["daily_quote"]}"</i>\n' if s.get("daily_quote") else ""
 
@@ -211,10 +214,12 @@ def build_daily_message(s: dict) -> str:
 📊 <b>Overall Progress:</b>
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
   ☸️  CKA:    {s["cka_done"]} / {s["cka_total"]}  ({cka_pct}%)
+  🧪  Labs:   {s["labs_done"]} / {s["labs_total"]}  ({labs_pct}%)
 
 📅 <b>Today's Schedule:</b>
 {today_video_line}
 {today_cka_line}
+{next_lab_line}
 
 🤖 <b>AI Prompt of the Day:</b>
   {s['daily_prompt']}
@@ -236,6 +241,7 @@ def build_hook_message(s: dict) -> str:
         
     vid_pct = round(s["videos_watched"] / s["videos_total"] * 100, 1) if s["videos_total"] else 0
     cka_pct = round(s["cka_done"]       / s["cka_total"]   * 100, 1) if s["cka_total"]   else 0
+    labs_pct = round(s["labs_done"]      / s["labs_total"]   * 100, 1) if s["labs_total"]  else 0
 
     return f"""🔔 <b>Progress Committed — {s["today_str"]}</b>
 
@@ -245,6 +251,7 @@ def build_hook_message(s: dict) -> str:
 📊 <b>Current Stats:</b>
   📺 Videos: {s["videos_watched"]} / {s["videos_total"]}  ({vid_pct}%)
   ☸️  CKA:    {s["cka_done"]} / {s["cka_total"]}  ({cka_pct}%)
+  🧪  Labs:   {s["labs_done"]} / {s["labs_total"]}  ({labs_pct}%)
   ☸️  CKA Exam in <b>{s["days_cka"]} days</b> <i>({s["cka_date_str"]})</i>
   ☁️  AZ-104 Exam in <b>{s["days_az"]} days</b> <i>({s["az_date_str"]})</i>
 
