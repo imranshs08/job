@@ -38,6 +38,7 @@ if not GMAIL_ADDRESS or not GMAIL_APP_PASSWORD:
 def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
     vid_pct = round(stats.get("videos_watched", 0) / stats.get("videos_total", 1) * 100, 1) if stats.get("videos_total") else 0
     cka_pct = round(stats.get("cka_done", 0) / stats.get("cka_total", 1) * 100, 1) if stats.get("cka_total") else 0
+    labs_pct = round(stats.get("labs_done", 0) / stats.get("labs_total", 1) * 100, 1) if stats.get("labs_total") else 0
 
     vid_raw = stats.get("today_video", "No video schedulded")
     if vid_raw is None: vid_raw = "No video scheduled"
@@ -95,8 +96,12 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
                 <td style="text-align: right; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9;">{stats.get('videos_watched',0)} / {stats.get('videos_total',0)} <span style="color: #0ea5e9;">({vid_pct}%)</span></td>
               </tr>
               <tr>
-                <td style="padding: 10px 0; color: #475569;">☸️ CKA Certification</td>
-                <td style="text-align: right; font-weight: 700; color: #0f172a;">{stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span style="color: #0ea5e9;">({cka_pct}%)</span></td>
+                <td style="padding: 10px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">☸️ CKA Certification</td>
+                <td style="text-align: right; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9;">{stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span style="color: #0ea5e9;">({cka_pct}%)</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #475569;">🧪 Validation Labs</td>
+                <td style="text-align: right; font-weight: 700; color: #0f172a;">{stats.get('labs_done',0)} / {stats.get('labs_total',0)} <span style="color: #0ea5e9;">({labs_pct}%)</span></td>
               </tr>
             </table>
           </div>
@@ -109,7 +114,8 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
             <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">📅 Output Required Today</h3>
             <ul style="list-style: none; padding: 0; margin: 0; font-size: 15px;">
               <li style="padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">📺 {vid_line}</li>
-              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">☸️ {cka_line}</li>
+              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">☸️ {cka_line}</li>
+              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">🧪 <strong>Next Lab:</strong> {stats.get('next_lab', 'All done!')}</li>
             </ul>
           </div>
         """

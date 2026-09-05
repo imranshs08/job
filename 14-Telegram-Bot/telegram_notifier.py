@@ -84,6 +84,18 @@ def parse_tracker() -> dict:
     cka_done   = sum(1 for s in cka_all if s == "✅")
     cka_total  = len(cka_all)
 
+    # ── Labs stats ──
+    labs_all = re.findall(r"\|\s*Lab\s*\d+\s*\|.*?\|\s*(✅|☐)\s*\|?\s*\n", content)
+    labs_done = sum(1 for s in labs_all if s == "✅")
+    labs_total = len(labs_all)
+
+    next_lab = None
+    lab_match = re.search(r"\|\s*(Lab\s*\d+)\s*\|.*?\|\s*([^|]+)\s*\|.*?\|\s*☐\s*\|", content)
+    if lab_match:
+        next_lab_id = lab_match.group(1).strip()
+        next_lab_title = lab_match.group(2).strip()
+        next_lab = f"{next_lab_id}: {next_lab_title}"
+
     # ── Today's schedule ──
     today = datetime.now(IST).date()
     months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
@@ -157,6 +169,9 @@ def parse_tracker() -> dict:
         "videos_total":   TOTAL_VIDEOS,
         "cka_done":       cka_done,
         "cka_total":      cka_total,
+        "labs_done":      labs_done,
+        "labs_total":     labs_total,
+        "next_lab":       next_lab,
         "days_cka":       days_cka,
         "days_az":        days_az,
         "today_video":    today_video,
