@@ -83,3 +83,13 @@ The magic of containers relies entirely on two hidden **Linux Kernel** features.
 
 **⚠️ The "Gotcha":** *"Is Docker the only way to run containers?"*
 **Answer:** No. Docker is just one tool that creates OCI (Open Container Initiative) compliant containers. The industry (especially Kubernetes) heavily relies on **containerd** and **CRI-O** as runtime alternatives, and tools like **Buildah/Podman** as daemonless builder alternatives.
+
+---
+
+## 🧪 6. Free Docker Playgrounds & Labs
+
+If you need a free, isolated environment to test your `Dockerfile`s and run containers without installing anything locally on your Windows machine, use these browser-based labs:
+
+1. **[Play with Docker (PWD)](https://labs.play-with-docker.com/)**: The official Docker playground. Gives you a free Alpine Linux VM with Docker pre-installed for 4 hours. Great for extremely fast testing.
+2. **[Killercoda](https://killercoda.com/)**: Interactive Ubuntu environments. Highly recommended for getting used to the terminal interface used in the actual CKA exam.
+3. **[GitHub Codespaces](https://github.com/features/codespaces)**: Offers 120 free hours/month. Gives you a full VS Code IDE in your browser with Docker pre-installed, allowing you to test builds and commit code directly.
