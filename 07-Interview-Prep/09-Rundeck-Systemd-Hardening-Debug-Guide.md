@@ -145,10 +145,15 @@ Sep 06 02:48:15 node-1 rundeckd[10452]: [INFO ] BootStrap - Starting Rundeck...
 - [x] Ensure `User=rundeck` and `NoNewPrivileges=true` to prevent horizontal privilege escalation if a Rundeck job is compromised.
 
 ### 🛑 What happens when Systemd Limit is breached?
-When the `MemoryLimit` boundary is hit, the impact is divided into two areas:
-1. **The Server Impact (🟢 Highly Positive):** The host OS is saved. The kernel doesn't panic. SSH stays up, and other databases on the same server are completely unaffected because the memory theft was contained in a cgroup sandbox.
-2. **The App Impact (🔴 Highly Destructive):** Systemd executes the Rundeck process with a violent `SIGKILL` (Exit 137). It does not let Rundeck gracefully save data or finish database transactions, resulting in immediate downtime and aborted jobs. 
-*That is why we configure `Restart=always` to recover immediately, and set our Java `-Xmx` limit lower than the Systemd limit so Java can exit gracefully on its own first (as a `java.lang.OutOfMemoryError`) before Systemd has to use a `SIGKILL`!*
+When the `MemoryLimit` boundary is hit, the exact technical chain of events looks like this:
+
+1. **The App is Halted:** As soon as the Rundeck Java process attempts to request the very next byte past 3GB, the Linux kernel's `cgroup` mechanism physically blocks the allocation.
+2. **Systemd Execution (🔴 App Impact):** Because the application is trapped, the Linux kernel triggers a targeted OOM kill constrained strictly to that cgroup. Rundeck is violently terminated with a `SIGKILL` (Exit 137). Active databases transactions drop immediately.
+3. **The OS Survives (🟢 Server Impact):** Since the OS still has 5GB of free RAM in the background, SSH, other databases, and network connections stay perfectly online. The host OS is completely saved.
+4. **Targeted Logging:** `journalctl` safely logs the cgroup invocation of the OOM killer (`Result: oom-kill`).
+5. **Auto-Recovery:** Because we configured `Restart=always` and `RestartSec=10s`, Systemd waits exactly 10 seconds and spins up a brand new, clean Java Rundeck process automatically to minimize downtime.
+
+*Mitigation Strategy: This is precisely why we set our Java `-Xmx` limit lower than the Systemd limit. It allows Java to catch its own limit first and exit gracefully (`java.lang.OutOfMemoryError`) before Systemd is forced to execute it with a catastrophic `SIGKILL`!*
 
 ## 🧠 Debug Decision Tree
 
