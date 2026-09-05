@@ -234,7 +234,7 @@
 | Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ✅ |
 | Sep 03, 2026 | Thu | **Core Concepts**: Kubectl Apply Command (04:38)<br>**Scheduling**: Scheduling Section Introduction (00:54) | 5m 32s | ☑ |
 | Sep 04, 2026 | Fri | **Scheduling**: Manual Scheduling (02:31)<br>**Scheduling**: Practice Test Manual Scheduling (—) | 2m 31s | ✅ |
-| Sep 05, 2026 | Sat | **Scheduling**: Solution: Manual Scheduling (optional) (03:22)<br>**Scheduling**: Labels and Selectors (05:47) | 9m 9s | ☐ |
+| Sep 05, 2026 | Sat | **Scheduling**: Solution: Manual Scheduling (optional) (03:22)<br>**Scheduling**: Labels and Selectors (05:47) | 9m 9s | ✅ |
 | Sep 06, 2026 | Sun | **Scheduling**: Practice Test Labels and Selectors (—)<br>**Scheduling**: Solution: Labels and Selectors (05:34)<br>**Scheduling**: Taints and Tolerations (09:42) | 15m 16s | ☐ |
 | Sep 07, 2026 | Mon | **Scheduling**: Practice Test – Taints and Tolerations (—)<br>**Scheduling**: Solution – Taints and Toleration (Optional) (08:02) | 8m 2s | ☐ |
 | Sep 08, 2026 | Tue | **Scheduling**: Node Selectors (03:19)<br>**Scheduling**: Node Affinity (07:16) | 10m 35s | ☐ |

@@ -50,8 +50,8 @@
 | 38 | **Scheduling** | Scheduling Section Introduction | 00:54 | Sep 03 | ☑ |
 | 39 | **Scheduling** | Manual Scheduling | 02:31 | Sep 04 | ☐ |
 | 40 | **Scheduling** | Practice Test Manual Scheduling | — | Sep 04 | ☐ |
-| 41 | **Scheduling** | Solution: Manual Scheduling (optional) | 03:22 | Sep 05 | ☐ |
-| 42 | **Scheduling** | Labels and Selectors | 05:47 | Sep 05 | ☐ |
+| 41 | **Scheduling** | Solution: Manual Scheduling (optional) | 03:22 | Sep 05 | ✅ |
+| 42 | **Scheduling** | Labels and Selectors | 05:47 | Sep 05 | ✅ |
 | 43 | **Scheduling** | Practice Test Labels and Selectors | — | Sep 06 | ☐ |
 | 44 | **Scheduling** | Solution: Labels and Selectors | 05:34 | Sep 06 | ☐ |
 | 45 | **Scheduling** | Taints and Tolerations | 09:42 | Sep 06 | ☐ |
