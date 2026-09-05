@@ -50,16 +50,24 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
 
     html = f"""
     <html>
-    <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f1f5f9; padding: 20px; margin: 0;">
-      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+    <head>
+      <style>
+        .badge {{ display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #e0f2fe; color: #0284c7; }}
+        .card {{ background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 20px; }}
+        .card-title {{ font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin: 0 0 15px 0; font-weight: 700; }}
+      </style>
+    </head>
+    <body style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; padding: 20px 10px; margin: 0; line-height: 1.6; color: #334155;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
         
-        <!-- Header Gradient -->
-        <div style="background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%); padding: 35px 20px; text-align: center; color: white;">
-          <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.5px;">{title}</h1>
+        <!-- Header -->
+        <div style="background: #ffffff; padding: 30px 30px 20px 30px; text-align: left; border-bottom: 1px solid #f1f5f9;">
+          <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #0f172a;">{title}</h1>
+          <p style="margin: 5px 0 0 0; font-size: 15px; color: #64748b;">Your specialized daily DevOps update.</p>
         </div>
         
         <!-- Content Area -->
-        <div style="padding: 30px;">
+        <div style="padding: 30px; background: #f8fafc;">
     """
     
     if mode == "test":
@@ -79,61 +87,68 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
         
     if mode == "hook" and commit_msg:
         html += f"""
-          <div style="margin-bottom: 25px;">
-            <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">💬 Commit Message</h3>
-            <p style="color: #334155; font-family: 'JetBrains Mono', monospace; background: #f1f5f9; padding: 12px; border-radius: 6px; margin: 0; border: 1px solid #e2e8f0;">{commit_msg}</p>
+          <div class="card" style="background-color: #f1f5f9;">
+            <h3 class="card-title">💬 Commit Deployed</h3>
+            <p style="color: #475569; font-family: 'JetBrains Mono', Courier, monospace; background: #ffffff; padding: 12px; border-radius: 6px; margin: 0; border: 1px solid #e2e8f0; font-size: 13px;">{commit_msg}</p>
           </div>
         """
 
     if mode != "test":
         html += f"""
           <!-- Progress -->
-          <div style="margin-bottom: 30px;">
-            <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">📊 Active Progress</h3>
-            <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
-              <tr>
-                <td style="padding: 10px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">📺 DevOps Bootcamp</td>
-                <td style="text-align: right; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9;">{stats.get('videos_watched',0)} / {stats.get('videos_total',0)} <span style="color: #0ea5e9;">({vid_pct}%)</span></td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">☸️ CKA Certification</td>
-                <td style="text-align: right; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9;">{stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span style="color: #0ea5e9;">({cka_pct}%)</span></td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; color: #475569;">🧪 Validation Labs</td>
-                <td style="text-align: right; font-weight: 700; color: #0f172a;">{stats.get('labs_done',0)} / {stats.get('labs_total',0)} <span style="color: #0ea5e9;">({labs_pct}%)</span></td>
-              </tr>
-            </table>
+          <div class="card">
+            <h3 class="card-title">📊 Operations Overview</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
+                <span style="color: #475569; font-weight: 500;">📺 DevOps Bootcamp</span>
+                <span style="font-weight: 600; color: #0f172a;">{stats.get('videos_watched',0)} / {stats.get('videos_total',0)} <span class="badge" style="margin-left: 8px;">{vid_pct}%</span></span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
+                <span style="color: #475569; font-weight: 500;">☸️ CKA Certification</span>
+                <span style="font-weight: 600; color: #0f172a;">{stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span class="badge" style="background:#fce7f3; color:#be185d; margin-left: 8px;">{cka_pct}%</span></span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #475569; font-weight: 500;">🧪 Validation Labs</span>
+                <span style="font-weight: 600; color: #0f172a;">{stats.get('labs_done',0)} / {stats.get('labs_total',0)} <span class="badge" style="background:#dcfce7; color:#166534; margin-left: 8px;">{labs_pct}%</span></span>
+              </div>
+            </div>
           </div>
         """
 
     if mode in ["daily", "nightly"]:
         html += f"""
           <!-- Today Schedule -->
-          <div style="margin-bottom: 30px;">
-            <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">📅 Output Required Today</h3>
-            <ul style="list-style: none; padding: 0; margin: 0; font-size: 15px;">
-              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">📺 {vid_line}</li>
-              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">☸️ {cka_line}</li>
-              <li style="padding: 12px 15px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">🧪 <strong>Next Lab:</strong> {stats.get('next_lab', 'All done!')}</li>
-            </ul>
+          <div class="card">
+            <h3 class="card-title">📅 Queue for Today</h3>
+            <div style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: flex-start;">
+              <span style="margin-right: 12px; font-size: 16px;">📺</span>
+              <span style="font-size: 15px; color: #334155; line-height: 1.4;">{vid_line}</span>
+            </div>
+            <div style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: flex-start;">
+              <span style="margin-right: 12px; font-size: 16px;">☸️</span>
+              <span style="font-size: 15px; color: #334155; line-height: 1.4;">{cka_line}</span>
+            </div>
+            <div style="padding: 12px 0; display: flex; align-items: flex-start;">
+              <span style="margin-right: 12px; font-size: 16px;">🧪</span>
+              <span style="font-size: 15px; color: #334155; line-height: 1.4;"><strong>Next Lab:</strong> {stats.get('next_lab', 'All done!')}</span>
+            </div>
           </div>
         """
 
     if mode == "daily" and stats.get("daily_prompt"):
         html += f"""
           <!-- AI & Interview -->
-          <div style="margin-bottom: 25px;">
-            <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">🤖 Prompt Engineering</h3>
-            <div style="background: #0f172a; color: #f8fafc; padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.5; border-left: 4px solid #38bdf8;">
-              {stats['daily_prompt'].replace('<b>', '<strong style="color: #38bdf8;">').replace('</b>', '</strong><br><br>').replace('<i>', '<span style="color: #94a3b8;">').replace('</i>', '</span>')}
+          <div class="card" style="background-color: #f0f9ff; border-color: #bae6fd;">
+            <h3 class="card-title" style="color: #0369a1;">🤖 Prompt Engineering</h3>
+            <div style="color: #0c4a6e; font-size: 14.5px; line-height: 1.6;">
+              {stats['daily_prompt'].replace('<b>', '<strong style="color: #0284c7; display:block; margin-bottom: 8px;">').replace('</b>', '</strong>').replace('<i>', '<span style="color: #0369a1;">').replace('</i>', '</span>')}
             </div>
           </div>
           
-          <div style="margin-bottom: 10px;">
-            <h3 style="color: #1e293b; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px;">🎙️ Interview Scenario</h3>
-            <div style="padding: 15px; background: #ecfdf5; border-left: 4px solid #10b981; border-radius: 8px; color: #064e3b; font-size: 14px; line-height: 1.6;">
-              {stats['daily_interview'].replace('<b>', '<strong>').replace('</b>', '</strong><br>')}
+          <div class="card" style="background-color: #f0fdf4; border-color: #bbf7d0; margin-bottom: 0;">
+            <h3 class="card-title" style="color: #15803d;">🎙️ Interview Scenario</h3>
+            <div style="color: #166534; font-size: 14.5px; line-height: 1.6;">
+              {stats['daily_interview'].replace('<b>', '<strong style="display:block; margin-bottom: 8px;">').replace('</b>', '</strong>')}
             </div>
           </div>
         """
@@ -141,14 +156,15 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
     html += f"""
         </div>
         <!-- Footer -->
-        <div style="background: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
-          <div style="margin-bottom: 10px;">
-            <a href="https://imranshs08.github.io/job/" style="display: inline-block; background: #0ea5e9; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 14px; margin: 0 5px;">View Dashboard</a>
-            <a href="https://github.com/imranshs08/job" style="display: inline-block; background: #cbd5e1; color: #334155; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 14px; margin: 0 5px;">GitHub Repo</a>
+        <div style="background: #ffffff; padding: 25px; text-align: center; border-top: 1px solid #f1f5f9;">
+          <div style="margin-bottom: 15px;">
+            <a href="https://imranshs08.github.io/job/" style="display: inline-block; background: #0f172a; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 13px; margin: 0 6px;">View Dashboard</a>
+            <a href="https://github.com/imranshs08/job" style="display: inline-block; background: #f1f5f9; color: #334155; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 13px; margin: 0 6px; border: 1px solid #e2e8f0;">GitHub Repo</a>
           </div>
-          <p style="font-size: 12px; color: #94a3b8; margin: 10px 0 0 0;">Autonomously dispatched by DevOps Command Center</p>
+          <p style="font-size: 12px; color: #94a3b8; margin: 0;">Autonomously dispatched by DevOps Command Center</p>
         </div>
       </div>
+      <br>
     </body>
     </html>
     """
