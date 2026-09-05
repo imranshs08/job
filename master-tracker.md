@@ -27,12 +27,12 @@
 
 | Phase | Videos | Period | Watched | Status |
 |-------|--------|--------|---------|--------|
-| Phase 1 — Foundations & Core DevOps | 1–53 | Aug–Sep | 11/53 | 🟨 |
+| Phase 1 — Foundations & Core DevOps | 1–53 | Aug–Sep | 12/53 | 🟨 |
 | Phase 2 — AWS Primary | 54–81 | Sep–Oct | 0/28 | ⬜ |
 | Phase 3 — Azure & IaC (Terraform) | 82–118 | Oct–Nov | 0/37 | ⬜ |
 | Phase 4 — Python & AI DevOps | 119–148 | Nov–Dec | 0/30 | ⬜ |
 | Phase 5 — Observability & Interview | 149–158 | Dec–Jan | 0/10 | ⬜ |
-| **TOTAL** | **1–158** | | **11/158** | 🟨 |
+| **TOTAL** | **1–158** | | **12/158** | 🟨 |
 
 > 📝 Update the Status and Watched counts here weekly. Full per-video checkboxes are in [progress-tracker.md](./03-Progress-Tracker/progress-tracker.md).
 
