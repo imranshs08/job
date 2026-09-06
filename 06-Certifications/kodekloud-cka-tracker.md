@@ -52,9 +52,9 @@
 | 40 | **Scheduling** | Practice Test Manual Scheduling | — | Sep 04 | ☐ |
 | 41 | **Scheduling** | Solution: Manual Scheduling (optional) | 03:22 | Sep 05 | ✅ |
 | 42 | **Scheduling** | Labels and Selectors | 05:47 | Sep 05 | ✅ |
-| 43 | **Scheduling** | Practice Test Labels and Selectors | — | Sep 06 | ☐ |
-| 44 | **Scheduling** | Solution: Labels and Selectors | 05:34 | Sep 06 | ☐ |
-| 45 | **Scheduling** | Taints and Tolerations | 09:42 | Sep 06 | ☐ |
+| 43 | **Scheduling** | Practice Test Labels and Selectors | — | Sep 06 | ✅ |
+| 44 | **Scheduling** | Solution: Labels and Selectors | 05:34 | Sep 06 | ✅ |
+| 45 | **Scheduling** | Taints and Tolerations | 09:42 | Sep 06 | ✅ |
 | 46 | **Scheduling** | Practice Test – Taints and Tolerations | — | Sep 07 | ☐ |
 | 47 | **Scheduling** | Solution – Taints and Toleration (Optional) | 08:02 | Sep 07 | ☐ |
 | 48 | **Scheduling** | Node Selectors | 03:19 | Sep 08 | ☐ |
