@@ -48,8 +48,10 @@ spec:
 
 ## ⚠️ Production Gotchas & Interview Traps
 - **Production Gotcha (Node Saturation):** Engineers often forget that Taints don't force a pod onto the right node, they just stop them from going to the wrong ones. Therefore, if you taint a Data node, and tolerate a Data pod, that Data pod might still randomly get scheduled onto a normal worker node and starve it of CPU. You must combine Taints/Tolerations with **Node Affinity** to forcefully bind them together.
-- **Interview Trap:** *"What happens to active, running pods if you suddenly apply a `NoExecute` taint to their Node?"*
-  - **The SRE Answer:** If a `NoExecute` taint is applied dynamically, the `kubelet` acts immediately. Any running pods that do not have the corresponding toleration are instantly poisoned and evicted off the node. They will be aggressively killed and rapidly rescheduled onto a different node by their ReplicaSet/Deployment.
+- **Interview Trap: Static vs. Dynamic Limits** *"What is the difference between a static and dynamic taint, and what happens to active pods if you dynamically apply a `NoExecute` taint to their Node in production?"*
+  - **The SRE Answer (Static):** A **Static Taint** is applied before the node joins the cluster (e.g., via Terraform or `--register-with-taints` in kubelet). Unwanted pods never schedule there because it boots up locked. *(Analogy: Locking the building before anyone arrives).*
+  - **The SRE Answer (Dynamic `NoSchedule`):** Applied manually to a live, running node via `kubectl`. No *new* pods can enter, but active pods already running there are completely untouched. *(Analogy: Locking the front door while people are inside).*
+  - **The SRE Answer (Dynamic `NoExecute` - The Disaster):** Applied to a live, running node. The `kubelet` acts immediately: any innocent pods already running on that node without a toleration are instantly poisoned, aggressively killed, and evicted. If done accidentally to a production worker node, this drops live traffic. *(Analogy: Locking the doors, pulling the fire alarm, and forcefully kicking everyone inside out onto the street).*
 
 ## 📝 10-Second Cheat Sheet
 Taints are applied to Nodes (the lock), Tolerations are applied to Pods (the key); they stop wrong pods from entering a node, but they don't guarantee right pods will go there unless combined with Node Affinity!
