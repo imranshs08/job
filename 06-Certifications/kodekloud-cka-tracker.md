@@ -55,8 +55,8 @@
 | 43 | **Scheduling** | Practice Test Labels and Selectors | — | Sep 06 | ✅ |
 | 44 | **Scheduling** | Solution: Labels and Selectors | 05:34 | Sep 06 | ✅ |
 | 45 | **Scheduling** | Taints and Tolerations | 09:42 | Sep 06 | ✅ |
-| 46 | **Scheduling** | Practice Test – Taints and Tolerations | — | Sep 07 | ☐ |
-| 47 | **Scheduling** | Solution – Taints and Toleration (Optional) | 08:02 | Sep 07 | ☐ |
+| 46 | **Scheduling** | Practice Test – Taints and Tolerations | — | Sep 07 | ✅ |
+| 47 | **Scheduling** | Solution – Taints and Toleration (Optional) | 08:02 | Sep 07 | ✅ |
 | 48 | **Scheduling** | Node Selectors | 03:19 | Sep 08 | ☐ |
 | 49 | **Scheduling** | Node Affinity | 07:16 | Sep 08 | ☐ |
 | 50 | **Scheduling** | Practice Test – Node Affinity | — | Sep 09 | ☐ |
