@@ -33,7 +33,7 @@
 | 20 | [Day-17 -Everything about Terraform -Write Your First Project -Remote Backend -Modu...](https://www.youtube.com/watch?v=CzdfdKWRDB8) | Sep 3 | 1h 17m | ☐ | ☐ | ☐ |
 | 21 | [Day-22 - Project Management tools for DevOps - What a DevOps Engineer does in the ...](https://www.youtube.com/watch?v=h4HdQBnEO04) | Sep 4 | 24m 49s | ✅ | ✅ | ✅ |
 | 22 | [Day-23 - Introduction to Containers - Learn about containers in easy way](https://www.youtube.com/watch?v=7JZP345yVjw) | Sep 5 | 25m 10s | ✅ | ✅ | ✅ |
-| 23 | [Day-24 - Docker Zero to Hero Part-1 - Must Watch - Basics to Best Practices](https://www.youtube.com/watch?v=wodLpta-hoQ) | Sep 6 | 49m 54s | ☐ | ☐ | ☐ |
+| 23 | [Day-24 - Docker Zero to Hero Part-1 - Must Watch - Basics to Best Practices](https://www.youtube.com/watch?v=wodLpta-hoQ) | Sep 6 | 49m 54s | ✅ | ✅ | ✅ |
 | 24 | [Day-25 - Docker Containerzation for Django](https://www.youtube.com/watch?v=3IAvr_O6vao) | Sep 7 | 28m 34s | ☐ | ☐ | ☐ |
 | 25 | [Day-26 - Multi Stage Docker Builds - Reduce Image Size by 800 % - Distroless Conta...](https://www.youtube.com/watch?v=yyJrZgoNal0) | Sep 8 | 31m 31s | ☐ | ☐ | ☐ |
 | 26 | [Day-27 - Docker Volumes and Bind Mounts-Persistent Storage for Docker](https://www.youtube.com/watch?v=r_LgmqejAkA) | Sep 8 | 35m 34s | ☐ | ☐ | ☐ |
