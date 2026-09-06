@@ -20,12 +20,15 @@
 ```bash
 # (Bug Analogy Example) Taint node01 with key=spray, value=mortein, and the NoSchedule effect
 kubectl taint nodes node01 spray=mortein:NoSchedule
+```
 
-# To REMOVE the taint, add a minus sign (-) to the exact end of the taint command
+**2. Untainting a Node (Imperative Command)**
+```bash
+# To REMOVE the exact taint, append a minus sign (-) to the exact end of the taint command
 kubectl taint nodes node01 spray=mortein:NoSchedule-
 ```
 
-**2. Adding a Toleration to a Pod (YAML)**
+**3. Adding a Toleration to a Pod (YAML)**
 ```yaml
 apiVersion: v1
 kind: Pod
