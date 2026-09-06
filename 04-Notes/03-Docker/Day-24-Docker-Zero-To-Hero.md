@@ -50,6 +50,29 @@ node_modules/
 Dockerfile
 ```
 
+**3.5 Application Code (app.py & requirements.txt)**
+To make the `Dockerfile` actually execute, you need the two corresponding application files running a minimal web server:
+
+*`requirements.txt`:*
+```text
+Flask==3.0.2
+```
+
+*`app.py`:*
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "🚀 Hello from inside the Docker Container!"
+
+if __name__ == "__main__":
+    # Listens on port 8080 (which matches our Docker run -p command)
+    app.run(host="0.0.0.0", port=8080)
+```
+
 **4. Building, Running, and Pushing (CLI)**
 ```bash
 # 1. Build the Docker image from your local Dockerfile
