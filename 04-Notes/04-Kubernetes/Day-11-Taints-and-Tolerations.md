@@ -18,11 +18,11 @@
 
 **1. Tainting a Node (Imperative Command)**
 ```bash
-# Taint node01 with a specific key=value and the NoSchedule effect
-kubectl taint nodes node01 gpu=true:NoSchedule
+# (Bug Analogy Example) Taint node01 with key=spray, value=mortein, and the NoSchedule effect
+kubectl taint nodes node01 spray=mortein:NoSchedule
 
 # To REMOVE the taint, add a minus sign (-) to the exact end of the taint command
-kubectl taint nodes node01 gpu=true:NoSchedule-
+kubectl taint nodes node01 spray=mortein:NoSchedule-
 ```
 
 **2. Adding a Toleration to a Pod (YAML)**
@@ -30,16 +30,16 @@ kubectl taint nodes node01 gpu=true:NoSchedule-
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gpu-frontend
+  name: bug-resistant-pod
 spec:
   containers:
   - name: nginx
     image: nginx
-  # This toleration acts as the "immunity" to the bug repellent
+  # This toleration acts as the "immunity" to the Mortein bug repellent
   tolerations:
-  - key: "gpu"
+  - key: "spray"
     operator: "Equal" 
-    value: "true"
+    value: "mortein"
     effect: "NoSchedule"
 ```
 
