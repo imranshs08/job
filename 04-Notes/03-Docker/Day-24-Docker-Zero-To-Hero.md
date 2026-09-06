@@ -42,12 +42,12 @@ my-app/
 *Example `.dockerignore` file:*
 ```text
 # Exclude giant directories, secrets, and raw docs
-venv/
-node_modules/
-.git/
-.env
-*.md
-Dockerfile
+venv/           # Python local virtual environments (prevents massive 500MB bloat)
+node_modules/   # Node.js local dependencies (always reinstall these cleanly inside the container)
+.git/           # Git history folder (keeps your proprietary commit history out of the image)
+.env            # Environment secrets (never bake API keys or passwords into static images!)
+*.md            # Documentation files (unnecessary for the application to actually run)
+Dockerfile      # The blueprint itself does not need to be inside the container it builds
 ```
 
 **3.5 Application Code (app.py & requirements.txt)**
