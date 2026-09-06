@@ -29,7 +29,28 @@ COPY . /app                # Copy your local code into the container's '/app' fo
 CMD ["python", "/app/app.py"]  # The default command that starts when the container turns on
 ```
 
-**3. Building, Running, and Pushing (CLI)**
+**3. Standard Project Structure & `.dockerignore`**
+When building containers, maintaining a clean directory structure and actively ignoring local, heavy environment files guarantees lightning-fast builds. 
+```text
+my-app/
+├── .dockerignore      # Prevents copying local bloat/secrets into the image
+├── Dockerfile         # The blueprint for the container
+├── requirements.txt   # App dependencies
+├── app.py             # Application code
+└── venv/              # ❌ Ignored! (Created strictly inside the container later)
+```
+*Example `.dockerignore` file:*
+```text
+# Exclude giant directories, secrets, and raw docs
+venv/
+node_modules/
+.git/
+.env
+*.md
+Dockerfile
+```
+
+**4. Building, Running, and Pushing (CLI)**
 ```bash
 # 1. Build the Docker image from your local Dockerfile
 # -t tags it with a recognizable name (your-repo/image:version)
