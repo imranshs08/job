@@ -98,20 +98,32 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
           <!-- Progress -->
           <div class="card">
             <h3 class="card-title">📊 Operations Overview</h3>
-            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
-                <span style="color: #475569; font-weight: 500;">📺 DevOps Bootcamp</span>
-                <span style="font-weight: 600; color: #0f172a;">{stats.get('videos_watched',0)} / {stats.get('videos_total',0)} <span class="badge" style="margin-left: 8px;">{vid_pct}%</span></span>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
-                <span style="color: #475569; font-weight: 500;">☸️ CKA Certification</span>
-                <span style="font-weight: 600; color: #0f172a;">{stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span class="badge" style="background:#fce7f3; color:#be185d; margin-left: 8px;">{cka_pct}%</span></span>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: #475569; font-weight: 500;">🧪 Validation Labs</span>
-                <span style="font-weight: 600; color: #0f172a;">{stats.get('labs_done',0)} / {stats.get('labs_total',0)} <span class="badge" style="background:#dcfce7; color:#166534; margin-left: 8px;">{labs_pct}%</span></span>
-              </div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #475569; font-weight: 500;">
+                  📺 DevOps Bootcamp
+                </td>
+                <td align="right" style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 600; color: #0f172a; white-space: nowrap;">
+                  {stats.get('videos_watched',0)} / {stats.get('videos_total',0)} <span class="badge" style="margin-left: 8px;">{vid_pct}%</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #475569; font-weight: 500;">
+                  ☸️ CKA Certification
+                </td>
+                <td align="right" style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 600; color: #0f172a; white-space: nowrap;">
+                  {stats.get('cka_done',0)} / {stats.get('cka_total',0)} <span class="badge" style="background:#fce7f3; color:#be185d; margin-left: 8px;">{cka_pct}%</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; color: #475569; font-weight: 500;">
+                  🧪 Validation Labs
+                </td>
+                <td align="right" style="padding: 10px 0; font-weight: 600; color: #0f172a; white-space: nowrap;">
+                  {stats.get('labs_done',0)} / {stats.get('labs_total',0)} <span class="badge" style="background:#dcfce7; color:#166534; margin-left: 8px;">{labs_pct}%</span>
+                </td>
+              </tr>
+            </table>
           </div>
         """
 
@@ -120,18 +132,20 @@ def build_beautiful_html(title, stats, mode="daily", commit_msg=""):
           <!-- Today Schedule -->
           <div class="card">
             <h3 class="card-title">📅 Queue for Today</h3>
-            <div style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: flex-start;">
-              <span style="margin-right: 12px; font-size: 16px;">📺</span>
-              <span style="font-size: 15px; color: #334155; line-height: 1.4;">{vid_line}</span>
-            </div>
-            <div style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: flex-start;">
-              <span style="margin-right: 12px; font-size: 16px;">☸️</span>
-              <span style="font-size: 15px; color: #334155; line-height: 1.4;">{cka_line}</span>
-            </div>
-            <div style="padding: 12px 0; display: flex; align-items: flex-start;">
-              <span style="margin-right: 12px; font-size: 16px;">🧪</span>
-              <span style="font-size: 15px; color: #334155; line-height: 1.4;"><strong>Next Lab:</strong> {stats.get('next_lab', 'All done!')}</span>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+              <tr>
+                <td width="30" valign="top" style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 16px;">📺</td>
+                <td valign="top" style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 15px; color: #334155; line-height: 1.4;">{vid_line}</td>
+              </tr>
+              <tr>
+                <td width="30" valign="top" style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 16px;">☸️</td>
+                <td valign="top" style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 15px; color: #334155; line-height: 1.4;">{cka_line}</td>
+              </tr>
+              <tr>
+                <td width="30" valign="top" style="padding: 12px 0; font-size: 16px;">🧪</td>
+                <td valign="top" style="padding: 12px 0; font-size: 15px; color: #334155; line-height: 1.4;"><strong>Next Lab:</strong> {stats.get('next_lab', 'All done!')}</td>
+              </tr>
+            </table>
           </div>
         """
 
