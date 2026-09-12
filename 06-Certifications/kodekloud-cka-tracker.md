@@ -66,8 +66,8 @@
 | 54 | **Scheduling** | A quick note on editing PODs and Deployments | — | Sep 11 | ✅ |
 | 55 | **Scheduling** | Practice Test Resource Limits | — | Sep 11 | ✅ |
 | 56 | **Scheduling** | Solution: Resource Limits | 05:09 | Sep 11 | ✅ |
-| 57 | **Scheduling** | DaemonSets | 04:08 | Sep 12 | ☐ |
-| 58 | **Scheduling** | Practice Test DaemonSets | — | Sep 12 | ☐ |
+| 57 | **Scheduling** | DaemonSets | 04:08 | Sep 12 | ✅ |
+| 58 | **Scheduling** | Practice Test DaemonSets | — | Sep 12 | ✅ |
 | 59 | **Scheduling** | Solution: DaemonSets (optional) | 05:44 | Sep 13 | ☐ |
 | 60 | **Scheduling** | Static Pods | 08:45 | Sep 13 | ☐ |
 | 61 | **Scheduling** | Practice Test – Static Pods | — | Sep 14 | ☐ |

@@ -241,7 +241,7 @@
 | Sep 09, 2026 | Wed | **Scheduling**: Practice Test – Node Affinity (—)<br>**Scheduling**: Solution – Node Affinity (Optional) (07:27) | 7m 27s | ✅ |
 | Sep 10, 2026 | Thu | **Scheduling**: Taints and Tolerations vs Node Affinity (02:32)<br>**Scheduling**: Resource Limits (14:51) | 17m 23s | ✅ |
 | Sep 11, 2026 | Fri | **Scheduling**: A quick note on editing PODs and Deployments (—)<br>**Scheduling**: Practice Test Resource Limits (—)<br>**Scheduling**: Solution: Resource Limits (05:09) | 5m 9s | ✅ |
-| Sep 12, 2026 | Sat | **Scheduling**: DaemonSets (04:08)<br>**Scheduling**: Practice Test DaemonSets (—) | 4m 8s | ☐ |
+| Sep 12, 2026 | Sat | **Scheduling**: DaemonSets (04:08)<br>**Scheduling**: Practice Test DaemonSets (—) | 4m 8s | ✅ |
 | Sep 13, 2026 | Sun | **Scheduling**: Solution: DaemonSets (optional) (05:44)<br>**Scheduling**: Static Pods (08:45) | 14m 29s | ☐ |
 | Sep 14, 2026 | Mon | **Scheduling**: Practice Test – Static Pods (—)<br>**Scheduling**: Solution – Static Pods (Optional) (05:58) | 5m 58s | ☐ |
 | Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers (09:32)<br>**Scheduling**: Practice Test Multiple Schedulers (—) | 9m 32s | ☐ |
