@@ -57,15 +57,15 @@
 | 45 | **Scheduling** | Taints and Tolerations | 09:42 | Sep 06 | ✅ |
 | 46 | **Scheduling** | Practice Test – Taints and Tolerations | — | Sep 07 | ✅ |
 | 47 | **Scheduling** | Solution – Taints and Toleration (Optional) | 08:02 | Sep 07 | ✅ |
-| 48 | **Scheduling** | Node Selectors | 03:19 | Sep 08 | ☐ |
-| 49 | **Scheduling** | Node Affinity | 07:16 | Sep 08 | ☐ |
-| 50 | **Scheduling** | Practice Test – Node Affinity | — | Sep 09 | ☐ |
-| 51 | **Scheduling** | Solution – Node Affinity (Optional) | 07:27 | Sep 09 | ☐ |
-| 52 | **Scheduling** | Taints and Tolerations vs Node Affinity | 02:32 | Sep 10 | ☐ |
-| 53 | **Scheduling** | Resource Limits | 14:51 | Sep 10 | ☐ |
-| 54 | **Scheduling** | A quick note on editing PODs and Deployments | — | Sep 11 | ☐ |
-| 55 | **Scheduling** | Practice Test Resource Limits | — | Sep 11 | ☐ |
-| 56 | **Scheduling** | Solution: Resource Limits | 05:09 | Sep 11 | ☐ |
+| 48 | **Scheduling** | Node Selectors | 03:19 | Sep 08 | ✅ |
+| 49 | **Scheduling** | Node Affinity | 07:16 | Sep 08 | ✅ |
+| 50 | **Scheduling** | Practice Test – Node Affinity | — | Sep 09 | ✅ |
+| 51 | **Scheduling** | Solution – Node Affinity (Optional) | 07:27 | Sep 09 | ✅ |
+| 52 | **Scheduling** | Taints and Tolerations vs Node Affinity | 02:32 | Sep 10 | ✅ |
+| 53 | **Scheduling** | Resource Limits | 14:51 | Sep 10 | ✅ |
+| 54 | **Scheduling** | A quick note on editing PODs and Deployments | — | Sep 11 | ✅ |
+| 55 | **Scheduling** | Practice Test Resource Limits | — | Sep 11 | ✅ |
+| 56 | **Scheduling** | Solution: Resource Limits | 05:09 | Sep 11 | ✅ |
 | 57 | **Scheduling** | DaemonSets | 04:08 | Sep 12 | ☐ |
 | 58 | **Scheduling** | Practice Test DaemonSets | — | Sep 12 | ☐ |
 | 59 | **Scheduling** | Solution: DaemonSets (optional) | 05:44 | Sep 13 | ☐ |
