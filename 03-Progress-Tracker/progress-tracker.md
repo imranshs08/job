@@ -39,7 +39,7 @@
 | 26 | [Day-27 - Docker Volumes and Bind Mounts-Persistent Storage for Docker](https://www.youtube.com/watch?v=r_LgmqejAkA) | Sep 8 | 35m 34s | ☐ | ☐ | ☐ |
 | 27 | [Day-28 - Docker Networking - Bridge vs Host vs Overlay -Secure containers with cus...](https://www.youtube.com/watch?v=xrUGEoUpa3s) | Sep 9 | 33m 24s | ☐ | ☐ | ☐ |
 | 28 | [Day-29 - Docker Interview Questions with Answers - How many can you answer ? - Com...](https://www.youtube.com/watch?v=I6ZBUEc4LrU) | Sep 10 | 38m 16s | ☐ | ☐ | ☐ |
-| 29 | [Day-30 - KUBERNETES IS EASY - INTRODUCTION TO KUBERNETES](https://www.youtube.com/watch?v=dfxrdoEQe00) | Sep 11 | 35m 13s | ☐ | ☐ | ☐ |
+| 29 | [Day-30 - KUBERNETES IS EASY - INTRODUCTION TO KUBERNETES](https://www.youtube.com/watch?v=dfxrdoEQe00) | Sep 11 | 35m 13s | ✅ | ✅ | ✅ |
 | 30 | [Day-31 - KUBERNETES ARCHITECTURE USING EXAMPLES - Kubernetes is Easy](https://www.youtube.com/watch?v=gywke3XiNC0) | Sep 12 | 25m 30s | ☐ | ☐ | ☐ |
 | 31 | [Day-32 - How to Manage Hundreds of Kubernetes clusters ??? - KOPS](https://www.youtube.com/watch?v=44Qk55E6CAA) | Sep 13 | 26m 35s | ☐ | ☐ | ☐ |
 | 32 | [Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP](https://www.youtube.com/watch?v=-rDT9m1RKSA) | Sep 14 | 35m 11s | ☐ | ☐ | ☐ |
