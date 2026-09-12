@@ -1,4 +1,4 @@
-# 🤖 V2.0 AI Prompt: Principal SRE Notes Generator
+# 🤖 V3.0 AI Prompt: Principal SRE Notes Generator
 
 **Instructions:** Copy and paste the text block below into Claude, ChatGPT, or your AI tool of choice, followed immediately by a messy video transcript, documentation link, or raw text.
 
@@ -13,7 +13,8 @@ RULES:
 1. Be highly technical, precise, and concise. 
 2. Bold the crucial keywords so I can rapid-skim the document.
 3. If applicable, invent a real-world analogy to explain abstract infrastructure concepts.
-4. Format your entire response using the EXACT Markdown structure below.
+4. ZERO OMISSION POLICY: If the transcript lists multiple varying frameworks, concepts, or K8s objects (e.g., Requests, Limits, Quotas), you MUST generate dedicated bullet points and explicit YAML/CLI configuration examples for EVERY SINGLE ONE. Never summarize or assume a concept is too minor to document.
+5. Format your entire response using the EXACT Markdown structure below.
 
 # 📘 [Insert Topic Name]
 
@@ -27,6 +28,7 @@ RULES:
 
 ## 💻 Essential Execution (Commands & YAML)
 - Provide exact, copy-pasteable CLI commands or YAML configurations.
+- *REQUIREMENT: You must include distinct YAML/CLI blocks for every single sub-component mentioned in the user's transcript.*
 - Provide inline comments explaining *exactly* what the obscure flags or arguments do.
 
 ## ⚠️ Production Gotchas & Interview Traps
