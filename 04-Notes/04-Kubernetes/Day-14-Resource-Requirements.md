@@ -33,7 +33,40 @@ spec:
         cpu: "1"         # 1 Full CPU core (will throttle if it wants more)
 ```
 
-**2. The Live Editing Limitation**
+**2. LimitRange (Default Automations)**
+Limits only work if developers actually write them. A `LimitRange` automatically injects default Requests/Limits into Pods that forget them, ensuring the cluster stays safe.
+```yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-limit-range
+spec:
+  limits:
+  - default:           # The Limit applied if the pod forgets to specify one
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest:    # The Request applied if the pod forgets to specify one
+      cpu: 500m
+      memory: 256Mi
+    type: Container
+```
+
+**3. ResourceQuota (Hard Namespace Limits)**
+A `ResourceQuota` places an absolute ceiling on an entire *Namespace*. If the combined resource requests of all Pods in the namespace exceed this quota, the deployment is blocked.
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+spec:
+  hard:
+    requests.cpu: "1"         # Max 1 Total CPU across all Pods in this Namespace
+    requests.memory: 1Gi      # Max 1GB Total RAM across all Pods in this Namespace
+    limits.cpu: "2"
+    limits.memory: 2Gi
+```
+
+**4. The Live Editing Limitation**
 ```bash
 # 1. Attempting to live-edit a running Pod
 kubectl edit pod webapp
