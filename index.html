@@ -130,7 +130,7 @@
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.05);
             padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center; min-width: 240px;
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
         }
@@ -234,7 +234,7 @@
             border-left: 4px solid #10b981 !important;
             color: #cbd5e1 !important;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.3) !important;
         }
         .terminal-block::before {
@@ -282,7 +282,7 @@
             </div>
             <!-- Visit Counter (dual tracker: badge + inline counts) -->
             <div
-                style="display: flex; align-items: center; gap: 0.75rem; background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.15); padding: 0.3rem 1rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim);">
+                style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.75rem; text-align: center; background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.15); padding: 0.3rem 1rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim);">
                 <span>👁️</span>
                 <span>Views: <strong style="color: #38bdf8;" id="busuanzi_value_site_pv">—</strong></span>
                 <span style="opacity:0.3;">|</span>
@@ -299,7 +299,7 @@
         <!-- Main Centered Header -->
         <header style="text-align: center; margin-bottom: 3.5rem; animation: fadeIn 1s ease-in-out;">
             <h1
-                style="font-size: 3.5rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 4px 10px rgba(56,189,248,0.15));">
+                style="font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 4px 10px rgba(56,189,248,0.15));">
                 DevOps 2027 Command Center
             </h1>
             <p
@@ -308,7 +308,7 @@
             </p>
 
             <div
-                style="display: inline-flex; justify-content: center; align-items: center; gap: 1rem; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.6rem 2.5rem; border-radius: 50px; font-size: 0.95rem; color: #10b981; font-family: 'JetBrains Mono', monospace; box-shadow: 0 4px 20px rgba(16,185,129,0.1);">
+                style="display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem; width: 100%; box-sizing: border-box; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.6rem 2.5rem; border-radius: 50px; font-size: 0.95rem; color: #10b981; font-family: 'JetBrains Mono', monospace; box-shadow: 0 4px 20px rgba(16,185,129,0.1);">
                 <span>⏱️ Mon-Fri: <strong style="color: #34d399;">2-3 Hrs</strong></span>
                 <span style="opacity: 0.3;">|</span>
                 <span>🔥 Sat-Sun: <strong style="color: #34d399;">4-5 Hrs</strong></span>
