@@ -42,8 +42,8 @@
 | 29 | [Day-30 - KUBERNETES IS EASY - INTRODUCTION TO KUBERNETES](https://www.youtube.com/watch?v=dfxrdoEQe00) | Sep 11 | 35m 13s | ✅ | ✅ | ✅ |
 | 30 | [Day-31 - KUBERNETES ARCHITECTURE USING EXAMPLES - Kubernetes is Easy](https://www.youtube.com/watch?v=gywke3XiNC0) | Sep 12 | 25m 30s | ✅ | ✅ | ✅ |
 | 31 | [Day-32 - How to Manage Hundreds of Kubernetes clusters ??? - KOPS](https://www.youtube.com/watch?v=44Qk55E6CAA) | Sep 13 | 26m 35s | ✅ | ✅ | ✅ |
-| 32 | [Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP](https://www.youtube.com/watch?v=-rDT9m1RKSA) | Sep 14 | 35m 11s | ☐ | ☐ | ☐ |
-| 33 | [Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS](https://www.youtube.com/watch?v=lVKLkyuRWCY) | Sep 14 | 27m 38s | ☐ | ☐ | ☐ |
+| 32 | [Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP](https://www.youtube.com/watch?v=-rDT9m1RKSA) | Sep 14 | 35m 11s | ✅ | ☐ | ☐ |
+| 33 | [Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS](https://www.youtube.com/watch?v=lVKLkyuRWCY) | Sep 14 | 27m 38s | ✅ | ☐ | ☐ |
 | 34 | [DAY-35 - EVERYTHING ABOUT KUBERNETES SERVICES - DISCOVERY - LOAD BALANCING - NETWO...](https://www.youtube.com/watch?v=xY6Ic7Igzck) | Sep 15 | 34m 37s | ☐ | ☐ | ☐ |
 | 35 | [Day-36 - KUBERNETES INTERVIEW QUESTIONS PART-1- What's Your Score ? -10/10](https://www.youtube.com/watch?v=0qy5JD7CbJ4) | Sep 16 | 29m 3s | ☐ | ☐ | ☐ |
 | 36 | [DAY-37 - KUBERNETES SERVICES DEEP DIVE- LIVE DEMO - LEARN TRAFFIC FLOW USING KUBES...](https://www.youtube.com/watch?v=fCX8O7GA_lY) | Sep 17 | 44m 18s | ☐ | ☐ | ☐ |
