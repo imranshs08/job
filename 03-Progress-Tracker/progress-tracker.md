@@ -41,7 +41,7 @@
 | 28 | [Day-29 - Docker Interview Questions with Answers - How many can you answer ? - Com...](https://www.youtube.com/watch?v=I6ZBUEc4LrU) | Sep 10 | 38m 16s | ☐ | ☐ | ☐ |
 | 29 | [Day-30 - KUBERNETES IS EASY - INTRODUCTION TO KUBERNETES](https://www.youtube.com/watch?v=dfxrdoEQe00) | Sep 11 | 35m 13s | ✅ | ✅ | ✅ |
 | 30 | [Day-31 - KUBERNETES ARCHITECTURE USING EXAMPLES - Kubernetes is Easy](https://www.youtube.com/watch?v=gywke3XiNC0) | Sep 12 | 25m 30s | ✅ | ✅ | ✅ |
-| 31 | [Day-32 - How to Manage Hundreds of Kubernetes clusters ??? - KOPS](https://www.youtube.com/watch?v=44Qk55E6CAA) | Sep 13 | 26m 35s | ☐ | ☐ | ☐ |
+| 31 | [Day-32 - How to Manage Hundreds of Kubernetes clusters ??? - KOPS](https://www.youtube.com/watch?v=44Qk55E6CAA) | Sep 13 | 26m 35s | ✅ | ✅ | ✅ |
 | 32 | [Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP](https://www.youtube.com/watch?v=-rDT9m1RKSA) | Sep 14 | 35m 11s | ☐ | ☐ | ☐ |
 | 33 | [Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS](https://www.youtube.com/watch?v=lVKLkyuRWCY) | Sep 14 | 27m 38s | ☐ | ☐ | ☐ |
 | 34 | [DAY-35 - EVERYTHING ABOUT KUBERNETES SERVICES - DISCOVERY - LOAD BALANCING - NETWO...](https://www.youtube.com/watch?v=xY6Ic7Igzck) | Sep 15 | 34m 37s | ☐ | ☐ | ☐ |
@@ -242,7 +242,7 @@
 | Sep 10, 2026 | Thu | **Scheduling**: Taints and Tolerations vs Node Affinity (02:32)<br>**Scheduling**: Resource Limits (14:51) | 17m 23s | ✅ |
 | Sep 11, 2026 | Fri | **Scheduling**: A quick note on editing PODs and Deployments (—)<br>**Scheduling**: Practice Test Resource Limits (—)<br>**Scheduling**: Solution: Resource Limits (05:09) | 5m 9s | ✅ |
 | Sep 12, 2026 | Sat | **Scheduling**: DaemonSets (04:08)<br>**Scheduling**: Practice Test DaemonSets (—) | 4m 8s | ✅ |
-| Sep 13, 2026 | Sun | **Scheduling**: Solution: DaemonSets (optional) (05:44)<br>**Scheduling**: Static Pods (08:45) | 14m 29s | ☐ |
+| Sep 13, 2026 | Sun | **Scheduling**: Solution: DaemonSets (optional) (05:44)<br>**Scheduling**: Static Pods (08:45) | 14m 29s | ✅ |
 | Sep 14, 2026 | Mon | **Scheduling**: Practice Test – Static Pods (—)<br>**Scheduling**: Solution – Static Pods (Optional) (05:58) | 5m 58s | ☐ |
 | Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers (09:32)<br>**Scheduling**: Practice Test Multiple Schedulers (—) | 9m 32s | ☐ |
 | Sep 16, 2026 | Wed | **Scheduling**: Solution – Multiple Scheduler (07:46)<br>**Scheduling**: Configuring Scheduler Profiles (09:53)<br>**Scheduling**: References (—) | 17m 39s | ☐ |
