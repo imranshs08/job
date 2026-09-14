@@ -6,12 +6,12 @@ import socket
 import os
 
 # --- ENTERPRISE SMTP SECRETS ---
-SMTP_SERVER = "smtp-relay.brevo.com"
+SMTP_SERVER = "<YOUR_SMTP_SERVER_URL>"
 SMTP_PORT = 587
-SENDER = "b7e208001@smtp-brevo.com"
+SENDER = "<YOUR_SENDER_EMAIL@DOMAIN.COM>"
 # Pulls standard credential from environments so it's not hardcoded in the script
 PASSWORD = os.environ.get("GMAIL_APP_PASSWORD") 
-RECIPIENT = "imran@cmd-center.local" # Adjust for real alerts
+RECIPIENT = "<YOUR_RECIPIENT_EMAIL@DOMAIN.COM>" # Adjust for real alerts
 
 def send_alert(disk_usage):
     if not PASSWORD:
