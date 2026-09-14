@@ -83,8 +83,33 @@ In a real enterprise production environment, running cleanup scripts blindly on 
 
 ### ⚠️ Constraint 1: Active File Handles (The `rm -rf` trap)
 You should **never** just run `rm -rf /var/log/app.log` if the application is still writing to it! 
-**Why?** In Linux, if a process has an open file handle, deleting the file removes the pointer, but **does not free the disk space**. The disk will still show 100% full until the process (like Rundeck or Docker) is manually restarted.
-* **The SRE Fix:** Always use log rotation (`logrotate`), or safely truncate the file in place via `> /var/log/app.log`.
+
+**Why?** In Linux file systems, a file is only truly deleted when *both* its directory link is removed AND no active processes have it open (run `lsof` to see). If you `rm` a log file that Rundeck, Java, or Docker is currently streaming to, you only remove the name pointer. The OS keeps the data blocks allocated on the disk resulting in a "ghost file". The disk will still show 100% full, but you won't be able to see the file to delete it! Space is only reclaimed when you restart the application service.
+
+**The SRE Fixes (Detailed Examples):**
+
+👉 **Method 1: Safe In-Place Truncation (Emergency Response)**
+If you are in the middle of a SEV-1 incident and need disk space *immediately* without crashing the app, empty the file natively. This keeps the active file handle completely intact:
+```bash
+# Safely clears the file content to 0 bytes instantly (The optimal SRE method)
+> /var/log/rundeck/rundeck.log
+
+# Alternative using the truncate command
+truncate -s 0 /var/log/rundeck/rundeck.log
+```
+
+👉 **Method 2: Standard Log Rotation (`logrotate`)**
+For long-term permanent fixes, SREs configure the Linux `logrotate` daemon to handle cutting, zipping, and managing files gracefully without manual bash scripts. 
+*Example `/etc/logrotate.d/rundeck` configuration:*
+```text
+/var/log/rundeck/*.log {
+    daily               # Rotate every day
+    rotate 7            # Keep exactly 7 days of history
+    compress            # gzip the rotated files natively
+    missingok           # Don't error out if the file is missing
+    copytruncate        # CRITICAL: Copies the file and truncates the original in place (prevents handle breaking!)
+}
+```
 
 ### ⚠️ Constraint 2: Inode Exhaustion
 Sometimes `df -h` shows 50% capacity, but applications are still crashing with "No space left on device".
