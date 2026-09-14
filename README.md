@@ -46,6 +46,8 @@
 - 🌐 **[Command Center Dashboard](https://imranshs08.github.io/job/)** — Auto-refreshing, glassmorphic UI tracking overdue backlog items, live visits, and study progress.
 - 🚀 **[AGIC to AGC Migration Guide](https://imranshs08.github.io/job/04-Notes/05-Cloud-AWS-Azure/AGIC-to-AGC-Migration.html)** — Premium Zero-Downtime Migration guide for Azure Application Gateway for Containers (with embedded video labs).
 - ☸️ **[EKS NGINX Ingress Controller](04-Notes/04-Kubernetes/EKS-NGINX-Ingress.md)** — Production-grade Ingress template featuring TLS termination, path-based routing, and rate limiting (DDoS protection).
+- 🚨 **[SRE Lab: Rundeck Disk Exhaustion](11-Labs-and-Validation/05-Rundeck-Log-Exhaustion/README.md)** — End-to-end lab simulating devastating `/var/log` block limits remediated by automated self-healing bash scripts.
+- 🔄 **[SRE Lab: Advanced Logrotate Architecture](11-Labs-and-Validation/06-Advanced-Logrotate-System/README.md)** — Master class on ghost files, active handles, and `copytruncate` using a fully artificially mocked Linux log environment.
 
 ---
 
