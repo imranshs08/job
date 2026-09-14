@@ -27,10 +27,11 @@ if [ "$USAGE_INT" -gt 80 ]; then
     # Check if files exist to avoid throwing find errors
     if [ "$(ls -A "$MONITOR_DIR"/*.log 2>/dev/null)" ]; then
         # -exec gzip compresses them in place, heavily reducing du (disk usage) space.
-        sudo find "$MONITOR_DIR" -type f -name "*.log" -exec gzip -v {} \+
+        # Modified to only target logs strictly older than 2 days to maintain immediate recent logs!
+        sudo find "$MONITOR_DIR" -type f -name "*.log" -mtime +2 -exec gzip -v {} \+
         echo "[+] Remediation successful. Files archived."
     else
-         echo "[-] No uncompressed .log files found to compress!"
+         echo "[-] No uncompressed .log files older than 2 days found to compress!"
     fi
     
     # Post-mortem telemetry
