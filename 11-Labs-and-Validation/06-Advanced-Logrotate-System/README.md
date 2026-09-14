@@ -127,6 +127,7 @@ In a production Kubernetes or Fortune 500 bare-metal environment, the standard l
     mail audit-logs@yourcompany.com   # Eject the 6th archive to this email before deletion!
 }
 ```
+👉 **[View the Complete SRE Guide: Enabling Logrotate's `mail` Directive (Postfix MTA Setup)](Mail-Setup.md)**
 
 ### ⚖️ Enterprise Scenario 5: `size` vs `maxsize`
 These two directives seem identical, but function entirely differently in production!
