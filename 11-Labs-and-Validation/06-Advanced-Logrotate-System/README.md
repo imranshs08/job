@@ -29,12 +29,14 @@ Execute `./setup_lab.sh` to scaffold the environment.
 * It creates a dummy application root at `/var/log/my_app/my_app.log`.
 * It automatically deploys our aggressive config into `/etc/logrotate.d/my_app`.
 
-**Let's analyze the configuration we injected:**
+**Let's analyze the configuration we injected (The Magic of Logrotate):**
+Unlike the previous Rundeck Lab where we had to write custom bash scripts with `find -mtime` to zip files and run scheduled crontabs to delete them, `logrotate` handles ALL of this natively through two simple parameters:
+
 ```text
 /var/log/my_app/*.log {
     size 10M            # Trigger rotation if file hits 10 Megabytes (ignores daily cron limit)
-    rotate 4            # Keep a maximum of 4 historical logs. The 5th is permanently deleted.
-    compress            # GZIP all rotated logs natively.
+    rotate 4            # THE CLEANUP: Keep a maximum of 4 historical logs. The 5th is permanently deleted automatically!
+    compress            # THE ZIPPING: GZIP all rotated logs natively (No manual bash scripts required!)
     delaycompress       # Delay compression of yesterday's log until tomorrow's rotation. (Great for active debugging).
     missingok           # Do not throw alerts if no log file exists.
     notifempty          # Do not rotate if the file is completely empty.
