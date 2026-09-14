@@ -114,6 +114,7 @@ In a production Kubernetes or Fortune 500 bare-metal environment, the standard l
     olddir /mnt/deep_archive/logs/  # Move the gzipped logs off the fast SSD to a cheaper NFS mount block
 }
 ```
+👉 **[View the Complete SRE Guide: Securely Mounting Azure File Share (NFS 4.1) for Logrotate](Azure-NFS-Setup.md)**
 
 ### 📩 Enterprise Scenario 4: Emailing the Archives (`mail`)
 **The Problem:** You must permanently delete logs to save space, but upper management mandates a hardcopy of all logs be shipped to an auditing email address before deletion.
