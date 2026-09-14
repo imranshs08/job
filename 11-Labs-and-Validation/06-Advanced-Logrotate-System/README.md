@@ -23,6 +23,25 @@ Before executing the scenarios, you must understand the foundational terminology
 
 `logrotate` is natively installed on RHEL and CentOS. It is executed automatically every day by a standard Linux `cron` job located in `/etc/cron.daily/logrotate`.
 
+### 🗺️ The SRE Data Flow
+```mermaid
+graph TD
+    classDef daemon fill:#6b21a8,stroke:#d8b4fe,stroke-width:2px,color:#fff
+    classDef storage fill:#0f766e,stroke:#5eead4,stroke-width:2px,color:#fff
+    classDef engine fill:#b91c1c,stroke:#fca5a5,stroke-width:2px,color:#fff
+    classDef remote fill:#0369a1,stroke:#7dd3fc,stroke-width:2px,color:#fff
+
+    A[Docker / NGINX Daemon]:::daemon -->|Writes Continually| B(Active: /var/log/my_app.log)
+    C[OS: /etc/cron.daily]:::daemon -->|Wakes at 2:00 AM| D{Logrotate Engine}:::engine
+    
+    B -.-> D
+    D -->|Phase 1: Rotate| E[my_app.log.1]:::storage
+    D -->|Phase 2: Compress| F[my_app.log.2.gz]:::storage
+    D -->|Phase 3: olddir| G[(Azure NFS Share)]:::remote
+    D -->|Phase 4: mail| H[📧 Audit Inbox]:::remote
+    G -->|maxage 90 days| I[💥 Permanent Deletion]
+```
+
 It utilizes a split architecture:
 1. **The Global Config (`/etc/logrotate.conf`)**: Defines the base configurations (e.g., rotate logs weekly by default, keep 4 weeks of backlogs, compress them).
 2. **The Modular Drop-ins (`/etc/logrotate.d/`)**: SREs and package managers drop individual application specs here (e.g., `/etc/logrotate.d/nginx`, `/etc/logrotate.d/syslog`). These override the global config explicitly for that application.
@@ -188,10 +207,19 @@ chmod +x cleanup_lab.sh
 ---
 
 ## ⚠️ Production Gotchas & Interview Traps
-*   **The Gotcha (Log Bloat between Crons):** The `size 10M` parameter does *not* mean the file is instantly cut the exact second it hits 10MB! Because `logrotate` only wakes up once per day (usually 2:00 AM via cron), if a runaway application writes 50 Gigabytes of data in 4 hours, it will still crash the server before `logrotate` ever gets a chance to awake and verify the `size` rule! For hyper-active logs, you must manually run logrotate via a custom 5-minute cronjob (as demonstrated in the previous Rundeck lab).
-*   **The Interview Trap:** "An engineer deleted a 50GB log file via `rm -rf`, but the disk is still 100% full. Why?"
-    *   *The SRE Answer:* The application (like Docker or Tomcat) still holds an active file handle to the inode. The name pointer is gone, creating a "Ghost File". You must restart the application to free the inode, or use `> file.log` / `copytruncate` to properly empty it in-place.
-*   **Copytruncate CPU Overhead:** `copytruncate` involves reading the entire file and writing a raw copy to disk before truncating. On an extremely hot 50GB log file, this can cause massive I/O spikes and bring down an undersized Virtual Machine. 
+
+> [!WARNING]
+> **The Cron Bloat Constraint:** 
+> The `size 10M` parameter does *not* mean the file is instantly cut the exact second it hits 10MB! Because `logrotate` only wakes up once per day (usually 2:00 AM via cron), if a runaway application writes 50 Gigabytes of data in 4 hours, it will still crash the server before `logrotate` ever gets a chance to awake and verify the `size` rule! For hyper-active logs, you must manually run logrotate via a custom 5-minute cronjob (as demonstrated in the previous Rundeck lab).
+
+> [!CAUTION]
+> **The Infamous "Ghost File" Interview Trap:**
+> *"An engineer deleted a 50GB log file via `rm -rf`, but the disk is still 100% full. Why?"*
+> **The SRE Answer:** The application (like Docker or Tomcat) still holds an active file handle to the inode. The name pointer is gone, creating a invisible "Ghost File" that continues to eat disk space. You must restart the application to free the inode, or use `> file.log` / `copytruncate` to properly empty it in-place.
+
+> [!IMPORTANT]
+> **The CPU Overhead of `copytruncate`:** 
+> Using `copytruncate` involves reading the entire file and writing a raw copy to disk before immediately zeroing out the original. On an extremely hot 50GB database log file, this can cause massive CPU/IO spikes and bring down an undersized Virtual Machine temporarily. Use with care.
 
 ## 🔍 SRE Debugging (Where to look when it fails)
 If your Linux disk is exhausted and you suspect logrotate failure:
