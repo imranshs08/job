@@ -70,6 +70,52 @@ logrotate -vf /etc/logrotate.d/my_app
 
 ---
 
+## 🏢 Phase 4: Advanced Enterprise SRE Configurations
+
+In a production Kubernetes or Fortune 500 bare-metal environment, the standard logrotate config isn't enough. Here are three highly advanced enterprise configurations you **must** know for interviews and architectures.
+
+### 🛡️ Enterprise Scenario 1: The Multi-Worker Trap (`sharedscripts`)
+**The Problem:** NGINX or Apache might have 50 different log files (`access.log`, `error.log`, `ssl.log`). If you tell `logrotate` to gracefully reload the NGINX daemon in a `postrotate` block, it will reload NGINX **50 times** (once for every single file it rotated), destroying your CPU!
+**The SRE Fix:** Inject `sharedscripts`. This forces `logrotate` to wait until *all* logs are rotated, and then executes the daemon reload exactly **once**.
+
+```text
+/var/log/nginx/*.log {
+    daily
+    rotate 14
+    sharedscripts       # CRITICAL: Ensures postrotate executes ONLY ONCE for all 50 files.
+    postrotate
+        /bin/systemctl reload nginx.service > /dev/null 2>/dev/null || true
+    endscript
+}
+```
+
+### 📅 Enterprise Scenario 2: SOC2 Compliance Auditing (`dateext`)
+**The Problem:** Standard logrotate renames files sequentially (`app.log.1`, `app.log.2`). When an auditor asks for the logs from "August 12th", correlating `.14.gz` is a nightmare.
+**The SRE Fix:** Inject `dateext`. Instead of indexing via numbers, logrotate magically stamps the exact rotation date into the file string! (`app.log-20270812.gz`).
+
+```text
+/var/log/my_app/*.log {
+    daily
+    dateext             # Morph 'app.log.1' into 'app.log-20270812'
+    dateformat -%Y%m%d  # Standardize the timestamp format
+}
+```
+
+### 🚢 Enterprise Scenario 3: Log Shipping & Legal Retention (`olddir` & `maxage`)
+**The Problem:** You must keep logs for 90 days for legal compliance, but you absolutely cannot afford them cluttering up the primary application directory while FileBeat is trying to ship them to Elasticsearch.
+**The SRE Fix:** Use `olddir` to automatically move them to a separate deep-storage network mount, and `maxage 90` to strictly enforce a physical 90-day execution order.
+
+```text
+/var/log/my_app/*.log {
+    daily
+    rotate 365          # Keep 365 copies maximum
+    maxage 90           # OVERRIDE: Delete anything strictly older than 90 days for compliance!
+    olddir /mnt/deep_archive/logs/  # Move the gzipped logs off the fast SSD to a cheaper NFS mount block
+}
+```
+
+---
+
 ## 🔁 Verification
 After running the test script, execute `ls -lh /var/log/my_app`.
 
