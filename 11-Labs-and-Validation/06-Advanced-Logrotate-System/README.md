@@ -1,6 +1,7 @@
 # 🔄 SRE Lab: Advanced Logrotate System
 
 **Scenario:** Standard OS components log heavily to `/var/log` (e.g., `boot.log`, `messages`, `secure`). Unchecked, these text files will grow infinitely until they crash the server. 
+
 **Objective:** Deploy a custom application log stream and master the Linux `logrotate` service to strictly enforce log rotation, compression, and automated deletion sequences without dropping file handles.
 
 ---
