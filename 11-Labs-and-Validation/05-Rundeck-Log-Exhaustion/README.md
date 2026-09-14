@@ -59,10 +59,20 @@ To fix this, we've deployed a self-healing script `disk_monitor.sh` coupled with
 3.  **SEV-1 Dispatch:** Executes the Python script to send a beautifully styled HTML email bounding into your inbox using your `smtp-relay.brevo.com` service.
 4.  **Graceful Compression:** Executes `find /var/log/rundeck_lab_sim -type f -name "*.log" -exec gzip {} \+`. This targets raw logs and archives them in place, massively reducing their footprint (up to 95% reduction depending on entropy) without deleting the underlying evidence for post-mortems!
 
-**Execute the heal:**
+**Execute the heal manually:**
 ```bash
 chmod +x disk_monitor.sh mail_notifier.py
 ./disk_monitor.sh
+```
+
+**Automating the heal via Cron (Every 5 minutes):**
+To ensure the system heals itself automatically before Rundeck even realizes there is a storage issue, we can schedule the monitor script to check the drive every 5 minutes continuously:
+```bash
+# 1. Open the crontab editor
+sudo crontab -e
+
+# 2. Add this line to execute the monitor script every 5 minutes
+*/5 * * * * /path/to/11-Labs-and-Validation/05-Rundeck-Log-Exhaustion/disk_monitor.sh >> /var/log/rundeck_disk_monitor.log 2>&1
 ```
 
 ---
