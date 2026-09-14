@@ -11,12 +11,15 @@ echo "================================================="
 
 echo "[1/3] Running a dry-run (debug mode) without modifying files..."
 echo "Command: logrotate -d $CONF_FILE"
+# The '-d' (debug) flag tells logrotate to read the file, calculate what it *would* do, print the output, 
+# but actually touch nothing on disk. This is how SREs prevent breaking production config files!
 sudo logrotate -d "$CONF_FILE"
 echo "-------------------------------------------------"
 
 echo "[2/3] Forcing execution regardless of daily cron intervals..."
 echo "Command: logrotate -vf $CONF_FILE"
-# -v for verbose output, -f for force 
+# The '-v' (verbose) flag provides dense stdout logging.
+# The '-f' (force) flag completely ignores the /var/lib/logrotate/status state memory file and forces the rotation IMMEDIATELY.
 sudo logrotate -vf "$CONF_FILE"
 echo "-------------------------------------------------"
 
