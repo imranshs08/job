@@ -46,9 +46,20 @@ It utilizes a split architecture:
 1. **The Global Config (`/etc/logrotate.conf`)**: Defines the base configurations (e.g., rotate logs weekly by default, keep 4 weeks of backlogs, compress them).
 2. **The Modular Drop-ins (`/etc/logrotate.d/`)**: SREs and package managers drop individual application specs here (e.g., `/etc/logrotate.d/nginx`, `/etc/logrotate.d/syslog`). These override the global config explicitly for that application.
 
-Before beginning, check your version:
+Before beginning, verify your installation and default system capabilities:
 ```bash
 logrotate --version
+
+# Expected Output:
+# logrotate 3.19.0
+#
+#     Default mail command:       /usr/bin/mail
+#     Default compress command:   /bin/gzip
+#     Default uncompress command: /bin/gunzip
+#     Default compress extension: .gz
+#     Default state file path:    /var/lib/logrotate/status
+#     ACL support:                yes
+#     SELinux support:            yes
 ```
 
 ---
