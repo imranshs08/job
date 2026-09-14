@@ -6,6 +6,19 @@
 
 ---
 
+## 🧠 Pre-Flight Concepts: What You Must Know Before Starting
+
+Before executing the scenarios, you must understand the foundational terminology and *why* this system exists:
+
+1. **The Core Threat (Disk Exhaustion):** Without `logrotate`, services like NGINX or Docker write indefinitely to `app.log`. Once the underlying storage disk reaches 100% capacity (either Blocks or Inodes), the server suffers a SEV-1 failure. Databases lock horizontally, and users cannot login.
+2. **Rotation vs. Compression:**
+   * **Rotation:** Moving the active `/var/log/app.log` file out of the way (renaming it to `app.log.1`) and instantly generating a brand new, empty `app.log` for the application to continue writing to uninterrupted.
+   * **Compression:** The secondary step. Using a utility like `gzip` to crush the old `app.log.1` (reducing its size by up to ~95%) to permanently reclaim disk space.
+3. **The Cron Dependency:** `logrotate` is *not* an always-on daemon monitoring your disk in real-time. By default, it is a binary invoked exactly **once per day** by the Linux OS scheduler located at `/etc/cron.daily/logrotate`.
+4. **Statefulness (The Brain):** Because it sleeps all day, `logrotate` stores its memory in `/var/lib/logrotate/status`. If you ever need to know exactly when an active application's log was last shifted, you `cat` this file.
+
+---
+
 ## 🏛️ The Architecture of `logrotate`
 
 `logrotate` is natively installed on RHEL and CentOS. It is executed automatically every day by a standard Linux `cron` job located in `/etc/cron.daily/logrotate`.
