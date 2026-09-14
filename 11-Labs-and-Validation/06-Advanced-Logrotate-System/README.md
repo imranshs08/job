@@ -24,7 +24,7 @@ logrotate --version
 
 We have provided three bash scripts to safely automate and demonstrate this architecture.
 
-### 1. Scaffolding the Application (`setup_lab.sh`)
+### 1. Scaffolding the Application ([`setup_lab.sh`](setup_lab.sh))
 Execute `./setup_lab.sh` to scaffold the environment. 
 * It creates a dummy application root at `/var/log/my_app/my_app.log`.
 * It automatically deploys our aggressive config into `/etc/logrotate.d/my_app`.
@@ -44,12 +44,12 @@ Unlike the previous Rundeck Lab where we had to write custom bash scripts with `
 }
 ```
 
-### 2. Simulating Log Growth (`simulate_growth.sh`)
+### 2. Simulating Log Growth ([`simulate_growth.sh`](simulate_growth.sh))
 Since `logrotate` usually only happens daily via Cron, we need to artificially break the thresholds to witness it.
 Execute `./simulate_growth.sh`. 
 * This blasts 15 Megabytes of Base64 encoded entropy into `/var/log/my_app/my_app.log`, explicitly breaching our `size 10M` rule.
 
-### 3. The SRE Diagnostics (`test_rotation.sh`)
+### 3. The SRE Diagnostics ([`test_rotation.sh`](test_rotation.sh))
 Whenever an SRE modifies a configuration file in `/etc/logrotate.d/`, they **must** test it. If the syntax is broken, logs stop rotating globally!
 
 Run `./test_rotation.sh` which executes two critical commands:
