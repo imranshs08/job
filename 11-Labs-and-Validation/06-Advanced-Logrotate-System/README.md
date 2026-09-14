@@ -162,6 +162,17 @@ After running the test script, execute `ls -lh /var/log/my_app`.
 
 ---
 
+## 🧽 Phase 6: Lab Teardown
+Once you are done experimenting with configurations, you must remove the `.conf` file so it doesn't perpetually trigger via crontab in the background of your system!
+
+Execute the teardown script to wipe the configurations safely:
+```bash
+chmod +x cleanup_lab.sh
+./cleanup_lab.sh
+```
+
+---
+
 ## ⚠️ Production Gotchas & Interview Traps
 *   **The Gotcha (Log Bloat between Crons):** The `size 10M` parameter does *not* mean the file is instantly cut the exact second it hits 10MB! Because `logrotate` only wakes up once per day (usually 2:00 AM via cron), if a runaway application writes 50 Gigabytes of data in 4 hours, it will still crash the server before `logrotate` ever gets a chance to awake and verify the `size` rule! For hyper-active logs, you must manually run logrotate via a custom 5-minute cronjob (as demonstrated in the previous Rundeck lab).
 *   **The Interview Trap:** "An engineer deleted a 50GB log file via `rm -rf`, but the disk is still 100% full. Why?"

@@ -21,7 +21,7 @@ APP_LOG_FILE="$APP_LOG_DIR/my_app.log"
 echo "[+] Creating custom log directory at $APP_LOG_DIR"
 sudo mkdir -p "$APP_LOG_DIR"
 sudo touch "$APP_LOG_FILE"
-sudo chmod 777 "$APP_LOG_FILE" # For lab write access
+sudo chmod 666 "$APP_LOG_FILE" # Grant write access securely (777 triggers logrotate security panic!)
 
 # 3. Inject Custom Configuration into /etc/logrotate.d/
 CONF_FILE="/etc/logrotate.d/my_app"
@@ -29,6 +29,7 @@ echo "[+] Deploying aggressive logrotate configuration to $CONF_FILE"
 
 sudo bash -c "cat <<EOF > $CONF_FILE
 $APP_LOG_DIR/*.log {
+    su root root        # Mandates execution as root to pass strict SELinux ownership security rules
     size 10M
     rotate 4
     compress
