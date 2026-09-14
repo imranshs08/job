@@ -74,3 +74,28 @@ After running the test script, execute `ls -lh /var/log/my_app`.
 1. `my_app.log` will be entirely empty (0 bytes).
 2. `my_app.log.1` will exist uncompressed (15MB) due to the `delaycompress` parameter.
 3. If you run the `simulate` and `test` scripts **again**, `my_app.log.1` will natively morph into `my_app.log.2.gz` and shrink to practically nothing via compression, proving the rotation cycle is fully functional!
+
+---
+
+## ⚠️ Production Gotchas & Interview Traps
+*   **The Gotcha (Log Bloat between Crons):** The `size 10M` parameter does *not* mean the file is instantly cut the exact second it hits 10MB! Because `logrotate` only wakes up once per day (usually 2:00 AM via cron), if a runaway application writes 50 Gigabytes of data in 4 hours, it will still crash the server before `logrotate` ever gets a chance to awake and verify the `size` rule! For hyper-active logs, you must manually run logrotate via a custom 5-minute cronjob (as demonstrated in the previous Rundeck lab).
+*   **The Interview Trap:** "An engineer deleted a 50GB log file via `rm -rf`, but the disk is still 100% full. Why?"
+    *   *The SRE Answer:* The application (like Docker or Tomcat) still holds an active file handle to the inode. The name pointer is gone, creating a "Ghost File". You must restart the application to free the inode, or use `> file.log` / `copytruncate` to properly empty it in-place.
+*   **Copytruncate CPU Overhead:** `copytruncate` involves reading the entire file and writing a raw copy to disk before truncating. On an extremely hot 50GB log file, this can cause massive I/O spikes and bring down an undersized Virtual Machine. 
+
+## 🔍 SRE Debugging (Where to look when it fails)
+If your Linux disk is exhausted and you suspect logrotate failure:
+
+1.  **Read the daily cron execution logs:**
+    ```bash
+    cat /var/log/cron | grep logrotate
+    ```
+2.  **Ensure you didn't create a syntax error in your config:**
+    ```bash
+    # SREs ALWAYS run this after modifying drop-in configs
+    logrotate -d /etc/logrotate.conf
+    ```
+3.  **Check for "Ghost Files" taking up unseen space:**
+    ```bash
+    sudo lsof | grep deleted
+    ```
