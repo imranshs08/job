@@ -115,6 +115,41 @@ In a production Kubernetes or Fortune 500 bare-metal environment, the standard l
 }
 ```
 
+### 📩 Enterprise Scenario 4: Emailing the Archives (`mail`)
+**The Problem:** You must permanently delete logs to save space, but upper management mandates a hardcopy of all logs be shipped to an auditing email address before deletion.
+**The SRE Fix:** Inject the `mail` parameter. Logrotate will automatically calculate which `.gz` file is about to cross the threshold for deletion, extract it, attach it to an email using the local `/usr/bin/mail` agent, and dispatch it exactly one millisecond before `rm -rf` executes.
+
+```text
+/var/log/my_app/*.log {
+    daily
+    rotate 5
+    mail audit-logs@yourcompany.com   # Eject the 6th archive to this email before deletion!
+}
+```
+
+### ⚖️ Enterprise Scenario 5: `size` vs `maxsize`
+These two directives seem identical, but function entirely differently in production!
+*   **`size 100M`**: Forcefully rotates the log *only* if it is larger than 100MB. It completely ignores cron schedules like `daily` or `weekly`.
+*   **`maxsize 100M`**: Enforces time intervals (e.g. `weekly`), rotating exactly once a week, *UNLESS* the log breaches 100MB early, in which case it rotates instantly to save the server from crashing.
+
+---
+
+## 🧹 Phase 5: Modern Systemd Binary Logs (`journalctl`)
+
+While `logrotate` handles raw `text` files, modern Linux OS's use `systemd` which writes core kernel and daemon logs in a raw **Binary format** inside `/var/log/journal/`. Logrotate **cannot** read or clean these!
+
+To prevent your binary journaling system from exhausting disk space, SREs employ the explicit `vacuum` commands:
+```bash
+# 1. Check exactly how much disk space your binary systemd logs are taking up globally
+journalctl --disk-usage
+
+# 2. Hard-delete any binary logs older than 7 days
+sudo journalctl --vacuum-time=7d
+
+# 3. Aggressively delete older binary logs until the total folder is shrunk to 500MB
+sudo journalctl --vacuum-size=500M
+```
+
 ---
 
 ## 🔁 Verification
