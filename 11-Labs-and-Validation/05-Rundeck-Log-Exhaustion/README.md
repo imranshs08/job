@@ -81,10 +81,30 @@ Sometimes `df -h` shows 50% capacity, but applications are still crashing with "
 **Why?** A rogue process generated millions of tiny 1-byte files, consuming all the filesystem's **Inodes**, even though raw space remains.
 * **The SRE Fix:** Check inode capacity natively using `df -i`.
 
-### 🧹 Phase 5: Cleanup the Lab
-Restore your workspace:
+### 🧹 Phase 5: Long-Term Enterprise Cleanup (Automated CronJob)
+While `disk_monitor.sh` dynamically compresses the logs to save space, we still need to permanently delete those `.gz` archives eventually, otherwise the disk will still fill up over a span of months. 
+
+We deployed `cleanup_logs.sh` to target `.gz` files older than 7 days and successfully `rm` them. This script is designed to run automatically in the background using Linux **Cron**.
+
+**How to schedule the automated cleanup via Cron:**
+```bash
+# 1. Make the script executable
+chmod +x cleanup_logs.sh
+
+# 2. Open the crontab editor for the root user (or Rundeck user)
+sudo crontab -e
+
+# 3. Add the following line to execute the cleanup completely autonomously every night at 2:00 AM
+0 2 * * * /path/to/11-Labs-and-Validation/05-Rundeck-Log-Exhaustion/cleanup_logs.sh >> /var/log/rundeck_cleanup.log 2>&1
+```
+
+---
+
+### 💥 Phase 6: Lab Teardown
+Restore your workspace back to zero:
 ```bash
 sudo rm -rf /var/log/rundeck_lab_sim
+sudo crontab -l | grep -v 'cleanup_logs.sh' | sudo crontab - # Remove just the cronjob
 sudo systemctl stop rundeckd
 sudo yum remove -y rundeck
 ```
