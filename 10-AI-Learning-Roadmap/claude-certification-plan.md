@@ -18,7 +18,7 @@ This master syllabus is designed for a DevOps engineer transitioning into AI Pla
 ### 2. High-Impact YouTube Playlists
 * **[The Ultimate Build-Along Course: Claude Certified Developer](https://www.youtube.com/playlist?list=PLYrYhzAmVyKU):** 
   * This is the definitive 15-part video series (featuring a 12-episode core build-along) designed specifically for this exam. 
-  * We have mapped these exact episodes directly into your 11-week syllabus below.
+  * Total Runtime: **12 hours, 1 minute, 57 seconds**. We have mapped these exact episodes directly into your 11-week syllabus below (avg. ~65m per weekend).
 
 ---
 
@@ -26,70 +26,70 @@ This master syllabus is designed for a DevOps engineer transitioning into AI Pla
 
 ### Week 1: Foundation & The Raw API (Sep 19–20)
 * **Saturday (Theory):** 
-  * Watch: **New Claude Certifications Are Coming: Here's What's Actually Confirmed**
-  * Watch: **Claude Agent SDK vs API vs Managed Agents: Which Should You Actually Use?**
+  * Watch: **New Claude Certifications Are Coming: Here's What's Actually Confirmed** `[18m 00s]`
+  * Watch: **Claude Agent SDK vs API vs Managed Agents: Which Should You Actually Use?** `[33m 12s]`
 * **Sunday (Practice):**
-  * Watch & Code: **Ep 01 | Your First Agent on the Raw Messages API**
+  * Watch & Code: **Ep 01 | Your First Agent on the Raw Messages API** `[48m 36s]`
 
 ### Week 2: Mastering the Local SDK (Sep 26–27)
 * **Saturday:**
-  * Watch & Code: **Ep 02 | Claude Agent SDK Explained From Zero**
+  * Watch & Code: **Ep 02 | Claude Agent SDK Explained From Zero** `[48m 19s]`
 * **Sunday:**
   * Build a baseline local Python script querying `claude-3-5-sonnet-20240620`. Handle the response payload gracefully.
 
 ### Week 3: Tool Use & MCP (Oct 3–4)
 * **Saturday:**
-  * Watch & Code: **Ep 03 | Custom Tools & MCP**
+  * Watch & Code: **Ep 03 | Custom Tools & MCP** `[47m 02s]`
 * **Sunday:**
   * Define a `get_stock_price(ticker)` tool in JSON and pass it in the `tools` array to Claude using Python.
 
 ### Week 4: Hooks, Guardrails & Security (Oct 10–11)
 * **Saturday:**
-  * Watch & Code: **Ep 04 | Hooks, Guardrails & Security**
+  * Watch & Code: **Ep 04 | Hooks, Guardrails & Security** `[1h 11m 13s]`
 * **Sunday:**
   * Test input constraints. Write a system prompt that explicitly limits Claude from executing unsafe tool payloads.
 
 ### Week 5: Multi-Agent Architectures (Oct 17–18)
 * **Saturday:**
-  * Watch & Code: **Ep 05 | Subagents & Multi-Agent Orchestration**
+  * Watch & Code: **Ep 05 | Subagents & Multi-Agent Orchestration** `[1h 07m 50s]`
 * **Sunday:**
   * Implement an orchestration pattern where `Haiku` routes an intent, and `Sonnet` executes the heavy lifting.
 
 ### Week 6: State & Memory Management (Oct 24–25)
 * **Saturday:**
-  * Watch & Code: **Ep 06 | Agent Memory, Sessions, Resume & Forking**
+  * Watch & Code: **Ep 06 | Agent Memory, Sessions, Resume & Forking** `[1h 01m 19s]`
 * **Sunday:**
   * Build a chatbot that remembers context from Turn 1 when answering Turn 5.
 
 ### Week 7: Structured Output (Oct 31–Nov 1)
 * **Saturday:**
-  * Watch & Code: **Ep 07 | Structured Output Handling**
+  * Watch & Code: **Ep 07 | Structured Output Handling** `[59m 37s]`
 * **Sunday:**
   * Pre-fill the `assistant` message with `{` to force Claude to output pure, parseable JSON without conversation filler.
 
 ### Week 8: Advanced Skills (Nov 7–8)
 * **Saturday:**
-  * Watch & Code: **Ep 08 | Claude Agent Skills: Build & Chain Two Real Skills**
+  * Watch & Code: **Ep 08 | Claude Agent Skills: Build & Chain Two Real Skills** `[51m 02s]`
 * **Sunday:**
   * Chain an API fetch skill directly into a formatting presentation skill.
 
 ### Week 9: Model Context Protocol (MCP) Deep Dive (Nov 14–15)
 * **Saturday:**
-  * Watch & Code: **Ep 09 | How AI Agents Actually Use MCP**
+  * Watch & Code: **Ep 09 | How AI Agents Actually Use MCP** `[46m 34s]`
 * **Sunday:**
   * Draft a conceptual MCP server wrapper that connects Claude to your local filesystem securely.
 
 ### Week 10: Economics & System Profiling (Nov 21–22)
 * **Saturday:**
-  * Watch: **Claude Certified Architect vs Developer: What Nobody Tells You (2026 Update)**
-  * Watch: **Ep 10 | Opus vs Sonnet vs Haiku, Thinking & Effort**
+  * Watch: **Claude Certified Architect vs Developer: What Nobody Tells You (2026 Update)** `[24m 55s]`
+  * Watch: **Ep 10 | Opus vs Sonnet vs Haiku, Thinking & Effort** `[43m 19s]`
 * **Sunday:**
-  * Watch & Code: **Ep 11 | Prompt Caching, Token Costs & Error Handling Explained**
+  * Watch & Code: **Ep 11 | Prompt Caching, Token Costs & Error Handling Explained** `[52m 39s]`
   * Calculate token spend profiles between standard calls and Cached calls.
 
 ### Week 11: Anthropic Managed Agents & Mock Exams (Nov 28–29)
 * **Saturday:** 
-  * Watch & Code: **Ep 12 | Claude Managed Agents: Let Anthropic Run It**
+  * Watch & Code: **Ep 12 | Claude Managed Agents: Let Anthropic Run It** `[48m 20s]`
 * **Sunday:** 
   * Build a final Capstone Project deploying a fully managed agent, linking all 12 modules together!
 
