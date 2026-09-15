@@ -2,6 +2,11 @@
 
 > **Mission:** Master DevOps + AI skills by December 2026. Start applying from **1st January 2027**.
 
+> **Certifications Target:**
+> * 🤖 Claude Developer Foundation — Dec 6, 2026
+> * ☸️ CKA — Jan 1, 2027
+> * ☁️ AZ-104 — Jan 15, 2027
+
 ---
 
 ## 📅 Timeline at a Glance

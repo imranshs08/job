@@ -160,7 +160,32 @@
 
 ---
 
-## 💼 Section 4 — Career & Interview Checklist
+## 🤖 Section 4 — Claude Certified Developer Foundation (Dec 6)
+
+> **Full weekend-only syllabus:** [claude-certification-plan.md](./10-AI-Learning-Roadmap/claude-certification-plan.md)
+> **Exam Date:** December 6, 2026 | **Pace:** Weekends Only (Sat/Sun)
+
+### Weekend 11-Week Syllabus Summary
+
+| Week | Target Dates | Topic Area | Status |
+|------|--------------|------------|--------|
+| W1 | Sep 19–20 | Prompt Engineering Fundamentals & XML Tags | ⬜ |
+| W2 | Sep 26–27 | Context Windows & System Prompts | ⬜ |
+| W3 | Oct 3–4 | Python/JS SDK & Messages API Basics | ⬜ |
+| W4 | Oct 10–11 | Streaming & Max Tokens Profiling | ⬜ |
+| W5 | Oct 17–18 | Tool Use (Function Calling) Introduction | ⬜ |
+| W6 | Oct 24–25 | Advanced Tool Parsing & JSON Definitions | ⬜ |
+| W7 | Oct 31–Nov 1 | Vision API & Multimodal Inputs | ⬜ |
+| W8 | Nov 7–8 | Agentic Workflows & External RAG | ⬜ |
+| W9 | Nov 14–15 | Security, Bias & Prompt Injection Defenses | ⬜ |
+| W10 | Nov 21–22 | Optimization & Cost Routing | ⬜ |
+| W11 | Nov 28–29 | Mock Exams & API Playground Drills | ⬜ |
+| 🤔 | Dec 5 | Final Cheat Sheet Review | ⬜ |
+| **🎯** | **Dec 6** | **EXAM: Claude Developer Foundation** | ⬜ |
+
+---
+
+## 💼 Section 5 — Career & Interview Checklist
 
 | Task | Action | Target Date | Done |
 |------|--------|-------------|------|

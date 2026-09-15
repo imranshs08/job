@@ -9,7 +9,7 @@ This file provides the foundational context for Gemini CLI interactions within t
 **DevOps Job Switch 2027** is a high-intensity, structured transition program designed to take a learner from Zero to Hero in DevOps and AI by January 1, 2027. The repository serves as a "Command Center" for tracking study progress, labs, certifications, and career marketing efforts.
 
 ### 🎯 Key Goals
-- **Certifications:** Secure **CKA** (Target: Jan 1, 2027) and **AZ-104** (Target: Jan 15, 2027).
+- **Certifications:** Secure **Claude Certified Developer Foundation** (Dec 6, 2026), **CKA** (Jan 1, 2027), and **AZ-104** (Jan 15, 2027).
 - **Primary Curriculum:** Abhishek Veeramalla’s "DevOps Engineer in 3 Months" (158 videos).
 - **Specialization:** Integration of AI (Claude, ChatGPT, AI Agents) into DevOps workflows.
 - **Career:** Transition to a DevOps/SRE role with a focus on AI Platform Engineering.
@@ -71,6 +71,7 @@ When updating progress, follow this hierarchy:
 
 ## 📅 Important Dates
 - **Project Start:** August 18, 2026
+- **Claude Cert Target:** December 6, 2026
 - **CKA Exam Target:** January 1, 2027
 - **Job Application Go-Live:** January 1, 2027
 - **AZ-104 Exam Target:** January 15, 2027
