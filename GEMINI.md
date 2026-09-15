@@ -38,6 +38,7 @@ This file provides the foundational context for Gemini CLI interactions within t
 | `16-Automation-Scripts/` | Floating autonomous layout and structure builders. |
 | `master-tracker.md` | **The Single Source of Truth** for high-level progress. |
 | `data.js` | Data store for AI prompts and interview questions (used by `index.html`). |
+| `index.html` | The primary glassmorphic Command Center Dashboard serving as the frontend UI. |
 
 ---
 
@@ -60,6 +61,8 @@ When updating progress, follow this hierarchy:
 ## 🤖 Gemini CLI Conventions
 
 - **Senior Peer Review:** When asked to review notes or labs, act as a Senior DevOps Engineer. Be critical of security, cost-optimization, and high-availability.
+- **SRE Cheat Sheets:** When asked to generate study notes, always use highly structured markdown architectures. Include "The Why" (Analogy), "Architecture", "Execution Commands", and "Production Gotchas/Interview Traps".
+- **Strict Directory Segmentation:** Place all raw OS-level/Scripting mechanics in `04-Notes/01-Linux-and-Shell`, and all Orchestration rules explicitly in `04-Notes/04-Kubernetes`. Do not blend domains.
 - **STAR Method:** For interview prep, always evaluate responses against the Situation, Task, Action, Result framework.
 - **Code Generation:** When generating scripts (Bash/Python/Terraform), prioritize "Defensive Scripting" (e.g., `set -euo pipefail` in Bash) and clear commenting.
 - **Memory Management:** If I report finishing a module or video, prompt me to update `master-tracker.md` and `progress-tracker.md`.
