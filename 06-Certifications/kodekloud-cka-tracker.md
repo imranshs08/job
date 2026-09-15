@@ -72,8 +72,8 @@
 | 60 | **Scheduling** | Static Pods | 08:45 | Sep 13 | ☐ |
 | 61 | **Scheduling** | Practice Test – Static Pods | — | Sep 14 | ☐ |
 | 62 | **Scheduling** | Solution – Static Pods (Optional) | 05:58 | Sep 14 | ☐ |
-| 63 | **Scheduling** | Multiple Schedulers | 09:32 | Sep 15 | ☐ |
-| 64 | **Scheduling** | Practice Test Multiple Schedulers | — | Sep 15 | ☐ |
+| 63 | **Scheduling** | Multiple Schedulers | 09:32 | Sep 15 | ✅ |
+| 64 | **Scheduling** | Practice Test Multiple Schedulers | — | Sep 15 | ✅ |
 | 65 | **Scheduling** | Solution – Multiple Scheduler | 07:46 | Sep 16 | ☐ |
 | 66 | **Scheduling** | Configuring Scheduler Profiles | 09:53 | Sep 16 | ☐ |
 | 67 | **Scheduling** | References | — | Sep 16 | ☐ |

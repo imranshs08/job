@@ -32,7 +32,7 @@
 | Sep 12, 2026 | Sat | **Scheduling**: DaemonSets<br>**Scheduling**: Practice Test DaemonSets | — |
 | Sep 13, 2026 | Sun | **Scheduling**: Solution: DaemonSets (optional)<br>**Scheduling**: Static Pods | — |
 | Sep 14, 2026 | Mon | **Scheduling**: Practice Test – Static Pods<br>**Scheduling**: Solution – Static Pods (Optional) | — |
-| Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers<br>**Scheduling**: Practice Test Multiple Schedulers | — |
+| Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers<br>**Scheduling**: Practice Test Multiple Schedulers | ✅ |
 | Sep 16, 2026 | Wed | **Scheduling**: Solution – Multiple Scheduler<br>**Scheduling**: Configuring Scheduler Profiles<br>**Scheduling**: References | — |
 | Sep 17, 2026 | Thu | **Scheduling**: Download Presentation Deck 2<br>**Scheduling**: (2025 Updates) Admission Controllers | — |
 | Sep 18, 2026 | Fri | **Scheduling**: (2025 Updates) Practice Test – Admission Controllers<br>**Scheduling**: (2025 Updates) Solution: Admission Controllers | — |
