@@ -1,61 +1,105 @@
 # 🤖 Claude Developer – SRE Note Generation Prompts
 
-As you progress through the 11-week Claude Developer syllabus, you should convert the video transcripts or your raw learning into highly structured, enterprise-grade SRE cheat sheets. 
+As you progress through the 11-week Claude Developer syllabus, you should convert the video transcripts or your raw testing into highly structured, enterprise-grade SRE cheat sheets tailored for Anthropic AI systems. 
 
-Use the prompts below whenever you want an AI (ChatGPT or Claude) to generate notes for your `04-Notes` directory based on what you just learned. These prompts forcibly constrain the AI to output exactly the format expected in your DevOps 2027 Command Center.
+**Instructions:** Copy and paste the appropriate text block below into Claude, ChatGPT, or your AI tool of choice, followed immediately by the video transcript, documentation link, or raw text. Save the output directly to `04-Notes/09-AI-Platform-Engineering/`.
 
----
+***
 
 ## 🛠️ Prompt 1: The Core Architecture Concept (For Theory Videos)
-*Use this prompt after watching architecture videos like "SDK vs API vs Managed Agents" or "Understanding MCP".*
+Use this prompt after watching architecture videos like "SDK vs API vs Managed Agents" or "Understanding MCP".
 
-> **Copy & Paste this into AI:**
-> "I just studied [INSERT TOPIC, e.g., The Claude Messages API vs OpenAI API]. Act as a Senior AI Platform Engineer. Generate a highly structured Markdown cheat sheet for my DevOps notebook. You MUST strictly follow this architecture:
-> 
-> 1. **The Why (Analogy):** Explain the core concept using a real-world infrastructure analogy (like load balancers or DNS) so it makes intuitive sense to a DevOps engineer.
-> 2. **Architecture:** A concise bulleted overview of how the components interact. Use a Mermaid diagram if applicable.
-> 3. **Execution Commands:** The exact CLI commands or Python SDK bash snippets required to implement this.
-> 4. **Production Gotchas & Interview Traps:** Highlight realistic security risks, token consumption traps, or tricky edge cases that an interviewer would ask about.
-> 
-> Output ONLY the markdown content, ready to be saved to a `.md` file."
+```text
+Act as a Principal AI Platform Engineer and Technical Interviewer. I will provide you with an Anthropic/Claude architectural topic, video transcript, or core concept. 
 
----
+Your absolute priority is to strip away all fluff. Convert the input into highly structured, production-grade engineering notes designed for rapid revision, lab execution, and technical interview preparation.
+
+RULES:
+1. Be highly technical, precise, and concise. 
+2. Bold the crucial keywords so I can rapid-skim the document.
+3. Incorporate real-world DevOps infrastructure analogies where applicable.
+4. Format your entire response using the EXACT Markdown structure below:
+
+# 📘 [Insert Topic Name]
+
+## 🎯 The "Why" (Core Concept)
+- Briefly outline the concept simply but technically. *(Include an analogy here, e.g. comparing MCP to a DNS resolve).*
+- What catastrophic integration problem does this framework natively solve?
+
+## ⚙️ Architecture & Under the Hood
+- 3 to 5 bullet points breaking down the internal Anthropic API mechanics or agent workflow.
+- Exactly how do these components securely interact? Provide a Mermaid.js diagram depicting the API flow.
+
+## 💻 Essential Execution (API & SDK)
+- Provide exact, copy-pasteable Python snippet using the `anthropic` SDK (or `curl`).
+- Provide inline comments explaining *exactly* what the obscure parameters (like `stop_reason`) do.
+
+## ⚠️ Production Gotchas & Interview Traps
+- What is the most common way this breaks natively in a live application environment?
+- How do Senior Principal Engineers usually test candidates regarding this topic? Provide the "SRE Answer".
+
+Here is the topic/transcript to process:
+[PASTE YOUR TOPIC OR VIDEO TRANSCRIPT HERE]
+```
+
+***
 
 ## 💻 Prompt 2: The Code Implementation (For Toolkit & SDK Videos)
-*Use this prompt after watching "Ep 03: Custom Tools", "Prompt Caching", or "Structured JSON".*
+Use this prompt after watching "Ep 03: Custom Tools", "Prompt Caching", or "Structured JSON".
 
-> **Copy & Paste this into AI:**
-> "I am studying how to implement [INSERT TOPIC, e.g., Pre-filling Claude's Assistant Role for Structured JSON Output]. Act as a Senior SRE and Python Developer. Generate a technical reference markdown document.
-> 
-> Please use this exact structure:
-> 
-> 1. **The Objective:** 2 sentences on what this code achieves.
-> 2. **The JSON/Python Payload:** Provide the exact clean, comment-annotated code snippet (Python using `anthropic` SDK).
-> 3. **Step-by-Step Breakdown:** Bullet points explaining the key variables (e.g., why we use `stop_reason`).
-> 4. **Defensive Coding:** Add a GitHub `> [!WARNING]` alert block detailing what happens if the API fails or how to handle rate limits/timeout exceptions for this specific feature.
-> 
-> Do not use conversational filler. Give me pure, copy-pasteable Markdown."
+```text
+Act as a Senior AI SRE and Python Automation Engineer. I will provide a prompt engineering or SDK coding topic (e.g., Pre-filling Claude's Assistant Role for Structured JSON). 
 
----
+Convert the input into a highly structured, scalable code reference manual targeting Anthropic models (Claude 3.5 Sonnet/Haiku).
+
+RULES:
+1. Strip conversational filler completely.
+2. Ensure Python payloads are defensive (handle timeouts and unexpected API payloads).
+3. Use the EXACT Markdown structure below:
+
+# 📘 [Insert Coding Topic]
+
+## 🎯 The Objective
+- 2 precise sentences on what this exact block of code achieves at scale for an enterprise.
+
+## 💻 The Implementation Payload
+- Provide the exact clean, comment-annotated Python code snippet utilizing the latest Anthropic API structure.
+- Break down the payload mathematically (e.g., explaining JSON Schema structures for tool use).
+
+## ⚠️ Defensive Coding & Fault Tolerance
+- Add a GitHub > [!WARNING] or > [!CAUTION] alert block detailing what happens if the API fails, triggers a hallucination, or hits Anthropic rate limits. What is the precise exception fallback strategy here?
+
+Here is the topic/transcript to process:
+[PASTE YOUR TOPIC OR VIDEO TRANSCRIPT HERE]
+```
+
+***
 
 ## 🚨 Prompt 3: Security & Guardrails (For Enterprise Implementation)
-*Use this prompt after watching "Ep 04: Hooks, Guardrails & Security".*
+Use this prompt after watching "Ep 04: Hooks, Guardrails & Security".
 
-> **Copy & Paste this into AI:**
-> "I need to document enterprise security guardrails for [INSERT TOPIC, e.g., Preventing Claude Hallucinations during Tool Use]. 
-> 
-> Generate a security posture playbook using this structure:
-> 1. **Threat Vector:** What could maliciously go wrong? (e.g., Prompt Injection).
-> 2. **XML Guarding Strategy:** Show exactly how to use Anthropic's `<tags>` logic to sandbox untrusted user input.
-> 3. **Validation Layer:** How should a DevOps engineer validate the API output locally before executing it?
-> 4. **Incident Response:** What happens when Claude returns a compromised payload, and how do we fail securely?
-> 
-> Present this clearly using GitHub alert blocks (`> [!CAUTION]`) where appropriate."
+```text
+Act as a Cloud Security Architect specializing in Generative AI. I will provide a framework related to LLM integration or Anthropic guardrails.
 
----
+Generate a highly structured security posture playbook outlining the exact defenses mechanism required to prevent adversarial API payload manipulation.
 
-## 🎯 How to Store These Notes
-When the AI generates the Markdown using these prompts, save them directly to:
-`C:\Job Tracker\04-Notes\09-AI-Platform-Engineering\` (Create this folder if it doesn't exist). 
+RULES:
+1. Be brutally technical regarding prompt injection and jailbreaking defenses.
+2. Emphasize XML tag strategies.
+3. Use the EXACT Markdown structure below:
 
-Keep the file names lowercase with hyphens (e.g., `claude-tool-use-architecture.md`).
+# 🛡️ [Insert Security Topic]
+
+## 🎯 Threat Vector Analysis
+- What could maliciously go wrong? (e.g., Prompt Injection, data exfiltration via rogue Tool Use).
+
+## 🔒 XML Guarding Strategy
+- Explicitly demonstrate how to use Anthropic's `<tags>` logic to successfully sandbox untrusted zero-trust user input within the `messages` array.
+
+## 🚦 Validation & Incident Response
+- How should an AI Platform Engineer structurally validate the payload locally before routing it back into production databases? 
+- If a payload is compromised, how do we fail securely?
+
+Here is the topic/transcript to process:
+[PASTE YOUR TOPIC OR VIDEO TRANSCRIPT HERE]
+```
