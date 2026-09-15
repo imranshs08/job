@@ -16,93 +16,82 @@ This master syllabus is designed for a DevOps engineer transitioning into AI Pla
 * [Anthropic Cookbook (GitHub)](https://github.com/anthropics/anthropic-cookbook)
 
 ### 2. High-Impact YouTube Playlists
-* **Vanderbilt University - Prompt Engineering for ChatGPT/Claude**: (Best for core fundamentals of zero-shot, few-shot, and chain of thought).
-* **Dave Ebbelaar - AI Agents & LangChain**: (Crucial for understanding how Claude Tool Use actually works in production Python scripts).
-* **Anthropic Official Developer Videos**: Deep dives on using the Messages API, Vision API, and JSON scaling.
+* **[The Ultimate Build-Along Course: Claude Certified Developer](https://www.youtube.com/playlist?list=PLYrYhzAmVyKU):** 
+  * This is the definitive 15-part video series (featuring a 12-episode core build-along) designed specifically for this exam. 
+  * We have mapped these exact episodes directly into your 11-week syllabus below.
 
 ---
 
-## 🗓️ The 11-Week Weekend Syllabus
+## 🗓️ The 11-Week Weekend Syllabus (With Playlist Integration)
 
-### Week 1: Prompt Engineering Fundamentals (Sep 19–20)
+### Week 1: Foundation & The Raw API (Sep 19–20)
 * **Saturday (Theory):** 
-  * The anatomy of a Claude Prompt. 
-  * System Prompts vs User Prompts.
-  * The strict requirement of `<XML>` tags for Claude (Claude is heavily trained to parse XML unlike GPT).
+  * Watch: **New Claude Certifications Are Coming: Here's What's Actually Confirmed**
+  * Watch: **Claude Agent SDK vs API vs Managed Agents: Which Should You Actually Use?**
 * **Sunday (Practice):**
-  * Write 5 prompts using `<context>`, `<instructions>`, and `<output_format>` XML brackets.
-  * Practice *Few-Shot Prompting* (providing 3 examples to Claude before asking the final question).
+  * Watch & Code: **Ep 01 | Your First Agent on the Raw Messages API**
 
-### Week 2: Context Windows & Output Parsing (Sep 26–27)
+### Week 2: Mastering the Local SDK (Sep 26–27)
 * **Saturday:**
-  * Context Window limitations (200k tokens).
-  * Prompt chunking strategies.
-  * Forcing Claude into `Prefill` responses (e.g., forcing Claude's response to start with `{ "status": `).
+  * Watch & Code: **Ep 02 | Claude Agent SDK Explained From Zero**
 * **Sunday:**
-  * Build a prompt that forces Claude to ONLY output raw JSON without any markdown formatting using `Prefill`.
+  * Build a baseline local Python script querying `claude-3-5-sonnet-20240620`. Handle the response payload gracefully.
 
-### Week 3: Python/JS SDK & Messages API (Oct 3–4)
+### Week 3: Tool Use & MCP (Oct 3–4)
 * **Saturday:**
-  * Setup your local Python environment (`pip install anthropic`).
-  * Understand the `Messages` API structure (`role: user`, `role: assistant`).
-  * Injecting `system` parameters at the API level (it is *not* a message role in Claude 3; it is a top-level parameter).
-* **Sunday:**
-  * Write a basic Python script that queries the `claude-3-5-sonnet-20240620` model.
-  * Handle the API response object natively in Python.
-
-### Week 4: Streaming, Tokens, & Cost (Oct 10–11)
-* **Saturday:**
-  * Implement `stream=True` in the Python SDK.
-  * Tracking `input_tokens` and `output_tokens`.
-* **Sunday:**
-  * Understand the token costs (Haiku vs Sonnet vs Opus).
-  * Build a cost calculator Python script for a 1M token workload.
-
-### Week 5: Tool Use / Function Calling [Part 1] (Oct 17–18)
-* **Saturday:**
-  * What is Tool Use? (Giving Claude the ability to access external APIs like Weather, Databases, or GitHub).
-  * Defining the JSON Schema for a tool definition.
+  * Watch & Code: **Ep 03 | Custom Tools & MCP**
 * **Sunday:**
   * Define a `get_stock_price(ticker)` tool in JSON and pass it in the `tools` array to Claude using Python.
 
-### Week 6: Tool Use / Function Calling [Part 2] (Oct 24–25)
+### Week 4: Hooks, Guardrails & Security (Oct 10–11)
 * **Saturday:**
-  * Handling Claude's `tool_use` Stop Reason.
-  * Executing the local Python function and returning the `tool_result` back to Claude.
+  * Watch & Code: **Ep 04 | Hooks, Guardrails & Security**
 * **Sunday:**
-  * Build a fully functioning local chatbot that can fetch real-time weather data.
+  * Test input constraints. Write a system prompt that explicitly limits Claude from executing unsafe tool payloads.
 
-### Week 7: Vision API capabilities (Oct 31–Nov 1)
+### Week 5: Multi-Agent Architectures (Oct 17–18)
 * **Saturday:**
-  * Base64 encoding images.
-  * Injecting multimodal blocks into the Messages API.
+  * Watch & Code: **Ep 05 | Subagents & Multi-Agent Orchestration**
 * **Sunday:**
-  * Pass a screenshot of a Kubernetes Dashboard to Claude and ask it to diagnose the failing Pod via Python.
+  * Implement an orchestration pattern where `Haiku` routes an intent, and `Sonnet` executes the heavy lifting.
 
-### Week 8: Advanced Agentic Workflows (Nov 7–8)
+### Week 6: State & Memory Management (Oct 24–25)
 * **Saturday:**
-  * Chain-of-Thought (CoT) prompting.
-  * RAG (Retrieval-Augmented Generation) fundamentals.
+  * Watch & Code: **Ep 06 | Agent Memory, Sessions, Resume & Forking**
 * **Sunday:**
-  * Build an orchestration script where Claude-Haiku categorizes an email, and Claude-Sonnet writes the response.
+  * Build a chatbot that remembers context from Turn 1 when answering Turn 5.
 
-### Week 9: Security, Bias & Prompt Injection (Nov 14–15)
+### Week 7: Structured Output (Oct 31–Nov 1)
 * **Saturday:**
-  * Spotting Prompt Injection attacks (Jailbreaks).
-  * Using Claude's pre-and-post filtering capabilities.
+  * Watch & Code: **Ep 07 | Structured Output Handling**
 * **Sunday:**
-  * Write a system prompt that explicitly defends against a user trying to make the bot drop a database table.
+  * Pre-fill the `assistant` message with `{` to force Claude to output pure, parseable JSON without conversation filler.
 
-### Week 10: Optimization & Production Scaling (Nov 21–22)
+### Week 8: Advanced Skills (Nov 7–8)
 * **Saturday:**
-  * Prompt Caching (A massive Claude 3.5 feature).
-  * Error Handling (Rate limits, Overloaded errors - HTTP 429 & 529).
+  * Watch & Code: **Ep 08 | Claude Agent Skills: Build & Chain Two Real Skills**
 * **Sunday:**
-  * Refactor your Week 3 Python script to include Python `try/except` blocks and exponential backoff.
+  * Chain an API fetch skill directly into a formatting presentation skill.
 
-### Week 11: Mock Exams & Drills (Nov 28–29)
-* **Saturday:** Review all Cheat Sheets (API structure, SDK commands, XML tags).
-* **Sunday:** Build a capstone project using Prompt Caching, Tool Use, and System Prompts in a single 200-line Python script.
+### Week 9: Model Context Protocol (MCP) Deep Dive (Nov 14–15)
+* **Saturday:**
+  * Watch & Code: **Ep 09 | How AI Agents Actually Use MCP**
+* **Sunday:**
+  * Draft a conceptual MCP server wrapper that connects Claude to your local filesystem securely.
+
+### Week 10: Economics & System Profiling (Nov 21–22)
+* **Saturday:**
+  * Watch: **Claude Certified Architect vs Developer: What Nobody Tells You (2026 Update)**
+  * Watch: **Ep 10 | Opus vs Sonnet vs Haiku, Thinking & Effort**
+* **Sunday:**
+  * Watch & Code: **Ep 11 | Prompt Caching, Token Costs & Error Handling Explained**
+  * Calculate token spend profiles between standard calls and Cached calls.
+
+### Week 11: Anthropic Managed Agents & Mock Exams (Nov 28–29)
+* **Saturday:** 
+  * Watch & Code: **Ep 12 | Claude Managed Agents: Let Anthropic Run It**
+* **Sunday:** 
+  * Build a final Capstone Project deploying a fully managed agent, linking all 12 modules together!
 
 ---
 
