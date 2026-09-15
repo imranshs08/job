@@ -1374,7 +1374,7 @@
             let claudeHtmlStr = `<li class="task-item"><div style="color: var(--accent); font-weight: bold; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">🎯 ${clData.title}</div><ul style="list-style-type: none; padding-left: 0;">`;
             clData.tasks.forEach(item => {
                 if (item.v) {
-                    claudeHtmlStr += `<li style="margin-bottom: 0.5rem; font-size: 0.9rem;">▶️ <a href="https://www.youtube.com/watch?list=PLYrYhzAmVyKU&index=${item.v}" target="_blank" style="color: #fca5a5; text-decoration: none; border-bottom: 1px dotted rgba(252,165,165,0.5); transition: opacity 0.2s; opacity: 0.9;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">${item.t}</a></li>`;
+                    claudeHtmlStr += `<li style="margin-bottom: 0.5rem; font-size: 0.9rem;">▶️ <a href="https://www.youtube.com/watch?v=${item.v}&list=PLYrYhzAmVyKU" target="_blank" style="color: #fca5a5; text-decoration: none; border-bottom: 1px dotted rgba(252,165,165,0.5); transition: opacity 0.2s; opacity: 0.9;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">${item.t}</a></li>`;
                 } else {
                     claudeHtmlStr += `<li style="margin-bottom: 0.5rem; font-size: 0.9rem;">• ${item.t}</li>`;
                 }
