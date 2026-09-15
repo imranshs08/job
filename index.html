@@ -255,8 +255,8 @@
             max-width: 1400px;
         }
 
-        .card:nth-child(5) {
-            grid-column: 1 / -1;
+        .span-all {
+            grid-column: 1 / -1 !important;
         }
 
         @media (min-width: 1400px) {
@@ -264,16 +264,8 @@
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            .card:nth-child(4) {
-                grid-column: span 1;
-            }
-
-            .card:nth-child(5) {
-                grid-column: span 2;
-            }
-
-            .card:nth-child(6) {
-                grid-column: span 1;
+            .span-two {
+                grid-column: span 2 !important;
             }
         }
 
@@ -324,37 +316,7 @@
             }
         }
 
-        .card:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-
-        .card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .card:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-
-        .card:nth-child(4) {
-            animation-delay: 0.2s;
-        }
-
-        .card:nth-child(5) {
-            animation-delay: 0.25s;
-        }
-
-        .card:nth-child(6) {
-            animation-delay: 0.3s;
-        }
-
-        .card:nth-child(7) {
-            animation-delay: 0.35s;
-        }
-
-        .card:nth-child(8) {
-            animation-delay: 0.4s;
-        }
+        /* Animations no longer bound to nth-child, instead handled natively */
 
         .card:hover {
             transform: translateY(-6px);
@@ -539,8 +501,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .card:nth-child(5) {
-                grid-column: auto;
+            .span-two {
+                grid-column: auto !important;
             }
         }
 
@@ -851,7 +813,7 @@
             </div>
 
             <!-- Claude Card -->
-            <div class="card" style="--accent: #fca5a5; --accent-glow: rgba(252, 165, 165, 0.3);">
+            <div class="card span-all" style="--accent: #fca5a5; --accent-glow: rgba(252, 165, 165, 0.3);">
                 <h2>🤖 Claude Cert Track
                     <a href="https://www.youtube.com/playlist?list=PLYrYhzAmVyKU" target="_blank" class="course-link">🔗
                         Build-Along Series</a>
@@ -874,7 +836,7 @@
             </div>
 
             <!-- CI/CD & AI Card -->
-            <div class="card" style="--accent: var(--ai-purp); --accent-glow: rgba(168, 85, 247, 0.3);">
+            <div class="card span-two" style="--accent: var(--ai-purp); --accent-glow: rgba(168, 85, 247, 0.3);">
                 <h2>🤖 Continuous Habits: AI & Interviews</h2>
                 <ul class="task-list">
                     <li class="task-item">
