@@ -74,9 +74,9 @@
 | 62 | **Scheduling** | Solution – Static Pods (Optional) | 05:58 | Sep 14 | ☐ |
 | 63 | **Scheduling** | Multiple Schedulers | 09:32 | Sep 15 | ✅ |
 | 64 | **Scheduling** | Practice Test Multiple Schedulers | — | Sep 15 | ✅ |
-| 65 | **Scheduling** | Solution – Multiple Scheduler | 07:46 | Sep 16 | ☐ |
-| 66 | **Scheduling** | Configuring Scheduler Profiles | 09:53 | Sep 16 | ☐ |
-| 67 | **Scheduling** | References | — | Sep 16 | ☐ |
+| 65 | **Scheduling** | Solution – Multiple Scheduler | 07:46 | Sep 16 | ✅ |
+| 66 | **Scheduling** | Configuring Scheduler Profiles | 09:53 | Sep 16 | ✅ |
+| 67 | **Scheduling** | References | — | Sep 16 | ✅ |
 | 68 | **Scheduling** | Download Presentation Deck 2 | — | Sep 17 | ☐ |
 | 69 | **Scheduling** | (2025 Updates) Admission Controllers | 08:07 | Sep 17 | ☐ |
 | 70 | **Scheduling** | (2025 Updates) Practice Test – Admission Controllers | — | Sep 18 | ☐ |

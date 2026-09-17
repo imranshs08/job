@@ -45,7 +45,7 @@
 | 32 | [Day-33 - KUBERNETES PODS - DEPLOY YOUR FIRST APP](https://www.youtube.com/watch?v=-rDT9m1RKSA) | Sep 14 | 35m 11s | ✅ | ☐ | ☐ |
 | 33 | [Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS](https://www.youtube.com/watch?v=lVKLkyuRWCY) | Sep 14 | 27m 38s | ✅ | ☐ | ☐ |
 | 34 | [DAY-35 - EVERYTHING ABOUT KUBERNETES SERVICES - DISCOVERY - LOAD BALANCING - NETWO...](https://www.youtube.com/watch?v=xY6Ic7Igzck) | Sep 15 | 34m 37s | ✅ | ☐ | ☐ |
-| 35 | [Day-36 - KUBERNETES INTERVIEW QUESTIONS PART-1- What's Your Score ? -10/10](https://www.youtube.com/watch?v=0qy5JD7CbJ4) | Sep 16 | 29m 3s | ☐ | ☐ | ☐ |
+| 35 | [Day-36 - KUBERNETES INTERVIEW QUESTIONS PART-1- What's Your Score ? -10/10](https://www.youtube.com/watch?v=0qy5JD7CbJ4) | Sep 16 | 29m 3s | ✅ | ✅ | — |
 | 36 | [DAY-37 - KUBERNETES SERVICES DEEP DIVE- LIVE DEMO - LEARN TRAFFIC FLOW USING KUBES...](https://www.youtube.com/watch?v=fCX8O7GA_lY) | Sep 17 | 44m 18s | ☐ | ☐ | ☐ |
 | 37 | [DAY-38 - KUBERNETES INGRESS - WATCH DEMO USING LINK IN DESCRIPTION](https://www.youtube.com/watch?v=47ck6bh6dfI) | Sep 18 | 39m 17s | ☐ | ☐ | ☐ |
 | 38 | [INTRODUCTION TO K8s RBAC - 30 DAYS FREE OPENSHIFT CLUSTER - LEARN RBAC WITH REAL C...](https://www.youtube.com/watch?v=1slRgW2IzJY) | Sep 19 | 26m 40s | ☐ | ☐ | ☐ |
@@ -245,7 +245,7 @@
 | Sep 13, 2026 | Sun | **Scheduling**: Solution: DaemonSets (optional) (05:44)<br>**Scheduling**: Static Pods (08:45) | 14m 29s | ✅ |
 | Sep 14, 2026 | Mon | **Scheduling**: Practice Test – Static Pods (—)<br>**Scheduling**: Solution – Static Pods (Optional) (05:58) | 5m 58s | ✅ |
 | Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers (09:32)<br>**Scheduling**: Practice Test Multiple Schedulers (—) | 9m 32s | ✅ |
-| Sep 16, 2026 | Wed | **Scheduling**: Solution – Multiple Scheduler (07:46)<br>**Scheduling**: Configuring Scheduler Profiles (09:53)<br>**Scheduling**: References (—) | 17m 39s | ☐ |
+| Sep 16, 2026 | Wed | **Scheduling**: Solution – Multiple Scheduler (07:46)<br>**Scheduling**: Configuring Scheduler Profiles (09:53)<br>**Scheduling**: References (—) | 17m 39s | ✅ |
 | Sep 17, 2026 | Thu | **Scheduling**: Download Presentation Deck 2 (—)<br>**Scheduling**: (2025 Updates) Admission Controllers (08:07) | 8m 7s | ☐ |
 | Sep 18, 2026 | Fri | **Scheduling**: (2025 Updates) Practice Test – Admission Controllers (—)<br>**Scheduling**: (2025 Updates) Solution: Admission Controllers (06:41) | 6m 41s | ☐ |
 | Sep 19, 2026 | Sat | **Scheduling**: (2025 Updates) Validating and Mutating Admission Controllers (10:26)<br>**Scheduling**: (2025 Updates) Practice Test – Validating and Mutating Admission Controllers (—) | 10m 26s | ☐ |
