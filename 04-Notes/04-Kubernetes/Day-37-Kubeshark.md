@@ -105,6 +105,21 @@ minikube ssh
 curl -v http://10.244.0.X:8080
 ```
 
+**7. Advanced / Unusual Minikube Commands**
+```powershell
+# Side-load a local Docker image directly into Minikube's containerd (bypassing registry/docker-env entirely)
+minikube image load my-local-image:latest
+
+# Create an actual multi-node Minikube cluster on the fly (spins up a new worker node to test affinities/taints)
+minikube node add
+
+# Expose services of type LoadBalancer to your host OS by creating an active background network tunnel
+minikube tunnel
+
+# Mount a local host directory directly into the Minikube VM for persistent volume testing
+minikube mount "C:\path\to\data:/data"
+```
+
 ## ⚠️ Production Gotchas & Interview Traps
 - **Production Gotcha - EBPF Kernel Panics/Compatibility:** Kubeshark relies heavily on eBPF. If you deploy this onto an older, legacy Kubernetes cluster running archaic Linux kernels (pre-4.15), it will fail to attach the probes and can potentially destabilize node networking.
 - **Production Gotcha - Disk/Memory Exhaustion:** Leaving a root-level packet capture running indefinitely on a high-throughput production cluster (e.g., thousands of RPS) will rapidly exhaust memory or disk IOPS on the worker nodes collecting the PCAP data. Keep sessions short.
