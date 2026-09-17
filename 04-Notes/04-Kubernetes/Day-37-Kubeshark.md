@@ -150,13 +150,39 @@ minikube mount "C:\path\to\data:/data"
 - **`cat /sys/kernel/debug/tracing/trace_pipe`** (run inside the node) - Deep kernel inspection to monitor if eBPF hooks are logging systemic trace errors on the host node.
 
 ## 🏁 End-to-End Lab Execution Flow
-If you generated the automated lab script (`setup-kubeshark-lab.ps1`), here is your exact execution flow from zero to packet sniffing:
+> ⚠️ **Windows Note:** Do NOT use `kubeshark.exe tap` directly — it has a confirmed YAML bug on Windows (v53.4.0). Use the Helm install method below instead.
+
 1. **Scaffold the infrastructure:** `cd "C:\Job Tracker"` & Run `.\11-Labs-and-Validation\setup-kubeshark-lab.ps1`
 2. **Hook Docker environment:** `cd kubeshark-traffic-lab` & `minikube docker-env | Invoke-Expression`
 3. **Build the image:** `cd app` & `docker build -t python-api:v1 .` & `cd ..`
 4. **Deploy it:** `kubectl apply -f k8s/`
-5. **Start analyzing:** `kubeshark.exe tap "pod.name == 'python-api'"`
-6. **Trigger traffic:** In a separate PowerShell, run `minikube ssh` and `curl -v http://<POD_IP>:8080` to watch Kubeshark instantly decode the JSON traffic in your terminal!
+5. **Install Kubeshark via Helm:** `helm repo add kubeshark https://helm.kubeshark.com && helm repo update && helm install kubeshark kubeshark/kubeshark`
+6. **Wait for pods:** `kubectl get pods -l app.kubernetes.io/instance=kubeshark -w` (wait for all `Running`)
+7. **Port-forward the dashboard:** `kubectl port-forward service/kubeshark-front 8899:80`
+8. **Open browser:** Navigate to `http://127.0.0.1:8899` — login with your Google account for Community license
+9. **Trigger live traffic (PowerShell):** `1..10 | ForEach-Object { minikube ssh "curl -s http://10.244.0.4:8080" }`
+10. **Validate stream:** Watch HTTP `200 OK` packets appear in real-time with full JSON payload decoded in the Kubeshark dashboard!
 
 ## 📝 10-Second Cheat Sheet
 **Kubeshark** is an ephemeral, eBPF-powered packet analyzer for Kubernetes that gives you immediate WireShark-level visibility into pod-to-pod traffic without altering your Deployments or requiring a heavyweight Service Mesh. It deploys as a privileged DaemonSet to tap kernel-level network interfaces, decoding REST/gRPC traffic on the fly. When debugging network timeouts or `Connection Refused` errors, avoid injecting permanent sidecars during an incident; instead, use `kubeshark tap` to rapidly isolate the failing network hops. Use `kubectl get po -v=9` to heavily debug the Kubernetes API server client calls, and execute `minikube ssh` coupled with a manual `curl` for brute-force, low-level node connectivity tests.
+
+## 🧹 Lab Cleanup (Tear Down Everything)
+```powershell
+# 1. Stop the port-forward (Ctrl+C in the port-forward terminal)
+
+# 2. Uninstall Kubeshark from the cluster (removes Hub, Worker DaemonSet, Front pods)
+helm uninstall kubeshark
+
+# 3. Delete the Python API Deployment and Service
+kubectl delete -f k8s/
+
+# 4. Verify the cluster is clean - should only show kubernetes service
+kubectl get all
+
+# 5. (Recommended) Stop Minikube to free up RAM/CPU - preserves cluster state!
+minikube stop
+
+# 6. (Nuclear Option) Completely destroy the Minikube cluster and all data
+minikube delete
+```
+> 💡 **Pro Tip:** Prefer `minikube stop` over `minikube delete`. Stop saves your cluster state — next time just `minikube start` and everything is ready instantly. Delete wipes everything and forces a full re-download.
