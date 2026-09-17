@@ -14,6 +14,10 @@
 
 ## 💻 Essential Execution (Commands & YAML)
 
+**0. Automated Lab Scaffold Script (Recommended)**
+If you want to instantly scaffold this entire lab (the mock Python API, Dockerfile, and K8s YAMLs), run the provided PowerShell script:
+`Run:` [setup-kubeshark-lab.ps1](file:///c:/Job%20Tracker/11-Labs-and-Validation/setup-kubeshark-lab.ps1)
+
 **1. Minikube Installation (Windows - PowerShell as Admin)**
 ```powershell
 # Using Winget (Preferred Windows Package Manager) to fetch the latest Minikube binary
@@ -128,6 +132,7 @@ minikube mount "C:\path\to\data:/data"
   - *SRE Answer:* "If a Service Mesh isn't already present, I won't introduce architectural drift or restart pods during an active outage. I will deploy an ephemeral eBPF-based sniffer like **Kubeshark** or inject an ephemeral debug container with `tcpdump` to capture raw ring-buffer traffic on the host's `veth` interfaces securely, without disrupting the running workloads."
 
 ## 🔍 Debugging (Where to look when it fails)
+- **Minikube Fails to Start with `open //./pipe/dockerDesktopLinuxEngine`**: This explicitly means Docker Desktop is closed. Open Docker Desktop on Windows, wait for the engine to start (turns green), run `minikube delete` to wipe the corrupted broken state, and run `minikube start` again.
 - **`kubectl get pods -n kubeshark`** - Verify the Hub and Worker DaemonSets actually transitioned to the `Running` state without `CrashLoopBackOff`.
 - **`kubectl logs -l app=kubeshark-worker -n kubeshark`** - Check the worker logs to see if eBPF probes are failing to attach due to kernel permission restrictions or AppArmor profiles blocking access.
 - **`kubeshark.exe check`** - Run the built-in pre-flight diagnostic CLI tool to validate cluster kernel compatibility and RBAC permissions.
