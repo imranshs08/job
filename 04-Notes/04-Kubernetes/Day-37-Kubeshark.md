@@ -30,19 +30,27 @@ minikube start --memory=4096 --cpus=2
 minikube status
 ```
 
-**2. Kubeshark Installation & Execution (Windows - PowerShell)**
+**2. Kubeshark Installation via Helm (Windows - CORRECT METHOD)**
+> ⚠️ **IMPORTANT:** The Kubeshark Windows `.exe` binary (v53.4.0) has a confirmed bug on Windows where it injects backslash paths into its Helm chart (`12-config-map.yaml`), causing a fatal YAML parse error. **DO NOT use the Windows binary directly.** Install via Helm instead.
+
 ```powershell
-# Download the Kubeshark binary for Windows
-curl.exe -LO "https://github.com/kubeshark/kubeshark/releases/latest/download/kubeshark.exe"
+# Step 1: Add the official CORRECT Kubeshark Helm repo (.com NOT .co - the old URL is dead!)
+helm repo add kubeshark https://helm.kubeshark.com
 
-# Move the executable to a directory in your PATH (e.g., C:\Windows\System32 or create an alias)
-Move-Item -Path ".\kubeshark.exe" -Destination "C:\Windows\System32\kubeshark.exe" -Force
+# Step 2: Update your local Helm chart index cache
+helm repo update
 
-# Start capturing ALL traffic in the default namespace
-kubeshark.exe tap
+# Step 3: Deploy Kubeshark directly into the cluster (this spins up the Front, Hub, and Worker DaemonSet)
+helm install kubeshark kubeshark/kubeshark
 
-# Start capturing traffic specifically for a deployment (e.g., python-api)
-kubeshark.exe tap "pod.name == 'python-api'"
+# Step 4: Wait for all pods to be fully Running before port-forwarding
+kubectl get pods -l app.kubernetes.io/instance=kubeshark -w
+
+# Step 5: Forward the kubeshark-front service to localhost:8899
+# NOTE: The service is named kubeshark-front, NOT kubeshark-hub
+kubectl port-forward service/kubeshark-front 8899:80
+
+# Step 6: Open http://127.0.0.1:8899 in your browser to see the live traffic dashboard!
 ```
 
 **3. Application Simulation: Python Dockerfile & Build (PowerShell)**
