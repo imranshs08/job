@@ -27,7 +27,7 @@
 
 | Phase | Videos | Period | Watched | Status |
 |-------|--------|--------|---------|--------|
-| Phase 1 — Foundations & Core DevOps | 1–53 | Aug–Sep | 13/53 | 🟨 |
+| Phase 1 — Foundations & Core DevOps | 1–53 | Aug–Sep | 22/53 | 🟨 |
 | Phase 2 — AWS Primary | 54–81 | Sep–Oct | 0/28 | ⬜ |
 | Phase 3 — Azure & IaC (Terraform) | 82–118 | Oct–Nov | 0/37 | ⬜ |
 | Phase 4 — Python & AI DevOps | 119–148 | Nov–Dec | 0/30 | ⬜ |
