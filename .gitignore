@@ -1,2 +1,13 @@
 14-Telegram-Bot/config.py
 14-Telegram-Bot/__pycache__/
+
+# Binaries - never commit executables to git
+*.exe
+*.zip
+*.tar.gz
+*.dll
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
