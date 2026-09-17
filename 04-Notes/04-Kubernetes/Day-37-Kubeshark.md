@@ -133,6 +133,7 @@ minikube mount "C:\path\to\data:/data"
 
 ## 🔍 Debugging (Where to look when it fails)
 - **Minikube Fails to Start with `open //./pipe/dockerDesktopLinuxEngine`**: This explicitly means Docker Desktop is closed. Open Docker Desktop on Windows, wait for the engine to start (turns green), run `minikube delete` to wipe the corrupted broken state, and run `minikube start` again.
+- **Minikube Delete Fails with `id_rsa.pub Access is denied`**: A background process locked the cluster's SSH keys. To forcefully bypass: run `takeown /F "C:\Users\imran\.minikube\machines\minikube\id_rsa.pub"`, then `icacls "C:\Users\imran\.minikube\machines\minikube\id_rsa.pub" /grant "%USERNAME%:F"`, then `cmd.exe /c "del /F /A /Q C:\Users\imran\.minikube\machines\minikube\id_rsa.pub"`. Finally, run `Remove-Item -Recurse -Force C:\Users\imran\.minikube\`. If this still fails, Quit Docker Desktop entirely to release the hypervisor lock.
 - **`kubectl get pods -n kubeshark`** - Verify the Hub and Worker DaemonSets actually transitioned to the `Running` state without `CrashLoopBackOff`.
 - **`kubectl logs -l app=kubeshark-worker -n kubeshark`** - Check the worker logs to see if eBPF probes are failing to attach due to kernel permission restrictions or AppArmor profiles blocking access.
 - **`kubeshark.exe check`** - Run the built-in pre-flight diagnostic CLI tool to validate cluster kernel compatibility and RBAC permissions.
