@@ -1,13 +1,175 @@
+# ============================================================
+# 🔐 SECRETS & CREDENTIALS (NEVER COMMIT THESE)
+# ============================================================
+*.env
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+config.py
+secrets.yaml
+secrets.json
+credentials.json
+service-account*.json
+kubeconfig
+*.kubeconfig
+
+# ============================================================
+# 🤖 TELEGRAM BOT
+# ============================================================
 14-Telegram-Bot/config.py
 14-Telegram-Bot/__pycache__/
 
-# Binaries - never commit executables to git
-*.exe
-*.zip
-*.tar.gz
-*.dll
-
-# Python cache
+# ============================================================
+# 🐍 PYTHON
+# ============================================================
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.tox/
+.venv/
+venv/
+env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ============================================================
+# 📦 NODE / NPM / JAVASCRIPT
+# ============================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn/
+dist/
+.next/
+.nuxt/
+.cache/
+*.lock
+
+# ============================================================
+# 🪟 BINARIES & EXECUTABLES (Never commit these)
+# ============================================================
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+*.iso
+*.img
+*.msi
+*.deb
+*.rpm
+
+# ============================================================
+# ☁️ TERRAFORM & CLOUD IaC
+# ============================================================
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!example.tfvars
+.terraform.lock.hcl
+crash.log
+
+# ============================================================
+# ☸️ KUBERNETES & HELM
+# ============================================================
+**/charts/*.tgz
+kubeconfig
+*.kubeconfig
+helm-debug.log
+.helm/
+
+# ============================================================
+# 🐳 DOCKER
+# ============================================================
+.dockerignore
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ============================================================
+# 🖥️ OS ARTIFACTS
+# ============================================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+
+# ============================================================
+# 🛠️ EDITORS & IDE SETTINGS
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.settings/
+*.iml
+
+# ============================================================
+# 📋 LOGS & TEMP FILES
+# ============================================================
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.retry
+logs/
+log/
+tmp/
+temp/
+
+# ============================================================
+# 📊 DATA & EXPORTS (Large files)
+# ============================================================
+*.csv
+*.xlsx
+*.xls
+*.db
+*.sqlite
+*.sqlite3
