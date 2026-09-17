@@ -140,5 +140,14 @@ minikube mount "C:\path\to\data:/data"
 - **`minikube logs`** - Check the underlying hypervisor or container logs if Minikube networking collapses entirely.
 - **`cat /sys/kernel/debug/tracing/trace_pipe`** (run inside the node) - Deep kernel inspection to monitor if eBPF hooks are logging systemic trace errors on the host node.
 
+## 🏁 End-to-End Lab Execution Flow
+If you generated the automated lab script (`setup-kubeshark-lab.ps1`), here is your exact execution flow from zero to packet sniffing:
+1. **Scaffold the infrastructure:** `cd "C:\Job Tracker"` & Run `.\11-Labs-and-Validation\setup-kubeshark-lab.ps1`
+2. **Hook Docker environment:** `cd kubeshark-traffic-lab` & `minikube docker-env | Invoke-Expression`
+3. **Build the image:** `cd app` & `docker build -t python-api:v1 .` & `cd ..`
+4. **Deploy it:** `kubectl apply -f k8s/`
+5. **Start analyzing:** `kubeshark.exe tap "pod.name == 'python-api'"`
+6. **Trigger traffic:** In a separate PowerShell, run `minikube ssh` and `curl -v http://<POD_IP>:8080` to watch Kubeshark instantly decode the JSON traffic in your terminal!
+
 ## 📝 10-Second Cheat Sheet
 **Kubeshark** is an ephemeral, eBPF-powered packet analyzer for Kubernetes that gives you immediate WireShark-level visibility into pod-to-pod traffic without altering your Deployments or requiring a heavyweight Service Mesh. It deploys as a privileged DaemonSet to tap kernel-level network interfaces, decoding REST/gRPC traffic on the fly. When debugging network timeouts or `Connection Refused` errors, avoid injecting permanent sidecars during an incident; instead, use `kubeshark tap` to rapidly isolate the failing network hops. Use `kubectl get po -v=9` to heavily debug the Kubernetes API server client calls, and execute `minikube ssh` coupled with a manual `curl` for brute-force, low-level node connectivity tests.
