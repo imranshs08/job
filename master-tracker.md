@@ -1,7 +1,7 @@
 # 🚀 Master Progress Tracker — DevOps Job Switch 2027
 
 > **Mission:** Complete DevOps + AI skills by December 2026. Start applying **January 1, 2027**.
-> **Today:** August 18, 2026 | **Days to Go-Live:** ~136 days
+> **Today:** Sep 20, 2026 | **Days to Go-Live:** ~103 days
 
 ---
 
@@ -163,25 +163,26 @@
 ## 🤖 Section 4 — Claude Certified Developer Foundation (Dec 6)
 
 > **Full weekend-only syllabus:** [claude-certification-plan.md](./10-AI-Learning-Roadmap/claude-certification-plan.md)
+> **Course:** [Skills Pragati — Free Course Playlist](https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw) (34 videos / 6h 55m)
 > **Exam Date:** December 6, 2026 | **Pace:** Weekends Only (Sat/Sun)
 
 ### Weekend 11-Week Syllabus Summary
 
-| Week | Target Dates | Topic Area | Status |
-|------|--------------|------------|--------|
-| W1 | Sep 19–20 | Prompt Engineering Fundamentals & XML Tags | ⬜ |
-| W2 | Sep 26–27 | Context Windows & System Prompts | ⬜ |
-| W3 | Oct 3–4 | Python/JS SDK & Messages API Basics | ⬜ |
-| W4 | Oct 10–11 | Streaming & Max Tokens Profiling | ⬜ |
-| W5 | Oct 17–18 | Tool Use (Function Calling) Introduction | ⬜ |
-| W6 | Oct 24–25 | Advanced Tool Parsing & JSON Definitions | ⬜ |
-| W7 | Oct 31–Nov 1 | Vision API & Multimodal Inputs | ⬜ |
-| W8 | Nov 7–8 | Agentic Workflows & External RAG | ⬜ |
-| W9 | Nov 14–15 | Security, Bias & Prompt Injection Defenses | ⬜ |
-| W10 | Nov 21–22 | Optimization & Cost Routing | ⬜ |
-| W11 | Nov 28–29 | Mock Exams & API Playground Drills | ⬜ |
-| 🤔 | Dec 5 | Final Cheat Sheet Review | ⬜ |
-| **🎯** | **Dec 6** | **EXAM: Claude Developer Foundation** | ⬜ |
+| Week | Target Dates | Topic Area | Resource | Status |
+|------|--------------|------------|----------|--------|
+| W1 | Sep 19–20 | Foundation & Messages API | Videos 00–02 | ✅ |
+| W2 | Sep 26–27 | Tool Use & MCP Server Development | Videos 03–04 | ⬜ |
+| W3 | Oct 3–4 | Agents, Workflows & Streaming | Videos 05–06 | ⬜ |
+| W4 | Oct 10–11 | Model Selection & Cost Optimization | Videos 07–08 | ⬜ |
+| W5 | Oct 17–18 | Prompt & Context Engineering | Video 09 + Lab | ⬜ |
+| W6 | Oct 24–25 | Security & Safety | Video 10 + Lab | ⬜ |
+| W7 | Oct 31–Nov 1 | Eval, Testing, Debugging & Claude Code | Videos 11–12 | ⬜ |
+| W8 | Nov 7–8 | Capstone + Subagents & Multi-Agent | Video 13 + MC Lab | ⬜ |
+| W9 | Nov 14–15 | Enterprise Design & Deployment | MC Labs 15–16 | ⬜ |
+| W10 | Nov 21–22 | Best Practices & Full Mock Revision | MC Labs 18–19 | ⬜ |
+| W11 | Nov 28–29 | Mock Exams & Final Drill | 53Q / 120 min | ⬜ |
+| 🤔 | Dec 5 | Final Cheat Sheet Review | W01–W10 notes | ⬜ |
+| **🎯** | **Dec 6** | **EXAM: Claude Developer Foundation** | | ⬜ |
 
 ---
 
