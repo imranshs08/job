@@ -814,9 +814,11 @@
 
             <!-- Claude Card -->
             <div class="card span-all" style="--accent: #fca5a5; --accent-glow: rgba(252, 165, 165, 0.3);">
-                <h2>🤖 Claude Cert Track (Skills Pragati)
-                    <a href="https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw" target="_blank" class="course-link">🔗
-                        34-Video Playlist</a>
+                <h2>🤖 Claude Cert Track (CCDV-F)
+                    <a href="https://www.udemy.com/course/ccdv-f-exam-prep/" target="_blank" class="course-link">🎓
+                        Udemy Course</a>
+                    <a href="https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw" target="_blank" class="course-link"
+                        style="margin-left: 0.5rem; font-size: 0.8em; opacity: 0.7;">▶ Supplement</a>
                 </h2>
                 <ul class="task-list" id="claude-tasks"></ul>
             </div>
@@ -1357,17 +1359,104 @@
             if (cWeekNum > 11) cWeekNum = 11;
 
             const claudeSyllabus = {
-                1: { title: "W1 ✅ Foundation & Messages API (Sep 19-20)", tasks: [{ t: "Course Overview", v: "R3hHhqIOjA0" }, { t: "01. Messages API Mechanics", v: "uUN8gIY7RUg" }, { t: "02. Claude Application Design", v: "D05LV88VSKc" }, { t: "Notes: W01-claude-cert-overview.md ✅" }] },
-                2: { title: "W2: Tool Use & MCP Server Dev (Sep 26-27)", tasks: [{ t: "03. Tool Use End to End", v: "aFfbL1dZyx4" }, { t: "04. MCP Server Development", v: "Lfv0wUS3meg" }, { t: "Lab: MC-2 Tools + Custom Tools + MCP", v: "LZRIlv8-iys" }, { t: "Notes: W02-tool-use-mcp.md" }] },
-                3: { title: "W3: Agents, Workflows & Streaming (Oct 3-4)", tasks: [{ t: "05. Agents and Workflows", v: "rBqjaLfiOJA" }, { t: "06. Streaming, Vision and Batch", v: "dkXUthdK7Ho" }, { t: "Lab: MC-2 First Agent + Building Agents", v: "A5pqtHF4S9A" }, { t: "Notes: W03-agents-workflows-streaming.md" }] },
-                4: { title: "W4: Model Selection & Cost (Oct 10-11)", tasks: [{ t: "07. Model Selection and Cost", v: "FQULUG7IZNk" }, { t: "08. Prompt Caching & Optimisation Order", v: "WIxT73mAtoo" }, { t: "Lab: MC-2 Environment Setup", v: "qTLJ4P3JaCA" }, { t: "Notes: W04-model-selection-cost.md" }] },
-                5: { title: "W5: Prompt & Context Engineering (Oct 17-18)", tasks: [{ t: "09. Prompt and Context Engineering", v: "9g98DsOQ-8Y" }, { t: "Lab: MC-2 Sessions & Conversation", v: "cwi5lqjDM70" }, { t: "Notes: W05-prompt-context-engineering.md" }] },
-                6: { title: "W6: Security & Safety (Oct 24-25)", tasks: [{ t: "10. Security and Safety", v: "Un0B0wul4BA" }, { t: "Lab: MC-2 Permissions", v: "MOweWeXt49s" }, { t: "Notes: W06-security-safety.md" }] },
-                7: { title: "W7: Eval, Testing & Claude Code (Oct 31-Nov 1)", tasks: [{ t: "11. Eval, Testing and Debugging", v: "_WUulWcK8jQ" }, { t: "12. Claude Code Operation", v: "TcYaPzzLat8" }, { t: "Lab: MC-2 Claude Code Fundamentals", v: "Lx9HqptA1X8" }, { t: "Notes: W07-eval-testing-claude-code.md" }] },
-                8: { title: "W8: Capstone + Multi-Agent Lab (Nov 7-8)", tasks: [{ t: "13. Capstone: Production Claude App", v: "Pqqo0ZFhbHs" }, { t: "Lab: MC-2 Subagents", v: "PwQ11teulTs" }, { t: "Lab: MC-2 Multi Agent", v: "KTh9RrCvuRE" }, { t: "Notes: W08-capstone-multiagent.md" }] },
-                9: { title: "W9: Enterprise Design & Deployment (Nov 14-15)", tasks: [{ t: "Lab: MC-2 Skills", v: "EAGdLz1zvIc" }, { t: "Lab: MC-2 Enterprise Design", v: "UYIMFQvpyAw" }, { t: "Lab: MC-2 Deployment", v: "l3VNxFxUeoM" }, { t: "Notes: W09-enterprise-deployment.md" }] },
-                10: { title: "W10: Best Practices & Revision (Nov 21-22)", tasks: [{ t: "Lab: MC-2 Best Practices", v: "oJ8grHMxppE" }, { t: "Lab: MC-2 Capstone: Release Assistant", v: "mmfExowEJ_M" }, { t: "Review all W01-W09 cheat sheets" }, { t: "Notes: W10-best-practices-revision.md" }] },
-                11: { title: "W11: Final Mock Exam & Drill (Nov 28-29)", tasks: [{ t: "Full mock exam: 53Q / 120 min — time yourself" }, { t: "Review all wrong answers in depth" }, { t: "Final pass: Domain 1 (API) + Domain 2 (Models)" }, { t: "Dec 5: Final cheat sheet review only" }] },
+                1: {
+                    title: "W1 ✅ D1: Welcome + Agent vs Workflow (Sep 20–21)", tasks: [
+                        { t: "S1: Course Welcome & Orientation" },
+                        { t: "S2: D1 – When to Build an Agent vs a Workflow" },
+                        { t: "S3: D1 – Context Isolation with Scoped Subagents" },
+                        { t: "S4: D1 – Streaming vs Single-Message Input" },
+                        { t: "📝 Notes: W01-udemy-welcome-agents-p1.md ✅" }
+                    ]
+                },
+                2: {
+                    title: "W2: D1+D2 – Agents P2 + Arch Intro (Sep 27–28)", tasks: [
+                        { t: "S5: D1 – Self-Hosted vs Anthropic-Hosted Agents" },
+                        { t: "S6: D1 – Hooks as Deterministic Guardrails" },
+                        { t: "S7: D1 – Agentic Frameworks Compared" },
+                        { t: "S8: D2 – From Business Need to Testable Spec" },
+                        { t: "📝 Notes: W02-udemy-agents-p2-arch-intro.md" }
+                    ]
+                },
+                3: {
+                    title: "W3: D2 – Messages API + SSE + Batch (Oct 3–4)", tasks: [
+                        { t: "S9: D2 – Matching Architecture to the Requirement" },
+                        { t: "S10: D2 – Messages API: Turns, Blocks, and Roles" },
+                        { t: "S11: D2 – Streaming SSE and Vision Input" },
+                        { t: "S12: D2 – Realtime vs Batch: When to Go" },
+                        { t: "📝 Notes: W03-udemy-arch-messages-api.md" }
+                    ]
+                },
+                4: {
+                    title: "W4: D2 – Vertex AI + Async + SDK (Oct 10–11)", tasks: [
+                        { t: "S13: D2 – Invoking Claude on Google Vertex AI" },
+                        { t: "S14: D2 – Async and Await for API Calls" },
+                        { t: "S15: D2 – Committing Config into the Life Cycle" },
+                        { t: "S16: D2 – One Model, Many Surfaces and SDKs" },
+                        { t: "📝 Notes: W04-udemy-vertex-async-sdk.md" }
+                    ]
+                },
+                5: {
+                    title: "W5: D2 – Data Boundaries + Plugins + CLAUDE.md (Oct 17–18)", tasks: [
+                        { t: "S17: D2 – Setting Content and Data Boundaries" },
+                        { t: "S18: D2 – Installing and Configuring Plugins" },
+                        { t: "S19: D2 – The CLAUDE.md Precedence Hierarchy" },
+                        { t: "S20: D2 – Pinning Model IDs in Production" },
+                        { t: "📝 Notes: W05-udemy-data-boundaries-plugins.md" }
+                    ]
+                },
+                6: {
+                    title: "W6: D2+D3+D4+D5 – Sessions + Recovery + Sampling (Oct 24–25)", tasks: [
+                        { t: "S21: D2 – Sharing Dependencies Across a Team" },
+                        { t: "S22: D3 – Managing Sessions and Slash Commands" },
+                        { t: "S23: D4 – Selecting the Right Recovery Strategy" },
+                        { t: "S24: D5 – Sampling and Why Output Varies" },
+                        { t: "📝 Notes: W06-udemy-sessions-slash-recovery.md" }
+                    ]
+                },
+                7: {
+                    title: "W7: D5 – Effort Levels + SDK + SSE + Cost (Oct 31–Nov 1)", tasks: [
+                        { t: "S25: D5 – Effort Levels for Reasoning Depth" },
+                        { t: "S26: D5 – The Anthropic SDKs Wrap One REST" },
+                        { t: "S27: D5 – Websockets vs SSE for Claude" },
+                        { t: "S28: D5 – Quality, Latency, and Cost Tradeoffs" },
+                        { t: "📝 Notes: W07-udemy-api-params-effort-cost.md" }
+                    ]
+                },
+                8: {
+                    title: "W8: D5+D6 – Usage Fields + Cache + Context (Nov 7–8)", tasks: [
+                        { t: "S29: D5 – Reading the Usage Fields on a Response" },
+                        { t: "S30: D5 – Cache Breakpoints and the Prefix Rule" },
+                        { t: "S31: D6 – Isolating Context with Subagents" },
+                        { t: "S32: D6 – System vs User Placement, Constraints" },
+                        { t: "📝 Notes: W08-udemy-cache-context-isolation.md" }
+                    ]
+                },
+                9: {
+                    title: "W9: D6+D7 – Untrusted Input + Injection + PII (Nov 14–15)", tasks: [
+                        { t: "S33: D6 – Delimiting & Validating Untrusted Input" },
+                        { t: "S34: D6 – Validate and Re-Prompt on Failure" },
+                        { t: "S35: D7 – Defending Against Prompt Injection" },
+                        { t: "S36: D7 – Preventing Data Leakage and PII Exposure" },
+                        { t: "📝 Notes: W09-udemy-validation-security.md" }
+                    ]
+                },
+                10: {
+                    title: "W10: D7+D8 – Hooks + Identity + Tool Design (Nov 21–22)", tasks: [
+                        { t: "S37: D7 – Blocking Destructive Actions with Hooks" },
+                        { t: "S38: D7 – Validating Identity, Monitoring Access" },
+                        { t: "S39: D8 – Tool Definitions Claude Calls Well" },
+                        { t: "S40: D8 – Designing a Coherent Tool Set" },
+                        { t: "📝 Notes: W10-udemy-hooks-identity-tools.md" }
+                    ]
+                },
+                11: {
+                    title: "W11: D8 – MCP Server + Practice Exams (Nov 28–29)", tasks: [
+                        { t: "S41: D8 – Authoring & Registering an MCP Server (6 lectures, 37 min)" },
+                        { t: "S42: Practice Exam 1 (Warm-Up) → Practice Exam 2 (Moderate)" },
+                        { t: "🔴 Dec 1–5: Domain cheat sheets + final timed 53Q mock" },
+                        { t: "🎯 Dec 6: EXAM — Target 85%+" }
+                    ]
+                },
             };
 
             const clData = claudeSyllabus[cWeekNum];

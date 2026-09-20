@@ -1,205 +1,238 @@
-# 🤖 Claude Certified Developer Foundation (CCDV-F) — Master Study Plan
+# 🤖 Claude Certified Developer – Foundations (CCDV-F)
+# Udemy Course — Day-Wise Study Plan
 
-> **Author:** Imran (imranshs08) | **Updated:** 2026-09-20
-> **Exam Target Date:** December 6, 2026
-> **Pace:** Weekend Warrior (Saturdays & Sundays ONLY)
-
----
-
-## 📚 Primary Study Resource
-
-> 🎯 **Skills Pragati — Claude Certified Developer Foundations Free Course**
-> 📺 **Playlist:** [https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw](https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw)
-> 📦 **Total Videos:** 34 | **Two Sub-Courses bundled in one playlist**
+> **Course:** [Claude Certified Developer - Foundations (CCDV-F) Exam Prep](https://www.udemy.com/course/ccdv-f-exam-prep/)
+> **Total:** 42 Sections | 124 Lectures | 13h 50m
+> **Exam Date:** 🎯 **December 6, 2026** | 53 Questions | 120 Min | **72% to Pass**
+> **Cadence:** Weekends Only (Sat + Sun) — 11 Study Weekends
+> **Start Date:** September 20, 2026
 
 ---
 
-## 🗂️ Course 1: Claude Certified Developer — Foundations (Videos 1–14)
-> Direct exam prep — mapped 1:1 to the CCDV-F blueprint
+## 🗓️ Exam Blueprint (8 Official Domains)
 
-| # | Title | Duration | Link |
-|---|---|---|---|
-| 0 | Full Course Overview | 3:01 | [▶](https://www.youtube.com/watch?v=R3hHhqIOjA0) |
-| 1 | Messages API Mechanics | 15:09 | [▶](https://www.youtube.com/watch?v=uUN8gIY7RUg) |
-| 2 | Claude Application Design | 16:37 | [▶](https://www.youtube.com/watch?v=D05LV88VSKc) |
-| 3 | Tool Use End to End | 13:44 | [▶](https://www.youtube.com/watch?v=aFfbL1dZyx4) |
-| 4 | MCP Server Development | 10:53 | [▶](https://www.youtube.com/watch?v=Lfv0wUS3meg) |
-| 5 | Agents and Workflows | 15:29 | [▶](https://www.youtube.com/watch?v=rBqjaLfiOJA) |
-| 6 | Streaming, Vision and Batch | 15:01 | [▶](https://www.youtube.com/watch?v=dkXUthdK7Ho) |
-| 7 | Model Selection and Cost | 15:09 | [▶](https://www.youtube.com/watch?v=FQULUG7IZNk) |
-| 8 | Prompt Caching and Optimisation Order | 11:48 | [▶](https://www.youtube.com/watch?v=WIxT73mAtoo) |
-| 9 | Prompt and Context Engineering | 12:04 | [▶](https://www.youtube.com/watch?v=9g98DsOQ-8Y) |
-| 10 | Security and Safety | 13:51 | [▶](https://www.youtube.com/watch?v=Un0B0wul4BA) |
-| 11 | Eval, Testing and Debugging | 11:12 | [▶](https://www.youtube.com/watch?v=_WUulWcK8jQ) |
-| 12 | Claude Code Operation | 5:18 | [▶](https://www.youtube.com/watch?v=TcYaPzzLat8) |
-| 13 | Capstone — Ship a Production Claude Application | 16:27 | [▶](https://www.youtube.com/watch?v=Pqqo0ZFhbHs) |
+| Domain | Topic | Weight |
+|--------|-------|--------|
+| **D1** | Agents and Workflows | 14% |
+| **D2** | Core Claude Architecture & Integration | 24% |
+| **D3** | Session Management & Slash Commands | 10% |
+| **D4** | Error Recovery Strategies | 10% |
+| **D5** | Claude API Configuration & Parameters | 14% |
+| **D6** | Context Isolation & Prompt Structuring | 12% |
+| **D7** | Safety, Guardrails & Security | 8% |
+| **D8** | Custom Tools & Model Context Protocol (MCP) | 8% |
 
 ---
 
-## 🗂️ Course 2: Claude AI Agent Engineering Masterclass — Beginner to Advanced (Videos 15–34)
-> Deep hands-on engineering — builds real agentic systems
+## 📅 Day-Wise Study Schedule
 
-| # | Title | Duration | Link |
-|---|---|---|---|
-| 0 | Full Masterclass Overview | 3:44 | [▶](https://www.youtube.com/watch?v=WGqlrvf4-i0) |
-| 1 | Environment Setup | 22:47 | [▶](https://www.youtube.com/watch?v=qTLJ4P3JaCA) |
-| 2 | First AI Agent — 4 Exercises | 12:04 | [▶](https://www.youtube.com/watch?v=A5pqtHF4S9A) |
-| 3 | Building Your First Agents | 17:35 | [▶](https://www.youtube.com/watch?v=m3SPZAkKaMY) |
-| 4 | Claude Code Fundamentals | 15:20 | [▶](https://www.youtube.com/watch?v=Lx9HqptA1X8) |
-| 5 | Working with Large Projects | 4:32 | [▶](https://www.youtube.com/watch?v=Y0t2E4DFeWE) |
-| 6 | Sessions & Conversation | 15:32 | [▶](https://www.youtube.com/watch?v=cwi5lqjDM70) |
-| 7 | Tools | 11:59 | [▶](https://www.youtube.com/watch?v=LZRIlv8-iys) |
-| 8 | Custom Tools | 12:49 | [▶](https://www.youtube.com/watch?v=UhB8-8g67s8) |
-| 9 | MCP | 9:05 | [▶](https://www.youtube.com/watch?v=s71ecMsxCQI) |
-| 10 | Skills | 11:33 | [▶](https://www.youtube.com/watch?v=EAGdLz1zvIc) |
-| 11 | Subagents | 12:11 | [▶](https://www.youtube.com/watch?v=PwQ11teulTs) |
-| 12 | Multi Agent | 12:36 | [▶](https://www.youtube.com/watch?v=KTh9RrCvuRE) |
-| 13 | Streaming | 9:18 | [▶](https://www.youtube.com/watch?v=lNT6JUdLB44) |
-| 14 | Permissions | 11:28 | [▶](https://www.youtube.com/watch?v=MOweWeXt49s) |
-| 15 | Enterprise Design | 12:20 | [▶](https://www.youtube.com/watch?v=UYIMFQvpyAw) |
-| 16 | Deployment | 14:35 | [▶](https://www.youtube.com/watch?v=l3VNxFxUeoM) |
-| 17 | Enterprise Projects | 12:07 | [▶](https://www.youtube.com/watch?v=CuHq8RdT84Q) |
-| 18 | Best Practices | 12:13 | [▶](https://www.youtube.com/watch?v=oJ8grHMxppE) |
-| 19 | Capstone: Release Assistant | 5:54 | [▶](https://www.youtube.com/watch?v=mmfExowEJ_M) |
+### ✅ Weekend 01 — Sep 20–21, 2026
+**Focus: Course Kickoff + Domain 1 Part A**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Sep 20 | S1: Welcome | 2 lectures | 13 min | ✅ |
+| Sat | Sep 20 | S2: D1 – When to Build an Agent vs a Workflow | 4 lectures | 21 min | ✅ |
+| Sun | Sep 21 | S3: D1 – Context Isolation with Scoped Subagents | 3 lectures | 20 min | ✅ |
+| Sun | Sep 21 | S4: D1 – Streaming vs Single-Message Input | 3 lectures | 20 min | ✅ |
+
+> 📝 **Notes target:** `W01-udemy-welcome-agents-p1.md`
+> 🔑 **Key concepts:** Agent vs Workflow decision tree, scoped subagents, streaming patterns
 
 ---
 
-## 🗓️ 11-Week Weekend Study Syllabus
+### ⬜ Weekend 02 — Sep 27–28, 2026
+**Focus: Domain 1 Completion (Agents & Workflows)**
 
-> **Strategy:** Watch Course 1 (Videos 1–14) first — it maps directly to the exam.
-> Use Course 2 as hands-on lab reinforcement after each exam topic.
-> For each video → Use `claude-cert-study-prompt.md` → Save notes as `W0X-topic.md`
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Sep 27 | S5: D1 – Self-Hosted vs Anthropic-Hosted Agents | 3 lectures | 20 min | ⬜ |
+| Sat | Sep 27 | S6: D1 – Hooks as Deterministic Guardrails | 2 lectures | 14 min | ⬜ |
+| Sun | Sep 28 | S7: D1 – Agentic Frameworks Compared | 3 lectures | 21 min | ⬜ |
+| Sun | Sep 28 | S8: D2 – From Business Need to Testable Spec | 3 lectures | 21 min | ⬜ |
 
----
-
-### Week 1: Foundation & API Landscape (Sep 19–20) ✅ DONE
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [Course Overview](https://www.youtube.com/watch?v=R3hHhqIOjA0) | 3:01 |
-| Sat | [01. Messages API Mechanics](https://www.youtube.com/watch?v=uUN8gIY7RUg) | 15:09 |
-| Sun | [02. Claude Application Design](https://www.youtube.com/watch?v=D05LV88VSKc) | 16:37 |
-| Notes | `W01-claude-cert-overview.md` ✅ | |
+> 📝 **Notes target:** `W02-udemy-agents-p2-arch-intro.md`
+> 🔑 **Key concepts:** Hosting trade-offs, hooks as guardrails, agentic framework comparison (LangChain vs Claude native vs others)
 
 ---
 
-### Week 2: Tool Use & MCP (Sep 26–27)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [03. Tool Use End to End](https://www.youtube.com/watch?v=aFfbL1dZyx4) | 13:44 |
-| Sat | [04. MCP Server Development](https://www.youtube.com/watch?v=Lfv0wUS3meg) | 10:53 |
-| Sun | Lab: [MC-2 Tools](https://www.youtube.com/watch?v=LZRIlv8-iys) + [Custom Tools](https://www.youtube.com/watch?v=UhB8-8g67s8) + [MCP](https://www.youtube.com/watch?v=s71ecMsxCQI) | ~34m |
-| Notes | `W02-tool-use-mcp.md` | |
+### ⬜ Weekend 03 — Oct 3–4, 2026
+**Focus: Domain 2 Part A (Core Architecture)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Oct 3 | S9: D2 – Matching Architecture to the Requirement | 3 lectures | 22 min | ⬜ |
+| Sat | Oct 3 | S10: D2 – Messages API: Turns, Blocks, and Roles | 2 lectures | 14 min | ⬜ |
+| Sun | Oct 4 | S11: D2 – Streaming SSE and Vision Input | 3 lectures | 21 min | ⬜ |
+| Sun | Oct 4 | S12: D2 – Realtime vs Batch: When to Go | 3 lectures | 21 min | ⬜ |
+
+> 📝 **Notes target:** `W03-udemy-arch-messages-api.md`
+> 🔑 **Key concepts:** Messages API turn structure, content blocks, SSE streaming, vision input, batch processing
 
 ---
 
-### Week 3: Agents, Workflows & Streaming (Oct 3–4)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [05. Agents and Workflows](https://www.youtube.com/watch?v=rBqjaLfiOJA) | 15:29 |
-| Sat | [06. Streaming, Vision and Batch](https://www.youtube.com/watch?v=dkXUthdK7Ho) | 15:01 |
-| Sun | Lab: [MC-2 First Agent](https://www.youtube.com/watch?v=A5pqtHF4S9A) + [Building Agents](https://www.youtube.com/watch?v=m3SPZAkKaMY) | ~30m |
-| Notes | `W03-agents-workflows-streaming.md` | |
+### ⬜ Weekend 04 — Oct 10–11, 2026
+**Focus: Domain 2 Part B (Platforms & Config)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Oct 10 | S13: D2 – Invoking Claude on Google Vertex AI | 3 lectures | 22 min | ⬜ |
+| Sat | Oct 10 | S14: D2 – Async and Await for API Calls | 3 lectures | 20 min | ⬜ |
+| Sun | Oct 11 | S15: D2 – Committing Config into the Life Cycle | 3 lectures | 21 min | ⬜ |
+| Sun | Oct 11 | S16: D2 – One Model, Many Surfaces and SDKs | 2 lectures | 14 min | ⬜ |
+
+> 📝 **Notes target:** `W04-udemy-vertex-async-sdk.md`
+> 🔑 **Key concepts:** Vertex AI Claude integration, async patterns, SDK multi-platform, config lifecycle
 
 ---
 
-### Week 4: Model Selection & Cost Optimization (Oct 10–11)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [07. Model Selection and Cost](https://www.youtube.com/watch?v=FQULUG7IZNk) | 15:09 |
-| Sat | [08. Prompt Caching and Optimisation](https://www.youtube.com/watch?v=WIxT73mAtoo) | 11:48 |
-| Sun | Lab: [MC-2 Environment Setup](https://www.youtube.com/watch?v=qTLJ4P3JaCA) | 22:47 |
-| Notes | `W04-model-selection-cost.md` | |
+### ⬜ Weekend 05 — Oct 17–18, 2026
+**Focus: Domain 2 Completion + Domain 3 (Sessions)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Oct 17 | S17: D2 – Setting Content and Data Boundaries | 3 lectures | 20 min | ⬜ |
+| Sat | Oct 17 | S18: D2 – Installing and Configuring Plugins | 3 lectures | 20 min | ⬜ |
+| Sun | Oct 18 | S19: D2 – The CLAUDE.md Precedence Hierarchy | 3 lectures | 21 min | ⬜ |
+| Sun | Oct 18 | S20: D2 – Pinning Model IDs in Production | 2 lectures | 13 min | ⬜ |
+
+> 📝 **Notes target:** `W05-udemy-data-boundaries-plugins-model-pinning.md`
+> 🔑 **Key concepts:** Data boundaries, plugin install/config, CLAUDE.md hierarchy, model ID pinning in prod
 
 ---
 
-### Week 5: Prompt & Context Engineering (Oct 17–18)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [09. Prompt and Context Engineering](https://www.youtube.com/watch?v=9g98DsOQ-8Y) | 12:04 |
-| Sun | Lab: [MC-2 Sessions & Conversation](https://www.youtube.com/watch?v=cwi5lqjDM70) | 15:32 |
-| Notes | `W05-prompt-context-engineering.md` | |
+### ⬜ Weekend 06 — Oct 24–25, 2026
+**Focus: Domain 2 Wrap-up + Domain 3 & 4 (Sessions + Error Recovery)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Oct 24 | S21: D2 – Sharing Dependencies Across a Team | 3 lectures | 20 min | ⬜ |
+| Sat | Oct 24 | S22: D3 – Managing Sessions and Slash Commands | 4 lectures | 22 min | ⬜ |
+| Sun | Oct 25 | S23: D4 – Selecting the Right Recovery Strategy | 3 lectures | 20 min | ⬜ |
+| Sun | Oct 25 | S24: D5 – Sampling and Why Output Varies | 3 lectures | 21 min | ⬜ |
+
+> 📝 **Notes target:** `W06-udemy-sessions-slash-recovery-sampling.md`
+> 🔑 **Key concepts:** Team dependency sharing, session management, `/reset`/`/compact`, error recovery logic, sampling parameters (temperature, top_p, top_k)
 
 ---
 
-### Week 6: Security & Safety (Oct 24–25)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [10. Security and Safety](https://www.youtube.com/watch?v=Un0B0wul4BA) | 13:51 |
-| Sun | Lab: [MC-2 Permissions](https://www.youtube.com/watch?v=MOweWeXt49s) | 11:28 |
-| Notes | `W06-security-safety.md` | |
+### ⬜ Weekend 07 — Oct 31–Nov 1, 2026
+**Focus: Domain 5 Part A (API Config & Parameters)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Oct 31 | S25: D5 – Effort Levels for Reasoning Depth | 3 lectures | 21 min | ⬜ |
+| Sat | Oct 31 | S26: D5 – The Anthropic SDKs Wrap One REST | 3 lectures | 21 min | ⬜ |
+| Sun | Nov 1 | S27: D5 – Websockets vs SSE for Claude | 3 lectures | 21 min | ⬜ |
+| Sun | Nov 1 | S28: D5 – Quality, Latency, and Cost Tradeoffs | 3 lectures | 22 min | ⬜ |
+
+> 📝 **Notes target:** `W07-udemy-api-params-effort-sse-cost.md`
+> 🔑 **Key concepts:** Reasoning effort levels, SDK internals, WebSocket vs SSE, Haiku/Sonnet/Opus cost-quality matrix
 
 ---
 
-### Week 7: Eval, Testing, Debugging & Claude Code (Oct 31–Nov 1)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [11. Eval, Testing and Debugging](https://www.youtube.com/watch?v=_WUulWcK8jQ) | 11:12 |
-| Sat | [12. Claude Code Operation](https://www.youtube.com/watch?v=TcYaPzzLat8) | 5:18 |
-| Sun | Lab: [MC-2 Claude Code Fundamentals](https://www.youtube.com/watch?v=Lx9HqptA1X8) + [Large Projects](https://www.youtube.com/watch?v=Y0t2E4DFeWE) | ~20m |
-| Notes | `W07-eval-testing-claude-code.md` | |
+### ⬜ Weekend 08 — Nov 7–8, 2026
+**Focus: Domain 5 Completion + Domain 6 Part A (Context Isolation)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Nov 7 | S29: D5 – Reading the Usage Fields on a Response | 3 lectures | 21 min | ⬜ |
+| Sat | Nov 7 | S30: D5 – Cache Breakpoints and the Prefix Rule | 3 lectures | 21 min | ⬜ |
+| Sun | Nov 8 | S31: D6 – Isolating Context with Subagents | 3 lectures | 20 min | ⬜ |
+| Sun | Nov 8 | S32: D6 – System vs User Placement, Constraints | 3 lectures | 21 min | ⬜ |
+
+> 📝 **Notes target:** `W08-udemy-usage-fields-cache-context-isolation.md`
+> 🔑 **Key concepts:** `usage` object fields, prompt caching prefix rule, subagent context isolation, system vs user prompt placement
 
 ---
 
-### Week 8: Capstone + Subagents & Multi-Agent (Nov 7–8)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | [13. Capstone — Production App](https://www.youtube.com/watch?v=Pqqo0ZFhbHs) | 16:27 |
-| Sun | Lab: [MC-2 Subagents](https://www.youtube.com/watch?v=PwQ11teulTs) + [Multi Agent](https://www.youtube.com/watch?v=KTh9RrCvuRE) | ~25m |
-| Notes | `W08-capstone-multiagent.md` | |
+### ⬜ Weekend 09 — Nov 14–15, 2026
+**Focus: Domain 6 Completion + Domain 7 (Security)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Nov 14 | S33: D6 – Delimiting & Validating Untrusted Input | 2 lectures | 14 min | ⬜ |
+| Sat | Nov 14 | S34: D6 – Validate and Re-Prompt on Failure | 3 lectures | 21 min | ⬜ |
+| Sun | Nov 15 | S35: D7 – Defending Against Prompt Injection | 2 lectures | 16 min | ⬜ |
+| Sun | Nov 15 | S36: D7 – Preventing Data Leakage and PII Exposure | 3 lectures | 22 min | ⬜ |
+
+> 📝 **Notes target:** `W09-udemy-validation-security-injection.md`
+> 🔑 **Key concepts:** XML delimiting, re-prompt on failure, prompt injection defense, PII handling patterns
 
 ---
 
-### Week 9: Advanced — Skills, Enterprise Design & Deployment (Nov 14–15)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | Lab: [MC-2 Skills](https://www.youtube.com/watch?v=EAGdLz1zvIc) + [Enterprise Design](https://www.youtube.com/watch?v=UYIMFQvpyAw) | ~24m |
-| Sun | Lab: [MC-2 Deployment](https://www.youtube.com/watch?v=l3VNxFxUeoM) + [Enterprise Projects](https://www.youtube.com/watch?v=CuHq8RdT84Q) | ~27m |
-| Notes | `W09-enterprise-deployment.md` | |
+### ⬜ Weekend 10 — Nov 21–22, 2026
+**Focus: Domain 7 Completion + Domain 8 (Tools & MCP)**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Nov 21 | S37: D7 – Blocking Destructive Actions with Hooks | 3 lectures | 21 min | ⬜ |
+| Sat | Nov 21 | S38: D7 – Validating Identity, Monitoring Access | 3 lectures | 21 min | ⬜ |
+| Sun | Nov 22 | S39: D8 – Tool Definitions Claude Calls Well | 3 lectures | 23 min | ⬜ |
+| Sun | Nov 22 | S40: D8 – Designing a Coherent Tool Set | 3 lectures | 21 min | ⬜ |
+
+> 📝 **Notes target:** `W10-udemy-hooks-identity-tools.md`
+> 🔑 **Key concepts:** Hook-based guardrails, identity validation, JSON Schema tool definition, tool set design patterns
 
 ---
 
-### Week 10: Best Practices & Full Mock Revision (Nov 21–22)
-| Day | Video | Duration |
-|---|---|---|
-| Sat | Lab: [MC-2 Best Practices](https://www.youtube.com/watch?v=oJ8grHMxppE) + [Capstone](https://www.youtube.com/watch?v=mmfExowEJ_M) | ~18m |
-| Sun | Review all W01–W09 cheat sheets + weak domains | |
-| Notes | `W10-best-practices-revision.md` | |
+### ⬜ Weekend 11 — Nov 28–29, 2026
+**Focus: Domain 8 MCP Deep Dive + Practice Exams**
+
+| Day | Date | Sections | Lectures | Time | Status |
+|-----|------|----------|----------|------|--------|
+| Sat | Nov 28 | S41: D8 – Authoring and Registering an MCP Server | 6 lectures | 37 min | ⬜ |
+| Sun | Nov 29 | S42: Practice Exams (Warm-Up + Moderate) | 3 exams | — | ⬜ |
+
+> 📝 **Notes target:** `W11-udemy-mcp-server-practice-exams.md`
+> 🔑 **Key concepts:** stdio transport, HTTP/SSE MCP, auth for networked MCP, built-in vs custom tools vs skills
 
 ---
 
-### Week 11: Final Exam Prep & Mock Tests (Nov 28–29)
-| Day | Activity |
-|---|---|
-| Sat | Full mock exam (53Q / 120 min) — time yourself strictly |
-| Sat | Review all wrong answers in depth |
-| Sun | Re-read all 10-second cheat sheets |
-| Sun | Final pass: Domain 1 (API) + Domain 2 (Models) — 49% of exam |
+### 🔴 Final Exam Sprint — Dec 1–5, 2026
+
+| Day | Date | Task |
+|-----|------|------|
+| Tue | Dec 1 | Master cheat sheet: Domain 1 (Agents 14%) + Domain 5 (API 14%) |
+| Wed | Dec 2 | Master cheat sheet: Domain 2 (Architecture 24%) — biggest domain |
+| Thu | Dec 3 | Master cheat sheet: Domain 3 (Sessions 10%) + Domain 4 (Recovery 10%) |
+| Fri | Dec 4 | Master cheat sheet: Domain 6 (Context 12%) + Domain 7 (Security 8%) + Domain 8 (MCP 8%) |
+| Sat | Dec 5 | Full timed mock exam: 53Q / 120 min. Score review. Sleep early. |
 
 ---
 
-## 🎯 December 6, 2026 — EXAM DAY PROTOCOL
+### 🎯 Dec 6, 2026 — EXAM DAY
+> **Claude Certified Developer – Foundations (CCDV-F)**
+> 53 Questions | 120 Minutes | 72% to Pass → Target: **85%+**
+
+---
+
+## 📚 Supporting Resources
+
+| Resource | Link | Purpose |
+|----------|------|---------|
+| Anthropic Docs | [docs.anthropic.com](https://docs.anthropic.com) | Official API reference |
+| Anthropic Cookbook | [github.com/anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) | Official code examples |
+| FlashGenius Practice | [flashgenius.net](https://flashgenius.net) | Free CCDV-F practice tests |
+| Skills Pragati (YouTube) | [Playlist](https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw) | Free theoretical deep-dives (supplement) |
+| Udemy Course | [ccdv-f-exam-prep](https://www.udemy.com/course/ccdv-f-exam-prep/) | **Primary study source** |
+
+---
+
+## 📝 Notes Directory Structure
 
 ```
-Morning (2 hours before):
-  ☐ Read all W01-W10 cheat sheets (10-second summaries ONLY)
-  ☐ Focus: Domain 1 (API Mechanics) — 33% of exam
-  ☐ Focus: Domain 2 (Model Selection) — 16% of exam
-
-During Exam (53Q / 120 min = ~2.25 min/question):
-  ☐ Flag uncertain questions — return at end
-  ☐ Remember: system= is top-level, NOT inside messages[]
-  ☐ Remember: max_tokens is ALWAYS required — no default!
-  ☐ Remember: stop_reason "tool_use" means execute a tool and loop back
-
-Target: ≥85% (45+/53 questions correct)
+10-AI-Learning-Roadmap/
+├── claude-certification-plan.md       ← This file
+├── W01-udemy-welcome-agents-p1.md     ← Weekend 1 notes
+├── W02-udemy-agents-p2-arch-intro.md
+├── W03-udemy-arch-messages-api.md
+├── W04-udemy-vertex-async-sdk.md
+├── W05-udemy-data-boundaries-plugins-model-pinning.md
+├── W06-udemy-sessions-slash-recovery-sampling.md
+├── W07-udemy-api-params-effort-sse-cost.md
+├── W08-udemy-usage-fields-cache-context-isolation.md
+├── W09-udemy-validation-security-injection.md
+├── W10-udemy-hooks-identity-tools.md
+└── W11-udemy-mcp-server-practice-exams.md
 ```
-
----
-
-## 📖 Additional Reference Resources
-| Resource | Link |
-|---|---|
-| Official Anthropic Docs | [docs.anthropic.com](https://docs.anthropic.com) |
-| Anthropic Cookbook (GitHub) | [github.com/anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) |
-| Prompt Engineering Guide | [docs.anthropic.com/prompt-engineering](https://docs.anthropic.com/en/docs/prompt-engineering) |
-| Certification Portal | [anthropic.com/certification](https://www.anthropic.com/certification) |

@@ -162,27 +162,28 @@
 
 ## 🤖 Section 4 — Claude Certified Developer Foundation (Dec 6)
 
-> **Full weekend-only syllabus:** [claude-certification-plan.md](./10-AI-Learning-Roadmap/claude-certification-plan.md)
-> **Course:** [Skills Pragati — Free Course Playlist](https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw) (34 videos / 6h 55m)
-> **Exam Date:** December 6, 2026 | **Pace:** Weekends Only (Sat/Sun)
+> **Full day-wise plan:** [claude-certification-plan.md](./10-AI-Learning-Roadmap/claude-certification-plan.md)
+> **Primary Course:** [Udemy CCDV-F Exam Prep](https://www.udemy.com/course/ccdv-f-exam-prep/) — 42 Sections | 124 Lectures | 13h 50m
+> **Supplement:** [Skills Pragati Playlist](https://www.youtube.com/playlist?list=PLRLPF8qJ3oIw) (34 videos / 6h 55m)
+> **Exam Date:** December 6, 2026 | **Pace:** Weekends Only (Sat/Sun) | 53Q / 120 Min / 72% pass
 
 ### Weekend 11-Week Syllabus Summary
 
-| Week | Target Dates | Topic Area | Resource | Status |
-|------|--------------|------------|----------|--------|
-| W1 | Sep 19–20 | Foundation & Messages API | Videos 00–02 | ✅ |
-| W2 | Sep 26–27 | Tool Use & MCP Server Development | Videos 03–04 | ⬜ |
-| W3 | Oct 3–4 | Agents, Workflows & Streaming | Videos 05–06 | ⬜ |
-| W4 | Oct 10–11 | Model Selection & Cost Optimization | Videos 07–08 | ⬜ |
-| W5 | Oct 17–18 | Prompt & Context Engineering | Video 09 + Lab | ⬜ |
-| W6 | Oct 24–25 | Security & Safety | Video 10 + Lab | ⬜ |
-| W7 | Oct 31–Nov 1 | Eval, Testing, Debugging & Claude Code | Videos 11–12 | ⬜ |
-| W8 | Nov 7–8 | Capstone + Subagents & Multi-Agent | Video 13 + MC Lab | ⬜ |
-| W9 | Nov 14–15 | Enterprise Design & Deployment | MC Labs 15–16 | ⬜ |
-| W10 | Nov 21–22 | Best Practices & Full Mock Revision | MC Labs 18–19 | ⬜ |
-| W11 | Nov 28–29 | Mock Exams & Final Drill | 53Q / 120 min | ⬜ |
-| 🤔 | Dec 5 | Final Cheat Sheet Review | W01–W10 notes | ⬜ |
-| **🎯** | **Dec 6** | **EXAM: Claude Developer Foundation** | | ⬜ |
+| Week | Dates | Udemy Sections | Domain Focus | Notes File | Status |
+|------|-------|----------------|-------------|------------|--------|
+| W1 | Sep 20–21 | S1–S4 | D1: Welcome + Agent vs Workflow + Scoped Subagents + Streaming | W01-udemy-welcome-agents-p1.md | ✅ |
+| W2 | Sep 27–28 | S5–S8 | D1+D2: Self-Hosted Agents, Hooks, Frameworks, Business→Spec | W02-udemy-agents-p2-arch-intro.md | ⬜ |
+| W3 | Oct 3–4 | S9–S12 | D2: Architecture, Messages API Turns, SSE Streaming, Batch | W03-udemy-arch-messages-api.md | ⬜ |
+| W4 | Oct 10–11 | S13–S16 | D2: Vertex AI, Async/Await, Config Lifecycle, Multi-SDK | W04-udemy-vertex-async-sdk.md | ⬜ |
+| W5 | Oct 17–18 | S17–S20 | D2: Data Boundaries, Plugins, CLAUDE.md, Model Pinning | W05-udemy-data-boundaries-plugins.md | ⬜ |
+| W6 | Oct 24–25 | S21–S24 | D2+D3+D4+D5: Deps, Sessions/Slash, Recovery, Sampling | W06-udemy-sessions-slash-recovery.md | ⬜ |
+| W7 | Oct 31–Nov 1 | S25–S28 | D5: Effort Levels, SDK internals, WebSocket/SSE, Cost | W07-udemy-api-params-effort-cost.md | ⬜ |
+| W8 | Nov 7–8 | S29–S32 | D5+D6: Usage Fields, Cache/Prefix, Context Isolation | W08-udemy-cache-context-isolation.md | ⬜ |
+| W9 | Nov 14–15 | S33–S36 | D6+D7: Untrusted Input, Validate+Reprompt, Injection, PII | W09-udemy-validation-security.md | ⬜ |
+| W10 | Nov 21–22 | S37–S40 | D7+D8: Hooks, Identity, Tool Definitions, Tool Set Design | W10-udemy-hooks-identity-tools.md | ⬜ |
+| W11 | Nov 28–29 | S41–S42 | D8: MCP Server + Practice Exams (Warm-Up + Moderate) | W11-udemy-mcp-practice-exams.md | ⬜ |
+| 🔴 | Dec 1–5 | — | Final sprint: domain cheat sheets + timed mock exam | — | ⬜ |
+| **🎯** | **Dec 6** | **EXAM** | **Claude Certified Developer Foundation** | — | ⬜ |
 
 ---
 
