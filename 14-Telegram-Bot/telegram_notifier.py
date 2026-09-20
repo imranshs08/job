@@ -10,6 +10,7 @@ Usage:
 
 import re
 import sys
+import io
 import urllib.request
 import urllib.parse
 import json
@@ -291,6 +292,12 @@ def build_nightly_message(s: dict) -> str:
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
+    # ── Force UTF-8 output on Windows to prevent UnicodeEncodeError with emoji ──
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
     mode = sys.argv[1] if len(sys.argv) > 1 else "--daily"
 
     if mode == "--test":
