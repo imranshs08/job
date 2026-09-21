@@ -14,7 +14,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
     * **[3min]** 2. Good to have / Recommended background
     * **[0min]** 3. Connect with me
     * **[9min]** 4. [What is a container and how is it different from a VM?](../../04-Notes/04-Kubernetes/AKS-Masterclass/02_Container_Isolation_Namespaces_and_Cgroups.md)
-    * **[2min]** 5. Microservices architecture
+    * **[2min]** 5. [Microservices architecture](../../04-Notes/04-Kubernetes/AKS-Masterclass/03_Microservices_Architecture.md)
     * **[7min]** 6. What are Docker, Dockerfile and Docker Hub?
     * **[7min]** 7. Creating our first container app (web app), pushing it to Docker Hub and running
     * **[7min]** 8. Create our 2nd container app (troubleshooting app), push it to DHub and run it
