@@ -216,4 +216,5 @@
 | ☸️ CKA Lesson Tracker | [kodekloud-cka-tracker.md](./05-Certifications/kodekloud-cka-tracker.md) |
 | ☁️ AZ-104 Daily Notes | [AZ-104 README](../devops-labs/devops-labs/05_AZ_104_Exam/Daily_Study_Notes/README.md) |
 | 🎤 Interview Prep | [interview-prep.md](./06-Interview-Prep/interview-prep.md) |
+| 🌐 Cloudflare Tunnel Lab | [cloudflare-tunnel-lab.md](./11-Labs-and-Validation/cloudflare-tunnel-lab.md) |
 | 🖨️ Print Sheet | [job-tracker.html](./print/job-tracker.html) |
