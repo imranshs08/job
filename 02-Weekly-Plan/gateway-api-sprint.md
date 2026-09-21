@@ -12,7 +12,7 @@
 
 | Status | # | Video Title | Duration | Notes / Lab |
 |:---:|:---:|---|:---:|---|
-| ☐ | 1 | [Kubernetes Gateway API - Is Ingress dead?](https://youtu.be/dgQQpJq1asc) | `32m 38s` | ☁️ Azure Spot<br>[📝 Notes](../04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md) |
+| ✅ | 1 | [Kubernetes Gateway API - Is Ingress dead?](https://youtu.be/dgQQpJq1asc) | `32m 38s` | ☁️ Azure Spot<br>[📝 Notes](../04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md) |
 | ☐ | 2 | [Azure Application Gateway for Containers Setup in AKS](https://youtu.be/O6k-L6oBCMc) | `37m 57s` | ☁️ Azure Spot |
 | ☐ | 3 | [Host multiple Apps with one AGC on AKS](https://youtu.be/JoRQhny4QPM) | `22m 16s` | ☁️ Azure Spot |
 
