@@ -339,124 +339,172 @@
         </div>
     </div>
 
-    <div class="section-label">📚 The 6-Session Sprint Curriculum</div>
-        <div class="grid">
+    <div class="section-label">📚 The 20-Day AKS Curriculum</div>
+    <div class="grid">
         <div class="card">
-            <div class="card-icon">⚡</div>
-            <h2>Session 1 &nbsp;<span class="weight">Fundamentals & Azure AGC</span></h2>
-            <p>Understanding why Ingress is being replaced. Setup the new Azure AGC resources on AKS. Contains the SRE-grade YAML comparisons between legacy Ingress and modern Gateway.</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 1: Intro to AKS & Containers</h2>
+            <p>What is K8s, Docker basics, AKS architecture.</p>
             <div class="video-list">
-                <a class="video-link" href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md" target="_blank">✅ 1. Is Ingress dead? (View Notes)</a>
-                <a class="video-link" href="https://youtu.be/O6k-L6oBCMc" target="_blank">▶️ 2. Azure AGC Setup in AKS</a>
-                <a class="video-link" href="https://youtu.be/JoRQhny4QPM" target="_blank">▶️ 3. Host multiple Apps with AGC</a>
+                <a class="video-link" href="#" target="_blank">✅ Introduction to the course</a>
             </div>
-            <span class="badge badge-green">✅ COMPLETED (1h 31m)</span>
         </div>
-        
         <div class="card">
-            <div class="card-icon">🔒</div>
-            <h2>Session 2 &nbsp;<span class="weight">Automated TLS & DNS</span></h2>
-            <p>Wiring up Azure DNS, Cert-Manager, and dynamically securing AKS Masterclass endpoints with Let's Encrypt using wildcard certificates.</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 2: Cluster Provisioning</h2>
+            <p>Cluster types, control plane access, public vs private, VNET integration.</p>
             <div class="video-list">
-                <a class="video-link" href="https://youtu.gPvXGWCqkrI" target="_blank">▶️ 4. Automate DNS Records for AKS TLS</a>
-                <a class="video-link" href="https://youtu.be/BfynzCAcvTc" target="_blank">▶️ 5. Cert-Manager Automated HTTPS</a>
-                <a class="video-link" href="https://youtu.be/io9GdZMwAYA" target="_blank">▶️ 6. Azure DNS Wildcard Certificates</a>
+                <a class="video-link" href="#" target="_blank">✅ Starting with Azure Kubernetes Service</a>
             </div>
-            <span class="badge badge-blue">☁️ AZURE SPOT LAB (1h 11m)</span>
         </div>
-        
         <div class="card">
-            <div class="card-icon">🚦</div>
-            <h2>Session 3 &nbsp;<span class="weight">Traffic Management</span></h2>
-            <p>HTTPRoutes, header matching, rewrite/redirect rules, and advanced deployments (Canary/A-B traffic splitting).</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 3: Node Pools Mastery</h2>
+            <p>System vs User node pools, scaling nodes, Spot instances.</p>
             <div class="video-list">
-                <a class="video-link" href="https://youtu.be/6p-W7DE7Yd0" target="_blank">▶️ 7. CI/CD for Dynamic PR Environments</a>
-                <a class="video-link" href="https://youtu.be/iT9WhRoukyY" target="_blank">▶️ 8. Routing Path, Query & Headers</a>
-                <a class="video-link" href="https://youtu.be/y714oJ2rnwc" target="_blank">▶️ 9. URL Rewrite & Redirect with AGC</a>
-                <a class="video-link" href="https://youtu.be/HG5Qyfu_rSk" target="_blank">▶️ 10. Canary and A-B Deployments</a>
+                <a class="video-link" href="#" target="_blank">✅ Working with node pools and nodes</a>
             </div>
-            <span class="badge badge-blue">☁️ AZURE SPOT LAB (1h 24m)</span>
         </div>
-        
         <div class="card">
-            <div class="card-icon">🛡️</div>
-            <h2>Session 4 &nbsp;<span class="weight">Security & Monitoring</span></h2>
-            <p>Applying rigorous WAF policies, integrating Prometheus/Grafana, and exploring alternative controllers like NGINX and Traefik Gateways.</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 4: AKS Networking (Part 1)</h2>
+            <p>Kubenet vs Azure CNI, core internal cluster networking.</p>
             <div class="video-list">
-                <a class="video-link" href="https://youtu.be/_81ypGr5X9w" target="_blank">▶️ 11. AKS Monitoring (Prometheus/Grafana)</a>
-                <a class="video-link" href="https://youtu.be/CW3S2AFe4UE" target="_blank">▶️ 12. WAF Security for AKS with AGC</a>
-                <a class="video-link" href="https://youtu.be/zp-5m88I2wE" target="_blank">▶️ 13. Kubernetes AKS Masterclass with Nginx</a>
-                <a class="video-link" href="https://youtu.be/UkNWjNMhDKE" target="_blank">▶️ 14. Deploy Traefik AKS Masterclass</a>
+                <a class="video-link" href="#" target="_blank">✅ Networking in AKS (Part 1)</a>
             </div>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 26m)</span>
         </div>
-        
         <div class="card">
-            <div class="card-icon">🚀</div>
-            <h2>Session 5 &nbsp;<span class="weight">Envoy & Migration</span></h2>
-            <p>Standing up Envoy Gateway natively and comparing the new API with traditional NGINX Ingress objects.</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 5: AKS Networking (Part 2)</h2>
+            <p>Services, SNAT, Outbound types, Calico.</p>
             <div class="video-list">
-                <a class="video-link" href="https://youtu.be/ypl7Bu9zQUM" target="_blank">▶️ 15. Envoy AKS Masterclass Setup</a>
-                <a class="video-link" href="https://youtu.be/ZLUCt4yhe0Q" target="_blank">▶️ 16. Envoy Gateway + Zero Touch TLS</a>
-                <a class="video-link" href="https://youtu.be/hDjmDKjJ3dQ" target="_blank">▶️ 17. NGINX Ingress vs AKS Masterclass</a>
-                <a class="video-link" href="https://youtu.be/5arGrivpen8" target="_blank">▶️ 18. AKS AGC Native Addon</a>
+                <a class="video-link" href="#" target="_blank">✅ Networking in AKS (Part 2)</a>
             </div>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 25m)</span>
         </div>
-        
         <div class="card">
-            <div class="card-icon">🏆</div>
-            <h2>Session 6 &nbsp;<span class="weight">Production Pipelines</span></h2>
-            <p>End-to-end production CI/CD architectures mapping Infrastructure to App using Terraform, ArgoCD, and Multi-Domain TLS architecture.</p>
+            <div class="card-icon">☁️</div>
+            <h2>Day 6: Identity & Access (Part 1)</h2>
+            <p>AKS-managed Microsoft Entra (AAD) integration, RBAC.</p>
             <div class="video-list">
-                <a class="video-link" href="https://youtu.be/8UOj0aJDzXc" target="_blank">▶️ 19. Prod-Ready Infra to App Pipeline</a>
-                <a class="video-link" href="https://youtu.be/Y11sFkvmHnY" target="_blank">▶️ 20. Series Final Recap (Wolfgang)</a>
-                <a class="video-link" href="https://youtu.be/k28q5bsKfwI" target="_blank">▶️ 21. Multi-Domain TLS Architecture</a>
+                <a class="video-link" href="#" target="_blank">✅ Microsoft Entra (AAD) integration</a>
             </div>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 44m)</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 7: Identity & Access (Part 2)</h2>
+            <p>Service Principals, Managed Identities, Workload Identity.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Security and identities in AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 8: Security Deep Dive (Part 1)</h2>
+            <p>Azure Key Vault integration using Secret Store CSI driver.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Secret Store CSI Driver config</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 9: Security Deep Dive (Part 2)</h2>
+            <p>Network Policies, AppArmor, Seccomp, Image Cleaner.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Policy & Defender for Containers</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 10: Scaling Operations</h2>
+            <p>HPA (Horizontal Pod Autoscaler), VPA, Cluster Autoscaler.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Scaling in AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 11: Storage in AKS</h2>
+            <p>Storage Classes, PV, PVC, CSI Drivers, Azure Disks/Files.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Storage in AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 12: Monitoring & Observability</h2>
+            <p>Container Insights, Azure Monitor, Log Analytics, Troubleshooting.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Monitor and troubleshoot AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 13: Cluster Maintenance</h2>
+            <p>Upgrading AKS clusters, node OS updates, certificate rotation.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Upgrade an AKS cluster</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 14: Image Management</h2>
+            <p>Integrate AKS with ACR, automated updates, security scanning.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Integrate AKS with ACR</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 15: Legacy Ingress Controllers</h2>
+            <p>Nginx Ingress controller setup, TLS termination with Cert-Manager.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Ingress controllers in AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 16: Modern Gateway API</h2>
+            <p>Working with Azure Application Gateway for Containers (AGC).</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Gateway API Architecture</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 17: High Availability (HA)</h2>
+            <p>Multi-zone clusters, pod topology spread constraints, quotas.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ High Availability in AKS</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 18: Azure DevOps (Part 1)</h2>
+            <p>Introduction to CI/CD on AKS, setting up pipelines.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ DevOps integration basics</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 19: Azure DevOps (Part 2)</h2>
+            <p>Helm charts in pipelines, blue/green deployments.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Deploy to AKS using Azure DevOps</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h2>Day 20: Final Capstone Lab</h2>
+            <p>Deploying a full microservices app with identity, storage, and AGC.</p>
+            <div class="video-list">
+                <a class="video-link" href="#" target="_blank">✅ Final Capstone deployment</a>
+            </div>
         </div>
     </div>
-
-    <!-- SRE Notes Cheat Sheet -->
-    <div class="cram-grid">
-        <h2>📑 SRE Cheat Sheet — Core Objects</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Kubernetes Object</th>
-                    <th>Responsibility / Pattern</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>GatewayClass</code></td>
-                    <td>Template defining infrastructure implementation (e.g., Azure AGC, Envoy). Cluster scope.</td>
-                </tr>
-                <tr>
-                    <td><code>Gateway</code></td>
-                    <td>Physical/logical load balancer containing Listeners (Port 80/443, TLS details). Typically
-                        managed by Infra namespace.</td>
-                </tr>
-                <tr>
-                    <td><code>HTTPRoute</code></td>
-                    <td>Defines traffic routing (hostname, paths, headers) to backend Services. App Dev namespace.</td>
-                </tr>
-                <tr>
-                    <td><code>ReferenceGrant</code></td>
-                    <td>Strict security boundary allowing Cross-Namespace attachments (e.g., App Route attaching to
-                        Infra Gateway).</td>
-                </tr>
-                <tr>
-                    <td>Vendor Annotations</td>
-                    <td>Eliminated from Developer routes. Required ONLY on the <code>Gateway</code> object natively.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+    <!-- END CRAM GRID -->
     <footer>
-        <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\gateway-api-sprint.md</code><br>
+        <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\aks-made-easy-sprint.md</code><br>
             🎯 Goal: DevOps SRE 2027</p>
     </footer>
 
