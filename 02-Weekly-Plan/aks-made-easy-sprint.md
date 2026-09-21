@@ -3,7 +3,7 @@
 > **Target:** Master AKS End-to-End before $200 Azure Credit Expires.
 > **Total Lectures:** 183
 > **Timeline:** Sep 22, 2026 to Oct 11, 2026
-> **Primary Source:** Kalyan Reddy Daida (Udemy)
+> **Primary Source:** [Kalyan Reddy Daida (Udemy)](https://www.udemy.com/course/azure-kubernetes-services-aks-made-easy/)
 
 This specialized 20-day sprint suspends all other non-Kubernetes study plans. The primary focus is deeply mastering Azure-native Kubernetes deployments, operations, and security.
 
