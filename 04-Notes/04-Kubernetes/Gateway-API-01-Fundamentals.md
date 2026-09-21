@@ -115,7 +115,89 @@ spec:
 ```
 
 ### ✅ The Modern Way (Gateway API)
-*Going forward in this sprint, we will split routing into a `Gateway` (managed by Infra) and an `HTTPRoute` (managed by Devs).* *(Examples to follow in upcoming labs)*.
+*Going forward, routing is split into a physical `Gateway` (managed by Infra) and an `HTTPRoute` (managed by Devs).*
+
+**1. The Gateway (Platform/Infra Team)**
+*Notice how listeners for HTTP/HTTPS are centralized globally.*
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: $GatewayName
+  namespace: $InfrastructureNamespace
+  annotations:
+    alb.networking.azure.io/alb-namespace: $InfrastructureNamespace
+    alb.networking.azure.io/alb-name: $ApplicationLoadBalancerName
+    cert-manager.io/cluster-issuer: $ClusterIssuerName
+spec:
+  gatewayClassName: $GatewayClassName
+  listeners:
+  - name: http-listener
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: traefik-https-listener
+    port: 443
+    protocol: HTTPS
+    hostname: $TraefikUrl
+    tls:
+      certificateRefs:
+        - group: ""
+          kind: Secret
+          name: $TraefikSecretName
+          namespace: $InfrastructureNamespace
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: nginx-https-listener
+    port: 443
+    protocol: HTTPS
+    hostname: $NginxUrl
+    tls:
+      certificateRefs:
+        - group: ""
+          kind: Secret
+          name: $NginxSecretName
+          namespace: $InfrastructureNamespace
+    allowedRoutes:
+      namespaces:
+        from: All
+```
+
+**2. The HTTPRoute (Application Dev Team)**
+*Notice how developers can elegantly match on paths and specific headers without writing vendor-specific annotations!*
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: $RoutingHttpRoute
+  namespace: $RoutingDemoNamespace
+spec:
+  parentRefs:
+    - name: $GatewayName
+      namespace: $InfrastructureNamespace
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /routing 
+      backendRefs:
+        - name: $RoutingAppNameOne
+          port: 80
+    - matches:
+        - headers:
+          - type: Exact
+            name: header
+            value: routing 
+          path:
+            type: PathPrefix
+            value: /routing
+      backendRefs:
+        - name: $RoutingAppNameTwo
+          port: 80
+```
 
 ---
 
