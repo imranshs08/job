@@ -116,9 +116,38 @@
             transform: translateY(-2px);
         }
 
+
         .card.featured {
             grid-column: span 2;
         }
+
+        .video-list {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        
+        .video-link {
+            font-size: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .video-link:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
 
         @media (max-width: 768px) {
             .card.featured {
@@ -312,50 +341,81 @@
     </div>
 
     <div class="section-label">📚 The 6-Session Sprint Curriculum</div>
-    <div class="grid">
-        <a class="card"
-            href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md"
-            target="_blank">
+        <div class="grid">
+        <div class="card">
             <div class="card-icon">⚡</div>
             <h2>Session 1 &nbsp;<span class="weight">Fundamentals & Azure AGC</span></h2>
-            <p>Understanding why Ingress is being replaced. Setup the new Azure AGC resources on AKS. Contains the
-                SRE-grade YAML comparisons between legacy Ingress and modern Gateway.</p>
-            <span class="badge badge-green">✅ COMPLETED</span>
-        </a>
-        <a class="card" href="https://youtu.be/gPvXGWCqkrI" target="_blank">
+            <p>Understanding why Ingress is being replaced. Setup the new Azure AGC resources on AKS. Contains the SRE-grade YAML comparisons between legacy Ingress and modern Gateway.</p>
+            <div class="video-list">
+                <a class="video-link" href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md" target="_blank">✅ 1. Is Ingress dead? (View Notes)</a>
+                <a class="video-link" href="https://youtu.be/O6k-L6oBCMc" target="_blank">▶️ 2. Azure AGC Setup in AKS</a>
+                <a class="video-link" href="https://youtu.be/JoRQhny4QPM" target="_blank">▶️ 3. Host multiple Apps with AGC</a>
+            </div>
+            <span class="badge badge-green">✅ COMPLETED (1h 31m)</span>
+        </div>
+        
+        <div class="card">
             <div class="card-icon">🔒</div>
             <h2>Session 2 &nbsp;<span class="weight">Automated TLS & DNS</span></h2>
-            <p>Wiring up Azure DNS, Cert-Manager, and dynamically securing Gateway API endpoints with Let's Encrypt
-                using wildcard certificates.</p>
-            <span class="badge badge-blue">☁️ AZURE SPOT LAB</span>
-        </a>
-        <a class="card" href="https://youtu.be/6p-W7DE7Yd0" target="_blank">
+            <p>Wiring up Azure DNS, Cert-Manager, and dynamically securing Gateway API endpoints with Let's Encrypt using wildcard certificates.</p>
+            <div class="video-list">
+                <a class="video-link" href="https://youtu.gPvXGWCqkrI" target="_blank">▶️ 4. Automate DNS Records for AKS TLS</a>
+                <a class="video-link" href="https://youtu.be/BfynzCAcvTc" target="_blank">▶️ 5. Cert-Manager Automated HTTPS</a>
+                <a class="video-link" href="https://youtu.be/io9GdZMwAYA" target="_blank">▶️ 6. Azure DNS Wildcard Certificates</a>
+            </div>
+            <span class="badge badge-blue">☁️ AZURE SPOT LAB (1h 11m)</span>
+        </div>
+        
+        <div class="card">
             <div class="card-icon">🚦</div>
             <h2>Session 3 &nbsp;<span class="weight">Traffic Management</span></h2>
-            <p>HTTPRoutes, header matching, rewrite/redirect rules, and advanced deployments (Canary/A-B traffic
-                splitting).</p>
-            <span class="badge badge-blue">☁️ AZURE SPOT LAB</span>
-        </a>
-        <a class="card" href="https://youtu.be/_81ypGr5X9w" target="_blank">
+            <p>HTTPRoutes, header matching, rewrite/redirect rules, and advanced deployments (Canary/A-B traffic splitting).</p>
+            <div class="video-list">
+                <a class="video-link" href="https://youtu.be/6p-W7DE7Yd0" target="_blank">▶️ 7. CI/CD for Dynamic PR Environments</a>
+                <a class="video-link" href="https://youtu.be/iT9WhRoukyY" target="_blank">▶️ 8. Routing Path, Query & Headers</a>
+                <a class="video-link" href="https://youtu.be/y714oJ2rnwc" target="_blank">▶️ 9. URL Rewrite & Redirect with AGC</a>
+                <a class="video-link" href="https://youtu.be/HG5Qyfu_rSk" target="_blank">▶️ 10. Canary and A-B Deployments</a>
+            </div>
+            <span class="badge badge-blue">☁️ AZURE SPOT LAB (1h 24m)</span>
+        </div>
+        
+        <div class="card">
             <div class="card-icon">🛡️</div>
             <h2>Session 4 &nbsp;<span class="weight">Security & Monitoring</span></h2>
-            <p>Applying rigorous WAF policies, integrating Prometheus/Grafana, and exploring alternative controllers
-                like NGINX and Traefik Gateways.</p>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
-        </a>
-        <a class="card" href="https://youtu.be/ypl7Bu9zQUM" target="_blank">
+            <p>Applying rigorous WAF policies, integrating Prometheus/Grafana, and exploring alternative controllers like NGINX and Traefik Gateways.</p>
+            <div class="video-list">
+                <a class="video-link" href="https://youtu.be/_81ypGr5X9w" target="_blank">▶️ 11. AKS Monitoring (Prometheus/Grafana)</a>
+                <a class="video-link" href="https://youtu.be/CW3S2AFe4UE" target="_blank">▶️ 12. WAF Security for AKS with AGC</a>
+                <a class="video-link" href="https://youtu.be/zp-5m88I2wE" target="_blank">▶️ 13. Kubernetes Gateway API with Nginx</a>
+                <a class="video-link" href="https://youtu.be/UkNWjNMhDKE" target="_blank">▶️ 14. Deploy Traefik Gateway API</a>
+            </div>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 26m)</span>
+        </div>
+        
+        <div class="card">
             <div class="card-icon">🚀</div>
             <h2>Session 5 &nbsp;<span class="weight">Envoy & Migration</span></h2>
             <p>Standing up Envoy Gateway natively and comparing the new API with traditional NGINX Ingress objects.</p>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
-        </a>
-        <a class="card" href="https://youtu.be/8UOj0aJDzXc" target="_blank">
+            <div class="video-list">
+                <a class="video-link" href="https://youtu.be/ypl7Bu9zQUM" target="_blank">▶️ 15. Envoy Gateway API Setup</a>
+                <a class="video-link" href="https://youtu.be/ZLUCt4yhe0Q" target="_blank">▶️ 16. Envoy Gateway + Zero Touch TLS</a>
+                <a class="video-link" href="https://youtu.be/hDjmDKjJ3dQ" target="_blank">▶️ 17. NGINX Ingress vs Gateway API</a>
+                <a class="video-link" href="https://youtu.be/5arGrivpen8" target="_blank">▶️ 18. AKS AGC Native Addon</a>
+            </div>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 25m)</span>
+        </div>
+        
+        <div class="card">
             <div class="card-icon">🏆</div>
             <h2>Session 6 &nbsp;<span class="weight">Production Pipelines</span></h2>
-            <p>End-to-end production CI/CD architectures mapping Infrastructure to App using Terraform, ArgoCD, and
-                Multi-Domain TLS architecture.</p>
-            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
-        </a>
+            <p>End-to-end production CI/CD architectures mapping Infrastructure to App using Terraform, ArgoCD, and Multi-Domain TLS architecture.</p>
+            <div class="video-list">
+                <a class="video-link" href="https://youtu.be/8UOj0aJDzXc" target="_blank">▶️ 19. Prod-Ready Infra to App Pipeline</a>
+                <a class="video-link" href="https://youtu.be/Y11sFkvmHnY" target="_blank">▶️ 20. Series Final Recap (Wolfgang)</a>
+                <a class="video-link" href="https://youtu.be/k28q5bsKfwI" target="_blank">▶️ 21. Multi-Domain TLS Architecture</a>
+            </div>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB (1h 44m)</span>
+        </div>
     </div>
 
     <!-- SRE Notes Cheat Sheet -->
