@@ -325,18 +325,17 @@
     <!-- LAB AUTOMATION -->
     <div class="cram-grid"
         style="padding: 1.5rem; margin-top: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(56, 189, 248, 0.05)); border-left: 4px solid var(--accent);">
-        <h2 style="margin-bottom: 0.5rem; font-size: 1rem;"><span style="margin-right: 8px;">🚀</span> AGC Lab
-            Automation — Spot Instance Clusters</h2>
-        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">Execute this directly in Azure Cloud
-            Shell to spin up a virtually free Spot-Instance AKS cluster for all Gateway API and Azure AGC routing labs.
-        </p>
-        <div
-            style="background: #000; padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border);">
-            <code
-                style="color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- up</code>
-            <button class="copy-btn"
-                onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- up'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Cmd', 2000);">Copy
-                Cmd</button>
+        <h2 style="margin-bottom: 0.5rem; font-size: 1rem;"><span style="margin-right: 8px;">🚀</span> AGC Lab Automation — Deploy & Destroy</h2>
+        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">Execute these directly in Azure Cloud Shell. Always run 'Down' when finished to nuke the resources and stop billing.</p>
+        
+        <div style="background: #000; padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); margin-bottom: 0.75rem;">
+            <code style="color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- up</code>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- up'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Up', 2000);">Copy Up</button>
+        </div>
+
+        <div style="background: rgba(248, 113, 113, 0.05); padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(248, 113, 113, 0.2);">
+            <code style="color: var(--red); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- down</code>
+            <button class="copy-btn" style="color: var(--red); border-color: rgba(248, 113, 113, 0.4); background: rgba(248, 113, 113, 0.1);" onmouseover="this.style.background='rgba(248, 113, 113, 0.2)'" onmouseout="this.style.background='rgba(248, 113, 113, 0.1)'" onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- down'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Down', 2000);">Copy Down</button>
         </div>
     </div>
 
