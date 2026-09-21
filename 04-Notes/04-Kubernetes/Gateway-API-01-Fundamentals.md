@@ -25,17 +25,17 @@ Unlike the monolithic `Ingress` object, the Gateway API breaks routing down into
 ```mermaid
 graph TD
     subgraph "Platform Team (Cluster Scope)"
-        GC[GatewayClass<br>e.g., Azure AGC / Envoy] --> GW[Gateway<br>example.com]
+        GC["GatewayClass<br>e.g. Azure AGC/Envoy"] --> GW["Gateway<br>example.com"]
     end
     
     subgraph "App Team (Namespace A)"
-        GW -->|Listeners<br>(Port 80/443, TLS)| R1[HTTPRoute]
-        R1 -->|Path: /api| S1[Service]
-        S1 --> P1[Pods]
+        GW -->|"Listeners (Port 80/443, TLS)"| R1["HTTPRoute"]
+        R1 -->|"Path: /api"| S1["Service"]
+        S1 --> P1["Pods"]
     end
     
     subgraph "Security Team (Namespace B)"
-        TLS[(TLS Secret)] -.->|Cross-Namespace<br>ReferenceGrant| GW
+        TLS[("TLS Secret")] -.->|"Cross-Namespace ReferenceGrant"| GW
     end
     
     style GC fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#fff
