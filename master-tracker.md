@@ -11,9 +11,9 @@
 |-------|--------|-------|--------|
 | **Phase 1** | Aug – Sep | Foundations + Core DevOps (158 videos) | 🟨 In Progress |
 | **Phase 2 (CKA)** | Aug 18 – Dec 31 | KodeKloud CKA Course (300 lessons) | 🟨 In Progress |
-| **Phase 3 (AZ-104)** | Jan 1 – Feb 14 | AZ-104 Study Notes (27 days) | ⬜ Not Started |
+| **Phase 3 (AZ-104)** | Oct 1 – Nov 14 | AZ-104 Study Notes (27 days) | ⬜ Not Started |
 | **🎯 CKA Exam** | **February 1, 2027** | Certified Kubernetes Administrator | ⬜ |
-| **🎯 AZ-104 Exam** | **February 15, 2027** | Azure Administrator Associate | ⬜ |
+| **🎯 AZ-104 Exam** | **November 15, 2026** | Azure Administrator Associate | ⬜ |
 | **🎯 Job Applications** | **February 1, 2027** | Resume live, applying to roles | ⬜ |
 
 > **Legend:** ⬜ Not Started | 🟨 In Progress | ✅ Complete

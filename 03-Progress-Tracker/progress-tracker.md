@@ -359,52 +359,52 @@
 
 | Date | Day | AZ-104 Plan | Status |
 |---|---|---|---|
-| Jan 1, 2027 | Fri | 📘 Azure AD Basics | ☐ |
-| Jan 2, 2027 | Sat | 📘 RBAC | ☐ |
-| Jan 3, 2027 | Sun | 💤 Rest / Catch-up | ☐ |
-| Jan 4, 2027 | Mon | 📘 MG & Governance | ☐ |
-| Jan 5, 2027 | Tue | 📘 Azure Policy | ☐ |
-| Jan 6, 2027 | Wed | 💤 Rest / Catch-up | ☐ |
-| Jan 7, 2027 | Thu | 📘 IAM + Governance | ☐ |
-| Jan 8, 2027 | Fri | 📘 Cost Management | ☐ |
-| Jan 9, 2027 | Sat | 💤 Rest / Catch-up | ☐ |
-| Jan 10, 2027 | Sun | 📘 Storage Accounts | ☐ |
-| Jan 11, 2027 | Mon | 📘 Blob Storage | ☐ |
-| Jan 12, 2027 | Tue | 💤 Rest / Catch-up | ☐ |
-| Jan 13, 2027 | Wed | 📘 File Shares & SAS | ☐ |
-| Jan 14, 2027 | Thu | 📘 Lifecycle Tools | ☐ |
-| Jan 15, 2027 | Fri | 💤 Rest / Catch-up | ☐ |
-| Jan 16, 2027 | Sat | 📘 VM Basics | ☐ |
-| Jan 17, 2027 | Sun | 📘 Storage Case Study | ☐ |
-| Jan 18, 2027 | Mon | 💤 Rest / Catch-up | ☐ |
-| Jan 19, 2027 | Tue | 📘 HA & Availability | ☐ |
-| Jan 20, 2027 | Wed | 📘 Custom Image + SIG | ☐ |
-| Jan 21, 2027 | Thu | 💤 Rest / Catch-up | ☐ |
-| Jan 22, 2027 | Fri | 📘 VMSS | ☐ |
-| Jan 23, 2027 | Sat | 📘 VNet / Subnets | ☐ |
-| Jan 24, 2027 | Sun | 📘 Break | ☐ |
-| Jan 25, 2027 | Mon | 📘 Break | ☐ |
-| Jan 26, 2027 | Tue | 💤 Rest / Catch-up | ☐ |
-| Jan 27, 2027 | Wed | 📘 NSG / ASG | ☐ |
-| Jan 28, 2027 | Thu | 📘 Load Balancer | ☐ |
-| Jan 29, 2027 | Fri | 💤 Rest / Catch-up | ☐ |
-| Jan 30, 2027 | Sat | 📘 Networking Case Study | ☐ |
-| Jan 31, 2027 | Sun | 📘 Break | ☐ |
-| Feb 1, 2027 | Mon | 📘 Break | ☐ |
-| Feb 2, 2027 | Tue | 📘 App Gateway | ☐ |
-| Feb 3, 2027 | Wed | 📘 Private Endpoint | ☐ |
-| Feb 4, 2027 | Thu | 💤 Rest / Catch-up | ☐ |
-| Feb 5, 2027 | Fri | 📘 VPN Gateway | ☐ |
-| Feb 6, 2027 | Sat | 📘 ExpressRoute | ☐ |
-| Feb 7, 2027 | Sun | 💤 Rest / Catch-up | ☐ |
-| Feb 8, 2027 | Mon | 📘 Monitor & Logs | ☐ |
-| Feb 9, 2027 | Tue | 📘 Alerts | ☐ |
-| Feb 10, 2027 | Wed | 💤 Rest / Catch-up | ☐ |
-| Feb 11, 2027 | Thu | 📘 HA/DR Case Study | ☐ |
-| Feb 12, 2027 | Fri | 📘 Backup & Recovery | ☐ |
-| Feb 13, 2027 | Sat | 💤 Rest / Catch-up | ☐ |
-| Feb 14, 2027 | Sun | 📝 Mock Exam 1 (65 Qs) | ☐ |
-| Feb 15, 2027 | Mon | 🎯 **AZ-104 EXAM DAY** | ☐ |
+| Oct 1, 2026 | Thu | 📘 Azure AD Basics | ☐ |
+| Oct 2, 2026 | Fri | 📘 RBAC | ☐ |
+| Oct 3, 2026 | Sat | 💤 Rest / Catch-up | ☐ |
+| Oct 4, 2026 | Sun | 📘 MG & Governance | ☐ |
+| Oct 5, 2026 | Mon | 📘 Azure Policy | ☐ |
+| Oct 6, 2026 | Tue | 💤 Rest / Catch-up | ☐ |
+| Oct 7, 2026 | Wed | 📘 IAM + Governance | ☐ |
+| Oct 8, 2026 | Thu | 📘 Cost Management | ☐ |
+| Oct 9, 2026 | Fri | 💤 Rest / Catch-up | ☐ |
+| Oct 10, 2026 | Sat | 📘 Storage Accounts | ☐ |
+| Oct 11, 2026 | Sun | 📘 Blob Storage | ☐ |
+| Oct 12, 2026 | Mon | 💤 Rest / Catch-up | ☐ |
+| Oct 13, 2026 | Tue | 📘 File Shares & SAS | ☐ |
+| Oct 14, 2026 | Wed | 📘 Lifecycle Tools | ☐ |
+| Oct 15, 2026 | Thu | 💤 Rest / Catch-up | ☐ |
+| Oct 16, 2026 | Fri | 📘 VM Basics | ☐ |
+| Oct 17, 2026 | Sat | 📘 Storage Case Study | ☐ |
+| Oct 18, 2026 | Sun | 💤 Rest / Catch-up | ☐ |
+| Oct 19, 2026 | Mon | 📘 HA & Availability | ☐ |
+| Oct 20, 2026 | Tue | 📘 Custom Image + SIG | ☐ |
+| Oct 21, 2026 | Wed | 💤 Rest / Catch-up | ☐ |
+| Oct 22, 2026 | Thu | 📘 VMSS | ☐ |
+| Oct 23, 2026 | Fri | 📘 VNet / Subnets | ☐ |
+| Oct 24, 2026 | Sat | 📘 Break | ☐ |
+| Oct 25, 2026 | Sun | 📘 Break | ☐ |
+| Oct 26, 2026 | Mon | 💤 Rest / Catch-up | ☐ |
+| Oct 27, 2026 | Tue | 📘 NSG / ASG | ☐ |
+| Oct 28, 2026 | Wed | 📘 Load Balancer | ☐ |
+| Oct 29, 2026 | Thu | 💤 Rest / Catch-up | ☐ |
+| Oct 30, 2026 | Fri | 📘 Networking Case Study | ☐ |
+| Oct 31, 2026 | Sat | 📘 Break | ☐ |
+| Nov 1, 2026 | Sun | 📘 Break | ☐ |
+| Nov 2, 2026 | Mon | 📘 App Gateway | ☐ |
+| Nov 3, 2026 | Tue | 📘 Private Endpoint | ☐ |
+| Nov 4, 2026 | Wed | 💤 Rest / Catch-up | ☐ |
+| Nov 5, 2026 | Thu | 📘 VPN Gateway | ☐ |
+| Nov 6, 2026 | Fri | 📘 ExpressRoute | ☐ |
+| Nov 7, 2026 | Sat | 💤 Rest / Catch-up | ☐ |
+| Nov 8, 2026 | Sun | 📘 Monitor & Logs | ☐ |
+| Nov 9, 2026 | Mon | 📘 Alerts | ☐ |
+| Nov 10, 2026 | Tue | 💤 Rest / Catch-up | ☐ |
+| Nov 11, 2026 | Wed | 📘 HA/DR Case Study | ☐ |
+| Nov 12, 2026 | Thu | 📘 Backup & Recovery | ☐ |
+| Nov 13, 2026 | Fri | 💤 Rest / Catch-up | ☐ |
+| Nov 14, 2026 | Sat | 📝 Mock Exam 1 (65 Qs) | ☐ |
+| Nov 15, 2026 | Sun | 🎯 **AZ-104 EXAM DAY** | ☐ |
 
 ### 🎓 Exam Booking & Simulators
 | Certification | Status | Target Date | Preparation Milestone |
@@ -414,9 +414,9 @@
 | CKA: Simulator Killer.sh #1 | ☐ | Jan 26 | Clear with > 85% |
 | CKA: Simulator Killer.sh #2 | ☐ | Jan 30 | Clear with > 90% |
 | **🎯 CKA: Final Exam Date** | ☐ | **Feb 1, 2027** | Pass (Cost: ~$395) |
-| AZ-104: Complete Days 1–27 Study Notes | ☐ | Feb 12 | Dec 1 – Feb 12 daily plan |
-| AZ-104: TutorialDojo Mock Exam | ☐ | Feb 14 | Score > 85% |
-| **🎯 AZ-104: Final Exam Date** | ☐ | **Feb 15, 2027** | Pass (Cost: ~$165) |
+| AZ-104: Complete Days 1–27 Study Notes | ☐ | Nov 12 | Oct 1 – Nov 12 daily plan |
+| AZ-104: TutorialDojo Mock Exam | ☐ | Nov 14 | Score > 85% |
+| **🎯 AZ-104: Final Exam Date** | ☐ | **Nov 15, 2026** | Pass (Cost: ~$165) |
 
 ---
 ## 💼 Interview Prep & Career Marketing Checklist
