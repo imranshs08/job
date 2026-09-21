@@ -2,7 +2,7 @@
 
 > Print this sheet and check off items as you complete them. Review weekly.
 > **Start Date:** August 18, 2026 | **Target Apply Date: Jan 1, 2027**
-> **CKA Exam:** Jan 1, 2027 | **AZ-104 Exam:** Jan 15, 2027
+> **CKA Exam:** Feb 1, 2027 | **AZ-104 Exam:** Feb 15, 2027
 
 ---
 
@@ -232,7 +232,7 @@
 | Aug 31, 2026 | Mon | **Core Concepts**: Namespaces (08:23)<br>**Core Concepts**: Practice Test Namespaces (—) | 8m 23s | ✅ |
 | Sep 01, 2026 | Tue | ✅ **Core Concepts**: Solution: Namespaces (optional) (05:03)<br>**Core Concepts**: Imperative vs Declarative (13:06)<br>**Core Concepts**: Certification Tips – Imperative Commands with Kubectl (—) | 18m 9s | ✅ |
 | Sep 02, 2026 | Wed | **Core Concepts**: Practice Test – Imperative Commands (—)<br>**Core Concepts**: Solution: Imperative Commands (optional) (07:52) | 7m 52s | ✅ |
-| Sep 03, 2026 | Thu | **Core Concepts**: Kubectl Apply Command (04:38)<br>**Scheduling**: Scheduling Section Introduction (00:54) | 5m 32s | ☑ |
+| Oct 4, 2026 | Sun | **Core Concepts**: Kubectl Apply Command (04:38)<br>**Scheduling**: Scheduling Section Introduction (00:54) | 5m 32s | ☑ |
 | Sep 04, 2026 | Fri | **Scheduling**: Manual Scheduling (02:31)<br>**Scheduling**: Practice Test Manual Scheduling (—) | 2m 31s | ✅ |
 | Sep 05, 2026 | Sat | **Scheduling**: Solution: Manual Scheduling (optional) (03:22)<br>**Scheduling**: Labels and Selectors (05:47) | 9m 9s | ✅ |
 | Sep 06, 2026 | Sun | **Scheduling**: Practice Test Labels and Selectors (—)<br>**Scheduling**: Solution: Labels and Selectors (05:34)<br>**Scheduling**: Taints and Tolerations (09:42) | 15m 16s | ✅ |
@@ -246,177 +246,177 @@
 | Sep 14, 2026 | Mon | **Scheduling**: Practice Test – Static Pods (—)<br>**Scheduling**: Solution – Static Pods (Optional) (05:58) | 5m 58s | ✅ |
 | Sep 15, 2026 | Tue | **Scheduling**: Multiple Schedulers (09:32)<br>**Scheduling**: Practice Test Multiple Schedulers (—) | 9m 32s | ✅ |
 | Sep 16, 2026 | Wed | **Scheduling**: Solution – Multiple Scheduler (07:46)<br>**Scheduling**: Configuring Scheduler Profiles (09:53)<br>**Scheduling**: References (—) | 17m 39s | ✅ |
-| Sep 17, 2026 | Thu | **Scheduling**: Download Presentation Deck 2 (—)<br>**Scheduling**: (2025 Updates) Admission Controllers (08:07) | 8m 7s | ☐ |
-| Sep 18, 2026 | Fri | **Scheduling**: (2025 Updates) Practice Test – Admission Controllers (—)<br>**Scheduling**: (2025 Updates) Solution: Admission Controllers (06:41) | 6m 41s | ☐ |
-| Sep 19, 2026 | Sat | **Scheduling**: (2025 Updates) Validating and Mutating Admission Controllers (10:26)<br>**Scheduling**: (2025 Updates) Practice Test – Validating and Mutating Admission Controllers (—) | 10m 26s | ☐ |
-| Sep 20, 2026 | Sun | **Scheduling**: (2025 Updates) Solution: Validating and Mutating Admission Controllers (07:39)<br>**Logging & Monitoring**: Logging and Monitoring Section Introduction (00:36) | 8m 15s | ☐ |
-| Sep 21, 2026 | Mon | **Logging & Monitoring**: Monitor Cluster Components (03:58)<br>**Logging & Monitoring**: Practice Test Monitor Cluster Components (—)<br>**Logging & Monitoring**: Solution: Monitor Cluster Components (03:26) | 7m 24s | ☐ |
-| Sep 22, 2026 | Tue | **Logging & Monitoring**: Managing Application Logs (02:16)<br>**Logging & Monitoring**: Practice Test Managing Application Logs (—) | 2m 16s | ☐ |
-| Sep 23, 2026 | Wed | **Logging & Monitoring**: Solution: Logging (Optional) (02:09)<br>**Application Lifecycle**: Application Lifecycle Management – Section Introduction (00:42) | 2m 51s | ☐ |
-| Sep 24, 2026 | Thu | **Application Lifecycle**: Rolling Updates and Rollbacks (06:43)<br>**Application Lifecycle**: Practice Test Rolling Updates and Rollbacks (—) | 6m 43s | ☐ |
-| Sep 25, 2026 | Fri | **Application Lifecycle**: Solution: Rolling update (09:05)<br>**Application Lifecycle**: Configure Applications (—)<br>**Application Lifecycle**: Commands and Arguments in Docker (07:20) | 16m 25s | ☐ |
-| Sep 26, 2026 | Sat | **Application Lifecycle**: Commands and Arguments in Kubernetes (02:39)<br>**Application Lifecycle**: Practice Test Commands and Arguments (—) | 2m 39s | ☐ |
-| Sep 27, 2026 | Sun | **Application Lifecycle**: Solution – Commands and Arguments (Optional) (10:45)<br>**Application Lifecycle**: Configure Environment Variables in Applications (01:15) | 12m 0s | ☐ |
-| Sep 28, 2026 | Mon | **Application Lifecycle**: Configure ConfigMaps in Applications (05:19)<br>**Application Lifecycle**: Practice Test Env Variables (—) | 5m 19s | ☐ |
-| Sep 29, 2026 | Tue | **Application Lifecycle**: Solution – Env Variables (Optional) (09:00)<br>**Application Lifecycle**: Secrets (08:20) | 17m 20s | ☐ |
-| Sep 30, 2026 | Wed | **Application Lifecycle**: Practice Test Secrets (—)<br>**Application Lifecycle**: Additional Resource (—)<br>**Application Lifecycle**: Solution – Secrets (Optional) (09:36) | 9m 36s | ☐ |
-| Oct 01, 2026 | Thu | **Application Lifecycle**: Demo: Encrypting Secret Data at Rest (18:47)<br>**Application Lifecycle**: A note on Secrets (—) | 18m 47s | ☐ |
-| Oct 02, 2026 | Fri | **Application Lifecycle**: Multi Container Pods (02:13)<br>**Application Lifecycle**: Practice Test – Multi Container Pods (—) | 2m 13s | ☐ |
-| Oct 03, 2026 | Sat | **Application Lifecycle**: Solution – Multi Container Pods (Optional) (15:09)<br>**Application Lifecycle**: Multi-container Pods Design Patterns (—) | 15m 9s | ☐ |
-| Oct 04, 2026 | Sun | **Application Lifecycle**: Init Containers (—)<br>**Application Lifecycle**: Practice Test – Init Containers (—) | — | ☐ |
-| Oct 05, 2026 | Mon | **Application Lifecycle**: Solution – Init Containers (Optional) (08:02)<br>**Application Lifecycle**: Self Healing Applications (—)<br>**Application Lifecycle**: Download Presentation Deck 4 (—) | 8m 2s | ☐ |
-| Oct 06, 2026 | Tue | **Cluster Maintenance**: Cluster Maintenance – Section Introduction (01:16)<br>**Cluster Maintenance**: OS Upgrades (03:49) | 5m 5s | ☐ |
-| Oct 07, 2026 | Wed | **Cluster Maintenance**: Practice Test OS Upgrades (—)<br>**Cluster Maintenance**: Solution – OS Upgrades (optional) (10:50) | 10m 50s | ☐ |
-| Oct 08, 2026 | Thu | **Cluster Maintenance**: Kubernetes Software Versions (02:54)<br>**Cluster Maintenance**: References (—) | 2m 54s | ☐ |
-| Oct 09, 2026 | Fri | **Cluster Maintenance**: Cluster Upgrade Introduction (11:11)<br>**Cluster Maintenance**: Demo – Cluster upgrade (10:49) | 22m 0s | ☐ |
-| Oct 10, 2026 | Sat | **Cluster Maintenance**: Practice Test Cluster Upgrade Process (—)<br>**Cluster Maintenance**: Solution: Cluster Upgrade Process (12:36)<br>**Cluster Maintenance**: Backup and Restore Methods (06:18) | 18m 54s | ☐ |
-| Oct 11, 2026 | Sun | **Cluster Maintenance**: Working with ETCDCTL (—)<br>**Cluster Maintenance**: Practice Test Backup and Restore Methods (—) | — | ☐ |
-| Oct 12, 2026 | Mon | **Cluster Maintenance**: Solution: Backup and Restore (18:01)<br>**Cluster Maintenance**: Practice Test Backup and Restore Methods 2 (—) | 18m 1s | ☐ |
-| Oct 13, 2026 | Tue | **Cluster Maintenance**: Solution: Backup and Restore 2 (20:21)<br>**Cluster Maintenance**: Certification Exam Tip! (—) | 20m 21s | ☐ |
-| Oct 14, 2026 | Wed | **Cluster Maintenance**: References (2) (—)<br>**Cluster Maintenance**: Download Presentation Deck 5 (—) | — | ☐ |
-| Oct 15, 2026 | Thu | **Security**: Security – Section Introduction (02:15)<br>**Security**: Kubernetes Security Primitives (03:18)<br>**Security**: Authentication (05:34) | 11m 7s | ☐ |
-| Oct 16, 2026 | Fri | **Security**: Article on Setting up Basic Authentication (—)<br>**Security**: TLS Introduction (01:29) | 1m 29s | ☐ |
-| Oct 17, 2026 | Sat | **Security**: TLS Basics (20:03)<br>**Security**: TLS in Kubernetes (07:48) | 27m 51s | ☐ |
-| Oct 18, 2026 | Sun | **Security**: TLS in Kubernetes – Certificate Creation (10:55)<br>**Security**: View Certificate Details (04:31) | 15m 26s | ☐ |
-| Oct 19, 2026 | Mon | **Security**: Certificate Health Check Spreadsheet (—)<br>**Security**: Practice Test View Certificate Details (—) | — | ☐ |
-| Oct 20, 2026 | Tue | **Security**: Solution – View Certification Details (21:28)<br>**Security**: Certificates API (06:07)<br>**Security**: Practice Test Certificates API (—) | 27m 35s | ☐ |
-| Oct 21, 2026 | Wed | **Security**: Solution – Certificates API (07:37)<br>**Security**: KubeConfig (08:32) | 16m 9s | ☐ |
-| Oct 22, 2026 | Thu | **Security**: Practice Test KubeConfig (—)<br>**Security**: Solution – KubeConfig (08:08) | 8m 8s | ☐ |
-| Oct 23, 2026 | Fri | **Security**: API Groups (05:52)<br>**Security**: Authorization (07:30) | 13m 22s | ☐ |
-| Oct 24, 2026 | Sat | **Security**: Role Based Access Controls (04:28)<br>**Security**: Practice Test Role Based Access Controls (—) | 4m 28s | ☐ |
-| Oct 25, 2026 | Sun | **Security**: Solution – Role Based Access Controls (13:28)<br>**Security**: Cluster Roles (04:33)<br>**Security**: Practice Test Cluster Roles (—) | 18m 1s | ☐ |
-| Oct 26, 2026 | Mon | **Security**: Solution – Cluster Roles (11:13)<br>**Security**: Service Accounts (14:32) | 25m 45s | ☐ |
-| Oct 27, 2026 | Tue | **Security**: Practice Test Service Accounts (—)<br>**Security**: Solution – Service Accounts (08:04) | 8m 4s | ☐ |
-| Oct 28, 2026 | Wed | **Security**: Image Security (04:43)<br>**Security**: Practice Test Image Security (—) | 4m 43s | ☐ |
-| Oct 29, 2026 | Thu | **Security**: Solution – Image Security (06:53)<br>**Security**: Pre-requisite – Security in Docker (05:37)<br>**Security**: Security Contexts (01:52) | 14m 22s | ☐ |
-| Oct 30, 2026 | Fri | **Security**: Practice Test Security Contexts (—)<br>**Security**: Solution – Security Contexts (06:12) | 6m 12s | ☐ |
-| Oct 31, 2026 | Sat | **Security**: Network Policies (08:25)<br>**Security**: Developing network policies (11:35) | 20m 0s | ☐ |
-| Nov 01, 2026 | Sun | **Security**: Practice Test Network Policies (—)<br>**Security**: Solution – Network Policies (optional) (12:17) | 12m 17s | ☐ |
-| Nov 02, 2026 | Mon | **Security**: Kubectx and Kubens – Command line Utilities (—)<br>**Security**: Download Presentation Deck 6 (—) | — | ☐ |
-| Nov 03, 2026 | Tue | **Security**: (2025 Updates) Custom Resource Definition (CRD) (11:00)<br>**Security**: (2025 Updates) Custom Controllers (03:57)<br>**Security**: ⚠️ 1 lesson may be cut off – check KodeKloud Security module (—) | 14m 57s | ☐ |
-| Nov 04, 2026 | Wed | **Storage**: Storage – Section Introduction (00:45)<br>**Storage**: Introduction to Docker Storage (00:54) | 1m 39s | ☐ |
-| Nov 05, 2026 | Thu | **Storage**: Storage in Docker (12:32)<br>**Storage**: Volume Driver Plugins in Docker (01:53) | 14m 25s | ☐ |
-| Nov 06, 2026 | Fri | **Storage**: Container Storage Interface (03:44)<br>**Storage**: Volumes (04:30) | 8m 14s | ☐ |
-| Nov 07, 2026 | Sat | **Storage**: Persistent Volumes (03:01)<br>**Storage**: Persistent Volume Claims (04:05) | 7m 6s | ☐ |
-| Nov 08, 2026 | Sun | **Storage**: Using PVC in Pods (—)<br>**Storage**: Practice Test Persistent Volume Claims (—)<br>**Storage**: Solution – Persistent Volumes and Persistent Volume Claims (optional) (18:12) | 18m 12s | ☐ |
-| Nov 09, 2026 | Mon | **Storage**: Storage Class (03:59)<br>**Storage**: Practice Test – Storage Class (—) | 3m 59s | ☐ |
-| Nov 10, 2026 | Tue | **Storage**: Solution – Storage Class (10:28)<br>**Storage**: Download Presentation Deck 7 (—) | 10m 28s | ☐ |
-| Nov 11, 2026 | Wed | **Networking**: Networking Introduction (02:04)<br>**Networking**: Prerequisite Switching, Routing, Gateways CNI in kubernetes (12:12) | 14m 16s | ☐ |
-| Nov 12, 2026 | Thu | **Networking**: Prerequisite DNS (14:24)<br>**Networking**: Prerequisite – CoreDNS (—) | 14m 24s | ☐ |
-| Nov 13, 2026 | Fri | **Networking**: Prerequisite Network Namespaces (15:09)<br>**Networking**: FAQ (—)<br>**Networking**: Prerequisite Docker Networking (07:15) | 22m 24s | ☐ |
-| Nov 14, 2026 | Sat | **Networking**: Prerequisite CNI (06:10)<br>**Networking**: Cluster Networking (02:11) | 8m 21s | ☐ |
-| Nov 15, 2026 | Sun | **Networking**: Important Note about CNI and CKA Exam (—)<br>**Networking**: Practice Test – Explore Environment (—) | — | ☐ |
-| Nov 16, 2026 | Mon | **Networking**: Solution – Explore Environment (optional) (07:14)<br>**Networking**: Pod Networking (09:03) | 16m 17s | ☐ |
-| Nov 17, 2026 | Tue | **Networking**: CNI in kubernetes (03:06)<br>**Networking**: Note CNI Weave (—) | 3m 6s | ☐ |
-| Nov 18, 2026 | Wed | **Networking**: CNI weave (05:59)<br>**Networking**: Practice Test CNI (—)<br>**Networking**: Solution – Explore CNI (optional) (02:12) | 8m 11s | ☐ |
-| Nov 19, 2026 | Thu | **Networking**: Practice Test – Deploy Network Solution (—)<br>**Networking**: Solution – Deploy Network Solution (optional) (03:43) | 3m 43s | ☐ |
-| Nov 20, 2026 | Fri | **Networking**: ipam weave (03:21)<br>**Networking**: Practice Test – Networking Weave (—) | 3m 21s | ☐ |
-| Nov 21, 2026 | Sat | **Networking**: Solution – Networking Weave (optional) (05:30)<br>**Networking**: Service Networking (08:51) | 14m 21s | ☐ |
-| Nov 22, 2026 | Sun | **Networking**: Practice Test Service Networking (—)<br>**Networking**: Solution – Service Networking (optional) (05:12) | 5m 12s | ☐ |
-| Nov 23, 2026 | Mon | **Networking**: DNS in kubernetes (05:39)<br>**Networking**: CoreDNS in Kubernetes (06:44)<br>**Networking**: Practice Test CoreDNS in Kubernetes (—) | 12m 23s | ☐ |
-| Nov 24, 2026 | Tue | **Networking**: Solution – Explore DNS (optional) (13:03)<br>**Networking**: Ingress (22:34) | 35m 37s | ☐ |
-| Nov 25, 2026 | Wed | **Networking**: Article: Ingress (—)<br>**Networking**: Ingress – Annotations and rewrite-target (—) | — | ☐ |
-| Nov 26, 2026 | Thu | **Networking**: Practice Test – CKA – Ingress Networking – 1 (—)<br>**Networking**: Solution – Ingress Networking – 1 (optional) (15:46) | 15m 46s | ☐ |
-| Nov 27, 2026 | Fri | **Networking**: Practice Test – CKA – Ingress Networking – 2 (—)<br>**Networking**: Solution – Ingress Networking – 2 (optional) (10:39) | 10m 39s | ☐ |
-| Nov 28, 2026 | Sat | **Networking**: Download Presentation Deck 8 (—)<br>**Design and Install**: Design a Kubernetes Cluster (05:50)<br>**Design and Install**: Choosing Kubernetes Infrastructure (05:52) | 11m 42s | ☐ |
-| Nov 29, 2026 | Sun | **Design and Install**: Configure High Availability (07:48)<br>**Design and Install**: ETCD in HA (12:42) | 20m 30s | ☐ |
-| Nov 30, 2026 | Mon | **Design and Install**: Important Update: Kubernetes the Hard Way (—)<br>**Design and Install**: Download Presentation Deck 9 (—) | — | ☐ |
-| Dec 01, 2026 | Tue | **Install kubeadm**: Introduction to Deployment with kubeadm (02:32)<br>**Install kubeadm**: Resources (—) | 2m 32s | ☐ |
-| Dec 02, 2026 | Wed | **Install kubeadm**: Deploy with Kubeadm – Provision VMs with Vagrant (03:06)<br>**Install kubeadm**: Demo – Deployment with Kubeadm (14:30)<br>**Install kubeadm**: Practice Test – Deploy a Kubernetes Cluster using Kubeadm (—) | 17m 36s | ☐ |
-| Dec 03, 2026 | Thu | **Install kubeadm**: Solution – Install a Kubernetes Cluster using kubeadm (09:50)<br>**Helm Basics**: What is Helm (06:33) | 16m 23s | ☐ |
-| Dec 04, 2026 | Fri | **Helm Basics**: Installation and configuration (01:25)<br>**Helm Basics**: Lab: Installing Helm (—) | 1m 25s | ☐ |
-| Dec 05, 2026 | Sat | **Helm Basics**: A quick note about Helm2 vs Helm3 (08:09)<br>**Helm Basics**: Helm Components (07:49) | 15m 58s | ☐ |
-| Dec 06, 2026 | Sun | **Helm Basics**: Helm charts (07:24)<br>**Helm Basics**: Working with Helm: basics (06:16) | 13m 40s | ☐ |
-| Dec 07, 2026 | Mon | **Helm Basics**: Customizing chart parameters (04:05)<br>**Helm Basics**: Lab: using Helm to deploy a chart (—)<br>**Helm Basics**: Lifecycle management with Helm (07:51) | 11m 56s | ☐ |
-| Dec 08, 2026 | Tue | **Helm Basics**: Lab: upgrading a helm chart (—)<br>**Kustomize Basics**: Kustomize Problem Statement & idealogy (08:03) | 8m 3s | ☐ |
-| Dec 09, 2026 | Wed | **Kustomize Basics**: Kustomize vs Helm (04:34)<br>**Kustomize Basics**: Installation/Setup (01:05) | 5m 39s | ☐ |
-| Dec 10, 2026 | Thu | **Kustomize Basics**: kustomization.yaml file (03:54)<br>**Kustomize Basics**: Kustomize Output (02:31) | 6m 25s | ☐ |
-| Dec 11, 2026 | Fri | **Kustomize Basics**: Kustomize ApiVersion & Kind (00:22)<br>**Kustomize Basics**: Managing Directories (06:18) | 6m 40s | ☐ |
-| Dec 12, 2026 | Sat | **Kustomize Basics**: Managing Directories Demo (09:21)<br>**Kustomize Basics**: Lab: Managing Directories (—)<br>**Kustomize Basics**: Common Transformers (03:27) | 12m 48s | ☐ |
-| Dec 13, 2026 | Sun | **Kustomize Basics**: Image Transformers (02:31)<br>**Kustomize Basics**: Transformers Demo (11:31) | 14m 2s | ☐ |
-| Dec 14, 2026 | Mon | **Kustomize Basics**: Lab: Transformers (—)<br>**Kustomize Basics**: Patches Intro (08:29) | 8m 29s | ☐ |
-| Dec 15, 2026 | Tue | **Kustomize Basics**: Different Types of Patches (01:13)<br>**Kustomize Basics**: Patches Dictionary (06:02) | 7m 15s | ☐ |
-| Dec 16, 2026 | Wed | **Kustomize Basics**: Patches list (06:21)<br>**Kustomize Basics**: Lab: Patches (—) | 6m 21s | ☐ |
-| Dec 17, 2026 | Thu | **Kustomize Basics**: Overlays (05:41)<br>**Kustomize Basics**: Lab: Overlay (—)<br>**Kustomize Basics**: Components (08:44) | 14m 25s | ☐ |
-| Dec 18, 2026 | Fri | **Kustomize Basics**: Lab: Components (—)<br>**Troubleshooting**: Troubleshooting – Section Introduction (00:27) | 0m 27s | ☐ |
-| Dec 19, 2026 | Sat | **Troubleshooting**: Application Failure (02:51)<br>**Troubleshooting**: Practice Test Application Failure (—) | 2m 51s | ☐ |
-| Dec 20, 2026 | Sun | **Troubleshooting**: Solution – Application Failure (22:27)<br>**Troubleshooting**: Control Plane Failure (01:26) | 23m 53s | ☐ |
-| Dec 21, 2026 | Mon | **Troubleshooting**: Practice Test Control Plane Failure (—)<br>**Troubleshooting**: Solution: Control Plane Failure (15:20) | 15m 20s | ☐ |
-| Dec 22, 2026 | Tue | **Troubleshooting**: Worker Node Failure (01:55)<br>**Troubleshooting**: Practice Test Worker Node Failure (—)<br>**Troubleshooting**: Solutions Worker Node Failure (10:22) | 12m 17s | ☐ |
-| Dec 23, 2026 | Wed | **Troubleshooting**: Download Presentation Deck 10 (—)<br>**Troubleshooting**: Network Troubleshooting (—) | — | ☐ |
-| Dec 24, 2026 | Thu | **Troubleshooting**: Practice Test – Troubleshoot Network (—)<br>**Other Topics**: Labs – JSON PATH (—) | — | ☐ |
-| Dec 25, 2026 | Fri | **Other Topics**: Pre-Requisites – JSON PATH (—)<br>**Other Topics**: Advanced Kubectl Commands (12:04) | 12m 4s | ☐ |
-| Dec 26, 2026 | Sat | **Other Topics**: Practice Test – Advanced Kubectl Commands (—)<br>**Lightning Labs**: Lightning Lab Introduction (—) | — | ☐ |
-| Dec 27, 2026 | Sun | **Lightning Labs**: Lightning Lab – 1 (—)<br>**Mock Exams**: Mock Exam – Introduction (—)<br>**Mock Exams**: Mock Exam – 1 (—) | — | ☐ |
-| Dec 28, 2026 | Mon | **Mock Exams**: Solution – CKA Mock Exam 1 (optional) (21:15)<br>**Mock Exams**: Mock Exam – 2 (—) | 21m 15s | ☐ |
-| Dec 29, 2026 | Tue | **Mock Exams**: Solution – CKA Mock Exam – 2 (Optional) (43:52)<br>**Mock Exams**: Mock Exam – 3 (—) | 43m 52s | ☐ |
-| Dec 30, 2026 | Wed | **Mock Exams**: Solution – CKA Mock Exam – 3 (Optional) (50:28)<br>**Mock Exams**: What's Next? (07:23) | 57m 51s | ☐ |
-| Dec 31, 2026 | Thu | **Mock Exams**: All the Best! (—)<br>**Mock Exams**: Kubernetes Update and Project Videos – Your Essential Guide (—) | — | ☐ |
-| Jan 01, 2027 | Fri | 🎯 **CKA EXAM DAY** | 2h 0m | ☐ |
+| Oct 18, 2026 | Sun | **Scheduling**: Download Presentation Deck 2 (—)<br>**Scheduling**: (2025 Updates) Admission Controllers (08:07) | 8m 7s | ☐ |
+| Oct 19, 2026 | Mon | **Scheduling**: (2025 Updates) Practice Test – Admission Controllers (—)<br>**Scheduling**: (2025 Updates) Solution: Admission Controllers (06:41) | 6m 41s | ☐ |
+| Oct 20, 2026 | Tue | **Scheduling**: (2025 Updates) Validating and Mutating Admission Controllers (10:26)<br>**Scheduling**: (2025 Updates) Practice Test – Validating and Mutating Admission Controllers (—) | 10m 26s | ☐ |
+| Oct 21, 2026 | Wed | **Scheduling**: (2025 Updates) Solution: Validating and Mutating Admission Controllers (07:39)<br>**Logging & Monitoring**: Logging and Monitoring Section Introduction (00:36) | 8m 15s | ☐ |
+| Oct 22, 2026 | Thu | **Logging & Monitoring**: Monitor Cluster Components (03:58)<br>**Logging & Monitoring**: Practice Test Monitor Cluster Components (—)<br>**Logging & Monitoring**: Solution: Monitor Cluster Components (03:26) | 7m 24s | ☐ |
+| Oct 23, 2026 | Fri | **Logging & Monitoring**: Managing Application Logs (02:16)<br>**Logging & Monitoring**: Practice Test Managing Application Logs (—) | 2m 16s | ☐ |
+| Oct 24, 2026 | Sat | **Logging & Monitoring**: Solution: Logging (Optional) (02:09)<br>**Application Lifecycle**: Application Lifecycle Management – Section Introduction (00:42) | 2m 51s | ☐ |
+| Oct 25, 2026 | Sun | **Application Lifecycle**: Rolling Updates and Rollbacks (06:43)<br>**Application Lifecycle**: Practice Test Rolling Updates and Rollbacks (—) | 6m 43s | ☐ |
+| Oct 26, 2026 | Mon | **Application Lifecycle**: Solution: Rolling update (09:05)<br>**Application Lifecycle**: Configure Applications (—)<br>**Application Lifecycle**: Commands and Arguments in Docker (07:20) | 16m 25s | ☐ |
+| Oct 27, 2026 | Tue | **Application Lifecycle**: Commands and Arguments in Kubernetes (02:39)<br>**Application Lifecycle**: Practice Test Commands and Arguments (—) | 2m 39s | ☐ |
+| Oct 28, 2026 | Wed | **Application Lifecycle**: Solution – Commands and Arguments (Optional) (10:45)<br>**Application Lifecycle**: Configure Environment Variables in Applications (01:15) | 12m 0s | ☐ |
+| Oct 29, 2026 | Thu | **Application Lifecycle**: Configure ConfigMaps in Applications (05:19)<br>**Application Lifecycle**: Practice Test Env Variables (—) | 5m 19s | ☐ |
+| Oct 30, 2026 | Fri | **Application Lifecycle**: Solution – Env Variables (Optional) (09:00)<br>**Application Lifecycle**: Secrets (08:20) | 17m 20s | ☐ |
+| Oct 31, 2026 | Sat | **Application Lifecycle**: Practice Test Secrets (—)<br>**Application Lifecycle**: Additional Resource (—)<br>**Application Lifecycle**: Solution – Secrets (Optional) (09:36) | 9m 36s | ☐ |
+| Nov 1, 2026 | Sun | **Application Lifecycle**: Demo: Encrypting Secret Data at Rest (18:47)<br>**Application Lifecycle**: A note on Secrets (—) | 18m 47s | ☐ |
+| Nov 2, 2026 | Mon | **Application Lifecycle**: Multi Container Pods (02:13)<br>**Application Lifecycle**: Practice Test – Multi Container Pods (—) | 2m 13s | ☐ |
+| Nov 3, 2026 | Tue | **Application Lifecycle**: Solution – Multi Container Pods (Optional) (15:09)<br>**Application Lifecycle**: Multi-container Pods Design Patterns (—) | 15m 9s | ☐ |
+| Nov 4, 2026 | Wed | **Application Lifecycle**: Init Containers (—)<br>**Application Lifecycle**: Practice Test – Init Containers (—) | — | ☐ |
+| Nov 5, 2026 | Thu | **Application Lifecycle**: Solution – Init Containers (Optional) (08:02)<br>**Application Lifecycle**: Self Healing Applications (—)<br>**Application Lifecycle**: Download Presentation Deck 4 (—) | 8m 2s | ☐ |
+| Nov 6, 2026 | Fri | **Cluster Maintenance**: Cluster Maintenance – Section Introduction (01:16)<br>**Cluster Maintenance**: OS Upgrades (03:49) | 5m 5s | ☐ |
+| Nov 7, 2026 | Sat | **Cluster Maintenance**: Practice Test OS Upgrades (—)<br>**Cluster Maintenance**: Solution – OS Upgrades (optional) (10:50) | 10m 50s | ☐ |
+| Nov 8, 2026 | Sun | **Cluster Maintenance**: Kubernetes Software Versions (02:54)<br>**Cluster Maintenance**: References (—) | 2m 54s | ☐ |
+| Nov 9, 2026 | Mon | **Cluster Maintenance**: Cluster Upgrade Introduction (11:11)<br>**Cluster Maintenance**: Demo – Cluster upgrade (10:49) | 22m 0s | ☐ |
+| Nov 10, 2026 | Tue | **Cluster Maintenance**: Practice Test Cluster Upgrade Process (—)<br>**Cluster Maintenance**: Solution: Cluster Upgrade Process (12:36)<br>**Cluster Maintenance**: Backup and Restore Methods (06:18) | 18m 54s | ☐ |
+| Nov 11, 2026 | Wed | **Cluster Maintenance**: Working with ETCDCTL (—)<br>**Cluster Maintenance**: Practice Test Backup and Restore Methods (—) | — | ☐ |
+| Nov 12, 2026 | Thu | **Cluster Maintenance**: Solution: Backup and Restore (18:01)<br>**Cluster Maintenance**: Practice Test Backup and Restore Methods 2 (—) | 18m 1s | ☐ |
+| Nov 13, 2026 | Fri | **Cluster Maintenance**: Solution: Backup and Restore 2 (20:21)<br>**Cluster Maintenance**: Certification Exam Tip! (—) | 20m 21s | ☐ |
+| Nov 14, 2026 | Sat | **Cluster Maintenance**: References (2) (—)<br>**Cluster Maintenance**: Download Presentation Deck 5 (—) | — | ☐ |
+| Nov 15, 2026 | Sun | **Security**: Security – Section Introduction (02:15)<br>**Security**: Kubernetes Security Primitives (03:18)<br>**Security**: Authentication (05:34) | 11m 7s | ☐ |
+| Nov 16, 2026 | Mon | **Security**: Article on Setting up Basic Authentication (—)<br>**Security**: TLS Introduction (01:29) | 1m 29s | ☐ |
+| Nov 17, 2026 | Tue | **Security**: TLS Basics (20:03)<br>**Security**: TLS in Kubernetes (07:48) | 27m 51s | ☐ |
+| Nov 18, 2026 | Wed | **Security**: TLS in Kubernetes – Certificate Creation (10:55)<br>**Security**: View Certificate Details (04:31) | 15m 26s | ☐ |
+| Nov 19, 2026 | Thu | **Security**: Certificate Health Check Spreadsheet (—)<br>**Security**: Practice Test View Certificate Details (—) | — | ☐ |
+| Nov 20, 2026 | Fri | **Security**: Solution – View Certification Details (21:28)<br>**Security**: Certificates API (06:07)<br>**Security**: Practice Test Certificates API (—) | 27m 35s | ☐ |
+| Nov 21, 2026 | Sat | **Security**: Solution – Certificates API (07:37)<br>**Security**: KubeConfig (08:32) | 16m 9s | ☐ |
+| Nov 22, 2026 | Sun | **Security**: Practice Test KubeConfig (—)<br>**Security**: Solution – KubeConfig (08:08) | 8m 8s | ☐ |
+| Nov 23, 2026 | Mon | **Security**: API Groups (05:52)<br>**Security**: Authorization (07:30) | 13m 22s | ☐ |
+| Nov 24, 2026 | Tue | **Security**: Role Based Access Controls (04:28)<br>**Security**: Practice Test Role Based Access Controls (—) | 4m 28s | ☐ |
+| Nov 25, 2026 | Wed | **Security**: Solution – Role Based Access Controls (13:28)<br>**Security**: Cluster Roles (04:33)<br>**Security**: Practice Test Cluster Roles (—) | 18m 1s | ☐ |
+| Nov 26, 2026 | Thu | **Security**: Solution – Cluster Roles (11:13)<br>**Security**: Service Accounts (14:32) | 25m 45s | ☐ |
+| Nov 27, 2026 | Fri | **Security**: Practice Test Service Accounts (—)<br>**Security**: Solution – Service Accounts (08:04) | 8m 4s | ☐ |
+| Nov 28, 2026 | Sat | **Security**: Image Security (04:43)<br>**Security**: Practice Test Image Security (—) | 4m 43s | ☐ |
+| Nov 29, 2026 | Sun | **Security**: Solution – Image Security (06:53)<br>**Security**: Pre-requisite – Security in Docker (05:37)<br>**Security**: Security Contexts (01:52) | 14m 22s | ☐ |
+| Nov 30, 2026 | Mon | **Security**: Practice Test Security Contexts (—)<br>**Security**: Solution – Security Contexts (06:12) | 6m 12s | ☐ |
+| Dec 1, 2026 | Tue | **Security**: Network Policies (08:25)<br>**Security**: Developing network policies (11:35) | 20m 0s | ☐ |
+| Dec 2, 2026 | Wed | **Security**: Practice Test Network Policies (—)<br>**Security**: Solution – Network Policies (optional) (12:17) | 12m 17s | ☐ |
+| Dec 3, 2026 | Thu | **Security**: Kubectx and Kubens – Command line Utilities (—)<br>**Security**: Download Presentation Deck 6 (—) | — | ☐ |
+| Dec 4, 2026 | Fri | **Security**: (2025 Updates) Custom Resource Definition (CRD) (11:00)<br>**Security**: (2025 Updates) Custom Controllers (03:57)<br>**Security**: ⚠️ 1 lesson may be cut off – check KodeKloud Security module (—) | 14m 57s | ☐ |
+| Dec 5, 2026 | Sat | **Storage**: Storage – Section Introduction (00:45)<br>**Storage**: Introduction to Docker Storage (00:54) | 1m 39s | ☐ |
+| Dec 6, 2026 | Sun | **Storage**: Storage in Docker (12:32)<br>**Storage**: Volume Driver Plugins in Docker (01:53) | 14m 25s | ☐ |
+| Dec 7, 2026 | Mon | **Storage**: Container Storage Interface (03:44)<br>**Storage**: Volumes (04:30) | 8m 14s | ☐ |
+| Dec 8, 2026 | Tue | **Storage**: Persistent Volumes (03:01)<br>**Storage**: Persistent Volume Claims (04:05) | 7m 6s | ☐ |
+| Dec 9, 2026 | Wed | **Storage**: Using PVC in Pods (—)<br>**Storage**: Practice Test Persistent Volume Claims (—)<br>**Storage**: Solution – Persistent Volumes and Persistent Volume Claims (optional) (18:12) | 18m 12s | ☐ |
+| Dec 10, 2026 | Thu | **Storage**: Storage Class (03:59)<br>**Storage**: Practice Test – Storage Class (—) | 3m 59s | ☐ |
+| Dec 11, 2026 | Fri | **Storage**: Solution – Storage Class (10:28)<br>**Storage**: Download Presentation Deck 7 (—) | 10m 28s | ☐ |
+| Dec 12, 2026 | Sat | **Networking**: Networking Introduction (02:04)<br>**Networking**: Prerequisite Switching, Routing, Gateways CNI in kubernetes (12:12) | 14m 16s | ☐ |
+| Dec 13, 2026 | Sun | **Networking**: Prerequisite DNS (14:24)<br>**Networking**: Prerequisite – CoreDNS (—) | 14m 24s | ☐ |
+| Dec 14, 2026 | Mon | **Networking**: Prerequisite Network Namespaces (15:09)<br>**Networking**: FAQ (—)<br>**Networking**: Prerequisite Docker Networking (07:15) | 22m 24s | ☐ |
+| Dec 15, 2026 | Tue | **Networking**: Prerequisite CNI (06:10)<br>**Networking**: Cluster Networking (02:11) | 8m 21s | ☐ |
+| Dec 16, 2026 | Wed | **Networking**: Important Note about CNI and CKA Exam (—)<br>**Networking**: Practice Test – Explore Environment (—) | — | ☐ |
+| Dec 17, 2026 | Thu | **Networking**: Solution – Explore Environment (optional) (07:14)<br>**Networking**: Pod Networking (09:03) | 16m 17s | ☐ |
+| Dec 18, 2026 | Fri | **Networking**: CNI in kubernetes (03:06)<br>**Networking**: Note CNI Weave (—) | 3m 6s | ☐ |
+| Dec 19, 2026 | Sat | **Networking**: CNI weave (05:59)<br>**Networking**: Practice Test CNI (—)<br>**Networking**: Solution – Explore CNI (optional) (02:12) | 8m 11s | ☐ |
+| Dec 20, 2026 | Sun | **Networking**: Practice Test – Deploy Network Solution (—)<br>**Networking**: Solution – Deploy Network Solution (optional) (03:43) | 3m 43s | ☐ |
+| Dec 21, 2026 | Mon | **Networking**: ipam weave (03:21)<br>**Networking**: Practice Test – Networking Weave (—) | 3m 21s | ☐ |
+| Dec 22, 2026 | Tue | **Networking**: Solution – Networking Weave (optional) (05:30)<br>**Networking**: Service Networking (08:51) | 14m 21s | ☐ |
+| Dec 23, 2026 | Wed | **Networking**: Practice Test Service Networking (—)<br>**Networking**: Solution – Service Networking (optional) (05:12) | 5m 12s | ☐ |
+| Dec 24, 2026 | Thu | **Networking**: DNS in kubernetes (05:39)<br>**Networking**: CoreDNS in Kubernetes (06:44)<br>**Networking**: Practice Test CoreDNS in Kubernetes (—) | 12m 23s | ☐ |
+| Dec 25, 2026 | Fri | **Networking**: Solution – Explore DNS (optional) (13:03)<br>**Networking**: Ingress (22:34) | 35m 37s | ☐ |
+| Dec 26, 2026 | Sat | **Networking**: Article: Ingress (—)<br>**Networking**: Ingress – Annotations and rewrite-target (—) | — | ☐ |
+| Dec 27, 2026 | Sun | **Networking**: Practice Test – CKA – Ingress Networking – 1 (—)<br>**Networking**: Solution – Ingress Networking – 1 (optional) (15:46) | 15m 46s | ☐ |
+| Dec 28, 2026 | Mon | **Networking**: Practice Test – CKA – Ingress Networking – 2 (—)<br>**Networking**: Solution – Ingress Networking – 2 (optional) (10:39) | 10m 39s | ☐ |
+| Dec 29, 2026 | Tue | **Networking**: Download Presentation Deck 8 (—)<br>**Design and Install**: Design a Kubernetes Cluster (05:50)<br>**Design and Install**: Choosing Kubernetes Infrastructure (05:52) | 11m 42s | ☐ |
+| Dec 30, 2026 | Wed | **Design and Install**: Configure High Availability (07:48)<br>**Design and Install**: ETCD in HA (12:42) | 20m 30s | ☐ |
+| Dec 31, 2026 | Thu | **Design and Install**: Important Update: Kubernetes the Hard Way (—)<br>**Design and Install**: Download Presentation Deck 9 (—) | — | ☐ |
+| Jan 1, 2027 | Fri | **Install kubeadm**: Introduction to Deployment with kubeadm (02:32)<br>**Install kubeadm**: Resources (—) | 2m 32s | ☐ |
+| Jan 2, 2027 | Sat | **Install kubeadm**: Deploy with Kubeadm – Provision VMs with Vagrant (03:06)<br>**Install kubeadm**: Demo – Deployment with Kubeadm (14:30)<br>**Install kubeadm**: Practice Test – Deploy a Kubernetes Cluster using Kubeadm (—) | 17m 36s | ☐ |
+| Jan 3, 2027 | Sun | **Install kubeadm**: Solution – Install a Kubernetes Cluster using kubeadm (09:50)<br>**Helm Basics**: What is Helm (06:33) | 16m 23s | ☐ |
+| Jan 4, 2027 | Mon | **Helm Basics**: Installation and configuration (01:25)<br>**Helm Basics**: Lab: Installing Helm (—) | 1m 25s | ☐ |
+| Jan 5, 2027 | Tue | **Helm Basics**: A quick note about Helm2 vs Helm3 (08:09)<br>**Helm Basics**: Helm Components (07:49) | 15m 58s | ☐ |
+| Jan 6, 2027 | Wed | **Helm Basics**: Helm charts (07:24)<br>**Helm Basics**: Working with Helm: basics (06:16) | 13m 40s | ☐ |
+| Jan 7, 2027 | Thu | **Helm Basics**: Customizing chart parameters (04:05)<br>**Helm Basics**: Lab: using Helm to deploy a chart (—)<br>**Helm Basics**: Lifecycle management with Helm (07:51) | 11m 56s | ☐ |
+| Jan 8, 2027 | Fri | **Helm Basics**: Lab: upgrading a helm chart (—)<br>**Kustomize Basics**: Kustomize Problem Statement & idealogy (08:03) | 8m 3s | ☐ |
+| Jan 9, 2027 | Sat | **Kustomize Basics**: Kustomize vs Helm (04:34)<br>**Kustomize Basics**: Installation/Setup (01:05) | 5m 39s | ☐ |
+| Jan 10, 2027 | Sun | **Kustomize Basics**: kustomization.yaml file (03:54)<br>**Kustomize Basics**: Kustomize Output (02:31) | 6m 25s | ☐ |
+| Jan 11, 2027 | Mon | **Kustomize Basics**: Kustomize ApiVersion & Kind (00:22)<br>**Kustomize Basics**: Managing Directories (06:18) | 6m 40s | ☐ |
+| Jan 12, 2027 | Tue | **Kustomize Basics**: Managing Directories Demo (09:21)<br>**Kustomize Basics**: Lab: Managing Directories (—)<br>**Kustomize Basics**: Common Transformers (03:27) | 12m 48s | ☐ |
+| Jan 13, 2027 | Wed | **Kustomize Basics**: Image Transformers (02:31)<br>**Kustomize Basics**: Transformers Demo (11:31) | 14m 2s | ☐ |
+| Jan 14, 2027 | Thu | **Kustomize Basics**: Lab: Transformers (—)<br>**Kustomize Basics**: Patches Intro (08:29) | 8m 29s | ☐ |
+| Jan 15, 2027 | Fri | **Kustomize Basics**: Different Types of Patches (01:13)<br>**Kustomize Basics**: Patches Dictionary (06:02) | 7m 15s | ☐ |
+| Jan 16, 2027 | Sat | **Kustomize Basics**: Patches list (06:21)<br>**Kustomize Basics**: Lab: Patches (—) | 6m 21s | ☐ |
+| Jan 17, 2027 | Sun | **Kustomize Basics**: Overlays (05:41)<br>**Kustomize Basics**: Lab: Overlay (—)<br>**Kustomize Basics**: Components (08:44) | 14m 25s | ☐ |
+| Jan 18, 2027 | Mon | **Kustomize Basics**: Lab: Components (—)<br>**Troubleshooting**: Troubleshooting – Section Introduction (00:27) | 0m 27s | ☐ |
+| Jan 19, 2027 | Tue | **Troubleshooting**: Application Failure (02:51)<br>**Troubleshooting**: Practice Test Application Failure (—) | 2m 51s | ☐ |
+| Jan 20, 2027 | Wed | **Troubleshooting**: Solution – Application Failure (22:27)<br>**Troubleshooting**: Control Plane Failure (01:26) | 23m 53s | ☐ |
+| Jan 21, 2027 | Thu | **Troubleshooting**: Practice Test Control Plane Failure (—)<br>**Troubleshooting**: Solution: Control Plane Failure (15:20) | 15m 20s | ☐ |
+| Jan 22, 2027 | Fri | **Troubleshooting**: Worker Node Failure (01:55)<br>**Troubleshooting**: Practice Test Worker Node Failure (—)<br>**Troubleshooting**: Solutions Worker Node Failure (10:22) | 12m 17s | ☐ |
+| Jan 23, 2027 | Sat | **Troubleshooting**: Download Presentation Deck 10 (—)<br>**Troubleshooting**: Network Troubleshooting (—) | — | ☐ |
+| Jan 24, 2027 | Sun | **Troubleshooting**: Practice Test – Troubleshoot Network (—)<br>**Other Topics**: Labs – JSON PATH (—) | — | ☐ |
+| Jan 25, 2027 | Mon | **Other Topics**: Pre-Requisites – JSON PATH (—)<br>**Other Topics**: Advanced Kubectl Commands (12:04) | 12m 4s | ☐ |
+| Jan 26, 2027 | Tue | **Other Topics**: Practice Test – Advanced Kubectl Commands (—)<br>**Lightning Labs**: Lightning Lab Introduction (—) | — | ☐ |
+| Jan 27, 2027 | Wed | **Lightning Labs**: Lightning Lab – 1 (—)<br>**Mock Exams**: Mock Exam – Introduction (—)<br>**Mock Exams**: Mock Exam – 1 (—) | — | ☐ |
+| Jan 28, 2027 | Thu | **Mock Exams**: Solution – CKA Mock Exam 1 (optional) (21:15)<br>**Mock Exams**: Mock Exam – 2 (—) | 21m 15s | ☐ |
+| Jan 29, 2027 | Fri | **Mock Exams**: Solution – CKA Mock Exam – 2 (Optional) (43:52)<br>**Mock Exams**: Mock Exam – 3 (—) | 43m 52s | ☐ |
+| Jan 30, 2027 | Sat | **Mock Exams**: Solution – CKA Mock Exam – 3 (Optional) (50:28)<br>**Mock Exams**: What's Next? (07:23) | 57m 51s | ☐ |
+| Jan 31, 2027 | Sun | **Mock Exams**: All the Best! (—)<br>**Mock Exams**: Kubernetes Update and Project Videos – Your Essential Guide (—) | — | ☐ |
+| Feb 1, 2027 | Mon | 🎯 **CKA EXAM DAY** | 2h 0m | ☐ |
 
 ### ☁️ Day-by-Day AZ-104 Study Tracker
 > Daily 27-day schedule hitting exactly the topics needed for January 15.
 
 | Date | Day | AZ-104 Plan | Status |
 |---|---|---|---|
-| Dec 01, 2026 | Tue | 📘 Azure AD Basics | ☐ |
-| Dec 02, 2026 | Wed | 📘 RBAC | ☐ |
-| Dec 03, 2026 | Thu | 💤 Rest / Catch-up | ☐ |
-| Dec 04, 2026 | Fri | 📘 MG & Governance | ☐ |
-| Dec 05, 2026 | Sat | 📘 Azure Policy | ☐ |
-| Dec 06, 2026 | Sun | 💤 Rest / Catch-up | ☐ |
-| Dec 07, 2026 | Mon | 📘 IAM + Governance | ☐ |
-| Dec 08, 2026 | Tue | 📘 Cost Management | ☐ |
-| Dec 09, 2026 | Wed | 💤 Rest / Catch-up | ☐ |
-| Dec 10, 2026 | Thu | 📘 Storage Accounts | ☐ |
-| Dec 11, 2026 | Fri | 📘 Blob Storage | ☐ |
-| Dec 12, 2026 | Sat | 💤 Rest / Catch-up | ☐ |
-| Dec 13, 2026 | Sun | 📘 File Shares & SAS | ☐ |
-| Dec 14, 2026 | Mon | 📘 Lifecycle Tools | ☐ |
-| Dec 15, 2026 | Tue | 💤 Rest / Catch-up | ☐ |
-| Dec 16, 2026 | Wed | 📘 VM Basics | ☐ |
-| Dec 17, 2026 | Thu | 📘 Storage Case Study | ☐ |
-| Dec 18, 2026 | Fri | 💤 Rest / Catch-up | ☐ |
-| Dec 19, 2026 | Sat | 📘 HA & Availability | ☐ |
-| Dec 20, 2026 | Sun | 📘 Custom Image + SIG | ☐ |
-| Dec 21, 2026 | Mon | 💤 Rest / Catch-up | ☐ |
-| Dec 22, 2026 | Tue | 📘 VMSS | ☐ |
-| Dec 23, 2026 | Wed | 📘 VNet / Subnets | ☐ |
-| Dec 24, 2026 | Thu | 📘 Break | ☐ |
-| Dec 25, 2026 | Fri | 📘 Break | ☐ |
-| Dec 26, 2026 | Sat | 💤 Rest / Catch-up | ☐ |
-| Dec 27, 2026 | Sun | 📘 NSG / ASG | ☐ |
-| Dec 28, 2026 | Mon | 📘 Load Balancer | ☐ |
-| Dec 29, 2026 | Tue | 💤 Rest / Catch-up | ☐ |
-| Dec 30, 2026 | Wed | 📘 Networking Case Study | ☐ |
-| Dec 31, 2026 | Thu | 📘 Break | ☐ |
-| Jan 01, 2027 | Fri | 📘 Break | ☐ |
-| Jan 02, 2027 | Sat | 📘 App Gateway | ☐ |
-| Jan 03, 2027 | Sun | 📘 Private Endpoint | ☐ |
-| Jan 04, 2027 | Mon | 💤 Rest / Catch-up | ☐ |
-| Jan 05, 2027 | Tue | 📘 VPN Gateway | ☐ |
-| Jan 06, 2027 | Wed | 📘 ExpressRoute | ☐ |
-| Jan 07, 2027 | Thu | 💤 Rest / Catch-up | ☐ |
-| Jan 08, 2027 | Fri | 📘 Monitor & Logs | ☐ |
-| Jan 09, 2027 | Sat | 📘 Alerts | ☐ |
-| Jan 10, 2027 | Sun | 💤 Rest / Catch-up | ☐ |
-| Jan 11, 2027 | Mon | 📘 HA/DR Case Study | ☐ |
-| Jan 12, 2027 | Tue | 📘 Backup & Recovery | ☐ |
-| Jan 13, 2027 | Wed | 💤 Rest / Catch-up | ☐ |
-| Jan 14, 2027 | Thu | 📝 Mock Exam 1 (65 Qs) | ☐ |
-| Jan 15, 2027 | Fri | 🎯 **AZ-104 EXAM DAY** | ☐ |
+| Jan 1, 2027 | Fri | 📘 Azure AD Basics | ☐ |
+| Jan 2, 2027 | Sat | 📘 RBAC | ☐ |
+| Jan 3, 2027 | Sun | 💤 Rest / Catch-up | ☐ |
+| Jan 4, 2027 | Mon | 📘 MG & Governance | ☐ |
+| Jan 5, 2027 | Tue | 📘 Azure Policy | ☐ |
+| Jan 6, 2027 | Wed | 💤 Rest / Catch-up | ☐ |
+| Jan 7, 2027 | Thu | 📘 IAM + Governance | ☐ |
+| Jan 8, 2027 | Fri | 📘 Cost Management | ☐ |
+| Jan 9, 2027 | Sat | 💤 Rest / Catch-up | ☐ |
+| Jan 10, 2027 | Sun | 📘 Storage Accounts | ☐ |
+| Jan 11, 2027 | Mon | 📘 Blob Storage | ☐ |
+| Jan 12, 2027 | Tue | 💤 Rest / Catch-up | ☐ |
+| Jan 13, 2027 | Wed | 📘 File Shares & SAS | ☐ |
+| Jan 14, 2027 | Thu | 📘 Lifecycle Tools | ☐ |
+| Jan 15, 2027 | Fri | 💤 Rest / Catch-up | ☐ |
+| Jan 16, 2027 | Sat | 📘 VM Basics | ☐ |
+| Jan 17, 2027 | Sun | 📘 Storage Case Study | ☐ |
+| Jan 18, 2027 | Mon | 💤 Rest / Catch-up | ☐ |
+| Jan 19, 2027 | Tue | 📘 HA & Availability | ☐ |
+| Jan 20, 2027 | Wed | 📘 Custom Image + SIG | ☐ |
+| Jan 21, 2027 | Thu | 💤 Rest / Catch-up | ☐ |
+| Jan 22, 2027 | Fri | 📘 VMSS | ☐ |
+| Jan 23, 2027 | Sat | 📘 VNet / Subnets | ☐ |
+| Jan 24, 2027 | Sun | 📘 Break | ☐ |
+| Jan 25, 2027 | Mon | 📘 Break | ☐ |
+| Jan 26, 2027 | Tue | 💤 Rest / Catch-up | ☐ |
+| Jan 27, 2027 | Wed | 📘 NSG / ASG | ☐ |
+| Jan 28, 2027 | Thu | 📘 Load Balancer | ☐ |
+| Jan 29, 2027 | Fri | 💤 Rest / Catch-up | ☐ |
+| Jan 30, 2027 | Sat | 📘 Networking Case Study | ☐ |
+| Jan 31, 2027 | Sun | 📘 Break | ☐ |
+| Feb 1, 2027 | Mon | 📘 Break | ☐ |
+| Feb 2, 2027 | Tue | 📘 App Gateway | ☐ |
+| Feb 3, 2027 | Wed | 📘 Private Endpoint | ☐ |
+| Feb 4, 2027 | Thu | 💤 Rest / Catch-up | ☐ |
+| Feb 5, 2027 | Fri | 📘 VPN Gateway | ☐ |
+| Feb 6, 2027 | Sat | 📘 ExpressRoute | ☐ |
+| Feb 7, 2027 | Sun | 💤 Rest / Catch-up | ☐ |
+| Feb 8, 2027 | Mon | 📘 Monitor & Logs | ☐ |
+| Feb 9, 2027 | Tue | 📘 Alerts | ☐ |
+| Feb 10, 2027 | Wed | 💤 Rest / Catch-up | ☐ |
+| Feb 11, 2027 | Thu | 📘 HA/DR Case Study | ☐ |
+| Feb 12, 2027 | Fri | 📘 Backup & Recovery | ☐ |
+| Feb 13, 2027 | Sat | 💤 Rest / Catch-up | ☐ |
+| Feb 14, 2027 | Sun | 📝 Mock Exam 1 (65 Qs) | ☐ |
+| Feb 15, 2027 | Mon | 🎯 **AZ-104 EXAM DAY** | ☐ |
 
 ### 🎓 Exam Booking & Simulators
 | Certification | Status | Target Date | Preparation Milestone |
 |---|---|---|---|
 | **CKA: KodeKloud Course Finalized** | ☐ | Dec 31 | KodeKloud Mock Exams > 85% |
-| CKA: Purchase Exam Voucher | ☐ | Dec 1 | Watch for Cyber Monday / KubeCon deals |
-| CKA: Simulator Killer.sh #1 | ☐ | Dec 26 | Clear with > 85% |
-| CKA: Simulator Killer.sh #2 | ☐ | Dec 30 | Clear with > 90% |
-| **🎯 CKA: Final Exam Date** | ☐ | **Jan 1, 2027** | Pass (Cost: ~$395) |
-| AZ-104: Complete Days 1–27 Study Notes | ☐ | Jan 12 | Dec 1 – Jan 12 daily plan |
-| AZ-104: TutorialDojo Mock Exam | ☐ | Jan 14 | Score > 85% |
-| **🎯 AZ-104: Final Exam Date** | ☐ | **Jan 15, 2027** | Pass (Cost: ~$165) |
+| CKA: Purchase Exam Voucher | ☐ | Jan 1 | Watch for Cyber Monday / KubeCon deals |
+| CKA: Simulator Killer.sh #1 | ☐ | Jan 26 | Clear with > 85% |
+| CKA: Simulator Killer.sh #2 | ☐ | Jan 30 | Clear with > 90% |
+| **🎯 CKA: Final Exam Date** | ☐ | **Feb 1, 2027** | Pass (Cost: ~$395) |
+| AZ-104: Complete Days 1–27 Study Notes | ☐ | Feb 12 | Dec 1 – Feb 12 daily plan |
+| AZ-104: TutorialDojo Mock Exam | ☐ | Feb 14 | Score > 85% |
+| **🎯 AZ-104: Final Exam Date** | ☐ | **Feb 15, 2027** | Pass (Cost: ~$165) |
 
 ---
 ## 💼 Interview Prep & Career Marketing Checklist

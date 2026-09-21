@@ -11,10 +11,10 @@
 |-------|--------|-------|--------|
 | **Phase 1** | Aug – Sep | Foundations + Core DevOps (158 videos) | 🟨 In Progress |
 | **Phase 2 (CKA)** | Aug 18 – Dec 31 | KodeKloud CKA Course (300 lessons) | 🟨 In Progress |
-| **Phase 3 (AZ-104)** | Dec 1 – Jan 14 | AZ-104 Study Notes (27 days) | ⬜ Not Started |
-| **🎯 CKA Exam** | **January 1, 2027** | Certified Kubernetes Administrator | ⬜ |
-| **🎯 AZ-104 Exam** | **January 15, 2027** | Azure Administrator Associate | ⬜ |
-| **🎯 Job Applications** | **January 1, 2027** | Resume live, applying to roles | ⬜ |
+| **Phase 3 (AZ-104)** | Jan 1 – Feb 14 | AZ-104 Study Notes (27 days) | ⬜ Not Started |
+| **🎯 CKA Exam** | **February 1, 2027** | Certified Kubernetes Administrator | ⬜ |
+| **🎯 AZ-104 Exam** | **February 15, 2027** | Azure Administrator Associate | ⬜ |
+| **🎯 Job Applications** | **February 1, 2027** | Resume live, applying to roles | ⬜ |
 
 > **Legend:** ⬜ Not Started | 🟨 In Progress | ✅ Complete
 
