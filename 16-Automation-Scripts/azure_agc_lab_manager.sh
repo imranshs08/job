@@ -67,6 +67,13 @@ case "$COMMAND" in
         echo -e "${YELLOW}Starting Azure AGC Lab Build. Detailed background logs: ${LOG_FILE}${RESET}"
         touch "$LOG_FILE"
 
+        if az group show --name "$RG_NAME" > /dev/null 2>&1; then
+            echo -e "${YELLOW}⚠️  Pre-existing lab environment detected! Nuking it to ensure a clean slate...${RESET}"
+            log_step "Destroying old Resource Group (Takes ~2-3 mins)"
+            az group delete --name "$RG_NAME" --yes >> "$LOG_FILE" 2>&1 || log_fail
+            log_success
+        fi
+
         log_step "Registering modern Azure Network Providers"
         {
             az provider register --namespace Microsoft.ContainerService
