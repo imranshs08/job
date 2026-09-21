@@ -188,6 +188,3 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
-
-# CCDV-F Study PDFs (large local-only files)
-10-AI-Learning-Roadmap/*.pdf
