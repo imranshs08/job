@@ -702,6 +702,10 @@
                 style="font-size: 1.15rem; letter-spacing: 2px; color: #38bdf8; font-weight: 700; text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);">
                 00:00:00
             </div>
+            <div class="countdown-card" style="--card-color: #fbbf24;">
+                <div class="countdown-title">💰 Azure $200 (Oct 21)</div>
+                <div class="countdown-timer" id="azure-count">Loading...</div>
+            </div>
         </div>
 
         <!-- Main Centered Header -->
@@ -744,6 +748,10 @@
             <div class="countdown-card" style="--card-color: var(--az-blue);">
                 <div class="countdown-title">☁️ AZ-104 Exam (Nov 15)</div>
                 <div class="countdown-timer" id="az-count">Loading...</div>
+            </div>
+            <div class="countdown-card" style="--card-color: #fbbf24;">
+                <div class="countdown-title">💰 Azure $200 (Oct 21)</div>
+                <div class="countdown-timer" id="azure-count">Loading...</div>
             </div>
         </div>
 
@@ -1136,6 +1144,10 @@
                 <h2>💼 Career Marketing Milestones</h2>
                 <ul class="task-list" id="career-tasks"></ul>
             </div>
+            <div class="countdown-card" style="--card-color: #fbbf24;">
+                <div class="countdown-title">💰 Azure $200 (Oct 21)</div>
+                <div class="countdown-timer" id="azure-count">Loading...</div>
+            </div>
         </div>
     </div>
 
@@ -1144,6 +1156,7 @@
         const claudeDate = new Date('2027-01-06T00:00:00').getTime();
         const ckaDate = new Date('2027-02-01T00:00:00').getTime();
         const azDate = new Date('2026-11-15T00:00:00').getTime();
+        const azureCreditDate = new Date('2026-10-21T00:00:00').getTime();
 
         setInterval(() => {
             const now = new Date();
@@ -1161,6 +1174,12 @@
             const azDiff = azDate - nowTime;
             if (azDiff <= 0) { document.getElementById('az-count').innerText = "Exam Day!"; }
             else { document.getElementById('az-count').innerText = `${Math.floor(azDiff / (1000 * 60 * 60 * 24))}d ${Math.floor((azDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h`; }
+
+
+            // Azure Credit Countdown
+            const azureDiff = azureCreditDate - nowTime;
+            if (azureDiff <= 0) { document.getElementById('azure-count').innerText = "Expired!"; }
+            else { document.getElementById('azure-count').innerText = `${Math.floor(azureDiff / (1000 * 60 * 60 * 24))}d ${Math.floor((azureDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h`; }
 
             // Claude Certified Developer Countdown
             const claudeDiff = claudeDate - nowTime;
