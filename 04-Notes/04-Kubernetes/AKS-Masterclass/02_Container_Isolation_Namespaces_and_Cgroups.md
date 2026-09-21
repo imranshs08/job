@@ -19,16 +19,16 @@ A container is not a discrete physical object; it is simply a standard Linux pro
 
 ```mermaid
 flowchart TD
-    subgraph Host_OS [AKS Worker Node / Underlying Linux Kernel]
+    subgraph Host_OS ["AKS Worker Node / Underlying Linux Kernel"]
         direction TB
         Kernel[Linux Kernel]
         
-        subgraph Cgroups [cgroups - Resource Limits]
+        subgraph Cgroups ["cgroups - Resource Limits"]
             CPU_Limit(CPU Limit)
             Mem_Limit(Memory Limit)
         end
         
-        subgraph Namespaces [Namespaces - Visibility Limits]
+        subgraph Namespaces ["Namespaces - Visibility Limits"]
             PID[PID: Process ID Isolation]
             NET[NET: Network Stack Isolation]
             MNT[MNT: Filesystem Mount Isolation]

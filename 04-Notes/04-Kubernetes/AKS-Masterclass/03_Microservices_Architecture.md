@@ -15,7 +15,7 @@ A **Microservices Architecture** is exactly like an *Open-Air Strip Mall*. The g
 
 ```mermaid
 flowchart TD
-    subgraph Monolith_Arch [Monolithic Architecture]
+    subgraph Monolith_Arch ["Monolithic Architecture"]
         direction TB
         M_User[User Traffic] --> M_LB[Load Balancer]
         M_LB --> M_GodBlock[God Application Node]
@@ -29,7 +29,7 @@ flowchart TD
         M_GodBlock --> M_DB[(Single Massive Database)]
     end
 
-    subgraph Microservice_Arch [Microservices Architecture (AKS)]
+    subgraph Microservice_Arch ["Microservices Architecture (AKS)"]
         direction TB
         U_User[User Traffic] --> U_AGC[Azure Gateway for Containers / Ingress]
         

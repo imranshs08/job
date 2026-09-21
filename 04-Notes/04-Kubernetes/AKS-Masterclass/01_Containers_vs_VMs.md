@@ -15,7 +15,7 @@ A **Container** is like renting an apartment in a high-rise building. You share 
 
 ```mermaid
 flowchart TD
-    subgraph VM_Architecture [Virtual Machine Architecture]
+    subgraph VM_Architecture ["Virtual Machine Architecture"]
         direction TB
         Hardware1[Physical Server / Infrastructure] --> Hypervisor
         Hypervisor --> GOS1[Guest OS 1]
@@ -24,7 +24,7 @@ flowchart TD
         GOS2 --> B2[Bins / Libs] --> App2[App B]
     end
 
-    subgraph Container_Architecture [Container Architecture]
+    subgraph Container_Architecture ["Container Architecture"]
         direction TB
         Hardware2[Physical Server / Infrastructure] --> HostOS[Host Operating System]
         HostOS --> Engine[Container Engine e.g. containerd]
