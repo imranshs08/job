@@ -342,6 +342,29 @@
     </div>
 
     
+
+    <!-- PROGRESS BANNER -->
+    <div class="cram-grid" style="background: rgba(15, 23, 42, 0.6); padding: 1.5rem; margin-top: 1.5rem; margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h2 style="font-size: 1.25rem; color: #f1f5f9; margin-bottom: 0.4rem;">🎯 20-Day Course Mission</h2>
+                <p id="motivation-text" style="color: #94a3b8; font-size: 0.9rem; font-style: italic;">"Loading motivation..."</p>
+            </div>
+            <div style="text-align: right; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid rgba(248,113,113,0.2);">
+                <div style="color: #cbd5e1; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem;">Course Target: Oct 11, 2026</div>
+                <div id="aks-countdown" style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #f87171; font-weight: bold; text-shadow: 0 0 10px rgba(248,113,113,0.3);">Loading...</div>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.85rem; color: #e2e8f0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Sprint Completion</span>
+            <span id="progress-percentage" style="font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: bold; text-shadow: 0 0 10px rgba(52,211,153,0.4);">0%</span>
+        </div>
+        <div style="width: 100%; background: rgba(255,255,255,0.05); border-radius: 99px; height: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);">
+            <div id="progress-bar-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #38bdf8, #34d399); border-radius: 99px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(52,211,153,0.5);"></div>
+        </div>
+    </div>
+
     <!-- AI PROMPT SECTION -->
     <div class="cram-grid" style="padding: 1.5rem; margin-top: 1.5rem; background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.1)); border-left: 4px solid #10b981; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
@@ -371,7 +394,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
     <div class="section-label">📚 The 20-Day AKS Curriculum</div>
     <div class="grid">
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 1: Intro to AKS & Containers 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #1–10</span>
@@ -427,7 +456,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 2: Cluster Provisioning 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #11–20</span>
@@ -483,7 +518,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 3: Node Pools Mastery 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #21–30</span>
@@ -539,7 +580,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 4: AKS Networking (Part 1) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #31–38</span>
@@ -587,7 +634,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 5: AKS Networking (Part 2) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #39–48</span>
@@ -643,7 +696,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 6: Identity & Access (Part 1) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #49–57</span>
@@ -695,7 +754,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 7: Identity & Access (Part 2) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #58–66</span>
@@ -747,7 +812,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 8: Security Deep Dive (Part 1) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #67–75</span>
@@ -799,7 +870,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 9: Security Deep Dive (Part 2) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #76–85</span>
@@ -855,7 +932,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 10: Scaling Operations 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #86–94</span>
@@ -907,7 +990,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 11: Storage in AKS 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #95–104</span>
@@ -963,7 +1052,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 12: Monitoring & Observability 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #105–114</span>
@@ -1019,7 +1114,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 13: Cluster Maintenance 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #115–123</span>
@@ -1071,7 +1172,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 14: Image Management 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #124–133</span>
@@ -1127,7 +1234,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 15: Legacy Ingress Controllers 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #134–142</span>
@@ -1179,7 +1292,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 16: Modern Gateway API 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #143–151</span>
@@ -1231,7 +1350,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 17: High Availability (HA) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #152–160</span>
@@ -1283,7 +1408,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 18: Azure DevOps (Part 1) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #161–168</span>
@@ -1331,7 +1462,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 19: Azure DevOps (Part 2) 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #169–176</span>
@@ -1379,7 +1516,13 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             </div>
         </div>
         <div class="card">
-            <div class="card-icon" style="position:relative;">☁️</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
             <h2 style="display:flex; justify-content:space-between; align-items:center;">
                 Day 20: Final Capstone Lab 
                 <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #177–183</span>
@@ -1444,6 +1587,74 @@ Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div
             });
         }
     </script>
+
+    <script>
+        const quotes = [
+            "Pain is temporary, Kubernetes mastery is forever.",
+            "Your $200 Azure credit is burning. Deploy faster.",
+            "SREs aren't born, they are forged in broken YAML.",
+            "Master the control plane. Control your career.",
+            "Every dead pod is a lesson learned. Keep scaling.",
+            "No UI. Pure CLI. Welcome to the backend.",
+            "Automate everything. Document everything else."
+        ];
+        document.getElementById('motivation-text').innerText = '"' + quotes[Math.floor(Math.random() * quotes.length)] + '"';
+
+        // Countdown Timer Logic
+        const sprintDeadline = new Date("2026-10-11T23:59:59").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = sprintDeadline - now;
+            if (diff < 0) {
+                document.getElementById("aks-countdown").innerText = "Sprint Ended!";
+                document.getElementById("aks-countdown").style.color = "#94a3b8";
+            } else {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById("aks-countdown").innerText = `${d}d ${h}h ${m}m ${s}s`;
+            }
+        }, 1000);
+
+        // Progress Checkbox Logic
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            let checked = 0;
+            checkboxes.forEach((cb, idx) => {
+                if (cb.checked) {
+                    checked++;
+                    localStorage.setItem('aks-masterclass-d' + idx, 'true');
+                    cb.closest('.card').style.borderColor = 'rgba(52, 211, 153, 0.5)';
+                    cb.closest('.card').style.background = 'linear-gradient(to bottom right, var(--surface), rgba(52, 211, 153, 0.05))';
+                } else {
+                    localStorage.setItem('aks-masterclass-d' + idx, 'false');
+                    cb.closest('.card').style.borderColor = 'var(--border)';
+                    cb.closest('.card').style.background = 'var(--surface)';
+                }
+            });
+            const total = checkboxes.length || 20;
+            const pct = Math.round((checked / total) * 100);
+            document.getElementById('progress-percentage').innerText = pct + '%';
+            document.getElementById('progress-bar-fill').style.width = pct + '%';
+            
+            if(pct === 100) {
+                document.getElementById('progress-bar-fill').style.boxShadow = '0 0 20px rgba(52,211,153,0.8)';
+            }
+        }
+
+        // On Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            checkboxes.forEach((cb, idx) => {
+                if (localStorage.getItem('aks-masterclass-d' + idx) === 'true') {
+                    cb.checked = true;
+                }
+            });
+            updateProgress(); // init visual states
+        });
+    </script>
+
 </body>
 
 
