@@ -17,6 +17,7 @@ set -euo pipefail
 RG_NAME="rg-gateway-api-lab"
 LOCATION="eastus"
 CLUSTER_NAME="aks-agc-lab-spot"
+NODE_COUNT="3"
 NODE_SIZE="Standard_D2as_v7" 
 LOG_FILE="/tmp/azure_agc_lab_$(date +%s).log"
 
@@ -92,7 +93,7 @@ case "$COMMAND" in
         az aks create \
             --resource-group "$RG_NAME" \
             --name "$CLUSTER_NAME" \
-            --node-count 1 \
+            --node-count "$NODE_COUNT" \
             --node-vm-size "$NODE_SIZE" \
             --enable-oidc-issuer \
             --enable-workload-identity \
