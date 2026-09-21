@@ -341,6 +341,33 @@
         </div>
     </div>
 
+    
+    <!-- AI PROMPT SECTION -->
+    <div class="cram-grid" style="padding: 1.5rem; margin-top: 1.5rem; background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.1)); border-left: 4px solid #10b981; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+            <div>
+                <h2 style="margin-bottom: 0.2rem; font-size: 1.1rem; color: #34d399;"><span style="margin-right: 8px;">🤖</span> SRE AKS Notes Generator</h2>
+                <p style="font-size: 0.85rem; color: #94a3b8;">Use this highly-crafted prompt to generate perfectly architected Markdown notes for each Udemy chapter.</p>
+            </div>
+            <a href="https://github.com/imranshs08/job/tree/main/04-Notes/04-Kubernetes/AKS-Masterclass" target="_blank" style="background: rgba(255,255,255,0.1); color: #f1f5f9; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">📂 Open Notes Folder</a>
+        </div>
+        
+        <div class="prompt-box" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem;" id="aks-prompt-text">Act as a **Senior AKS Platform Architect / SRE**. 
+I am currently studying Kalyan Reddy Daida's "Azure Kubernetes Services (AKS) Made Easy" Udemy course.
+
+Please generate a high-fidelity, SRE-grade documentation markdown file for the current topic I am studying.
+
+**Your output MUST rigorously follow this architecture:**
+1. **The "Why" (Analogy):** Explain the core concept using a real-world infrastructure analogy (e.g., comparing Azure CNI vs Kubenet to physical router topologies).
+2. **Mermaid Architecture Diagram:** Provide a highly detailed Markdown `mermaid` flowchart mapping the specific AKS abstraction being discussed (such as VNETs, Subnets, Node Pools, AGC Ingress flows, or Entra ID RBAC assignments).
+3. **Execution Commands:** Provide the exact `az aks` and `kubectl` execution commands with parameters. Prioritize defensive scripting principles (no destructive commands without warnings).
+4. **Production Gotchas & Cost Optimization:** Highlight Azure-specific quotas, limitations, Spot instance traps, or security boundaries.
+5. **Interview Traps (STAR):** Present one high-level architectural interview question related to this topic, explicitly answered using the Situation, Task, Action, Result framework.
+
+Output ONLY the raw markdown syntax so I can instantly copy it to my notes.</div>
+        <button id="copy-aks-prompt-btn" onclick="copyAksPrompt()" style="background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.5); color: #34d399; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; width: 100%; transition: all 0.2s;">📋 Auto-Copy SRE Prompt to Clipboard</button>
+    </div>
+
     <div class="section-label">📚 The 20-Day AKS Curriculum</div>
     <div class="grid">
         <div class="card">
@@ -1402,6 +1429,22 @@
             🎯 Goal: DevOps SRE 2027</p>
     </footer>
 
+
+    <script>
+        function copyAksPrompt() {
+            const promptText = document.getElementById('aks-prompt-text').innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const btn = document.getElementById('copy-aks-prompt-btn');
+                btn.innerHTML = "✅ Copied to Clipboard!";
+                btn.style.background = "rgba(16, 185, 129, 0.4)";
+                setTimeout(() => {
+                    btn.innerHTML = "📋 Auto-Copy SRE Prompt to Clipboard";
+                    btn.style.background = "rgba(16,185,129,0.2)";
+                }, 3000);
+            });
+        }
+    </script>
 </body>
+
 
 </html>
