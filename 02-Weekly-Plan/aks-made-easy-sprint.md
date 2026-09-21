@@ -8,8 +8,8 @@
 This specialized 20-day sprint suspends all other non-Kubernetes study plans. The primary focus is deeply mastering Azure-native Kubernetes deployments, operations, and security.
 
 ## Day 1: Intro to AKS & Containers (Sep 22, 2026)
-- [ ] **Objective:** What is K8s, Docker basics, AKS architecture.
-- [ ] **Lectures:** Watch #1–10 (`⏱️ 47m Total`)
+- [x] **Objective:** What is K8s, Docker basics, AKS architecture.
+- [x] **Lectures:** Watch #1–10 (`⏱️ 47m Total`)
     * **[7min]** 1. Introduction about instructor and course
     * **[3min]** 2. Good to have / Recommended background
     * **[0min]** 3. Connect with me
@@ -21,7 +21,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
     * **[2min]** 9. Understanding why we need a container orchestrator, like Kubernetes
     * **[3min]** 10. Introduction to Kubernetes
 
-- [ ] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
+- [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 2: Cluster Provisioning (Sep 23, 2026)
 - [ ] **Objective:** Cluster types, control plane access, public vs private, VNET integration.
