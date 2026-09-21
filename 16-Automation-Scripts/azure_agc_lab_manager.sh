@@ -39,6 +39,9 @@ log_step() { echo -ne "${BLUE}>>${RESET} $1... "; }
 log_success() { echo -e "${GREEN}✓ [OK]${RESET}"; }
 log_fail() { 
     echo -e "${RED}✗ [FAILED]${RESET}"
+    echo -e "\n${RED}================= ERROR LOGS =================${RESET}"
+    tail -n 25 "$LOG_FILE"
+    echo -e "${RED}==============================================${RESET}"
     echo -e "${RED}Check detailed logs at: $LOG_FILE${RESET}"
     exit 1
 }
@@ -78,7 +81,7 @@ case "$COMMAND" in
         az group create --name "$RG_NAME" --location "$LOCATION" >> "$LOG_FILE" 2>&1 || log_fail
         log_success
         
-        log_step "Provisioning AKS Cluster with Spot Instances (Takes ~3-5 mins)"
+        log_step "Provisioning minimal AKS Cluster (Takes ~3-5 mins)"
         az aks create \
             --resource-group "$RG_NAME" \
             --name "$CLUSTER_NAME" \
