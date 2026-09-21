@@ -17,7 +17,7 @@ set -euo pipefail
 RG_NAME="rg-gateway-api-lab"
 LOCATION="eastus"
 CLUSTER_NAME="aks-agc-lab-spot"
-NODE_COUNT="3"
+NODE_COUNT="2"
 NODE_SIZE="Standard_D2as_v7" 
 LOG_FILE="/tmp/azure_agc_lab_$(date +%s).log"
 
