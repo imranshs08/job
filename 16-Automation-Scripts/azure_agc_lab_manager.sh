@@ -84,8 +84,6 @@ case "$COMMAND" in
             --name "$CLUSTER_NAME" \
             --node-count 1 \
             --node-vm-size "$NODE_SIZE" \
-            --enable-spot-node-pool \
-            --priority Spot \
             --enable-oidc-issuer \
             --enable-workload-identity \
             --network-plugin azure \
