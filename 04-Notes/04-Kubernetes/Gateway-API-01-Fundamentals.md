@@ -120,29 +120,36 @@ spec:
 **1. The Gateway (Platform/Infra Team)**
 *Notice how listeners for HTTP/HTTPS are centralized globally.*
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1 # Defines the standard Gateway API
+kind: Gateway # The physical or logical load balancer managed by the Infra team
 metadata:
   name: $GatewayName
-  namespace: $InfrastructureNamespace
+  namespace: $InfrastructureNamespace # Crucial: Gateways live in a central Infra/Ops namespace
   annotations:
+    # Vendor-specific provisioning annotations exist ONLY here, hiding them from developers
     alb.networking.azure.io/alb-namespace: $InfrastructureNamespace
     alb.networking.azure.io/alb-name: $ApplicationLoadBalancerName
+    # Tells Cert-Manager to secure these endpoints automatically
     cert-manager.io/cluster-issuer: $ClusterIssuerName
 spec:
+  # Defines the actual controller building the infrastructure (e.g., Azure AGC, Envoy)
   gatewayClassName: $GatewayClassName
   listeners:
+  
+  # Listener 1: Standard HTTP Traffic (Catch-all)
   - name: http-listener
     port: 80
     protocol: HTTP
-    allowedRoutes:
+    allowedRoutes: # Security boundary: Who is permitted to attach routes to this Gateway?
       namespaces:
-        from: All
+        from: All # In prod, this is usually restricted to specific namespaces (e.g., 'Selector')
+        
+  # Listener 2: Traefik specific HTTPS Traffic
   - name: traefik-https-listener
     port: 443
     protocol: HTTPS
-    hostname: $TraefikUrl
-    tls:
+    hostname: $TraefikUrl # Listens specifically on this subdomain/SNI
+    tls: # Centralized TLS Management! Devs don't need to mount certs in their apps.
       certificateRefs:
         - group: ""
           kind: Secret
@@ -151,6 +158,8 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+        
+  # Listener 3: NGINX specific HTTPS Traffic
   - name: nginx-https-listener
     port: 443
     protocol: HTTPS
@@ -170,23 +179,30 @@ spec:
 *Notice how developers can elegantly match on paths and specific headers without writing vendor-specific annotations!*
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: HTTPRoute # A developer-owned object defining how traffic reaches their application
 metadata:
   name: $RoutingHttpRoute
-  namespace: $RoutingDemoNamespace
+  namespace: $RoutingDemoNamespace # Deployed directly alongside the application pods
 spec:
   parentRefs:
+    # Binds this route to the central Gateway managed by the Infra team
     - name: $GatewayName
-      namespace: $InfrastructureNamespace
+      namespace: $InfrastructureNamespace # Cross-namespace attachment natively supported
+      
   rules:
+    # Rule 1: Standard Path-Based Routing
     - matches:
         - path:
             type: PathPrefix
-            value: /routing 
+            value: /routing # If traffic hits example.com/routing...
       backendRefs:
+        # ...send it to this Kubernetes Service inside the app namespace on port 80
         - name: $RoutingAppNameOne
           port: 80
+          
+    # Rule 2: Advanced Header-Based Routing (Perfect for Canary/A-B Testing)
     - matches:
+        # If traffic hits /routing AND has the exact HTTP header 'header: routing'...
         - headers:
           - type: Exact
             name: header
@@ -195,6 +211,7 @@ spec:
             type: PathPrefix
             value: /routing
       backendRefs:
+        # ...send it to Service Two instead! (Zero vendor annotations required)
         - name: $RoutingAppNameTwo
           port: 80
 ```
