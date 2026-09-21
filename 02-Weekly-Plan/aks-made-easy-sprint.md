@@ -9,7 +9,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 1: Intro to AKS & Containers (Sep 22, 2026)
 - [ ] **Objective:** What is K8s, Docker basics, AKS architecture.
-- [ ] **Lectures:** Watch #1–10
+- [ ] **Lectures:** Watch #1–10 (`⏱️ 47m Total`)
     * **[7min]** 1. Introduction about instructor and course
     * **[3min]** 2. Good to have / Recommended background
     * **[0min]** 3. Connect with me
@@ -25,7 +25,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 2: Cluster Provisioning (Sep 23, 2026)
 - [ ] **Objective:** Cluster types, control plane access, public vs private, VNET integration.
-- [ ] **Lectures:** Watch #11–20
+- [ ] **Lectures:** Watch #11–20 (`⏱️ 1h 16m Total`)
     * **[12min]** 11. Kubernetes architecture
     * **[6min]** 12. Self-managed vs Cloud-managed Kubernetes cluster
     * **[5min]** 13. What is Azure Kubernetes Service (AKS)?
@@ -41,7 +41,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 3: Node Pools Mastery (Sep 24, 2026)
 - [ ] **Objective:** System vs User node pools, scaling nodes, Spot instances.
-- [ ] **Lectures:** Watch #21–30
+- [ ] **Lectures:** Watch #21–30 (`⏱️ 54m Total`)
     * **[7min]** 21. PowerShell Basics in AKS - Connect to Azure, AKS creation, completion, aliases
     * **[5min]** 22. Imperative and declarative approaches
     * **[17min]** 23. Practice with Nodes, Pod, Deployment, Replicaset, DaemonSet, Service, Secret, CM
@@ -57,7 +57,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 4: AKS Networking (Part 1) (Sep 25, 2026)
 - [ ] **Objective:** Kubenet vs Azure CNI, core internal cluster networking.
-- [ ] **Lectures:** Watch #31–38
+- [ ] **Lectures:** Watch #31–38 (`⏱️ 30m Total`)
     * **[1min]** 31. cloud-node-manager
     * **[8min]** 32. coredns
     * **[3min]** 33. coredns-autoscaler
@@ -71,7 +71,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 5: AKS Networking (Part 2) (Sep 26, 2026)
 - [ ] **Objective:** Services, SNAT, Outbound types, Calico.
-- [ ] **Lectures:** Watch #39–48
+- [ ] **Lectures:** Watch #39–48 (`⏱️ 1h 23m Total`)
     * **[4min]** 39. Virtual Machine Scale Set (VMSS)
     * **[4min]** 40. Virtual Network (VNET) and Subnet (SNET)
     * **[4min]** 41. Network Security Group (NSG)
@@ -87,7 +87,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 6: Identity & Access (Part 1) (Sep 27, 2026)
 - [ ] **Objective:** AKS-managed Microsoft Entra (AAD) integration, RBAC.
-- [ ] **Lectures:** Watch #49–57
+- [ ] **Lectures:** Watch #49–57 (`⏱️ 55m Total`)
     * **[10min]** 49. Deploy and manage a Kubernetes application (Extension) from Azure Marketplace
     * **[5min]** 50. Install kubectl plugins with krew
     * **[5min]** 51. VM types: VMSS (Scale Set) vs VMAS (Availability Set)
@@ -102,7 +102,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 7: Identity & Access (Part 2) (Sep 28, 2026)
 - [ ] **Objective:** Service Principals, Managed Identities, Workload Identity.
-- [ ] **Lectures:** Watch #58–66
+- [ ] **Lectures:** Watch #58–66 (`⏱️ 34m Total`)
     * **[4min]** 58. Node pool with AzureLinux (Mariner) OS
     * **[5min]** 59. Create Windows node pool and connect to nodes
     * **[1min]** 60. Clarification about the next lecture (using Windows Server Core LTSC image)
@@ -117,7 +117,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 8: Security Deep Dive (Part 1) (Sep 29, 2026)
 - [ ] **Objective:** Azure Key Vault integration using Secret Store CSI driver.
-- [ ] **Lectures:** Watch #67–75
+- [ ] **Lectures:** Watch #67–75 (`⏱️ 50m Total`)
     * **[7min]** 67. GPU node pools
     * **[5min]** 68. Node pool snapshot
     * **[5min]** 69. Resize a node pool
@@ -132,7 +132,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 9: Security Deep Dive (Part 2) (Sep 30, 2026)
 - [ ] **Objective:** Network Policies, AppArmor, Seccomp, Image Cleaner.
-- [ ] **Lectures:** Watch #76–85
+- [ ] **Lectures:** Watch #76–85 (`⏱️ 1h 15m Total`)
     * **[10min]** 76. Bring your own VNET/subnet, NSG and Route Table in AKS
     * **[11min]** 77. A deeper look into LoadBalancer Service in AKS
     * **[5min]** 78. Consideration when multiple NSGs are used
@@ -148,7 +148,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 10: Scaling Operations (Oct 01, 2026)
 - [ ] **Objective:** HPA (Horizontal Pod Autoscaler), VPA, Cluster Autoscaler.
-- [ ] **Lectures:** Watch #86–94
+- [ ] **Lectures:** Watch #86–94 (`⏱️ 1h 19m Total`)
     * **[12min]** 86. Learn how AKS works with HTTP Proxy
     * **[5min]** 87. Install mitmproxy on a VM
     * **[8min]** 88. Deploy an AKS cluster with HTTP Proxy
@@ -163,7 +163,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 11: Storage in AKS (Oct 02, 2026)
 - [ ] **Objective:** Storage Classes, PV, PVC, CSI Drivers, Azure Disks/Files.
-- [ ] **Lectures:** Watch #95–104
+- [ ] **Lectures:** Watch #95–104 (`⏱️ 51m Total`)
     * **[3min]** 95. az aks invoke command
     * **[4min]** 96. Run kubectl commands from worker nodes
     * **[1min]** 97. Clarification about the rebranding of Azure Active Directory to Microsoft Entra
@@ -179,7 +179,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 12: Monitoring & Observability (Oct 03, 2026)
 - [ ] **Objective:** Container Insights, Azure Monitor, Log Analytics, Troubleshooting.
-- [ ] **Lectures:** Watch #105–114
+- [ ] **Lectures:** Watch #105–114 (`⏱️ 1h 20m Total`)
     * **[3min]** 105. Identities in AKS
     * **[5min]** 106. Create an AKS cluster with service principal
     * **[3min]** 107. Certificate rotation
@@ -195,7 +195,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 13: Cluster Maintenance (Oct 04, 2026)
 - [ ] **Objective:** Upgrading AKS clusters, node OS updates, certificate rotation.
-- [ ] **Lectures:** Watch #115–123
+- [ ] **Lectures:** Watch #115–123 (`⏱️ 1h 28m Total`)
     * **[14min]** 115. Use Image Cleaner (Eraser) in AKS
     * **[16min]** 116. Understand resource reservations and kube-reserved resource optimization in AKS
     * **[4min]** 117. Manually scale pod replicas and node count
@@ -210,7 +210,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 14: Image Management (Oct 05, 2026)
 - [ ] **Objective:** Integrate AKS with ACR, automated updates, security scanning.
-- [ ] **Lectures:** Watch #124–133
+- [ ] **Lectures:** Watch #124–133 (`⏱️ 1h 2m Total`)
     * **[6min]** 124. Exploring the storage options in AKS
     * **[4min]** 125. Dynamically create Azure Disk
     * **[3min]** 126. Create snapshot and restore Azure Disk
@@ -226,7 +226,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 15: Legacy Ingress Controllers (Oct 06, 2026)
 - [ ] **Objective:** Nginx Ingress controller setup, TLS termination with Cert-Manager.
-- [ ] **Lectures:** Watch #134–142
+- [ ] **Lectures:** Watch #134–142 (`⏱️ 32m Total`)
     * **[3min]** 134. Activity logs
     * **[5min]** 135. Diagnose and solve problems and Ask Genie
     * **[3min]** 136. Resource Health and Azure Status
@@ -241,7 +241,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 16: Modern Gateway API (Oct 07, 2026)
 - [ ] **Objective:** Working with Azure Application Gateway for Containers (AGC).
-- [ ] **Lectures:** Watch #143–151
+- [ ] **Lectures:** Watch #143–151 (`⏱️ 58m Total`)
     * **[4min]** 143. Explore Logs
     * **[2min]** 144. Understanding Alerts
     * **[4min]** 145. Create out-of-the-box Alert
@@ -257,7 +257,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 17: High Availability (HA) (Oct 08, 2026)
 - [ ] **Objective:** Multi-zone clusters, pod topology spread constraints, quotas.
-- [ ] **Lectures:** Watch #152–160
+- [ ] **Lectures:** Watch #152–160 (`⏱️ 48m Total`)
     * **[6min]** 152. Add a TCPDump sidecar container to a pod
     * **[12min]** 153. Understanding K8s version, node image, the upgrade and why we need to upgrade
     * **[4min]** 154. Auto-upgrade Feature
@@ -272,7 +272,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 18: Azure DevOps (Part 1) (Oct 09, 2026)
 - [ ] **Objective:** Introduction to CI/CD on AKS, setting up pipelines.
-- [ ] **Lectures:** Watch #161–168
+- [ ] **Lectures:** Watch #161–168 (`⏱️ 47m Total`)
     * **[5min]** 161. Create ACR and push/import our apps to it
     * **[4min]** 162. Integrate AKS and ACR - Azure/RBAC method
     * **[3min]** 163. Integrate AKS and ACR - Kubernetes/pull secret method
@@ -286,7 +286,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 19: Azure DevOps (Part 2) (Oct 10, 2026)
 - [ ] **Objective:** Helm charts in pipelines, blue/green deployments.
-- [ ] **Lectures:** Watch #169–176
+- [ ] **Lectures:** Watch #169–176 (`⏱️ 1h 10m Total`)
     * **[9min]** 169. Expose App on HTTPS with Cert-Manager and Let's Encrypt
     * **[6min]** 170. Use multiple ingress controllers in the same AKS cluster
     * **[7min]** 171. Gateway API basics
@@ -300,7 +300,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 
 ## Day 20: Final Capstone Lab (Oct 11, 2026)
 - [ ] **Objective:** Deploying a full microservices app with identity, storage, and AGC.
-- [ ] **Lectures:** Watch #177–183
+- [ ] **Lectures:** Watch #177–183 (`⏱️ 1h 14m Total`)
     * **[4min]** 177. Use custom domain and Azure Front Door certificate to expose apps in AKS
     * **[8min]** 178. Initial setup: Create a project, a service connection, add files, create ACR+AKS
     * **[22min]** 179. Example 1: Use a preconfigured Pipeline to build/push to ACR and deploy to AKS
