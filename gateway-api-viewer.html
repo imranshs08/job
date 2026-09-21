@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway API Sprint — Local Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --accent: #38bdf8;
+            /* Switched to Azure blue for AGC */
+            --green: #34d399;
+            --yellow: #fbbf24;
+            --red: #f87171;
+            --blue: #60a5fa;
+            --purple: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse at 20% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(192, 132, 252, 0.06) 0%, transparent 60%);
+        }
+
+        header {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 span {
+            color: var(--accent);
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .exam-banner {
+            max-width: 1100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(192, 132, 252, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .exam-stat {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .exam-stat .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .exam-stat .label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card.featured {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-yellow {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--yellow);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .badge-green {
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .badge-blue {
+            background: rgba(96, 165, 250, 0.1);
+            color: var(--blue);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .weight {
+            opacity: 0.5;
+            font-size: 0.8em;
+            font-weight: normal;
+        }
+
+        .cram-grid {
+            max-width: 1100px;
+            margin: 3rem auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .cram-grid h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
+
+        td code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            color: var(--green);
+        }
+
+        .section-label {
+            max-width: 1100px;
+            margin: 3rem auto 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .copy-btn {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Kubernetes Gateway API <span>Sprint</span></h1>
+        <p>A 6-Session Deep Dive into the modern evolution of Kubernetes Routing & Azure Application Gateway for
+            Containers (AGC)</p>
+    </header>
+
+    <div class="exam-banner">
+        <div class="exam-stat">
+            <div class="num">21</div>
+            <div class="label">Total Videos</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">8.5h</div>
+            <div class="label">Total Content</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">☁️ Azure Spot</div>
+            <div class="label">Infrastructure</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">SRE 2026</div>
+            <div class="label">Target Role</div>
+        </div>
+    </div>
+
+    <!-- LAB AUTOMATION -->
+    <div class="cram-grid"
+        style="padding: 1.5rem; margin-top: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(56, 189, 248, 0.05)); border-left: 4px solid var(--accent);">
+        <h2 style="margin-bottom: 0.5rem; font-size: 1rem;"><span style="margin-right: 8px;">🚀</span> AGC Lab
+            Automation — Spot Instance Clusters</h2>
+        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">Execute this directly in Azure Cloud
+            Shell to spin up a virtually free Spot-Instance AKS cluster for all Gateway API and Azure AGC routing labs.
+        </p>
+        <div
+            style="background: #000; padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border);">
+            <code
+                style="color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- up</code>
+            <button class="copy-btn"
+                onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- up'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Cmd', 2000);">Copy
+                Cmd</button>
+        </div>
+    </div>
+
+    <div class="section-label">📚 The 6-Session Sprint Curriculum</div>
+    <div class="grid">
+        <a class="card"
+            href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/Gateway-API-01-Fundamentals.md"
+            target="_blank">
+            <div class="card-icon">⚡</div>
+            <h2>Session 1 &nbsp;<span class="weight">Fundamentals & Azure AGC</span></h2>
+            <p>Understanding why Ingress is being replaced. Setup the new Azure AGC resources on AKS. Contains the
+                SRE-grade YAML comparisons between legacy Ingress and modern Gateway.</p>
+            <span class="badge badge-green">✅ COMPLETED</span>
+        </a>
+        <a class="card" href="https://youtu.be/gPvXGWCqkrI" target="_blank">
+            <div class="card-icon">🔒</div>
+            <h2>Session 2 &nbsp;<span class="weight">Automated TLS & DNS</span></h2>
+            <p>Wiring up Azure DNS, Cert-Manager, and dynamically securing Gateway API endpoints with Let's Encrypt
+                using wildcard certificates.</p>
+            <span class="badge badge-blue">☁️ AZURE SPOT LAB</span>
+        </a>
+        <a class="card" href="https://youtu.be/6p-W7DE7Yd0" target="_blank">
+            <div class="card-icon">🚦</div>
+            <h2>Session 3 &nbsp;<span class="weight">Traffic Management</span></h2>
+            <p>HTTPRoutes, header matching, rewrite/redirect rules, and advanced deployments (Canary/A-B traffic
+                splitting).</p>
+            <span class="badge badge-blue">☁️ AZURE SPOT LAB</span>
+        </a>
+        <a class="card" href="https://youtu.be/_81ypGr5X9w" target="_blank">
+            <div class="card-icon">🛡️</div>
+            <h2>Session 4 &nbsp;<span class="weight">Security & Monitoring</span></h2>
+            <p>Applying rigorous WAF policies, integrating Prometheus/Grafana, and exploring alternative controllers
+                like NGINX and Traefik Gateways.</p>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
+        </a>
+        <a class="card" href="https://youtu.be/ypl7Bu9zQUM" target="_blank">
+            <div class="card-icon">🚀</div>
+            <h2>Session 5 &nbsp;<span class="weight">Envoy & Migration</span></h2>
+            <p>Standing up Envoy Gateway natively and comparing the new API with traditional NGINX Ingress objects.</p>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
+        </a>
+        <a class="card" href="https://youtu.be/8UOj0aJDzXc" target="_blank">
+            <div class="card-icon">🏆</div>
+            <h2>Session 6 &nbsp;<span class="weight">Production Pipelines</span></h2>
+            <p>End-to-end production CI/CD architectures mapping Infrastructure to App using Terraform, ArgoCD, and
+                Multi-Domain TLS architecture.</p>
+            <span class="badge badge-yellow">💻 LOCAL KIND LAB</span>
+        </a>
+    </div>
+
+    <!-- SRE Notes Cheat Sheet -->
+    <div class="cram-grid">
+        <h2>📑 SRE Cheat Sheet — Core Objects</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kubernetes Object</th>
+                    <th>Responsibility / Pattern</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>GatewayClass</code></td>
+                    <td>Template defining infrastructure implementation (e.g., Azure AGC, Envoy). Cluster scope.</td>
+                </tr>
+                <tr>
+                    <td><code>Gateway</code></td>
+                    <td>Physical/logical load balancer containing Listeners (Port 80/443, TLS details). Typically
+                        managed by Infra namespace.</td>
+                </tr>
+                <tr>
+                    <td><code>HTTPRoute</code></td>
+                    <td>Defines traffic routing (hostname, paths, headers) to backend Services. App Dev namespace.</td>
+                </tr>
+                <tr>
+                    <td><code>ReferenceGrant</code></td>
+                    <td>Strict security boundary allowing Cross-Namespace attachments (e.g., App Route attaching to
+                        Infra Gateway).</td>
+                </tr>
+                <tr>
+                    <td>Vendor Annotations</td>
+                    <td>Eliminated from Developer routes. Required ONLY on the <code>Gateway</code> object natively.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\gateway-api-sprint.md</code><br>
+            🎯 Goal: DevOps SRE 2027</p>
+    </footer>
+
+</body>
+
+</html>
