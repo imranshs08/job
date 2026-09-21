@@ -393,7 +393,7 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
 **Antigravity (AI) Execution & Version Control Workflow:**
 1. Do NOT just output the text in the chat. Use your `write_to_file` tool to save this documentation directly into my local repository at `c:\Job Tracker-Notes-Kubernetes\AKS-Masterclass\`.
 2. Name the file sequentially based on the topic (e.g., `01_Topic_Name.md`, `02_Topic_Name.md`). Please run an `ls` or check the directory first to find the next available sequential number.
-3. Before committing, use your `replace_file_content` tool to edit `c:\Job Tracker-Weekly-Planks-made-easy-sprint.md`. Find the plaintext video title you just documented and wrap it in a markdown relative link pointing to your newly created file (e.g., `[Title](../../04-Notes/04-Kubernetes/AKS-Masterclass/03_Topic.md)`).
+3. Before committing, use your tools to edit BOTH `c:\Job Tracker-Weekly-Planks-made-easy-sprint.md` AND `c:\Job Trackerks-expert-viewer.html`. Find the plaintext video title you just documented and wrap it in a relative markdown link for the tracker, and an HTML `<a href...>` anchor for the dashboard. (e.g., `[Title](../../04-Notes/04-Kubernetes/AKS-Masterclass/03_Topic.md)`).
 4. Once both the new note is created and the sprint tracker is linked, use `run_command` to `git add .`, `git commit -m "docs(aks): add notes for [Topic] and link in syllabus"`, and `git push` to the remote repository.
 
 ---
@@ -408,7 +408,7 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                 <div class="card-icon" style="position:relative;">☁️</div>
                 <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
-                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    <input type="checkbox" class="day-checkbox" checked="checked" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
                     Done
                 </label>
             </div>
@@ -436,19 +436,19 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
                     </li>
                     <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
                         <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
-                        4. What is a container and how is it different from a VM?
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/02_Container_Isolation_Namespaces_and_Cgroups.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">4. What is a container and how is it different from a VM?</a>
                     </li>
                     <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
                         <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
-                        5. Microservices architecture
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/03_Microservices_Architecture.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">5. Microservices architecture</a>
                     </li>
                     <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
                         <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
-                        6. What are Docker, Dockerfile and Docker Hub?
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/04_Docker_Dockerfile_DockerHub.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">6. What are Docker, Dockerfile and Docker Hub?</a>
                     </li>
                     <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
                         <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
-                        7. Creating our first container app (web app), pushing it to Docker Hub and running
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/05_Container_Web_App_Build_and_Push.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">7. Creating our first container app (web app), pushing it to Docker Hub and running</a>
                     </li>
                     <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
                         <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
