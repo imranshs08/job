@@ -187,4 +187,58 @@ cat <<CRD | kubectl apply -f - >> "$LOG_FILE" 2>&1 || log_fail
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  nam
+  name: $GATEWAY_NAME
+  namespace: $INFRA_NAMESPACE
+  annotations:
+    alb.networking.azure.io/alb-namespace: $INFRA_NAMESPACE
+    alb.networking.azure.io/alb-name: $ALB_NAME
+spec:
+  gatewayClassName: $GATEWAY_CLASS_NAME
+  listeners:
+  - name: http-listener
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+CRD
+        log_success
+        
+        echo -e "\n${GREEN}========================================================================${RESET}"
+        echo -e "${GREEN}✅ LAB STOOD UP SUCCESSFULLY!${RESET}"
+        echo -e "${GREEN}========================================================================${RESET}"
+        echo "The Application Gateway takes about 5-6 mins to fully terminate and assign an IP."
+        echo "Run the following command to check its status:"
+        echo -e "   ${BLUE}kubectl get applicationloadbalancer $ALB_NAME -n $INFRA_NAMESPACE -o yaml${RESET}"
+        echo ""
+        echo "To grab the Gateway Public IP once it is assigned:"
+        echo -e "   ${BLUE}kubectl get gateway $GATEWAY_NAME -n $INFRA_NAMESPACE -o jsonpath='{.status.addresses[0].value}'${RESET}"
+        echo ""
+        echo -e "${YELLOW}⚠️  CRITICAL COST REMINDER: Run './azure_agc_lab_manager.sh down' when done.${RESET}\n"
+        ;;
+        
+    down)
+        echo -e "${RED}🛑 [1/1] NUKING RESOURCE GROUP: $RG_NAME...${RESET}"
+        echo "This will destroy the AKS cluster and ALL associated resources (IPs, LBs, Disks)."
+        
+        az group delete --name "$RG_NAME" --yes --no-wait
+        
+        echo -e "\n${GREEN}✅ Teardown initiated in the background!${RESET}"
+        echo "Azure is safely wiping everything. Billing has been effectively stopped."
+        ;;
+        
+    status)
+        echo "🔍 Checking lab resource group status..."
+        if az group show --name "$RG_NAME" -o table 2>/dev/null; then
+            echo -e "\n${YELLOW}⚠️  LAB IS CURRENTLY RUNNING!${RESET}"
+        else
+            echo -e "\n${GREEN}✅ LAB IS DOWN (No resource group found).${RESET}"
+        fi
+        ;;
+        
+    *)
+        echo "❌ Unknown command: $COMMAND"
+        show_help
+        exit 1
+        ;;
+esac
