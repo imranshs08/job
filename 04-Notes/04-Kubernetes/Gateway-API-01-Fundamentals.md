@@ -54,7 +54,42 @@ graph TD
 ## 💻 Execution: The Shift in YAML
 
 ### ❌ The Legacy Way (Ingress)
-*Notice the heavy use of proprietary annotations and a single monolithic manifest locking the application to NGINX.*
+*Notice the heavy use of proprietary annotations locking the application to NGINX, and the requirement of two completely different resources.*
+
+**1. The Ingress Controller (LoadBalancer)**
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-basic
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: https
+      port: 443
+      targetPort: https
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+status:
+  loadBalancer:
+    ingress:
+      - ip: 52.139.6.71
+```
+
+**2. The Ingress Route**
 ```yaml
 kind: Ingress
 apiVersion: networking.k8s.io/v1
