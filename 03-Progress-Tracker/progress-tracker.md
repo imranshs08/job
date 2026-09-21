@@ -46,7 +46,7 @@
 | 33 | [Day-34 - KUBERNETES DEPLOYMENT - REPLICASETS](https://www.youtube.com/watch?v=lVKLkyuRWCY) | Sep 14 | 27m 38s | ✅ | ☐ | ☐ |
 | 34 | [DAY-35 - EVERYTHING ABOUT KUBERNETES SERVICES - DISCOVERY - LOAD BALANCING - NETWO...](https://www.youtube.com/watch?v=xY6Ic7Igzck) | Sep 15 | 34m 37s | ✅ | ☐ | ☐ |
 | 35 | [Day-36 - KUBERNETES INTERVIEW QUESTIONS PART-1- What's Your Score ? -10/10](https://www.youtube.com/watch?v=0qy5JD7CbJ4) | Sep 16 | 29m 3s | ✅ | ✅ | — |
-| 36 | [DAY-37 - KUBERNETES SERVICES DEEP DIVE- LIVE DEMO - LEARN TRAFFIC FLOW USING KUBES...](https://www.youtube.com/watch?v=fCX8O7GA_lY) | Sep 17 | 44m 18s | ☐ | ☐ | ☐ |
+| 36 | [DAY-37 - KUBERNETES SERVICES DEEP DIVE- LIVE DEMO - LEARN TRAFFIC FLOW USING KUBES...](https://www.youtube.com/watch?v=fCX8O7GA_lY) | Sep 17 | 44m 18s | ✅ | ✅ | ✅ |
 | 37 | [DAY-38 - KUBERNETES INGRESS - WATCH DEMO USING LINK IN DESCRIPTION](https://www.youtube.com/watch?v=47ck6bh6dfI) | Sep 18 | 39m 17s | ☐ | ☐ | ☐ |
 | 38 | [INTRODUCTION TO K8s RBAC - 30 DAYS FREE OPENSHIFT CLUSTER - LEARN RBAC WITH REAL C...](https://www.youtube.com/watch?v=1slRgW2IzJY) | Sep 19 | 26m 40s | ☐ | ☐ | ☐ |
 | 39 | [DAY-40 - KUBERNETES CUSTOM RESOURCES - CUSTOM CONTROLLER - DEEP DIVE & DETAILED EX...](https://www.youtube.com/watch?v=alGEPSQxbLg) | Sep 20 | 39m 10s | ☐ | ☐ | ☐ |
