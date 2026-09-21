@@ -291,36 +291,36 @@
 | Dec 29, 2026 | Sun | **Security**: Solution – Image Security (06:53)<br>**Security**: Pre-requisite – Security in Docker (05:37)<br>**Security**: Security Contexts (01:52) | 14m 22s | ☐ |
 | Dec 30, 2026 | Mon | **Security**: Practice Test Security Contexts (—)<br>**Security**: Solution – Security Contexts (06:12) | 6m 12s | ☐ |
 | Dec 31, 2026 | Tue | **Security**: Network Policies (08:25)<br>**Security**: Developing network policies (11:35) | 20m 0s | ☐ |
-| Jan 1, 2026 | Wed | **Security**: Practice Test Network Policies (—)<br>**Security**: Solution – Network Policies (optional) (12:17) | 12m 17s | ☐ |
-| Jan 2, 2026 | Thu | **Security**: Kubectx and Kubens – Command line Utilities (—)<br>**Security**: Download Presentation Deck 6 (—) | — | ☐ |
-| Jan 3, 2026 | Fri | **Security**: (2025 Updates) Custom Resource Definition (CRD) (11:00)<br>**Security**: (2025 Updates) Custom Controllers (03:57)<br>**Security**: ⚠️ 1 lesson may be cut off – check KodeKloud Security module (—) | 14m 57s | ☐ |
-| Jan 4, 2026 | Sat | **Storage**: Storage – Section Introduction (00:45)<br>**Storage**: Introduction to Docker Storage (00:54) | 1m 39s | ☐ |
-| Jan 5, 2026 | Sun | **Storage**: Storage in Docker (12:32)<br>**Storage**: Volume Driver Plugins in Docker (01:53) | 14m 25s | ☐ |
-| Jan 6, 2026 | Mon | **Storage**: Container Storage Interface (03:44)<br>**Storage**: Volumes (04:30) | 8m 14s | ☐ |
-| Jan 7, 2026 | Tue | **Storage**: Persistent Volumes (03:01)<br>**Storage**: Persistent Volume Claims (04:05) | 7m 6s | ☐ |
-| Jan 8, 2026 | Wed | **Storage**: Using PVC in Pods (—)<br>**Storage**: Practice Test Persistent Volume Claims (—)<br>**Storage**: Solution – Persistent Volumes and Persistent Volume Claims (optional) (18:12) | 18m 12s | ☐ |
-| Jan 9, 2026 | Thu | **Storage**: Storage Class (03:59)<br>**Storage**: Practice Test – Storage Class (—) | 3m 59s | ☐ |
-| Jan 10, 2026 | Fri | **Storage**: Solution – Storage Class (10:28)<br>**Storage**: Download Presentation Deck 7 (—) | 10m 28s | ☐ |
-| Jan 11, 2026 | Sat | **Networking**: Networking Introduction (02:04)<br>**Networking**: Prerequisite Switching, Routing, Gateways CNI in kubernetes (12:12) | 14m 16s | ☐ |
-| Jan 12, 2026 | Sun | **Networking**: Prerequisite DNS (14:24)<br>**Networking**: Prerequisite – CoreDNS (—) | 14m 24s | ☐ |
-| Jan 13, 2026 | Mon | **Networking**: Prerequisite Network Namespaces (15:09)<br>**Networking**: FAQ (—)<br>**Networking**: Prerequisite Docker Networking (07:15) | 22m 24s | ☐ |
-| Jan 14, 2026 | Tue | **Networking**: Prerequisite CNI (06:10)<br>**Networking**: Cluster Networking (02:11) | 8m 21s | ☐ |
-| Jan 15, 2026 | Wed | **Networking**: Important Note about CNI and CKA Exam (—)<br>**Networking**: Practice Test – Explore Environment (—) | — | ☐ |
-| Jan 16, 2026 | Thu | **Networking**: Solution – Explore Environment (optional) (07:14)<br>**Networking**: Pod Networking (09:03) | 16m 17s | ☐ |
-| Jan 17, 2026 | Fri | **Networking**: CNI in kubernetes (03:06)<br>**Networking**: Note CNI Weave (—) | 3m 6s | ☐ |
-| Jan 18, 2026 | Sat | **Networking**: CNI weave (05:59)<br>**Networking**: Practice Test CNI (—)<br>**Networking**: Solution – Explore CNI (optional) (02:12) | 8m 11s | ☐ |
-| Jan 19, 2026 | Sun | **Networking**: Practice Test – Deploy Network Solution (—)<br>**Networking**: Solution – Deploy Network Solution (optional) (03:43) | 3m 43s | ☐ |
-| Jan 20, 2026 | Mon | **Networking**: ipam weave (03:21)<br>**Networking**: Practice Test – Networking Weave (—) | 3m 21s | ☐ |
-| Jan 21, 2026 | Tue | **Networking**: Solution – Networking Weave (optional) (05:30)<br>**Networking**: Service Networking (08:51) | 14m 21s | ☐ |
-| Jan 22, 2026 | Wed | **Networking**: Practice Test Service Networking (—)<br>**Networking**: Solution – Service Networking (optional) (05:12) | 5m 12s | ☐ |
-| Jan 23, 2026 | Thu | **Networking**: DNS in kubernetes (05:39)<br>**Networking**: CoreDNS in Kubernetes (06:44)<br>**Networking**: Practice Test CoreDNS in Kubernetes (—) | 12m 23s | ☐ |
-| Jan 24, 2026 | Fri | **Networking**: Solution – Explore DNS (optional) (13:03)<br>**Networking**: Ingress (22:34) | 35m 37s | ☐ |
-| Jan 25, 2026 | Sat | **Networking**: Article: Ingress (—)<br>**Networking**: Ingress – Annotations and rewrite-target (—) | — | ☐ |
-| Jan 26, 2026 | Sun | **Networking**: Practice Test – CKA – Ingress Networking – 1 (—)<br>**Networking**: Solution – Ingress Networking – 1 (optional) (15:46) | 15m 46s | ☐ |
-| Jan 27, 2026 | Mon | **Networking**: Practice Test – CKA – Ingress Networking – 2 (—)<br>**Networking**: Solution – Ingress Networking – 2 (optional) (10:39) | 10m 39s | ☐ |
-| Jan 28, 2026 | Tue | **Networking**: Download Presentation Deck 8 (—)<br>**Design and Install**: Design a Kubernetes Cluster (05:50)<br>**Design and Install**: Choosing Kubernetes Infrastructure (05:52) | 11m 42s | ☐ |
-| Jan 29, 2026 | Wed | **Design and Install**: Configure High Availability (07:48)<br>**Design and Install**: ETCD in HA (12:42) | 20m 30s | ☐ |
-| Jan 30, 2026 | Thu | **Design and Install**: Important Update: Kubernetes the Hard Way (—)<br>**Design and Install**: Download Presentation Deck 9 (—) | — | ☐ |
+| Jan 1, 2027 | Wed | **Security**: Practice Test Network Policies (—)<br>**Security**: Solution – Network Policies (optional) (12:17) | 12m 17s | ☐ |
+| Jan 2, 2027 | Thu | **Security**: Kubectx and Kubens – Command line Utilities (—)<br>**Security**: Download Presentation Deck 6 (—) | — | ☐ |
+| Jan 3, 2027 | Fri | **Security**: (2025 Updates) Custom Resource Definition (CRD) (11:00)<br>**Security**: (2025 Updates) Custom Controllers (03:57)<br>**Security**: ⚠️ 1 lesson may be cut off – check KodeKloud Security module (—) | 14m 57s | ☐ |
+| Jan 4, 2027 | Sat | **Storage**: Storage – Section Introduction (00:45)<br>**Storage**: Introduction to Docker Storage (00:54) | 1m 39s | ☐ |
+| Jan 5, 2027 | Sun | **Storage**: Storage in Docker (12:32)<br>**Storage**: Volume Driver Plugins in Docker (01:53) | 14m 25s | ☐ |
+| Jan 6, 2027 | Mon | **Storage**: Container Storage Interface (03:44)<br>**Storage**: Volumes (04:30) | 8m 14s | ☐ |
+| Jan 7, 2027 | Tue | **Storage**: Persistent Volumes (03:01)<br>**Storage**: Persistent Volume Claims (04:05) | 7m 6s | ☐ |
+| Jan 8, 2027 | Wed | **Storage**: Using PVC in Pods (—)<br>**Storage**: Practice Test Persistent Volume Claims (—)<br>**Storage**: Solution – Persistent Volumes and Persistent Volume Claims (optional) (18:12) | 18m 12s | ☐ |
+| Jan 9, 2027 | Thu | **Storage**: Storage Class (03:59)<br>**Storage**: Practice Test – Storage Class (—) | 3m 59s | ☐ |
+| Jan 10, 2027 | Fri | **Storage**: Solution – Storage Class (10:28)<br>**Storage**: Download Presentation Deck 7 (—) | 10m 28s | ☐ |
+| Jan 11, 2027 | Sat | **Networking**: Networking Introduction (02:04)<br>**Networking**: Prerequisite Switching, Routing, Gateways CNI in kubernetes (12:12) | 14m 16s | ☐ |
+| Jan 12, 2027 | Sun | **Networking**: Prerequisite DNS (14:24)<br>**Networking**: Prerequisite – CoreDNS (—) | 14m 24s | ☐ |
+| Jan 13, 2027 | Mon | **Networking**: Prerequisite Network Namespaces (15:09)<br>**Networking**: FAQ (—)<br>**Networking**: Prerequisite Docker Networking (07:15) | 22m 24s | ☐ |
+| Jan 14, 2027 | Tue | **Networking**: Prerequisite CNI (06:10)<br>**Networking**: Cluster Networking (02:11) | 8m 21s | ☐ |
+| Jan 15, 2027 | Wed | **Networking**: Important Note about CNI and CKA Exam (—)<br>**Networking**: Practice Test – Explore Environment (—) | — | ☐ |
+| Jan 16, 2027 | Thu | **Networking**: Solution – Explore Environment (optional) (07:14)<br>**Networking**: Pod Networking (09:03) | 16m 17s | ☐ |
+| Jan 17, 2027 | Fri | **Networking**: CNI in kubernetes (03:06)<br>**Networking**: Note CNI Weave (—) | 3m 6s | ☐ |
+| Jan 18, 2027 | Sat | **Networking**: CNI weave (05:59)<br>**Networking**: Practice Test CNI (—)<br>**Networking**: Solution – Explore CNI (optional) (02:12) | 8m 11s | ☐ |
+| Jan 19, 2027 | Sun | **Networking**: Practice Test – Deploy Network Solution (—)<br>**Networking**: Solution – Deploy Network Solution (optional) (03:43) | 3m 43s | ☐ |
+| Jan 20, 2027 | Mon | **Networking**: ipam weave (03:21)<br>**Networking**: Practice Test – Networking Weave (—) | 3m 21s | ☐ |
+| Jan 21, 2027 | Tue | **Networking**: Solution – Networking Weave (optional) (05:30)<br>**Networking**: Service Networking (08:51) | 14m 21s | ☐ |
+| Jan 22, 2027 | Wed | **Networking**: Practice Test Service Networking (—)<br>**Networking**: Solution – Service Networking (optional) (05:12) | 5m 12s | ☐ |
+| Jan 23, 2027 | Thu | **Networking**: DNS in kubernetes (05:39)<br>**Networking**: CoreDNS in Kubernetes (06:44)<br>**Networking**: Practice Test CoreDNS in Kubernetes (—) | 12m 23s | ☐ |
+| Jan 24, 2027 | Fri | **Networking**: Solution – Explore DNS (optional) (13:03)<br>**Networking**: Ingress (22:34) | 35m 37s | ☐ |
+| Jan 25, 2027 | Sat | **Networking**: Article: Ingress (—)<br>**Networking**: Ingress – Annotations and rewrite-target (—) | — | ☐ |
+| Jan 26, 2027 | Sun | **Networking**: Practice Test – CKA – Ingress Networking – 1 (—)<br>**Networking**: Solution – Ingress Networking – 1 (optional) (15:46) | 15m 46s | ☐ |
+| Jan 27, 2027 | Mon | **Networking**: Practice Test – CKA – Ingress Networking – 2 (—)<br>**Networking**: Solution – Ingress Networking – 2 (optional) (10:39) | 10m 39s | ☐ |
+| Jan 28, 2027 | Tue | **Networking**: Download Presentation Deck 8 (—)<br>**Design and Install**: Design a Kubernetes Cluster (05:50)<br>**Design and Install**: Choosing Kubernetes Infrastructure (05:52) | 11m 42s | ☐ |
+| Jan 29, 2027 | Wed | **Design and Install**: Configure High Availability (07:48)<br>**Design and Install**: ETCD in HA (12:42) | 20m 30s | ☐ |
+| Jan 30, 2027 | Thu | **Design and Install**: Important Update: Kubernetes the Hard Way (—)<br>**Design and Install**: Download Presentation Deck 9 (—) | — | ☐ |
 | Jan 31, 2027 | Fri | **Install kubeadm**: Introduction to Deployment with kubeadm (02:32)<br>**Install kubeadm**: Resources (—) | 2m 32s | ☐ |
 | Feb 1, 2027 | Sat | **Install kubeadm**: Deploy with Kubeadm – Provision VMs with Vagrant (03:06)<br>**Install kubeadm**: Demo – Deployment with Kubeadm (14:30)<br>**Install kubeadm**: Practice Test – Deploy a Kubernetes Cluster using Kubeadm (—) | 17m 36s | ☐ |
 | Feb 2, 2027 | Sun | **Install kubeadm**: Solution – Install a Kubernetes Cluster using kubeadm (09:50)<br>**Helm Basics**: What is Helm (06:33) | 16m 23s | ☐ |
