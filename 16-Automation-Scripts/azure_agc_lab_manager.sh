@@ -227,13 +227,28 @@ CRD
         ;;
         
     down)
-        echo -e "${RED}🛑 [1/1] NUKING RESOURCE GROUP: $RG_NAME...${RESET}"
+        echo -e "${RED}🛑 NUKING RESOURCE GROUP: $RG_NAME...${RESET}"
         echo "This will destroy the AKS cluster and ALL associated resources (IPs, LBs, Disks)."
         
+        if ! az group show --name "$RG_NAME" &>/dev/null; then
+            echo -e "\n${GREEN}✅ Resource group '$RG_NAME' is already gone! No action needed.${RESET}"
+            exit 0
+        fi
+
+        # Issue the delete command
         az group delete --name "$RG_NAME" --yes --no-wait
         
-        echo -e "\n${GREEN}✅ Teardown initiated in the background!${RESET}"
-        echo "Azure is safely wiping everything. Billing has been effectively stopped."
+        echo -e "\n${YELLOW}Monitoring destruction progress... (You can press Ctrl+C to exit securely; deletion will continue safely in the background)${RESET}\n"
+        
+        while az group show --name "$RG_NAME" &>/dev/null; do
+            COUNT=$(az resource list --resource-group "$RG_NAME" --query "length(@)" -o tsv 2>/dev/null || echo "0")
+            if [ -z "$COUNT" ]; then COUNT="0"; fi
+            echo -ne "\r${BLUE}⏳ Resources alive: ${COUNT} ... sweeping Azure backend...${RESET}\033[K"
+            sleep 10
+        done
+        
+        echo -e "\n\n${GREEN}✅ TEARDOWN COMPLETE!${RESET}"
+        echo "Azure has permanently wiped the environment. Billing has been safely stopped."
         ;;
         
     status)
