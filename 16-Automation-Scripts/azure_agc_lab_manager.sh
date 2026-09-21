@@ -15,9 +15,9 @@ set -euo pipefail
 
 # --- Core Vars ---
 RG_NAME="rg-gateway-api-lab"
-LOCATION="canadacentral"
+LOCATION="eastus"
 CLUSTER_NAME="aks-agc-lab-spot"
-NODE_SIZE="Standard_B2s" 
+NODE_SIZE="Standard_D2as_v7" 
 LOG_FILE="/tmp/azure_agc_lab_$(date +%s).log"
 
 # --- ALB / Gateway Vars ---
