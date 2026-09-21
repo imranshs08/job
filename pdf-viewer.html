@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCDV-F Study PDFs — Local Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --accent: #818cf8;
+            --green: #34d399;
+            --yellow: #fbbf24;
+            --red: #f87171;
+            --blue: #60a5fa;
+            --purple: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse at 20% 10%, rgba(129, 140, 248, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(192, 132, 252, 0.06) 0%, transparent 60%);
+        }
+
+        header {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 span {
+            color: var(--accent);
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .exam-banner {
+            max-width: 1100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.15), rgba(192, 132, 252, 0.1));
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .exam-stat {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .exam-stat .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .exam-stat .label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card.featured {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 720px) {
+            .card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .card p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+        }
+
+        .badge-green {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--green);
+        }
+
+        .badge-yellow {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--yellow);
+        }
+
+        .badge-blue {
+            background: rgba(96, 165, 250, 0.15);
+            color: var(--blue);
+        }
+
+        .badge-purple {
+            background: rgba(192, 132, 252, 0.15);
+            color: var(--purple);
+        }
+
+        .badge-red {
+            background: rgba(248, 113, 113, 0.15);
+            color: var(--red);
+        }
+
+        .weight {
+            float: right;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cram-grid {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .cram-grid h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            color: var(--muted);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--green);
+        }
+
+        .section-label {
+            max-width: 1100px;
+            margin: 2rem auto 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 2.5rem auto 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🤖 CCDV-F Study <span>PDF Resources</span></h1>
+        <p>Official Udemy Course Companion Materials — Open locally from your Job Tracker repo</p>
+    </header>
+
+    <div class="exam-banner">
+        <div class="exam-stat">
+            <div class="num">53</div>
+            <div class="label">Questions</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">120</div>
+            <div class="label">Minutes</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">72%</div>
+            <div class="label">Pass Score</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">Dec 6</div>
+            <div class="label">Exam Date</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">11</div>
+            <div class="label">Weekends Left</div>
+        </div>
+    </div>
+
+    <div class="section-label">📋 Quick References</div>
+    <div class="grid">
+        <a class="card" href="10-AI-Learning-Roadmap/Cram+Sheet+(Print).pdf" target="_blank">
+            <div class="card-icon">⚡</div>
+            <h2>Cram Sheet <span class="weight">6 pages</span></h2>
+            <p>All key terms, definitions, API fields, cost multipliers, and SSE sequence. Review this every weekend.
+            </p>
+            <span class="badge badge-green">✅ Reviewed</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/Study+Companion+(Print).pdf" target="_blank">
+            <div class="card-icon">📖</div>
+            <h2>Study Companion <span class="weight">37 pages</span></h2>
+            <p>Full textbook reference. Covers all 4 macro-domains, exam tips, and scenario walkthroughs by Jacob
+                Bushong.</p>
+            <span class="badge badge-green">✅ Reviewed</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/30-Day+Study+Plan+(Print).pdf" target="_blank">
+            <div class="card-icon">📅</div>
+            <h2>30-Day Study Plan <span class="weight">2 pages</span></h2>
+            <p>6 practice exams phased across 30 days. Maps to our 11-weekend schedule. Print and post on wall.</p>
+            <span class="badge badge-green">✅ Reviewed</span>
+        </a>
+    </div>
+
+    <div class="section-label">🗂️ Domain Slide Decks</div>
+    <div class="grid">
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+1+-+Agents+and+Workflows.pdf" target="_blank">
+            <div class="card-icon">🤖</div>
+            <h2>Domain 1 — Agents & Workflows <span class="weight">15%</span></h2>
+            <p>182 slides. Agent loop, orchestrator-worker, context isolation, hooks, LangGraph, Strands, PydanticAI,
+                Claude Agent SDK <code>query()</code>.</p>
+            <span class="badge badge-green">✅ W1–W2 (Sep 20–28)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+2+-+Applications+and+Integration.pdf"
+            target="_blank">
+            <div class="card-icon">🔌</div>
+            <h2>Domain 2 — Applications & Integration <span class="weight">33%</span></h2>
+            <p>370 slides. Messages API, SSE streaming, prompt caching, message batches, Bedrock Mantle, Vertex AI.
+                Heaviest exam domain.</p>
+            <span class="badge badge-yellow">⬜ W3–W6 (Oct 3–25)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+3+-+Claude+Code.pdf" target="_blank">
+            <div class="card-icon">💻</div>
+            <h2>Domain 3 — Claude Code</h2>
+            <p>CLAUDE.md hierarchy, Rules, Skills, Commands, Agents. Slash commands, session management, compaction
+                hooks.</p>
+            <span class="badge badge-yellow">⬜ W6 (Oct 24–25)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+4+-+Eval,+Testing,+and+Debugging.pdf"
+            target="_blank">
+            <div class="card-icon">🧪</div>
+            <h2>Domain 4 — Eval, Testing & Debugging</h2>
+            <p>Error classification (transient vs reasoning vs tool), re-prompt strategies, eval harnesses, debug
+                tooling.</p>
+            <span class="badge badge-yellow">⬜ W7 (Oct 31–Nov 1)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+5+-+Model+Selection+and+Optimization.pdf"
+            target="_blank">
+            <div class="card-icon">⚙️</div>
+            <h2>Domain 5 — Model Selection & Optimization</h2>
+            <p>Haiku/Sonnet/Opus trade-offs, sampling (temperature, top_p, top_k), effort levels, cost calculation.</p>
+            <span class="badge badge-yellow">⬜ W7–W8 (Oct 31–Nov 8)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+6+-+Prompt+and+Context+Engineering.pdf"
+            target="_blank">
+            <div class="card-icon">✍️</div>
+            <h2>Domain 6 — Prompt & Context Engineering</h2>
+            <p>Structured prompts, XML delimiting, system vs user placement, validate-and-reprompt, context window
+                management.</p>
+            <span class="badge badge-yellow">⬜ W8–W9 (Nov 7–15)</span>
+        </a>
+        <a class="card" href="10-AI-Learning-Roadmap/CCDV-F+Domain+7+-+Security+and+Safety.pdf" target="_blank">
+            <div class="card-icon">🛡️</div>
+            <h2>Domain 7 — Security & Safety</h2>
+            <p>Prompt injection defense, PII prevention, identity validation, destructive action blocking with hooks,
+                monitoring.</p>
+            <span class="badge badge-yellow">⬜ W9–W10 (Nov 14–22)</span>
+        </a>
+        <a class="card featured" href="10-AI-Learning-Roadmap/CCDV-F+Domain+8+-+Tools+and+MCPs.pdf" target="_blank">
+            <div class="card-icon">🔧</div>
+            <h2>Domain 8 — Tools & MCPs <span class="weight">30%</span></h2>
+            <p>Second-heaviest domain. Tool definitions, JSON Schema, client-side vs server-side tools. MCP primitives
+                (Tools/Resources/Prompts), stdio vs HTTP transports, auth, roots. Authoring & registering MCP servers.
+            </p>
+            <span class="badge badge-yellow">⬜ W10–W11 (Nov 21–29)</span>
+        </a>
+    </div>
+
+    <div class="cram-grid">
+        <h2>⚡ Quick Reference — Cram Sheet Key Values</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concept</th>
+                    <th>Value / Pattern</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pass score</td>
+                    <td><code>720/1000</code> (~72%) — Pearson VUE proctored</td>
+                </tr>
+                <tr>
+                    <td>Cache read cost</td>
+                    <td><code>0.1x</code> — 90% discount</td>
+                </tr>
+                <tr>
+                    <td>Cache write (5 min TTL)</td>
+                    <td><code>1.25x</code></td>
+                </tr>
+                <tr>
+                    <td>Cache write (1 hr TTL)</td>
+                    <td><code>2.0x</code></td>
+                </tr>
+                <tr>
+                    <td>Max cache breakpoints</td>
+                    <td><code>4 per request</code></td>
+                </tr>
+                <tr>
+                    <td>Message Batch discount</td>
+                    <td><code>50% off</code></td>
+                </tr>
+                <tr>
+                    <td>Batch custom_id pattern</td>
+                    <td><code>^[a-zA-Z0-9_-]{1,64}$</code></td>
+                </tr>
+                <tr>
+                    <td>Vertex AI required body field</td>
+                    <td><code>anthropic_version: "vertex-2023-10-16"</code></td>
+                </tr>
+                <tr>
+                    <td>Adaptive thinking effort field</td>
+                    <td><code>output_config.effort</code> → low/medium/high/max</td>
+                </tr>
+                <tr>
+                    <td>SSE sequence</td>
+                    <td><code>message_start → content_block_start → input_json_delta → content_block_stop → message_stop</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PreToolUse output field</td>
+                    <td><code>permissionDecision: allow | deny | ask</code></td>
+                </tr>
+                <tr>
+                    <td>tool_choice values</td>
+                    <td><code>auto | any | tool | none</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>📌 These PDFs are local-only (gitignored). Keep in <code>C:\Job Tracker\10-AI-Learning-Roadmap\</code><br>
+            🎯 Exam: Dec 6, 2026 — Target 85%+ | <a href="claude-certification-plan.md"
+                style="color: var(--accent);">View Study Plan</a></p>
+    </footer>
+
+</body>
+
+</html>
