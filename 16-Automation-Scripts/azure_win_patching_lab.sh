@@ -43,7 +43,7 @@ if [ "$command" == "up" ]; then
                 --size "$SIZE" \
                 --storage-sku "Standard_LRS" \
                 --nsg-rule "RDP" \
-                --public-ip-sku "Basic" \
+                --public-ip-sku "Standard" \
                 --output none 2>&1)
             EXIT_CODE=$?
             set -e
