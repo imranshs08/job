@@ -4,7 +4,7 @@
 set -euo pipefail
 
 RG_NAME="rg-win-patch-lab-2027"
-LOCATION="eastus"
+LOCATION="eastus2"
 VM_NAME="vm-win2019-lab"
 ADMIN_USER="labadmin"
 # Generates a pseudo-random secure password
@@ -19,7 +19,7 @@ if [ "$command" == "up" ]; then
     print_msg "🚀 Provisioning Cost-Optimized Windows 2019 Lab..."
     az group create --name "$RG_NAME" --location "$LOCATION" -o none
     
-    print_msg "⚙️ Deploying VM: $VM_NAME (Series: Standard_B2s, Storage: Standard HDD)"
+    print_msg "⚙️ Deploying VM: $VM_NAME (Series: Standard_B2ms, Storage: Standard HDD)"
     print_msg "⏳ This usually takes ~3-5 minutes. Please wait..."
     
     az vm create \
@@ -28,7 +28,7 @@ if [ "$command" == "up" ]; then
         --image "Win2019Datacenter" \
         --admin-username "$ADMIN_USER" \
         --admin-password "$ADMIN_PASS" \
-        --size "Standard_B2s" \
+        --size "Standard_B2ms" \
         --storage-sku "Standard_LRS" \
         --nsg-rule "RDP" \
         --public-ip-sku "Basic" \
