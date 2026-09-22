@@ -23,10 +23,10 @@ if [ "$command" == "up" ]; then
     DEPLOYED=false
     
     for LOCATION in "${REGIONS[@]}"; do
-        # RACE CONDITION FIX: Unique RG name per region so asynchronous deletions do not block the next iteration
-        RG_NAME="rg-win-patch-${LOCATION}-2027"
-        
         for SIZE in "${SIZES[@]}"; do
+            # RACE CONDITION FIX v2: Unique RG name per Region AND Size, so the inner size loop doesn't trip on its own async deletion!
+            CLEAN_SIZE="${SIZE//_/-}"
+            RG_NAME="rg-win-patch-${LOCATION}-${CLEAN_SIZE,,}-2027" 
             echo -e "\n\033[1;33m[Attempting]\033[0m Datacenter: \033[1m$LOCATION\033[0m | Hardware: \033[1m$SIZE\033[0m"
             
             # Silently create the RG in the target region
