@@ -63,3 +63,8 @@ Never leave Windows VMs running when idle. Destroy the lab using the exact same 
 ```bash
 curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_win_patching_lab.sh" | bash -s -- down
 ```
+
+---
+
+## 📚 References & Further Learning
+* **Deep Dive Playlist:** [Azure Update Manager Detailed Walkthrough](https://www.youtube.com/watch?v=YZpF2zaEuJY)
