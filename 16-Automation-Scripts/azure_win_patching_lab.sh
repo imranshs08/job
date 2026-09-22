@@ -74,12 +74,7 @@ if [ "$command" == "up" ]; then
         exit 1
     fi
         
-    print_msg "🔄 Enforcing 'Manual' patch orchestration for Azure Update Manager..."
-    az vm update \
-        -g "$RG_NAME" \
-        -n "$VM_NAME" \
-        --set osProfile.windowsConfiguration.enableAutomaticUpdates=false \
-        --output none
+    
 
     IP_ADDRESS=$(az vm show -d -g "$RG_NAME" -n "$VM_NAME" --query publicIps -o tsv)
 
@@ -97,19 +92,13 @@ elif [ "$command" == "down" ]; then
     
     # Loop through all possible RGs we might have created and invoke async deletion
     az group list --query "[?contains(name, 'rg-win-patch')].name" -o tsv | while read -r rg; do
-        if [ ! -z "$rg" ]; then
+        if [ ! -z "$rg" ] && [ "$rg" != " " ]; then
             echo -e "[1;33m⚠️ Nuking associated Resource Group: $rg...[0m"
             az group delete --name "$rg" --yes --no-wait 2>/dev/null || true
         fi
     done
     
-    # Dummy condition to preserve syntax mapping
-    if true; then
-        az group delete --name "$RG_NAME" --yes --no-wait
-        echo -e "\033[1;32m✅ Teardown initiated. Resources will be deleted safely in the background.\033[0m"
-    else
-        echo -e "\033[1;33m⚠️ Lab resource group '$RG_NAME' does not exist.\033[0m"
-    fi
+    echo -e "[1;32m✅ Teardown scheduled. All matching labs will be deleted safely in the background.[0m"
 else
     print_msg "❌ Invalid command. Usage: curl -sSL <url> | bash -s -- [up|down]"
 fi
