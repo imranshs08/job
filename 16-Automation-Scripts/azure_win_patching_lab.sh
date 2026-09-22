@@ -3,7 +3,6 @@
 # Author: Antigravity SRE
 set -euo pipefail
 
-RG_NAME="rg-win-patch-lab-2027"
 VM_NAME="vm-win2019-lab"
 ADMIN_USER="labadmin"
 ADMIN_PASS="AzureLab@2027!$RANDOM"
@@ -24,6 +23,9 @@ if [ "$command" == "up" ]; then
     DEPLOYED=false
     
     for LOCATION in "${REGIONS[@]}"; do
+        # RACE CONDITION FIX: Unique RG name per region so asynchronous deletions do not block the next iteration
+        RG_NAME="rg-win-patch-${LOCATION}-2027"
+        
         for SIZE in "${SIZES[@]}"; do
             echo -e "\n\033[1;33m[Attempting]\033[0m Datacenter: \033[1m$LOCATION\033[0m | Hardware: \033[1m$SIZE\033[0m"
             
@@ -92,7 +94,17 @@ if [ "$command" == "up" ]; then
 
 elif [ "$command" == "down" ]; then
     print_msg "🗑️ Destroying Lab and all resources..."
-    if az group exists --name "$RG_NAME"; then
+    
+    # Loop through all possible RGs we might have created and invoke async deletion
+    az group list --query "[?contains(name, 'rg-win-patch')].name" -o tsv | while read -r rg; do
+        if [ ! -z "$rg" ]; then
+            echo -e "[1;33m⚠️ Nuking associated Resource Group: $rg...[0m"
+            az group delete --name "$rg" --yes --no-wait 2>/dev/null || true
+        fi
+    done
+    
+    # Dummy condition to preserve syntax mapping
+    if true; then
         az group delete --name "$RG_NAME" --yes --no-wait
         echo -e "\033[1;32m✅ Teardown initiated. Resources will be deleted safely in the background.\033[0m"
     else
