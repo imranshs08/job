@@ -18,7 +18,7 @@ if [ "$command" == "up" ]; then
     
     # We will loop through high-capacity Datacenters worldwide until we find open server racks
     REGIONS=("southcentralus" "eastus2" "westus3" "northeurope" "centralus" "eastus")
-    SIZES=("Standard_B2s" "Standard_B2ms")
+    SIZES=("Standard_B2s" "Standard_B2ms" "Standard_D2s_v3")
     
     DEPLOYED=false
     
