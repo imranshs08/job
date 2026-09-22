@@ -4,38 +4,75 @@
 set -euo pipefail
 
 RG_NAME="rg-win-patch-lab-2027"
-LOCATION="centralus"
 VM_NAME="vm-win2019-lab"
 ADMIN_USER="labadmin"
-# Generates a pseudo-random secure password
 ADMIN_PASS="AzureLab@2027!$RANDOM"
 
-# Print colored text
 print_msg() { echo -e "\n\033[1;36m==>\033[0m \033[1m$1\033[0m"; }
 
 command=${1:-"help"}
 
 if [ "$command" == "up" ]; then
-    print_msg "🚀 Provisioning Cost-Optimized Windows 2019 Lab..."
-    az group create --name "$RG_NAME" --location "$LOCATION" -o none
+    print_msg "🚀 Invoking Intelligent Azure Hardware Scheduler..."
+    print_msg "Azure is experiencing catastrophic B-Series capacity exhaustion this weekend."
+    print_msg "Booting aggressive multi-region fallback loop to bypass capacity restrictions automatically..."
     
-    print_msg "⚙️ Deploying VM: $VM_NAME (Series: Standard_B2ms [Burstable Exhausted], Storage: Standard HDD)"
-    print_msg "⏳ This usually takes ~3-5 minutes. Please wait..."
+    # We will loop through high-capacity Datacenters worldwide until we find open server racks
+    REGIONS=("southcentralus" "eastus2" "westus3" "northeurope" "centralus" "eastus")
+    SIZES=("Standard_B2s" "Standard_B2ms")
     
-    az vm create \
-        --resource-group "$RG_NAME" \
-        --name "$VM_NAME" \
-        --image "Win2019Datacenter" \
-        --admin-username "$ADMIN_USER" \
-        --admin-password "$ADMIN_PASS" \
-        --size "Standard_B2ms" \
-        --storage-sku "Standard_LRS" \
-        --nsg-rule "RDP" \
-        --public-ip-sku "Basic" \
-        --output none
+    DEPLOYED=false
+    
+    for LOCATION in "${REGIONS[@]}"; do
+        for SIZE in "${SIZES[@]}"; do
+            echo -e "\n\033[1;33m[Attempting]\033[0m Datacenter: \033[1m$LOCATION\033[0m | Hardware: \033[1m$SIZE\033[0m"
+            
+            # Silently create the RG in the target region
+            az group create --name "$RG_NAME" --location "$LOCATION" -o none 2>/dev/null || true
+            
+            # Attempt deployment. Redirect stderr to capture the exact failure reason without crashing the loop.
+            set +e
+            ERROR_OUTPUT=$(az vm create \
+                --resource-group "$RG_NAME" \
+                --name "$VM_NAME" \
+                --image "Win2019Datacenter" \
+                --admin-username "$ADMIN_USER" \
+                --admin-password "$ADMIN_PASS" \
+                --size "$SIZE" \
+                --storage-sku "Standard_LRS" \
+                --nsg-rule "RDP" \
+                --public-ip-sku "Basic" \
+                --output none 2>&1)
+            EXIT_CODE=$?
+            set -e
+            
+            if [ $EXIT_CODE -eq 0 ]; then
+                DEPLOYED=true
+                print_msg "✅ SUCCESS! Hardware secured in $LOCATION using $SIZE!"
+                break 2
+            else
+                if echo "$ERROR_OUTPUT" | grep -q -i "SkuNotAvailable\|Capacity"; then
+                    echo "   ⚠️ Azure Rack Space Exhausted. Jumping to next..."
+                    # Cleanup the orphaned RG in the background so it doesn't block the next region
+                    az group delete --name "$RG_NAME" --yes --no-wait 2>/dev/null || true
+                elif echo "$ERROR_OUTPUT" | grep -q -i "QuotaExceeded\|quota"; then
+                    echo -e "\n❌ CRITICAL QUOTA ERROR: You do not have enough vCPUs permitted on your Azure Account to provision a $SIZE VM."
+                    echo "You must delete an old lab (e.g., AKS Cluster) to free up CPU cores."
+                    exit 1
+                else
+                    echo -e "\n❌ UNKNOWN ERROR: $ERROR_OUTPUT"
+                    exit 1
+                fi
+            fi
+        done
+    done
+    
+    if [ "$DEPLOYED" == "false" ]; then
+        echo -e "\n❌ ALL REGIONS EXHAUSTED. Azure cannot fulfill this request right now."
+        exit 1
+    fi
         
     print_msg "🔄 Enforcing 'Manual' patch orchestration for Azure Update Manager..."
-    # Disables automatic VM-level updates so Azure Update Manager (Portal) can fully control patching cycles
     az vm update \
         -g "$RG_NAME" \
         -n "$VM_NAME" \
