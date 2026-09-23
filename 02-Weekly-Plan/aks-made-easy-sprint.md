@@ -24,8 +24,8 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 - [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 2: Cluster Provisioning (Sep 23, 2026)
-- [ ] **Objective:** Cluster types, control plane access, public vs private, VNET integration.
-- [ ] **Lectures:** Watch #11–20 (`⏱️ 1h 16m Total`)
+- [x] **Objective:** Cluster types, control plane access, public vs private, VNET integration.
+- [x] **Lectures:** Watch #11–20 (`⏱️ 1h 16m Total`)
     * **[12min]** 11. Kubernetes architecture
     * **[6min]** 12. Self-managed vs Cloud-managed Kubernetes cluster
     * **[5min]** 13. What is Azure Kubernetes Service (AKS)?
@@ -37,7 +37,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
     * **[3min]** 19. aks-preview extension and feature registration
     * **[9min]** 20. Making our life easier with autocompletion, alias, Kubernetes and AKS extension
 
-- [ ] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
+- [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 3: Node Pools Mastery (Sep 24, 2026)
 - [ ] **Objective:** System vs User node pools, scaling nodes, Spot instances.
