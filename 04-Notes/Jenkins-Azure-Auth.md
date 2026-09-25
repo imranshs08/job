@@ -21,13 +21,13 @@ Run this from your local terminal (where you are already logged in to Azure):
 
 ```bash
 # Set your target subscription
-az account set --subscription "<YOUR_SUBSCRIPTION_ID>"
+az account set --subscription "9d25952c-70d0-4818-9568-4f8c2b31d98f"
 
 # Create the Service Principal scoped as Contributor to the specific Subscription (or tightly scoped to a Resource Group)
 az ad sp create-for-rbac \
   --name "Jenkins-AGC-Deployer" \
   --role "Contributor" \
-  --scopes /subscriptions/<YOUR_SUBSCRIPTION_ID>
+  --scopes /subscriptions/9d25952c-70d0-4818-9568-4f8c2b31d98f
 ```
 
 **Keep the JSON output safe!** It looks like this:
