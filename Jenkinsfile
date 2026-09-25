@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/imranshs08/job.git'
             }
         }
 
