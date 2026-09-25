@@ -95,7 +95,9 @@ pipeline {
 
                         def response = powershell(
                             script: """
-                            \$body = '${jsonPayload}'
+\$body = @'
+${jsonPayload}
+'@
                             try {
                                 \$res = Invoke-RestMethod -Uri "https://api.brevo.com/v3/smtp/email" -Method Post -Headers @{ "accept" = "application/json"; "api-key" = \$env:BREVO_API_KEY; "content-type" = "application/json" } -Body \$body
                                 Write-Output "Success"
