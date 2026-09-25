@@ -50,7 +50,7 @@ pipeline {
                         def subject = "Jenkins Job: ${env.JOB_NAME} Build ${env.BUILD_NUMBER} - ${buildStatus}"
                         def body = "Pipeline finished with status: ${buildStatus}. Please check Jenkins dashboard for detailed logs."
                         
-                        def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"jenkins@domain.local"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "<p>${body}</p>"}"""
+                        def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"imranshs08@12050952.brevosend.com"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "<p>${body}</p>"}"""
 
                         def response = powershell(
                             script: """
