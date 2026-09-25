@@ -9,12 +9,24 @@ pipeline {
     environment {
         // Make sure to add a Secret Text credential with ID 'brevo-api-key' in Jenkins
         BREVO_API_KEY = credentials('brevo-api-key')
+        AZURE_SP_APP_ID = credentials('AZURE_SP_APP_ID')
+        AZURE_SP_PASSWORD = credentials('AZURE_SP_PASSWORD')
+        AZURE_TENANT_ID = credentials('AZURE_TENANT_ID')
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/imranshs08/job.git'
+            }
+        }
+
+        stage('Azure Authentication') {
+            steps {
+                script {
+                    echo "Logging into Azure seamlessly with Service Principal..."
+                    bat "az login --service-principal -u %AZURE_SP_APP_ID% -p %AZURE_SP_PASSWORD% --tenant %AZURE_TENANT_ID%"
+                }
             }
         }
 
