@@ -89,7 +89,7 @@ pipeline {
                         </div>
                         """
                         
-                        def cleanBody = body.replaceAll("\n", "").replaceAll("  ", "")
+                        def cleanBody = body.replaceAll("\n", "").replaceAll("  ", "").replace('"', '\\"')
                         
                         def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"imranshs08@12050952.brevosend.com"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "${cleanBody}"}"""
 
