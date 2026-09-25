@@ -107,7 +107,9 @@ case "$COMMAND" in
         
         if ! command -v helm &> /dev/null; then
             log_step "Installing Helm dependencies"
-            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash >> "$LOG_FILE" 2>&1 || log_fail
+            curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 -o get_helm.sh
+            chmod +x get_helm.sh
+            USE_SUDO=false HELM_INSTALL_DIR=/usr/bin ./get_helm.sh >> "$LOG_FILE" 2>&1 || log_fail
             log_success
         fi
 
