@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         choice(name: 'ACTION', choices: ['status', 'up', 'down'], description: 'Manage Azure AGC Lab')
-        string(name: 'NOTIFICATION_EMAIL', defaultValue: '', description: 'Email address to send the pipeline status')
+        string(name: 'NOTIFICATION_EMAIL', defaultValue: 'imranshs08@gmail.com', description: 'Email address to send the pipeline status')
     }
 
     environment {
