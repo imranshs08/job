@@ -22,8 +22,8 @@ pipeline {
             steps {
                 script {
                     echo "Executing azure_agc_lab_manager.sh with action: ${params.ACTION}"
-                    sh 'chmod +x 16-Automation-Scripts/azure_agc_lab_manager.sh'
-                    sh "bash 16-Automation-Scripts/azure_agc_lab_manager.sh ${params.ACTION}"
+                    bat "bash -c 'chmod +x 16-Automation-Scripts/azure_agc_lab_manager.sh'"
+                    bat "bash 16-Automation-Scripts/azure_agc_lab_manager.sh ${params.ACTION}"
                 }
             }
         }
@@ -40,13 +40,9 @@ pipeline {
                         
                         def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"jenkins@domain.local"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "<p>${body}</p>"}"""
 
-                        def response = sh(
-                            script: """
-                            curl -s -w "\\n%{http_code}" -X POST 'https://api.brevo.com/v3/smtp/email' \\
-                                 -H 'accept: application/json' \\
-                                 -H "api-key: \${BREVO_API_KEY}" \\
-                                 -H 'content-type: application/json' \\
-                                 -d '${jsonPayload}'
+                        def response = bat(
+                            script: """@echo off
+                            bash -c "curl -s -X POST 'https://api.brevo.com/v3/smtp/email' -H 'accept: application/json' -H 'api-key: ${BREVO_API_KEY}' -H 'content-type: application/json' -d '${jsonPayload}'"
                             """,
                             returnStdout: true
                         ).trim()
