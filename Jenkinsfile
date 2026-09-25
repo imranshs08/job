@@ -40,12 +40,13 @@ pipeline {
                         
                         def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"jenkins@domain.local"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "<p>${body}</p>"}"""
 
-                        def response = bat(
-                            script: """@echo off
-                            "C:\\Program Files\\Git\\bin\\bash.exe" -c "curl -s -X POST 'https://api.brevo.com/v3/smtp/email' -H 'accept: application/json' -H 'api-key: %BREVO_API_KEY%' -H 'content-type: application/json' -d '${jsonPayload}'"
+                        def response = powershell(
+                            script: """
+                            \$body = '${jsonPayload}'
+                            Invoke-RestMethod -Uri "https://api.brevo.com/v3/smtp/email" -Method Post -Headers @{ "accept" = "application/json"; "api-key" = \$env:BREVO_API_KEY; "content-type" = "application/json" } -Body \$body
                             """,
-                            returnStdout: true
-                        ).trim()
+                            returnStatus: true
+                        )
                         
                         echo "Brevo API HTTP context: ${response}"
                     } catch (Exception e) {
