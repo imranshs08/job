@@ -40,8 +40,8 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 - [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 3: Node Pools Mastery (Sep 24, 2026)
-- [ ] **Objective:** System vs User node pools, scaling nodes, Spot instances.
-- [ ] **Lectures:** Watch #21–30 (`⏱️ 54m Total`)
+- [x] **Objective:** System vs User node pools, scaling nodes, Spot instances.
+- [x] **Lectures:** Watch #21–30 (`⏱️ 54m Total`)
     * **[7min]** 21. PowerShell Basics in AKS - Connect to Azure, AKS creation, completion, aliases
     * **[5min]** 22. Imperative and declarative approaches
     * **[17min]** 23. Practice with Nodes, Pod, Deployment, Replicaset, DaemonSet, Service, Secret, CM
@@ -53,7 +53,7 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
     * **[4min]** 29. containerd
     * **[2min]** 30. azure-ip-masq-agent
 
-- [ ] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
+- [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 4: AKS Networking (Part 1) (Sep 25, 2026)
 - [ ] **Objective:** Kubenet vs Azure CNI, core internal cluster networking.
