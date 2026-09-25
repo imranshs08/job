@@ -22,8 +22,8 @@ pipeline {
             steps {
                 script {
                     echo "Executing azure_agc_lab_manager.sh with action: ${params.ACTION}"
-                    bat "bash -c 'chmod +x 16-Automation-Scripts/azure_agc_lab_manager.sh'"
-                    bat "bash 16-Automation-Scripts/azure_agc_lab_manager.sh ${params.ACTION}"
+                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"chmod +x 16-Automation-Scripts/azure_agc_lab_manager.sh\""
+                    bat "\"C:\\Program Files\\Git\\bin\\bash.exe\" 16-Automation-Scripts/azure_agc_lab_manager.sh ${params.ACTION}"
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
 
                         def response = bat(
                             script: """@echo off
-                            bash -c "curl -s -X POST 'https://api.brevo.com/v3/smtp/email' -H 'accept: application/json' -H 'api-key: ${BREVO_API_KEY}' -H 'content-type: application/json' -d '${jsonPayload}'"
+                            "C:\\Program Files\\Git\\bin\\bash.exe" -c "curl -s -X POST 'https://api.brevo.com/v3/smtp/email' -H 'accept: application/json' -H 'api-key: %BREVO_API_KEY%' -H 'content-type: application/json' -d '${jsonPayload}'"
                             """,
                             returnStdout: true
                         ).trim()
