@@ -43,10 +43,15 @@ pipeline {
                         def response = powershell(
                             script: """
                             \$body = '${jsonPayload}'
-                            Invoke-RestMethod -Uri "https://api.brevo.com/v3/smtp/email" -Method Post -Headers @{ "accept" = "application/json"; "api-key" = \$env:BREVO_API_KEY; "content-type" = "application/json" } -Body \$body
+                            try {
+                                \$res = Invoke-RestMethod -Uri "https://api.brevo.com/v3/smtp/email" -Method Post -Headers @{ "accept" = "application/json"; "api-key" = \$env:BREVO_API_KEY; "content-type" = "application/json" } -Body \$body
+                                Write-Output "Success"
+                            } catch {
+                                Write-Output "Brevo API Error: \$_"
+                            }
                             """,
-                            returnStatus: true
-                        )
+                            returnStdout: true
+                        ).trim()
                         
                         echo "Brevo API HTTP context: ${response}"
                     } catch (Exception e) {
