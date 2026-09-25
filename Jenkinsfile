@@ -31,42 +31,32 @@ pipeline {
 
     post {
         always {
-            node {
-                script {
-                    if (params.NOTIFICATION_EMAIL) {
-                        try {
-                            def buildStatus = currentBuild.currentResult ?: "SUCCESS"
-                            def subject = "Jenkins Job: ${env.JOB_NAME} Build ${env.BUILD_NUMBER} - ${buildStatus}"
-                            def body = "Pipeline finished with status: ${buildStatus}. Please check Jenkins dashboard for detailed logs."
-                            
-                            writeFile file: 'brevo_payload.json', text: """
-                            {
-                                "sender": {"name":"DevOps Jenkins", "email":"jenkins@domain.local"},
-                                "to": [{"email": "${params.NOTIFICATION_EMAIL}"}],
-                                "subject": "${subject}",
-                                "htmlContent": "<p>${body}</p>"
-                            }
-                            """
+            script {
+                if (params.NOTIFICATION_EMAIL) {
+                    try {
+                        def buildStatus = currentBuild.currentResult ?: "SUCCESS"
+                        def subject = "Jenkins Job: ${env.JOB_NAME} Build ${env.BUILD_NUMBER} - ${buildStatus}"
+                        def body = "Pipeline finished with status: ${buildStatus}. Please check Jenkins dashboard for detailed logs."
+                        
+                        def jsonPayload = """{"sender": {"name":"DevOps Jenkins", "email":"jenkins@domain.local"}, "to": [{"email": "${params.NOTIFICATION_EMAIL}"}], "subject": "${subject}", "htmlContent": "<p>${body}</p>"}"""
 
-                            def response = sh(
-                                script: '''
-                                curl -s -w "\\n%{http_code}" -X POST 'https://api.brevo.com/v3/smtp/email' \\
-                                     -H 'accept: application/json' \\
-                                     -H "api-key: ${BREVO_API_KEY}" \\
-                                     -H 'content-type: application/json' \\
-                                     -d @brevo_payload.json
-                                ''',
-                                returnStdout: true
-                            ).trim()
-                            
-                            echo "Brevo API HTTP context: ${response}"
-                            sh 'rm -f brevo_payload.json'
-                        } catch (Exception e) {
-                            echo "Failed to send email notification! Ensure 'brevo-api-key' secret text credential is created in Jenkins. Error: ${e.message}"
-                        }
-                    } else {
-                        echo "NOTIFICATION_EMAIL parameter is empty; skipping email notification."
+                        def response = sh(
+                            script: """
+                            curl -s -w "\\n%{http_code}" -X POST 'https://api.brevo.com/v3/smtp/email' \\
+                                 -H 'accept: application/json' \\
+                                 -H "api-key: \${BREVO_API_KEY}" \\
+                                 -H 'content-type: application/json' \\
+                                 -d '${jsonPayload}'
+                            """,
+                            returnStdout: true
+                        ).trim()
+                        
+                        echo "Brevo API HTTP context: ${response}"
+                    } catch (Exception e) {
+                        echo "Failed to send email notification! Ensure 'brevo-api-key' secret text credential is created in Jenkins. Error: ${e.message}"
                     }
+                } else {
+                    echo "NOTIFICATION_EMAIL parameter is empty; skipping email notification."
                 }
             }
         }
