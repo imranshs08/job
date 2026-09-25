@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+    }
+
     parameters {
         choice(name: 'ACTION', choices: ['up', 'down'], description: 'Manage Azure Windows Patching Lab')
         string(name: 'NOTIFICATION_EMAIL', defaultValue: 'imranshs08@gmail.com', description: 'Email address to send the pipeline status')
