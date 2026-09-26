@@ -225,6 +225,9 @@ CRD
         echo "To grab the Gateway Public IP once it is assigned:"
         echo -e "   ${BLUE}kubectl get gateway $GATEWAY_NAME -n $INFRA_NAMESPACE -o jsonpath='{.status.addresses[0].value}'${RESET}"
         echo ""
+        echo "Connect to this cluster in your local terminal or Cloud Shell using:"
+        echo -e "   ${BLUE}az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME --overwrite-existing${RESET}"
+        echo ""
         echo -e "${YELLOW}⚠️  CRITICAL COST REMINDER: Run './azure_agc_lab_manager.sh down' when done.${RESET}\n"
         ;;
         
