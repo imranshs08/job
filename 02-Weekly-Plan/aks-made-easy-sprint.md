@@ -28,9 +28,9 @@ This specialized 20-day sprint suspends all other non-Kubernetes study plans. Th
 - [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 5: AKS Networking (Part 2) (Sep 26, 2026)
-- [ ] **Objective:** Services, SNAT, Outbound types, Calico.
-- [ ] **Lectures:** Watch #39–48
-- [ ] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
+- [x] **Objective:** Services, SNAT, Outbound types, Calico.
+- [x] **Lectures:** Watch #39–48
+- [x] Execute hands-on lab and commit markdown notes to `04-Notes/04-Kubernetes/`.
 
 ## Day 6: Identity & Access (Part 1) (Sep 27, 2026)
 - [ ] **Objective:** AKS-managed Microsoft Entra (AAD) integration, RBAC.
