@@ -1,4 +1,1675 @@
-<!DOC
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNSSEC SRE Tracker — Local Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --accent: #38bdf8;
+            /* Switched to Azure blue for AGC */
+            --green: #34d399;
+            --yellow: #fbbf24;
+            --red: #f87171;
+            --blue: #60a5fa;
+            --purple: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse at 20% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(192, 132, 252, 0.06) 0%, transparent 60%);
+        }
+
+        header {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 span {
+            color: var(--accent);
+        }
+
+        header p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .exam-banner {
+            max-width: 1100px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(192, 132, 252, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .exam-stat {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .exam-stat .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .exam-stat .label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+
+        .card.featured {
+            grid-column: span 2;
+        }
+
+        .video-list {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        
+        .video-link {
+            font-size: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .video-link:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+
+        @media (max-width: 768px) {
+            .card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-yellow {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--yellow);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .badge-green {
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .badge-blue {
+            background: rgba(96, 165, 250, 0.1);
+            color: var(--blue);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .weight {
+            opacity: 0.5;
+            font-size: 0.8em;
+            font-weight: normal;
+        }
+
+        .cram-grid {
+            max-width: 1100px;
+            margin: 3rem auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .cram-grid h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
+
+        td code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            color: var(--green);
+        }
+
+        .section-label {
+            max-width: 1100px;
+            margin: 3rem auto 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .copy-btn {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Kubernetes AKS Masterclass <span>Sprint</span></h1>
+        <p>A 20-Day intensive deep dive into AKS starting from fundamentals to advanced Gateway, Security, and Azure DevOps integration.</p>
+        <div style="margin-top: 1.5rem;">
+            <a href="https://www.udemy.com/course/azure-kubernetes-services-aks-made-easy/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0f172a; padding: 10px 24px; font-weight: 600; border-radius: 99px; text-decoration: none; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(56,189,248,0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">▶️ Launch Udemy Course 🚀</a>
+        </div>
+    </header>
+
+    <div class="exam-banner">
+        <div class="exam-stat">
+            <div class="num">20</div>
+            <div class="label">Total Days</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">20h</div>
+            <div class="label">Total Content</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">183</div>
+            <div class="label">Lectures</div>
+        </div>
+        <div class="exam-stat">
+            <div class="num">☁️ Azure Spot</div>
+            <div class="label">Infrastructure</div>
+        </div>
+    </div>
+
+    <!-- LAB AUTOMATION -->
+    <div class="cram-grid"
+        style="padding: 1.5rem; margin-top: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(56, 189, 248, 0.05)); border-left: 4px solid var(--accent);">
+        <h2 style="margin-bottom: 0.5rem; font-size: 1rem;"><span style="margin-right: 8px;">🚀</span> AKS Spot Cluster Automation — Deploy & Destroy</h2>
+        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">Execute these directly in Azure Cloud Shell. Always run 'Down' when finished to nuke the resources and stop billing.</p>
+        
+        <div style="background: #000; padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); margin-bottom: 0.75rem;">
+            <code style="color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- up</code>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- up'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Up', 2000);">Copy Up</button>
+        </div>
+
+        <div style="background: rgba(248, 113, 113, 0.05); padding: 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(248, 113, 113, 0.2);">
+            <code style="color: var(--red); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">curl -sSL "https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh" | bash -s -- down</code>
+            <button class="copy-btn" style="color: var(--red); border-color: rgba(248, 113, 113, 0.4); background: rgba(248, 113, 113, 0.1);" onmouseover="this.style.background='rgba(248, 113, 113, 0.2)'" onmouseout="this.style.background='rgba(248, 113, 113, 0.1)'" onclick="navigator.clipboard.writeText('curl -sSL &quot;https://raw.githubusercontent.com/imranshs08/job/main/16-Automation-Scripts/azure_agc_lab_manager.sh&quot; | bash -s -- down'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy Down', 2000);">Copy Down</button>
+        </div>
+    </div>
+
+    
+
+    <!-- PROGRESS BANNER -->
+    <div class="cram-grid" style="background: rgba(15, 23, 42, 0.6); padding: 1.5rem; margin-top: 1.5rem; margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h2 style="font-size: 1.25rem; color: #f1f5f9; margin-bottom: 0.4rem;">🎯 20-Day Course Mission</h2>
+                <p id="motivation-text" style="color: #94a3b8; font-size: 0.9rem; font-style: italic;">"Loading motivation..."</p>
+            </div>
+            <div style="text-align: right; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid rgba(248,113,113,0.2);">
+                <div style="color: #cbd5e1; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem;">Course Target: Oct 11, 2026</div>
+                <div id="aks-countdown" style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #f87171; font-weight: bold; text-shadow: 0 0 10px rgba(248,113,113,0.3);">Loading...</div>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.85rem; color: #e2e8f0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Sprint Completion</span>
+            <span id="progress-percentage" style="font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: bold; text-shadow: 0 0 10px rgba(52,211,153,0.4);">0%</span>
+        </div>
+        <div style="width: 100%; background: rgba(255,255,255,0.05); border-radius: 99px; height: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);">
+            <div id="progress-bar-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #38bdf8, #34d399); border-radius: 99px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(52,211,153,0.5);"></div>
+        </div>
+    </div>
+
+    <!-- AI PROMPT SECTION -->
+    <div class="cram-grid" style="padding: 1.5rem; margin-top: 1.5rem; background: linear-gradient(to right, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.1)); border-left: 4px solid #10b981; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+            <div>
+                <h2 style="margin-bottom: 0.2rem; font-size: 1.1rem; color: #34d399;"><span style="margin-right: 8px;">🤖</span> SRE AKS Notes Generator</h2>
+                <p style="font-size: 0.85rem; color: #94a3b8;">Use this highly-crafted prompt to generate perfectly architected Markdown notes for each Udemy chapter.</p>
+            </div>
+            <a href="https://github.com/imranshs08/job/tree/main/04-Notes/04-Kubernetes/AKS-Masterclass" target="_blank" style="background: rgba(255,255,255,0.1); color: #f1f5f9; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">📂 Open Notes Folder</a>
+        </div>
+        
+        <div class="prompt-box" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem;" id="aks-prompt-text">Act as a **Senior AKS Platform Architect / SRE**. 
+I am currently studying Kalyan Reddy Daida's "Azure Kubernetes Services (AKS) Made Easy" Udemy course.
+
+**▶️ CURRENT VIDEO TOPIC:**
+[ Paste the Video Title or Day Objective Here ]
+
+Please generate a high-fidelity, SRE-grade documentation markdown file based on the topic and my raw notes below.
+
+**Your output MUST rigorously follow this architecture:**
+1. **The "Why" (Analogy):** Explain the core concept using a real-world infrastructure analogy (e.g., comparing Azure CNI vs Kubenet to physical router topologies).
+2. **Mermaid Architecture Diagram:** Provide a highly detailed Markdown `mermaid` flowchart mapping the specific AKS abstraction being discussed (such as VNETs, Subnets, Node Pools, AGC Ingress flows, or Entra ID RBAC assignments).
+3. **Execution Commands:** Provide the exact `az aks` and `kubectl` execution commands with parameters. Prioritize defensive scripting principles (no destructive commands without warnings).
+4. **Production Gotchas & Cost Optimization:** Highlight Azure-specific quotas, limitations, Spot instance traps, or security boundaries.
+5. **Interview Traps (STAR):** Present one high-level architectural interview question related to this topic, explicitly answered using the Situation, Task, Action, Result framework.
+
+**Antigravity (AI) Execution & Version Control Workflow:**
+1. Do NOT just output the text in the chat. Use your `write_to_file` tool to save this documentation directly into my local repository at `c:\Job Tracker-Notes-Kubernetes\AKS-Masterclass\`.
+2. Name the file sequentially based on the topic (e.g., `01_Topic_Name.md`, `02_Topic_Name.md`). Please run an `ls` or check the directory first to find the next available sequential number.
+3. Before committing, use your tools to edit BOTH `c:\Job Tracker-Weekly-Planks-made-easy-sprint.md` AND `c:\Job Trackerks-expert-viewer.html`. Find the plaintext video title you just documented and wrap it in a relative markdown link for the tracker, and an HTML `<a href...>` anchor for the dashboard. (e.g., `[Title](../../04-Notes/04-Kubernetes/AKS-Masterclass/03_Topic.md)`).
+4. Once both the new note is created and the sprint tracker is linked, use `run_command` to `git add .`, `git commit -m "docs(aks): add notes for [Topic] and link in syllabus"`, and `git push` to the remote repository.
+
+---
+**🧠 WHAT I LEARNED FROM THE VIDEO / RAW NOTES:**
+[ Paste your rough notes, transcripts, or command outputs here ]</div>
+        <button id="copy-aks-prompt-btn" onclick="copyAksPrompt()" style="background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.5); color: #34d399; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; width: 100%; transition: all 0.2s;">📋 Auto-Copy SRE Prompt to Clipboard</button>
+    </div>
+
+    <div class="section-label">📚 The 20-Day AKS Curriculum</div>
+    <div class="grid">
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" checked="checked" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 1: Intro to AKS & Containers 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #1–10</span>
+            </h2>
+            <p>What is K8s, Docker basics, AKS architecture.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        1. Introduction about instructor and course
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        2. Good to have / Recommended background
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[0min]</span> 
+                        3. Connect with me
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/02_Container_Isolation_Namespaces_and_Cgroups.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">4. What is a container and how is it different from a VM?</a>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/03_Microservices_Architecture.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">5. Microservices architecture</a>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/04_Docker_Dockerfile_DockerHub.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">6. What are Docker, Dockerfile and Docker Hub?</a>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        <a href="https://github.com/imranshs08/job/blob/main/04-Notes/04-Kubernetes/AKS-Masterclass/05_Container_Web_App_Build_and_Push.md" target="_blank" style="color: #38bdf8; text-decoration: none; border-bottom: 1px dotted rgba(56,189,248,0.5);">7. Creating our first container app (web app), pushing it to Docker Hub and running</a>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        8. Create our 2nd container app (troubleshooting app), push it to DHub and run it
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        9. Understanding why we need a container orchestrator, like Kubernetes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        10. Introduction to Kubernetes
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" checked="checked" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 2: Cluster Provisioning 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #11–20</span>
+            </h2>
+            <p>Cluster types, control plane access, public vs private, VNET integration.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        11. Kubernetes architecture
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        12. Self-managed vs Cloud-managed Kubernetes cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        13. What is Azure Kubernetes Service (AKS)?
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        14. Azure pricing, free account and AKS cost
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[14min]</span> 
+                        15. Considerations for saving cost on AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        16. Login to Azure and set the subscription
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[11min]</span> 
+                        17. Let's create our first AKS cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        18. Install CLI, explore Azure Cloud Shell, connect to the cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        19. aks-preview extension and feature registration
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        20. Making our life easier with autocompletion, alias, Kubernetes and AKS extension
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" checked="checked" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 3: Node Pools Mastery 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #21–30</span>
+            </h2>
+            <p>System vs User node pools, scaling nodes, Spot instances.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        21. PowerShell Basics in AKS - Connect to Azure, AKS creation, completion, aliases
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        22. Imperative and declarative approaches
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[17min]</span> 
+                        23. Practice with Nodes, Pod, Deployment, Replicaset, DaemonSet, Service, Secret, CM
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        24. Understanding our CIDRs
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        25. What is a node pool?
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        26. Connect to AKS nodes - quick demo
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        27. Exploring the AKS cluster - Kubernetes side
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        28. kubelet
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        29. containerd
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        30. azure-ip-masq-agent
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" checked="checked" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 4: AKS Networking (Part 1) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #31–38</span>
+            </h2>
+            <p>Kubenet vs Azure CNI, core internal cluster networking.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 30m in Total (8 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        31. cloud-node-manager
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        32. coredns
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        33. coredns-autoscaler
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        34. CSI
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        35. konnectivity
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        36. kube-proxy
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        37. metrics-server
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        38. Exploring the AKS cluster - Azure infrastructure side
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" checked="checked" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 5: AKS Networking (Part 2) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #39–48</span>
+            </h2>
+            <p>Services, SNAT, Outbound types, Calico.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>39. Virtual Machine Scale Set (VMSS)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>40. Virtual Network (VNET) and Subnet (SNET)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>41. Network Security Group (NSG)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>42. Route Table (RT)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>43. Load Balancer (LB) and Public IP (PIP)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>44. Managed Identity (MI)</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[14min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>45. Important notes about AKS support policy</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[24min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>46. Avoid this common mistake in AKS with the NRGLockdown feature</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>47. Stop and Start feature</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>48. About kubeconfig and how to work with multiple AKS clusters</span>
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 6: Identity & Access (Part 1) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #49–57</span>
+            </h2>
+            <p>AKS-managed Microsoft Entra (AAD) integration, RBAC.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>49. Deploy and manage a Kubernetes application (Extension) from Azure Marketplace</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        ✅ <span style='opacity: 0.6; text-decoration: line-through;'>50. Install kubectl plugins with krew</span>
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        51. VM types: VMSS (Scale Set) vs VMAS (Availability Set)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        52. Understanding System and User node pool types
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        53. Connect to AKS nodes - using helper pod
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        54. Connect to AKS nodes - via SSH using Azure Bastion
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        55. Connect to AKS nodes - via SSH using a pod
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        56. Connect to AKS nodes - run-command invoke
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        57. Node's Operating Systems in AKS
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 7: Identity & Access (Part 2) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #58–66</span>
+            </h2>
+            <p>Service Principals, Managed Identities, Workload Identity.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        58. Node pool with AzureLinux (Mariner) OS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        59. Create Windows node pool and connect to nodes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        60. Clarification about the next lecture (using Windows Server Core LTSC image)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        61. Schedule pods on specific node pools or specific OS type nodes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        62. Customize node configuration using az aks parameters
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        63. Customize node configuration using DaemonSet
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        64. OS disk types
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        65. Default OS disk sizes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        66. Spot node pools
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 8: Security Deep Dive (Part 1) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #67–75</span>
+            </h2>
+            <p>Azure Key Vault integration using Secret Store CSI driver.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        67. GPU node pools
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        68. Node pool snapshot
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        69. Resize a node pool
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        70. Important note! Kubenet network plugin will be retired in 2028
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        71. Kubenet network plugin (retired in 2028)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        72. Azure CNI network plugin
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        73. Azure CNI overlay network plugin
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        74. Network plugins comparison
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        75. Other network plugins
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 9: Security Deep Dive (Part 2) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #76–85</span>
+            </h2>
+            <p>Network Policies, AppArmor, Seccomp, Image Cleaner.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        76. Bring your own VNET/subnet, NSG and Route Table in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[11min]</span> 
+                        77. A deeper look into LoadBalancer Service in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        78. Consideration when multiple NSGs are used
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        79. Kubernetes Internal Load Balancer
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        80. Use an Azure Private Link service to connect to an internal load balancer
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        81. Understand VNET Peering
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        82. SNAT in Azure
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        83. Outbound types: Load Balancer, NAT Gateway and UserDefinedRouting (UDR)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        84. Create AKS with NAT Gateway
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[11min]</span> 
+                        85. Create AKS with UDR and Azure Firewall
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 10: Scaling Operations 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #86–94</span>
+            </h2>
+            <p>HPA (Horizontal Pod Autoscaler), VPA, Cluster Autoscaler.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        86. Learn how AKS works with HTTP Proxy
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        87. Install mitmproxy on a VM
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        88. Deploy an AKS cluster with HTTP Proxy
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[25min]</span> 
+                        89. Explore, update, and troubleshoot AKS with HTTP Proxy
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        90. Types of clusters in relation to control plane access
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        91. Explore public AKS cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        92. Create public AKS cluster with VNET integration
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        93. API server authorized IP ranges
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[13min]</span> 
+                        94. Create and connect to general and VNET integration private AKS cluster
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 11: Storage in AKS 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #95–104</span>
+            </h2>
+            <p>Storage Classes, PV, PVC, CSI Drivers, Azure Disks/Files.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        95. az aks invoke command
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        96. Run kubectl commands from worker nodes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        97. Clarification about the rebranding of Azure Active Directory to Microsoft Entra
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        98. Understanding AKS-managed AAD integration with Azure RBAC and Kubernetes RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        99. Prepare the environment for Azure RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[11min]</span> 
+                        100. Practice Azure RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        101. Use custom role with Azure RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        102. Prepare the environment for Kubernetes RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        103. Practice Kubernetes RBAC
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        104. Local accounts
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 12: Monitoring & Observability 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #105–114</span>
+            </h2>
+            <p>Container Insights, Azure Monitor, Log Analytics, Troubleshooting.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        105. Identities in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        106. Create an AKS cluster with service principal
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        107. Certificate rotation
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        108. Network policies in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        109. Azure Key Vault Provider for Secrets Store CSI Drive
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        110. Use autorotation for Azure Key Vault Secret Provider add-on
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        111. Azure Policy for Kubernetes
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[15min]</span> 
+                        112. Microsoft Defender for Containers in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        113. AppArmor in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        114. Seccomp in AKS
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 13: Cluster Maintenance 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #115–123</span>
+            </h2>
+            <p>Upgrading AKS clusters, node OS updates, certificate rotation.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[14min]</span> 
+                        115. Use Image Cleaner (Eraser) in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[16min]</span> 
+                        116. Understand resource reservations and kube-reserved resource optimization in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        117. Manually scale pod replicas and node count
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        118. Stop/deallocate nodes with Scale-down mode
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        119. Horizontal Pod Autoscaler (HPA)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        120. Vertical Pod Autoscaler (VPA)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        121. Cluster Autoscaler (CAS)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        122. Virtual nodes add-on for AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        123. KEDA in AKS
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 14: Image Management 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #124–133</span>
+            </h2>
+            <p>Integrate AKS with ACR, automated updates, security scanning.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 47m in Total (10 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        124. Exploring the storage options in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        125. Dynamically create Azure Disk
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        126. Create snapshot and restore Azure Disk
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        127. Resize Azure Disk
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        128. Statically create Azure File
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        129. Use a custom StorageClass to create Azure File with private endpoint and GRS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        130. Use a StatefulSet to dynamically create Azure Blob
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        131. Understand Azure NetApp Files and Astra Trident
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        132. Dynamically create Azure NetApp Files with Astra Trident in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        133. Expand / resize an Azure NetApp Files volume
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 15: Legacy Ingress Controllers 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #134–142</span>
+            </h2>
+            <p>Nginx Ingress controller setup, TLS termination with Cert-Manager.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        134. Activity logs
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        135. Diagnose and solve problems and Ask Genie
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        136. Resource Health and Azure Status
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        137. Azure Advisor
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        138. Metrics explorer for AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        139. Metrics explorer for AKS related resources
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        140. Azure Monitor with Container Insights in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        141. Explore Insights
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        142. Explore Workbooks
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 16: Modern Gateway API 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #143–151</span>
+            </h2>
+            <p>Working with Azure Application Gateway for Containers (AGC).</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        143. Explore Logs
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[2min]</span> 
+                        144. Understanding Alerts
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        145. Create out-of-the-box Alert
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        146. Create custom Alert
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[11min]</span> 
+                        147. Diagnostics settings in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        148. Monitor AKS with managed Prometheus and Grafana
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        149. Understand and capture TCPDump on Linux node and collect it locally
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        150. Capture TCPDump on Linux node with autorotation and store it in a file share
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        151. Capture TCPDump on Linux pod with Mariner OS and collect it locally
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 17: High Availability (HA) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #152–160</span>
+            </h2>
+            <p>Multi-zone clusters, pod topology spread constraints, quotas.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 55m in Total (9 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        152. Add a TCPDump sidecar container to a pod
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        153. Understanding K8s version, node image, the upgrade and why we need to upgrade
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        154. Auto-upgrade Feature
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        155. Planned Maintenance Feature
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        156. What to check to prevent an upgrade failure
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        157. Performing a Kubernetes version upgrade - All at once
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        158. Performing a Kubernetes version upgrade - Blue green
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        159. Performing a node image upgrade
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        160. What is Azure Container Registry (ACR) and how the integration works?
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 18: Azure DevOps (Part 1) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #161–168</span>
+            </h2>
+            <p>Introduction to CI/CD on AKS, setting up pipelines.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 30m in Total (8 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[5min]</span> 
+                        161. Create ACR and push/import our apps to it
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        162. Integrate AKS and ACR - Azure/RBAC method
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        163. Integrate AKS and ACR - Kubernetes/pull secret method
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        164. Securely connect to ACR via a private connection
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        165. What is an ingress controller?
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        166. Using Application Gateway Ingress Controller (AGIC)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        167. Expose apps using a domain name on HTTPS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        168. Using nginx-ingress-controller in AKS
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 19: Azure DevOps (Part 2) 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #169–176</span>
+            </h2>
+            <p>Helm charts in pipelines, blue/green deployments.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 30m in Total (8 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        169. Expose App on HTTPS with Cert-Manager and Let's Encrypt
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        170. Use multiple ingress controllers in the same AKS cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[7min]</span> 
+                        171. Gateway API basics
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        172. What is Application Gateway for Containers?
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[16min]</span> 
+                        173. Using Application Gateway for Containers (including Gateway API and Ingress API)
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[3min]</span> 
+                        174. Free and Standard tiers for AKS cluster management
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[9min]</span> 
+                        175. Availability Zones in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[10min]</span> 
+                        176. Use Azure Front Door to route traffic between multiple AKS clusters
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+        <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="card-icon" style="position:relative;">☁️</div>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.8rem; cursor: pointer; color: #94a3b8; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(0,0,0,0.2)'">
+                    <input type="checkbox" class="day-checkbox" onclick="updateProgress()" style="accent-color: #34d399; width: 14px; height: 14px; cursor: pointer;">
+                    Done
+                </label>
+            </div>
+            <h2 style="display:flex; justify-content:space-between; align-items:center;">
+                Day 20: Final Capstone Lab 
+                <span style="font-size:0.7em; background:rgba(56, 189, 248, 0.1); color:#38bdf8; padding:2px 8px; border-radius:12px; font-weight:normal; border:1px solid rgba(56, 189, 248, 0.2);">Lec #177–183</span>
+            </h2>
+            <p>Deploying a full microservices app with identity, storage, and AGC.</p>
+            <div class="video-details" style="margin-top: 1rem;">
+                <details style="background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem;">
+                    <summary style="cursor: pointer; font-size: 0.9em; font-weight: 500; color: #bae6fd;">▶ ⏱️ 1h 14m in Total (7 videos)</summary>
+                    <ul style="list-style: none; padding: 0.5rem 0 0 0; margin: 0;">
+                        
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[4min]</span> 
+                        177. Use custom domain and Azure Front Door certificate to expose apps in AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[8min]</span> 
+                        178. Initial setup: Create a project, a service connection, add files, create ACR+AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[22min]</span> 
+                        179. Example 1: Use a preconfigured Pipeline to build/push to ACR and deploy to AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[12min]</span> 
+                        180. Example 2: Use a Pipeline configured by us to build/push to ACR, deploy to AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[6min]</span> 
+                        181. Example 3: Use a Pipeline to run kubectl commands against our AKS cluster
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[21min]</span> 
+                        182. Setup a self-hosted agent and use it to deploy to ACR and AKS
+                    </li>
+                    <li style="font-size: 0.85em; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 6px;">
+                        <span style="color:#94a3b8; font-family:monospace; margin-right: 5px;">[1min]</span> 
+                        183. Bonus Lecture
+                    </li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+    </div>
+    <!-- END CRAM GRID -->
+    <footer>
+        <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\aks-made-easy-sprint.md</code><br>
+            🎯 Goal: DevOps SRE 2027</p>
+    </footer>
+
+
+    <script>
+        function copyAksPrompt() {
+            const promptText = document.getElementById('aks-prompt-text').innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const btn = document.getElementById('copy-aks-prompt-btn');
+                btn.innerHTML = "✅ Copied to Clipboard!";
+                btn.style.background = "rgba(16, 185, 129, 0.4)";
+                setTimeout(() => {
+                    btn.innerHTML = "📋 Auto-Copy SRE Prompt to Clipboard";
+                    btn.style.background = "rgba(16,185,129,0.2)";
+                }, 3000);
+            });
+        }
+    </script>
+
+    <script>
+        const quotes = [
+            "Pain is temporary, Kubernetes mastery is forever.",
+            "Your $200 Azure credit is burning. Deploy faster.",
+            "SREs aren't born, they are forged in broken YAML.",
+            "Master the control plane. Control your career.",
+            "Every dead pod is a lesson learned. Keep scaling.",
+            "No UI. Pure CLI. Welcome to the backend.",
+            "Automate everything. Document everything else."
+        ];
+        document.getElementById('motivation-text').innerText = '"' + quotes[Math.floor(Math.random() * quotes.length)] + '"';
+
+        // Countdown Timer Logic
+        const sprintDeadline = new Date("2026-10-11T23:59:59").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = sprintDeadline - now;
+            if (diff < 0) {
+                document.getElementById("aks-countdown").innerText = "Sprint Ended!";
+                document.getElementById("aks-countdown").style.color = "#94a3b8";
+            } else {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById("aks-countdown").innerText = `${d}d ${h}h ${m}m ${s}s`;
+            }
+        }, 1000);
+
+        // Progress Checkbox Logic
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            let checked = 0;
+            checkboxes.forEach((cb, idx) => {
+                if (cb.checked) {
+                    checked++;
+                    localStorage.setItem('aks-masterclass-d' + idx, 'true');
+                    cb.closest('.card').style.borderColor = 'rgba(52, 211, 153, 0.5)';
+                    cb.closest('.card').style.background = 'linear-gradient(to bottom right, var(--surface), rgba(52, 211, 153, 0.05))';
+                } else {
+                    localStorage.setItem('aks-masterclass-d' + idx, 'false');
+                    cb.closest('.card').style.borderColor = 'var(--border)';
+                    cb.closest('.card').style.background = 'var(--surface)';
+                }
+            });
+            const total = checkboxes.length || 20;
+            const pct = Math.round((checked / total) * 100);
+            document.getElementById('progress-percentage').innerText = pct + '%';
+            document.getElementById('progress-bar-fill').style.width = pct + '%';
+            
+            if(pct === 100) {
+                document.getElementById('progress-bar-fill').style.boxShadow = '0 0 20px rgba(52,211,153,0.8)';
+            }
+        }
+
+        // On Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            checkboxes.forEach((cb, idx) => {
+                if (localStorage.getItem('aks-masterclass-d' + idx) === 'true') {
+                    cb.checked = true;
+                }
+            });
+            updateProgress(); // init visual states
+        });
+    </script>
+
+</body>
+
+
+</html
     <div style="max-width: 900px; margin: 2rem auto; color: white;">
         <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 5]</span>  Powershell Validation</h1>
         
