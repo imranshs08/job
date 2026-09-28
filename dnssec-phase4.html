@@ -404,18 +404,18 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
 
     
     <div style="max-width: 900px; margin: 2rem auto; color: white;">
-        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 4]</span>  SRE Forensic Recovery</h1>
+        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 4]</span>  Forensic Recovery</h1>
         
         <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
             <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">📖 Architecture Concept Explainer</h2>
             <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1rem;">
-            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">The internet is down, applications are crashing, and the cache TTLs have expired. How do you recover? <br><br>Since the internal DNS resolver cannot recursively trace domains, you must rely on hardcoded IP tunnels. However, a safer path is simply bypassing recursive hooks and relying on core network HTTPS resolution. <br><br>We pull the official Root Anchor XML natively from IANA, overwriting the corrupted block.</p>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">The Windows Domain apps are hanging, timeouts are racking up across the application load balancers. Let's recover the Linux Gateway.<br><br>Since the internal DNS resolver cannot recursively trace domains, you isolate standard unauthenticated HTTPs proxies over the wider azure backplane.<br><br>We pull the official Root Anchor XML natively from IANA, overwriting the corrupted block.</p>
         </div>
 
         <div style="background: rgba(0,0,0,0.4); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands</h2>
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands (Enterprise Logic)</h2>
             <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
-            <div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Exit the client SSH session and reconnect directly back into the gateway server:</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ ssh sreadmin@$SERVER_PUBLIC_IP</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ wget -qO- https://data.iana.org/root-anchors/bind.keys | sudo tee /etc/bind/bind.keys</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo systemctl restart bind9</div>
+            <div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Exit the RDP session entirely and connect right back to the Linux Server SSH tunnel:</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ ssh sreadmin@$SERVER_PUBLIC_IP</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ wget -qO- https://data.iana.org/root-anchors/bind.keys | sudo tee /etc/bind/bind.keys</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo systemctl restart bind9</div>
         </div>
         
         

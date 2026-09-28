@@ -404,18 +404,18 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
 
     
     <div style="max-width: 900px; margin: 2rem auto; color: white;">
-        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 5]</span>  The Ultimate Validation</h1>
+        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 5]</span>  Powershell Validation</h1>
         
         <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
             <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">📖 Architecture Concept Explainer</h2>
             <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1rem;">
-            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">We must verify mathematical cryptographic compliance. When we query Google again, pay excruciating attention to the DNS headers.<br><br>The presence of the <b>ad</b> (Authenticated Data) flag implies that the recursive server has successfully processed the upstream zone-signing key and verified it recursively against your freshly installed Root KSK Trust Anchor.</p>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">We must verify mathematical cryptographic compliance on the downstream node. When we run the PowerShell test again, the failure lock completely drops. <br><br>If the recursive trust chain holds successfully from the Linux Gateway out to the global ICANN architecture, your Windows machine will immediately begin ingesting the DNS A-records with total reliability.</p>
         </div>
 
         <div style="background: rgba(0,0,0,0.4); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands</h2>
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands (Enterprise Logic)</h2>
             <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
-            <div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Exit the server and SSH right back into the client node:</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ ssh sreadmin@$CLIENT_PUBLIC_IP</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ dig google.com</div><div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Look for the NOERROR block alongside the flags: qr rd ra [ad];</div>
+            <div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Drop back into your Windows RDP Session and clear the dead Cache blocks:</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ Clear-DnsClientCache</div><div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># Run the DNSSEC Ok Boolean payload one last time. It will natively succeed without Exception!</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ Resolve-DnsName -Name google.com -DnssecOk -Server <INSERT_SERVER_PRIVATE_IP></div>
         </div>
         
         
