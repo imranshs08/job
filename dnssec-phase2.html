@@ -418,7 +418,16 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
             <div style="font-size: 0.9em; padding: 12px; margin-bottom: 8px; color:#38bdf8; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8;"># ssh sreadmin@$SERVER_PUBLIC_IP</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo apt update && sudo apt install bind9 dnsutils -y</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo bash -c 'echo "managed-keys { \".\" initial-key 257 3 8 \"AwEAAAABBBBBCCCCCDDDDDEEEEEFFFFFGGGGGHHHHHIIIIIJJJJJKKKKKLLLLLMMMMM...\"; };" > /etc/bind/bind.keys'</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo sed -i 's/dnssec-validation auto;/dnssec-validation yes;/g' /etc/bind/named.conf.options</div><div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo systemctl restart bind9</div>
         </div>
         
-        <div style="margin-top: 2rem; text-align: center;">
+        
+        <div style="background: rgba(220, 38, 38, 0.1); padding: 2rem; border-radius: 12px; border: 1px solid rgba(220, 38, 38, 0.4); margin-bottom: 2rem;">
+            <h2 style="margin-top: 0; color: #fecaca; font-size: 1.5rem;">💥 Global Teardown (Nuke Lab)</h2>
+            <hr style="border-color: rgba(220, 38, 38, 0.2); margin-bottom: 1rem;">
+            <p style="font-size: 1rem; color: #fca5a5; margin-bottom: 1.5rem;">Stuck? Exhausted capacity? Finished with the lab? Hard-delete this entire topology to reset the environment and stop Azure billing instantly.</p>
+            <div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#fecaca; background: #450a0a; border-radius: 6px;">
+                $ az group delete --name rg-dnssec-lab --yes --no-wait
+            </div>
+        </div>
+    <div style="margin-top: 2rem; text-align: center;">
             <a href="dnssec-sre-lab.html" style="padding: 12px 24px; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; display: inline-block;">⬅ Return to Main Dashboard</a>
         </div>
     </div>
