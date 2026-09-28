@@ -402,55 +402,27 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
         <button id="copy-aks-prompt-btn" onclick="copyAksPrompt()" style="background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.5); color: #34d399; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; width: 100%; transition: all 0.2s;">📋 Auto-Copy SRE Prompt to Clipboard</button>
     </div>
 
-    <div class="section-label">📚 The DNSSEC Execution Vector</div>
-    <div class="grid">
+    
+    <div style="max-width: 900px; margin: 2rem auto; color: white;">
+        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 1]</span>  Dual-VM Provisioning</h1>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">📖 Architecture Concept Explainer</h2>
+            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1rem;">
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">To accurately simulate global routing collapse, we must first provision a private Azure Virtual Network (VNet). <br><br>We deploy two Linux nodes within this <b>snet-internal</b> block: <br>1. <b>vm-dns-server</b>: The authoritative gateway running BIND9.<br>2. <b>vm-dns-client</b>: The application node that consumes the gateway.</p>
+        </div>
 
-        <div class="card" onclick="window.location.href='dnssec-phase1.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 1: Dual-VM Provisioning</h2>
-            <p>Execute from Azure Cloud Shell to aggressively bypass local limitations and autonomously build the topology.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
+        <div style="background: rgba(0,0,0,0.4); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands</h2>
+            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
+            <div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ az group create --name rg-dnssec-lab --location centralus</div>\n<div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ az network vnet create -g rg-dnssec-lab -n vnet-dnssec --address-prefix 10.0.0.0/16 --subnet-name snet-internal --subnet-prefix 10.0.1.0/24</div>\n<div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ az vm create -g rg-dnssec-lab -n vm-dns-server --vnet-name vnet-dnssec --subnet snet-internal --image Ubuntu2204 --admin-username sreadmin --admin-password "SreDevOps2027!" --public-ip-sku Standard --size Standard_B1s</div>\n<div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ az vm create -g rg-dnssec-lab -n vm-dns-client --vnet-name vnet-dnssec --subnet snet-internal --image Ubuntu2204 --admin-username sreadmin --admin-password "SreDevOps2027!" --public-ip-sku Standard --size Standard_B1s</div>\n
         </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase2.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 2: Gateway Sabotage</h2>
-            <p>SSH into the server and violently corrupt ICANN root keys, fundamentally blocking the validation chain.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
+        
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="dnssec-sre-lab.html" style="padding: 12px 24px; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; display: inline-block;">⬅ Return to Main Dashboard</a>
         </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase3.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 3: The Impact (SERVFAIL)</h2>
-            <p>Route the downstream client into the damaged DNS config and systematically log the catastrophic dropout.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase4.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 4: SRE Forensic Recovery</h2>
-            <p>Operate directly on the server to dynamically pull native ICANN keys over an unauthenticated HTTPs tunnel.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase5.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 5: The Ultimate Validation</h2>
-            <p>Jump back into the internal app cluster and forcefully validate that recursive routing is fully restored.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-        </div>
-<footer>
+    </div>
+    <footer>
         <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\aks-made-easy-sprint.md</code><br>
             🎯 Goal: DevOps SRE 2027</p>
     </footer>

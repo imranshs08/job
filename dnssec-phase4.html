@@ -402,55 +402,27 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
         <button id="copy-aks-prompt-btn" onclick="copyAksPrompt()" style="background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.5); color: #34d399; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; width: 100%; transition: all 0.2s;">📋 Auto-Copy SRE Prompt to Clipboard</button>
     </div>
 
-    <div class="section-label">📚 The DNSSEC Execution Vector</div>
-    <div class="grid">
+    
+    <div style="max-width: 900px; margin: 2rem auto; color: white;">
+        <h1 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;"><span style="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8);">[Phase 4]</span>  SRE Forensic Recovery</h1>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">📖 Architecture Concept Explainer</h2>
+            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1rem;">
+            <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">The internet is down, applications are crashing, and the cache TTLs have expired. How do you recover? <br><br>Since the internal DNS resolver cannot recursively trace domains, you must rely on hardcoded IP tunnels. However, a safer path is simply bypassing recursive hooks and relying on core network HTTPS resolution. <br><br>We pull the official Root Anchor XML natively from IANA, overwriting the corrupted block.</p>
+        </div>
 
-        <div class="card" onclick="window.location.href='dnssec-phase1.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 1: Dual-VM Provisioning</h2>
-            <p>Execute from Azure Cloud Shell to aggressively bypass local limitations and autonomously build the topology.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
+        <div style="background: rgba(0,0,0,0.4); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+            <h2 style="margin-top: 0; color: #f8fafc; font-size: 1.5rem;">💻 SRE Execution Commands</h2>
+            <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
+            <div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ wget -qO- https://data.iana.org/root-anchors/bind.keys | sudo tee /etc/bind/bind.keys</div>\n<div style="font-size: 1em; padding: 12px; margin-bottom: 8px; font-family:monospace; color:#bae6fd; background: #0f172a; border-radius: 6px;">$ sudo systemctl restart bind9</div>\n
         </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase2.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 2: Gateway Sabotage</h2>
-            <p>SSH into the server and violently corrupt ICANN root keys, fundamentally blocking the validation chain.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
+        
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="dnssec-sre-lab.html" style="padding: 12px 24px; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; display: inline-block;">⬅ Return to Main Dashboard</a>
         </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase3.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 3: The Impact (SERVFAIL)</h2>
-            <p>Route the downstream client into the damaged DNS config and systematically log the catastrophic dropout.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase4.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 4: SRE Forensic Recovery</h2>
-            <p>Operate directly on the server to dynamically pull native ICANN keys over an unauthenticated HTTPs tunnel.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-    
-        <div class="card" onclick="window.location.href='dnssec-phase5.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 15px rgba(52, 211, 153, 0.4)'" onmouseout="this.style.boxShadow=''">
-            <div class="card-icon" style="position:relative;">🔐</div>
-            <h2>Phase 5: The Ultimate Validation</h2>
-            <p>Jump back into the internal app cluster and forcefully validate that recursive routing is fully restored.</p>
-            <div class="video-list">
-                <a class="video-link" style="color: #38bdf8; text-decoration: underline;">Launch Phase Guide ➔</a>
-            </div>
-        </div>
-        </div>
-<footer>
+    </div>
+    <footer>
         <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\aks-made-easy-sprint.md</code><br>
             🎯 Goal: DevOps SRE 2027</p>
     </footer>
