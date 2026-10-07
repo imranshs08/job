@@ -1578,7 +1578,139 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
         </div>
     </div>
     <!-- END CRAM GRID -->
-    <footer>
+    
+<div class="container" style="margin-top: 4rem;">
+    <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 2.5rem; margin-bottom: 3rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);">
+        
+        <h1 style="color: #ef4444; font-size: 2.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px;">
+            🔐 Enterprise AKS RBAC & Local Account Security SOP
+        </h1>
+        <h3 style="color: #cbd5e1; font-weight: normal; margin-top: 0; margin-bottom: 2rem;">
+            Validate, troubleshoot, restrict, and audit AKS access when Azure permissions change.
+        </h3>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 2rem;">
+
+        <!-- 1. The Access Model -->
+        <h2 style="color: #f8fafc; margin-bottom: 1rem;">1. Explain the AKS Access Model</h2>
+        <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            A fundamental flaw in Enterprise Cloud Security is assuming that Azure Resource Manager (ARM) permissions explicitly correlate to internal application permissions. They are entirely decoupled topologies.
+        </p>
+
+        <div style="background: rgba(15, 23, 42, 0.9); padding: 1.5rem; border-radius: 8px; font-family: monospace; color: #38bdf8; line-height: 1.8; margin-bottom: 2rem;">
+            Azure Identity (User/SPN) <br>
+            &nbsp; ↳ Microsoft Entra ID (Formerly AAD) <br>
+            &nbsp;&nbsp;&nbsp; ↳ Azure Resource Manager Permissions (ARM RBAC) <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↳ AKS Resource Plane <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↳ AKS Authentication (kubeconfig retrieval) <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↳ Kubernetes Authorization (K8s RBAC) <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↳ Kubernetes API Server <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↳ kubectl
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                <h3 style="color: #60a5fa; margin-top: 0;">Azure Resource RBAC</h3>
+                <p style="font-size: 0.95em; color:#cbd5e1; line-height: 1.5;">Examples: <code>Reader</code>, <code>Contributor</code>, <code>Owner</code>.<br><br>These control access to the Azure AKS resource itself (e.g., updating scaling blocks, deleting the cluster via the Azure Control Plane).</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #10b981;">
+                <h3 style="color: #34d399; margin-top: 0;">Kubernetes RBAC</h3>
+                <p style="font-size: 0.95em; color:#cbd5e1; line-height: 1.5;">Examples: <code>Role</code>, <code>ClusterRole</code>, <code>RoleBinding</code>.<br><br>These control what an explicitly authenticated identity can execute fundamentally inside the Kubernetes Data Plane (e.g., reading Secrets, deleting Pods).</p>
+            </div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+            <h3 style="color: #eab308; margin-top: 0;">⚠️ Azure RBAC for Kubernetes vs Local Accounts</h3>
+            <p style="font-size: 0.95em; color: #cbd5e1; line-height: 1.6;">
+                <strong>Azure RBAC for Kubernetes:</strong> AKS can use Azure RBAC for fundamental K8s authorization natively, but this must NOT be confused with standard ARM (Reader/Contributor) roles. You assign specific "Azure Kubernetes Service RBAC Reader" roles.<br><br>
+                <strong>AKS Local Accounts:</strong> Local accounts represent a completely decoupled, parallel path. If Local Accounts are enabled (they are by default historically), the cluster generates a static, immutable cluster-admin credential wrapper. 
+                <br><br>
+                <span style="color:#ef4444; font-weight:bold;">CRITICAL MAXIM:</span> Azure Reader does NOT automatically mean "no kubectl access".
+            </p>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 2rem;">
+
+        <!-- 2. Real-World Scenario -->
+        <h2 style="color: #f8fafc; margin-bottom: 1rem;">2. The Real-World Vulnerability Scenario</h2>
+        
+        <div style="background: rgba(0,0,0,0.5); border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <p style="margin: 0; font-family: monospace; color: #fdf2f8;">
+                <strong>INITIAL STATE:</strong> User is <code>Contributor</code> (Azure) and <code>cluster-admin</code> (K8s).<br>
+                <strong>DEMOTION:</strong> User is aggressively demoted to <code>Reader</code> via Azure Active Directory.<br>
+                <strong>THE EXPLOIT:</strong> The demoted user executes the following command and inexplicably retains lethal God-Level access to the cluster over kubectl.
+            </p>
+        </div>
+
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1rem;">
+            > az aks get-credentials --resource-group &lt;RESOURCE_GROUP&gt; --name &lt;AKS_NAME&gt;<br>
+            Merged "myAKS" as current context in ~/.kube/config<br><br>
+            > kubectl get nodes<br>
+            NAME                                STATUS   ROLES   AGE     VERSION<br>
+            aks-nodepool1-12345678-vmss000000   Ready    agent   120d    v1.30.2
+        </div>
+
+        <h3 style="color: #f8fafc; margin-top: 2rem;">Why does this zero-day scenario occur?</h3>
+        <ol style="color: #94a3b8; line-height: 1.7; font-size: 1.1rem; padding-left: 1.5rem; margin-bottom: 2rem;">
+            <li style="margin-bottom: 10px;"><strong>ARM Reader Permissions:</strong> The Azure <code>Reader</code> role fundamentally possesses the <code>Microsoft.ContainerService/managedClusters/listClusterUserCredential/action</code> permission. This permits the user to download the API keys.</li>
+            <li style="margin-bottom: 10px;"><strong>Persistent K8s Auth:</strong> Kubernetes authorization (ClusterRoleBindings) is internal. Just because Azure AD roles were stripped externally does NOT revoke the static `cluster-admin` mapping internally inside K8s if they aren't actively synced.</li>
+            <li style="margin-bottom: 10px;"><strong>Local Accounts Backdoor:</strong> When users pull credentials natively via Azure CLI, if Local Accounts are active, Azure hands them a static admin token embedded in the kubeconfig that totally bypasses Entra ID validation.</li>
+            <li style="margin-bottom: 10px;"><strong>Cached Kubeconfig:</strong> Even if permissions drop entirely, a previously cached <code>~/.kube/config</code> credential block can persist for up to 60-90 minutes depending on token cache lifetime.</li>
+        </ol>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 2rem;">
+
+        <!-- Extended Fields -->
+        <h2 style="color: #f8fafc; margin-bottom: 1rem;">3. Enterprise Remediation & Runbook</h2>
+        
+        <h3 style="color: #38bdf8;">Prerequisites</h3>
+        <p style="color: #94a3b8;">Azure CLI configured with <code>Owner</code> or <code>User Access Administrator</code> roles. Execution across the native AKS VNET (if API server is private).</p>
+
+        <h3 style="color: #38bdf8;">Forensic Validation (Determining the Path)</h3>
+        <p style="color: #94a3b8;">Verify if the credential leak is tied to a Local Account bypass or an Entra ID cache:</p>
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1.5rem;">
+            # Analyze the underlying kubeconfig footprint<br>
+            > kubectl config view --raw<br>
+            # Look for OIDC tokens vs static client-certificate-data
+        </div>
+
+        <h3 style="color: #38bdf8;">Immediate Remediation</h3>
+        <p style="color: #ef4444; font-weight: bold; margin-bottom: 0.5em;">Step 1: Disable Local Accounts</p>
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1rem;">
+            > az aks update --resource-group &lt;RG&gt; --name &lt;AKS&gt; --disable-local-accounts
+        </div>
+        
+        <p style="color: #ef4444; font-weight: bold; margin-bottom: 0.5em;">Step 2: Destroy Stale Internal K8s Bindings</p>
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1rem;">
+            > kubectl get clusterrolebindings | grep -i &lt;USER_EMAIL&gt;<br>
+            > kubectl delete clusterrolebinding &lt;COMPROMISED_BINDING&gt;
+        </div>
+
+        <p style="color: #ef4444; font-weight: bold; margin-bottom: 0.5em;">Step 3: Force Entra ID Token Rotation / Revocation</p>
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1.5rem;">
+            > Revoke-AzureADUserAllRefreshToken -ObjectId &lt;USER_OBJECT_ID&gt;
+        </div>
+
+        <h3 style="color: #34d399;">Enterprise Verification</h3>
+        <p style="color: #94a3b8;">Run a test `kubectl` command natively authenticated as the target compromised user. They should immediately be hit with <code>Error from server (Forbidden)</code>.</p>
+
+        <h3 style="color: #eab308; margin-top:2rem;">Break-Glass / Rollback</h3>
+        <p style="color: #94a3b8;">If disabling local accounts causes CI/CD Service Principals to break (a very common disruption), rollback utilizing:</p>
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1.5rem;">
+            > az aks update --resource-group &lt;RG&gt; --name &lt;AKS&gt; --enable-local-accounts
+        </div>
+        
+        <h3 style="color: #f8fafc; margin-top:2rem;">Ultimate Enterprise Recommendation</h3>
+        <ul style="color: #94a3b8; line-height: 1.7; font-size: 1.1rem; padding-left: 1.5rem; margin-bottom: 2rem;">
+            <li>Migrate exclusively to <strong style="color: white;">AKS-managed Microsoft Entra ID</strong> coupled with Azure RBAC for Kubernetes Authorization.</li>
+            <li>Enforce <strong style="color: white;">Conditional Access Policies (CAP)</strong> in Entra ID, ensuring standard credentials cannot bypass network location parameters (require VPN IP for Kubernetes API execution).</li>
+            <li>Maintain exactly zero local accounts on production instances.</li>
+        </ul>
+        
+    </div>
+</div>
+
+<footer>
         <p>📌 This file is tracking: <code>C:\Job Tracker\02-Weekly-Plan\aks-made-easy-sprint.md</code><br>
             🎯 Goal: DevOps SRE 2027</p>
     </footer>
