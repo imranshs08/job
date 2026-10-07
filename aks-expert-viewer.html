@@ -1715,7 +1715,22 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
             # Look for OIDC tokens vs static client-certificate-data
         </div>
 
+
         <h3 style="color: #38bdf8;">Immediate Remediation</h3>
+        
+        <div style="background: rgba(234, 179, 8, 0.1); border-left: 4px solid #eab308; padding: 1rem; border-radius: 0 6px 6px 0; margin-bottom: 2rem;">
+            <p style="color: #fde047; font-weight: bold; margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
+                ⚠️ Dependency Trap: The v1.25 Lockout Safeguard
+            </p>
+            <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1rem;">
+                Since Kubernetes v1.25, Azure Resource Manager (ARM) actively blocks the <code>--disable-local-accounts</code> command if your cluster is not already fundamentally bound to a secondary identity provider. If allowed to proceed, it would permanently brick the cluster with zero authentication paths.
+            </p>
+            <p style="color: #f8fafc; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: bold;">[PREREQUISITE] Enable Entra ID & Azure RBAC:</p>
+            <div style="background: rgba(0,0,0,0.5); padding: 0.75rem; border-radius: 6px; font-family: monospace; color: #bae6fd; font-size: 0.85rem;">
+                az aks update -g &lt;RG&gt; -n &lt;AKS&gt; --enable-aad --enable-azure-rbac
+            </div>
+        </div>
+
         <p style="color: #ef4444; font-weight: bold; margin-bottom: 0.5em;">Step 1: Disable Local Accounts</p>
         <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 1rem;">
             > az aks update --resource-group &lt;RG&gt; --name &lt;AKS&gt; --disable-local-accounts
