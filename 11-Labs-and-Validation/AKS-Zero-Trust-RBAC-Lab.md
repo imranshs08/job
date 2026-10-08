@@ -53,8 +53,13 @@ az ad group create --display-name "AKS-SRE-Admins" --mail-nickname "akssreadmins
 # 2. Get the Object ID of the Group (SAVE THIS)
 GROUP_ID=$(az ad group show --group "AKS-SRE-Admins" --query id -o tsv)
 
-# 3. Add your Reader User into the Group
-az ad group member add --group "AKS-SRE-Admins" --member-id <YOUR_USER_OBJECT_ID>
+# 3. Extract the Object ID of the Target User dynamically (Save to Variable)
+# Replace this exact email with the target user you are testing with
+USER_EMAIL="reader@jamiaxpressgmail.onmicrosoft.com"
+USER_ID=$(az ad user show --id $USER_EMAIL --query id -o tsv)
+
+# 4. Add the User to the Security Group using the Dynamic Variables
+az ad group member add --group "AKS-SRE-Admins" --member-id $USER_ID
 ```
 
 ### 2.2 Wire the Group to Azure RBAC for Kubernetes
@@ -133,6 +138,6 @@ kubectl delete pod csi-azuredisk-node-<HASH> -n kube-system
 ### 4.4 The Final Revocation
 To instantly kill the user's backend Kubernetes access, simply evict them from the Entra ID Group:
 ```bash
-az ad group member remove --group "AKS-SRE-Admins" --member-id <YOUR_USER_OBJECT_ID>
+az ad group member remove --group "AKS-SRE-Admins" --member-id $USER_ID
 ```
 Wait 2 minutes for token expiration, run `kubectl get pods`, and watch them get slammed with a cold, unforgiving **Error from server (Forbidden)**!
