@@ -158,3 +158,23 @@ To instantly kill the user's backend Kubernetes access, simply evict them from t
 az ad group member remove --group "AKS-SRE-Admins" --member-id $USER_ID
 ```
 Wait 2 minutes for token expiration, run `kubectl get pods`, and watch them get slammed with a cold, unforgiving **Error from server (Forbidden)**!
+
+
+---
+
+## 💥 Phase 5: Environment Cleanup (Cost Containment)
+To prevent unexpected Azure billing and to keep your Entra ID environment clean, execute the following teardown commands to completely nuke the lab infrastructure.
+
+### 5.1 Destroy the Kubernetes Infrastructure
+This command runs asynchronously (`--no-wait`), meaning it will return to your cursor immediately while Azure quietly deletes all Load Balancers, VMs, and Managed Disks in the background.
+```bash
+az group delete --name "rg-gateway-api-lab" --yes --no-wait
+```
+
+### 5.2 Erase the Entra ID Security Group
+Delete the God-Mode group we created during the lab to keep your Azure AD tenant sterile:
+```bash
+az ad group delete --group "AKS-SRE-Admins"
+```
+
+*Lab executed, verified, and safely destroyed! 🚀*
