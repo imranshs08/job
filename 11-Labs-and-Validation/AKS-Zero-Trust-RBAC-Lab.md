@@ -17,7 +17,7 @@ If you do not have a cluster deployed, run the following block to spin up the re
 
 ```bash
 RG_NAME="rg-gateway-api-lab"
-LOCATION="eastus"
+LOCATION="centralus"
 CLUSTER_NAME="aks-agc-lab-spot"
 
 # 1. Spin up the dedicated Resource Group

@@ -15,7 +15,7 @@ set -euo pipefail
 
 # --- Core Vars ---
 RG_NAME="rg-gateway-api-lab"
-LOCATION="eastus"
+LOCATION="centralus"
 CLUSTER_NAME="aks-agc-lab-spot"
 NODE_COUNT="2"
 NODE_SIZE="Standard_D2as_v7" 
