@@ -82,10 +82,14 @@ az ad group member add --group "AKS-SRE-Admins" --member-id $USER_ID
 ### 2.2 Wire the Group to Azure RBAC for Kubernetes
 Instead of relying on Kubernetes-native `ClusterRoleBindings`, we will grant the entire Group administrative control over the cluster via Azure IAM:
 ```bash
+# 4. Retrieve your active Azure Subscription ID dynamically
+SUB_ID=$(az account show --query id -o tsv)
+
+# 5. Wire the Group to Azure RBAC natively
 az role assignment create \
   --role "Azure Kubernetes Service RBAC Cluster Admin" \
   --assignee $GROUP_ID \
-  --scope /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-gateway-api-lab/providers/Microsoft.ContainerService/managedClusters/aks-agc-lab-spot
+  --scope /subscriptions/$SUB_ID/resourceGroups/rg-gateway-api-lab/providers/Microsoft.ContainerService/managedClusters/aks-agc-lab-spot
 ```
 
 ---
