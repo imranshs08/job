@@ -19,7 +19,7 @@ Wait! Before you begin, ensure your cluster currently has local accounts *enable
 ### 1.1 Exploit the Cluster (Extract the Static God-Key)
 Run this command to bypass Entra ID entirely and pull the static `clusterUser` certificate:
 ```bash
-az aks get-credentials --resource-group <RG_NAME> --name <CLUSTER_NAME> --admin --file insecure-kubeconfig
+az aks get-credentials --resource-group rg-gateway-api-lab --name aks-agc-lab-spot --admin --file insecure-kubeconfig
 ```
 
 ### 1.2 Validate the Cryptographic Payload
@@ -63,7 +63,7 @@ Instead of relying on Kubernetes-native `ClusterRoleBindings`, we will grant the
 az role assignment create \
   --role "Azure Kubernetes Service RBAC Cluster Admin" \
   --assignee $GROUP_ID \
-  --scope /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RG_NAME>/providers/Microsoft.ContainerService/managedClusters/<CLUSTER_NAME>
+  --scope /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-gateway-api-lab/providers/Microsoft.ContainerService/managedClusters/aks-agc-lab-spot
 ```
 
 ---
@@ -74,8 +74,8 @@ az role assignment create \
 Before we can disable the static backdoor, we must satisfy the Kubernetes v1.25 Lockout Safeguard (otherwise Azure Resource Manager will throw a `BadRequest` error).
 ```bash
 az aks update \
-  --resource-group <RG_NAME> \
-  --name <CLUSTER_NAME> \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot \
   --enable-aad \
   --enable-azure-rbac
 ```
@@ -84,8 +84,8 @@ az aks update \
 Destroy the static certificates forever:
 ```bash
 az aks update \
-  --resource-group <RG_NAME> \
-  --name <CLUSTER_NAME> \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot \
   --disable-local-accounts
 ```
 
@@ -99,7 +99,7 @@ Your cluster is now operating strictly under the **Zero-Trust Model**. Let's pro
 Attempt to pull the static credentials again (this time using the normal `~/.kube/config` location):
 ```bash
 unset KUBECONFIG
-az aks get-credentials --resource-group <RG_NAME> --name <CLUSTER_NAME> --admin
+az aks get-credentials --resource-group rg-gateway-api-lab --name aks-agc-lab-spot --admin
 ```
 **🔥 Expected Output:** 
 ```text
@@ -110,7 +110,7 @@ AuthorizationFailed: Getting static credential is not allowed because this clust
 ### 4.2 Validate Standard Entra ID Login (`kubelogin`)
 Now, attempt to log in using the secure OIDC method:
 ```bash
-az aks get-credentials --resource-group <RG_NAME> --name <CLUSTER_NAME> --overwrite-existing
+az aks get-credentials --resource-group rg-gateway-api-lab --name aks-agc-lab-spot --overwrite-existing
 kubelogin convert-kubeconfig -l azurecli
 ```
 Verify your context has shifted dynamically:
