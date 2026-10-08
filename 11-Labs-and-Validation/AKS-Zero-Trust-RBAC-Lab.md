@@ -12,6 +12,23 @@ This lab is a comprehensive, end-to-end execution guide designed to validate Mic
 
 ---
 
+## 🏗️ Prerequisites: Cluster Provisioning
+If you do not have a cluster deployed, run the following block to spin up the required native Azure architecture. (These are the exact execution parameters extracted from your background provisioning script):
+
+```bash
+RG_NAME="rg-gateway-api-lab"
+LOCATION="eastus"
+CLUSTER_NAME="aks-agc-lab-spot"
+
+# 1. Spin up the dedicated Resource Group
+az group create --name "$RG_NAME" --location "$LOCATION"
+
+# 2. Provision the AKS Cluster (Local Accounts inherently enabled by default)
+az aks create     --resource-group "$RG_NAME"     --name "$CLUSTER_NAME"     --node-count 1     --generate-ssh-keys     --network-plugin azure     --enable-managed-identity
+```
+
+---
+
 ## 🛑 Phase 1: Exposing The Local Account Vulnerability
 
 Wait! Before you begin, ensure your cluster currently has local accounts *enabled* (this is the default behavior on older AKS deployments).
