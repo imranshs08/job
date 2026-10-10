@@ -244,4 +244,12 @@ A common trap for junior engineers when validating this lab is discovering that 
 2. **Entra ID Token Caching:** When you authenticate with Azure AD, a cryptographic JWT (Access Token) is retrieved and cached locally (typically via `kubelogin`). The cluster API Server only validates the mathematical signature and lifespan of this JWT (which survives for 60-90 minutes independently of `az cli`). 
 3. **Propagation Delay:** Disabling local accounts via ARM initiates a rolling restart of the Kubernetes Control Plane. It can take 3-5 minutes for the API Server nodes to bounce and drop the X.509 certificate validation module completely.
 
-**To immediately break your local access:** Delete your local token cache (usually in `~/.kube/cache/kubelogin/`) or erase the `token: ...` block from your kubeconfig file. The next `kubectl` command will then fail instantly!
+**To immediately break your local access and prove the lockout:** Delete your local token cache. The next `kubectl` command will then fail instantly!
+
+```bash
+# For Bash / Linux / Cloud Shell:
+rm -rf ~/.kube/cache/kubelogin/
+
+# For Windows PowerShell:
+Remove-Item -Recurse -Force ~/.kube/cache/kubelogin/
+```
