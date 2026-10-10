@@ -201,7 +201,13 @@ az aks update \
   --name aks-agc-lab-spot \
   --enable-aad \
   --enable-azure-rbac
+```
 
+*(After the prerequisite finishes, your cluster will show Microsoft Entra ID integration, but the Local Accounts backdoor remains "Enabled" and open):*
+
+![Intermediate State - AAD Bound but Local Accounts Still Enabled](aks-security-config-aad-intermediate.png)
+
+```bash
 # The Architect universally destroys all Local Account certificates
 az aks update \
   --resource-group rg-gateway-api-lab \
