@@ -191,6 +191,9 @@ The Architect realizes they left the API Server exposed to local certificate byp
 
 ![BadRequest Error - v1.25 Lockout Safeguard](v125-lockout-error.png)
 
+*(Current configuration before remediation commands are executed):*
+![Current Configuration Before Changes](aks-security-config-before.png)
+
 ```bash
 # PREREQUISITE: Force Azure AD & Azure RBAC Integration
 az aks update \
