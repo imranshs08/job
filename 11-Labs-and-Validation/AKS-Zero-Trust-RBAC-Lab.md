@@ -1,12 +1,12 @@
 # 🔐 SRE Masterclass Sandbox: The Insider Threat (AKS Zero-Trust)
 
-This lab is a cinematic, end-to-end execution guide demonstrating a classic "Insider Threat" scenario. We will simulate three distinct actors: a Senior Admin (`jamiaxpress`), an Insider Threat (`imranshs08`), and an External Hacker (`saifi`). We will prove mathematically why AKS Local Accounts represent a critical backdoor, how credentials can be blindly copy-pasted, and how to permanently board up the API Server using Zero-Trust Architecture.
+This lab is a cinematic, end-to-end execution guide demonstrating a classic "Insider Threat" scenario. We will simulate three distinct actors: a Senior Admin (`Alex`), an Insider Threat (`Imran Ahmad`), and an External Hacker (`saifi`). We will prove mathematically why AKS Local Accounts represent a critical backdoor, how credentials can be blindly copy-pasted, and how to permanently board up the API Server using Zero-Trust Architecture.
 
 ---
 
 ## 🎭 The Cast of Characters
-* **The Architect (Admin):** `jamiaxpress@gmail.com`
-* **The Insider Threat (Employee):** `imranshs08@gmail.com`
+* **The Architect (Alex):** `jamiaxpress@gmail.com`
+* **The Insider Threat (Imran Ahmad):** `imranshs08@gmail.com`
 * **The External Threat (Hacker):** `saifi` (Zero Azure Access)
 * **The Target Workload:** A simple `nginx` deployment.
 
@@ -38,13 +38,13 @@ az aks create     --resource-group "$RG_NAME"     --name "$CLUSTER_NAME"     --n
 ```
 
 ### Step 3 & 4: Inviting & Granting Permission to the Employee
-The Architect (`jamiaxpress`) now invites the Employee (`imranshs08`) to help manage the cluster.
+The Architect (`Alex`) now invites the Employee (`Imran Ahmad`) to help manage the cluster.
 
 > **Enterprise DO:** Assign permissions strictly via Entra ID Security Groups, rather than individual direct user mapping.
 > **Enterprise DON'T:** Do not grant 'Cluster Admin' for trivial tasks; utilize granular Azure RBAC namespaces.
 
 ```bash
-# 3. Get the Object ID of the Insider Threat User (imranshs08)
+# 3. Get the Object ID of the Insider Threat User (Imran Ahmad)
 EMP_EMAIL="imranshs08@gmail.com"
 EMP_ID=$(az ad user show --id $EMP_EMAIL --query id -o tsv)
 
@@ -61,7 +61,7 @@ az role assignment create \
 ## 🎬 Act II: The Sabotage & Data Exfiltration
 
 ### Step 5: The Insider Steals the God-Key
-The Employee (`imranshs08`) intends to quit the company, but wants to maintain a backdoor. They sign into Azure CLI on their laptop and intentionally use the `--admin` flag to pull the raw, static RSA certificate instead of their Entra ID token!
+The Employee (`Imran Ahmad`) intends to quit the company, but wants to maintain a backdoor. They sign into Azure CLI on their laptop and intentionally use the `--admin` flag to pull the raw, static RSA certificate instead of their Entra ID token!
 
 ```bash
 # The Insider executes this on their terminal
@@ -148,7 +148,7 @@ kubectl port-forward deployment/nginx-web 8080:80
 ## 🎬 Act III: Termination & The Hacker Strike
 
 ### Step 8: The Architect Fires the Employee
-The Architect (`jamiaxpress`) terminates `imranshs08` and revokes their Azure access entirely from the portal.
+The Architect (`Alex`) terminates `Imran Ahmad` and revokes their Azure access entirely from the portal.
 
 ```bash
 # The Architect revokes the Azure RBAC assignment
