@@ -78,6 +78,12 @@ A `kubeconfig` is a raw YAML file consisting of three primary pillars:
 2. **Users:** The authentication payload. This can be an Entra ID token, or (in this deadly scenario) raw RSA `client-certificate-data` and `client-key-data`.
 3. **Contexts:** The glue that binds a specific User to a specific Cluster.
 
+**How to Expose the Stolen Payload:**
+By default, Kubernetes hides these certificates and output `REDACTED`. To force the raw cryptographic Base64 strings to render in your terminal, the Guest executes the `--raw` dump command:
+```bash
+kubectl config view --kubeconfig insecure-kubeconfig --raw
+```
+
 **Example of the Stolen Payload:**
 ```yaml
 apiVersion: v1
