@@ -228,4 +228,8 @@ kubectl get pods
 ```text
 error: You must be logged in to the server (Unauthorized)
 ```
-**Victory!** 🎯 The API Server has permanently revoked trust in the static X.509 certificate. The only way to authenticate now is via a validated, real-time Azure Entra ID token, neutralizing the copy-paste vulnerability co
+
+*(Your final, Zero-Trust Architecture cluster configuration):*
+![Final Secured State - Local Accounts Disabled](aks-security-config-lockdown-complete.png)
+
+**Victory!** 🎯 The API Server has permanently revoked trust in the static X.509 certificate. The only way to authenticate now is via a validated, real-time Azure Entra ID token, neutralizing the copy-paste vulnerability completely.
