@@ -1762,6 +1762,34 @@ Please generate a high-fidelity, SRE-grade documentation markdown file based on 
             <li>Enforce <strong style="color: white;">Conditional Access Policies (CAP)</strong> in Entra ID, ensuring standard credentials cannot bypass network location parameters (require VPN IP for Kubernetes API execution).</li>
             <li>Maintain exactly zero local accounts on production instances.</li>
         </ul>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 2rem;">
+
+        <!-- 4. Guest Accounts Gotcha -->
+        <h2 style="color: #f8fafc; margin-bottom: 1rem;">4. Guest & External Account RBAC Gotcha</h2>
+        
+        <div style="background: rgba(0,0,0,0.5); border-left: 4px solid #f97316; padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <p style="margin: 0; font-family: monospace; color: #ffedd5;">
+                <strong>THE SCENARIO:</strong> When deploying Insider Threat Labs or provisioning external contractors (e.g., <code style="color: #fdba74;">@gmail.com</code> or <code style="color: #fdba74;">@outlook.com</code> accounts), assigning Azure RBAC roles via <code style="color: #fdba74;">--assignee user@domain.com</code> often fails with <code style="color: #fdba74;">expected one argument</code> or resource not found.
+            </p>
+        </div>
+
+        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            Entra ID converts external guest emails into complex User Principal Names (UPNs) containing <code>#EXT#@tenant.onmicrosoft.com</code>. Relying on string-based email matching in the Azure CLI is inherently fragile for guest identities.
+        </p>
+
+        <h3 style="color: #38bdf8; margin-top: 2rem;">The Solution: Immutable Object IDs</h3>
+        <p style="color: #94a3b8; margin-bottom: 1rem;">Instead of querying by UPN, hardcode or dynamically resolve the guest's <strong>Object ID</strong> from the Entra ID Portal, bypassing email lookups entirely:</p>
+        
+        <div style="background: #0f172a; padding: 1rem; border-radius: 6px; font-family: monospace; color: #bae6fd; margin-bottom: 2rem; position: relative;">
+            <span style="position: absolute; top: 10px; right: 10px; color: #64748b; font-size: 0.75rem;">BASH</span>
+            > EMP_ID="&lt;YOUR_OBJECT_ID&gt;"<br>
+            > az role assignment create \<br>
+            &nbsp;&nbsp;--role "Azure Kubernetes Service RBAC Cluster Admin" \<br>
+            &nbsp;&nbsp;--assignee-object-id $EMP_ID \<br>
+            &nbsp;&nbsp;--assignee-principal-type User \<br>
+            &nbsp;&nbsp;--scope /subscriptions/&lt;SUB_ID&gt;/.../managedClusters/&lt;CLUSTER&gt;
+        </div>
         
     </div>
 </div>
