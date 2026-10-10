@@ -186,8 +186,17 @@ Even though the employee was fired from Azure, the static God-Key was successful
 The Architect realizes they left the API Server exposed to local certificate bypassing. They must immediately deploy Zero-Trust remediation.
 
 > **Enterprise Warning (Blast Radius):** Running this command will break any Jenkins or GitHub pipelines still utilizing `--admin`. They must be migrated to Azure Service Principals via `kubelogin`.
+>
+> ⚠️ **Dependency Trap (v1.25 Lockout Safeguard):** Since Kubernetes version 1.25, Azure actively blocks the `--disable-local-accounts` command if the cluster is not already strictly bound to Azure AD. You must run the Prerequisite command first to link Entra ID, otherwise you will receive a `BadRequest` error.
 
 ```bash
+# PREREQUISITE: Force Azure AD & Azure RBAC Integration
+az aks update \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot \
+  --enable-aad \
+  --enable-azure-rbac
+
 # The Architect universally destroys all Local Account certificates
 az aks update \
   --resource-group rg-gateway-api-lab \
