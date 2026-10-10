@@ -33,7 +33,7 @@ az group create --name "$RG_NAME" --location "$LOCATION"
 az group create --name "$RG_NAME" --location "$LOCATION"
 
 # 2. Provision the Cluster (Local Accounts Enabled)
-az aks create     --resource-group "$RG_NAME"     --name "$CLUSTER_NAME"     --node-count 1     --generate-ssh-keys     --network-plugin azure     --enable-managed-identity     --enable-aad     --enable-azure-rbac
+az aks create     --resource-group "$RG_NAME"     --name "$CLUSTER_NAME"     --node-count 1 --node-vm-size Standard_D4ds_v7     --generate-ssh-keys     --network-plugin azure     --enable-managed-identity     --enable-aad     --enable-azure-rbac
 
 ```
 
