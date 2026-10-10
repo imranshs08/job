@@ -64,6 +64,48 @@ kubectl config current-context
 # Output will be: aks-agc-lab-spot-admin (They now hold the static God-Key!)
 ```
 
+---
+
+## 🧠 SRE Deep-Dive: The Anatomy of a Kubeconfig
+Before the Guest attacks, let's understand exactly *what* they just stole. 
+
+**Where is it stored?**
+By default, Kubernetes stores this file at `~/.kube/config` on Linux/Mac, or `C:\Users\<YourName>\.kube\config` on Windows. We explicitly saved ours to `insecure-kubeconfig` in the current directory using the `--file` flag.
+
+**The Format:**
+A `kubeconfig` is a raw YAML file consisting of three primary pillars:
+1. **Clusters:** The API Server URL and the Certificate Authority (CA) data to verify the server is legitimate.
+2. **Users:** The authentication payload. This can be an Entra ID token, or (in this deadly scenario) raw RSA `client-certificate-data` and `client-key-data`.
+3. **Contexts:** The glue that binds a specific User to a specific Cluster.
+
+**Example of the Stolen Payload:**
+```yaml
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1... (Base64 CA)
+    server: https://aks-agc-la-rg-...hcp.centralus.azmk8s.io:443
+  name: aks-agc-lab-spot
+contexts:
+- context:
+    cluster: aks-agc-lab-spot
+    user: clusterAdmin_rg-gateway-api-lab_aks-agc-lab-spot
+  name: aks-agc-lab-spot-admin
+current-context: aks-agc-lab-spot-admin
+kind: Config
+users:
+- name: clusterAdmin_rg-gateway-api-lab_aks-agc-lab-spot
+  user:
+    client-certificate-data: LS0tLS1C... (Base64 RSA Public Cert)
+    client-key-data: LS0tLS1C... (Base64 RSA PRIVATE KEY - The God Key)
+```
+
+> **Enterprise Threat Vector (Copy/Paste Execution):** 
+> *Can the Guest copy this file and email it to a hacker?* 
+> **YES.** Because this specific kubeconfig utilizes static `client-certificate-data` (Local Accounts), it is completely decoupled from Azure Active Directory. The Guest can copy this exact `.yaml` file to *any* computer, smartphone, or CI/CD pipeline on earth, set `export KUBECONFIG=insecure-kubeconfig`, and wield cluster-admin privileges instantly. No MFA, no passwords, no Azure validation required. This is why Local Accounts are so dangerous!
+
+---
+
 ### Step 6 & 7: The Guest Deploys the Workload
 To prove they have access, the Guest deploys a standard Nginx application using declarative YAML and validates it locally.
 
