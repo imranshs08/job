@@ -233,3 +233,15 @@ error: You must be logged in to the server (Unauthorized)
 ![Final Secured State - Local Accounts Disabled](aks-security-config-lockdown-complete.png)
 
 **Victory!** 🎯 The API Server has permanently revoked trust in the static X.509 certificate. The only way to authenticate now is via a validated, real-time Azure Entra ID token, neutralizing the copy-paste vulnerability completely.
+
+---
+
+## 🧠 SRE Deep-Dive: The `az cli` vs `kubectl` Decoupling Principle
+A common trap for junior engineers when validating this lab is discovering that running `kubectl get po -A` *still succeeds* locally even after they log out of Azure (`az logout`) or when `az account show` reports `No subscription found`. 
+
+**Why does this happen architecturally?**
+1. **Separation of State:** `kubectl` does **not** route its requests through the `az cli` session state. It fires HTTPS requests directly to the Kubernetes API Server using the authentication tokens embedded in your `~/.kube/config` file.
+2. **Entra ID Token Caching:** When you authenticate with Azure AD, a cryptographic JWT (Access Token) is retrieved and cached locally (typically via `kubelogin`). The cluster API Server only validates the mathematical signature and lifespan of this JWT (which survives for 60-90 minutes independently of `az cli`). 
+3. **Propagation Delay:** Disabling local accounts via ARM initiates a rolling restart of the Kubernetes Control Plane. It can take 3-5 minutes for the API Server nodes to bounce and drop the X.509 certificate validation module completely.
+
+**To immediately break your local access:** Delete your local token cache (usually in `~/.kube/cache/kubelogin/`) or erase the `token: ...` block from your kubeconfig file. The next `kubectl` command will then fail instantly!
