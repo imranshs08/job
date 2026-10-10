@@ -189,6 +189,8 @@ The Architect realizes they left the API Server exposed to local certificate byp
 >
 > ⚠️ **Dependency Trap (v1.25 Lockout Safeguard):** Since Kubernetes version 1.25, Azure actively blocks the `--disable-local-accounts` command if the cluster is not already strictly bound to Azure AD. You must run the Prerequisite command first to link Entra ID, otherwise you will receive a `BadRequest` error.
 
+![BadRequest Error - v1.25 Lockout Safeguard](v125-lockout-error.png)
+
 ```bash
 # PREREQUISITE: Force Azure AD & Azure RBAC Integration
 az aks update \
