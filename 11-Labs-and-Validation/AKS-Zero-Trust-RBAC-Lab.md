@@ -20,6 +20,9 @@ Log into your local CLI as **`jamiaxpress@gmail.com`**. We will deploy a standar
 > **Enterprise DO:** Always explicitly declare `--disable-local-accounts` during provisioning for production clusters.
 > **Enterprise DON'T:** Never assume Entra ID integration automatically secures the API Server. It fundamentally does not.
 
+![AKS Cluster Overview](aks-cluster-overview.png)
+![AKS Security Configuration - Local Accounts Enabled](aks-security-config.png)
+
 ```bash
 # Define Constants
 RG_NAME="rg-gateway-api-lab"
