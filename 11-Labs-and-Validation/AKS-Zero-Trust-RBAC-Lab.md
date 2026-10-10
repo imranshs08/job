@@ -258,3 +258,13 @@ rm -rf ~/.kube/cache/kubelogin/
 # For Windows PowerShell:
 Remove-Item -Recurse -Force ~/.kube/cache/kubelogin/
 ```
+
+### 🥷 The Hacker Perspective: What Happens After Lockdown?
+
+**Scenario 1: The Hacker Stole the `--admin` Local Certificate Backdoor**
+If `--disable-local-accounts` was never executed, the hacker would have unrestricted god-mode access to the cluster for **2 straight years**. There is no native way to revoke or track those credentials because the Kubernetes API Server implicitly trusts local certificates.
+However, because the lockdown command was executed, Azure orchestrated a rolling reboot of the master nodes and physically deleted the X.509 validation module. Even if the hacker retains the `kubeconfig` file on their laptop, the API Server will instantly drop their connection with an `Unauthorized` error. The backdoor is permanently barricaded.
+
+**Scenario 2: The Hacker Stole an Azure AD (Entra ID) Token**
+By killing the local certificates, you force *every single request* through Azure AD, where SecOps has the ultimate kill switch.
+An Entra ID JWT natively expires in 60-90 minutes. When the hijacked token naturally expires, the hacker's machine will attempt to seamlessly fetch a new one from Microsoft. However, because their identity is centrally managed, a Security Admin can simply click **"Revoke Sessions"** or **"Disable Account"** in the Azure Portal. Entra ID will instantly refuse to issue a new token, severing the connection, and the hacker is permanently locked out without the engineers ever needing to touch the cluster infrastructure.
