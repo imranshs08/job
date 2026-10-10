@@ -44,15 +44,16 @@ The Architect (`Alex`) now invites the Employee (`Imran Ahmad`) to help manage t
 > **Enterprise DON'T:** Do not grant 'Cluster Admin' for trivial tasks; utilize granular Azure RBAC namespaces.
 
 ```bash
-# 3. Get the Object ID of the Insider Threat User (Imran Ahmad)
+# 3. Get the Object ID of the Insider Threat User (Guest accounts require mail filtering)
 EMP_EMAIL="imranshs08@gmail.com"
-EMP_ID=$(az ad user show --id $EMP_EMAIL --query id -o tsv)
+EMP_ID=$(az ad user list --filter "mail eq '$EMP_EMAIL'" --query "[0].id" -o tsv)
 
 # 4. Grant the Employee 'Azure Kubernetes Service RBAC Cluster Admin' rights
 SUB_ID=$(az account show --query id -o tsv)
 az role assignment create \
   --role "Azure Kubernetes Service RBAC Cluster Admin" \
-  --assignee $EMP_ID \
+  --assignee-object-id $EMP_ID \
+  --assignee-principal-type User \
   --scope /subscriptions/$SUB_ID/resourceGroups/$RG_NAME/providers/Microsoft.ContainerService/managedClusters/$CLUSTER_NAME
 ```
 
