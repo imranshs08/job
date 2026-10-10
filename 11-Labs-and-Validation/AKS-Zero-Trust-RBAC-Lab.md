@@ -230,6 +230,9 @@ error: You must be logged in to the server (Unauthorized)
 ```
 
 > 💡 **SRE Pro-Tip (Live Validation):** To actively monitor the exact moment connectivity is severed during your lab, open a separate PowerShell terminal and execute `.\monitor-aks-lockdown.ps1` (included in this directory). It will continuously ping the API Server every 5 seconds and alert you the second your backend connection drops.
+>
+> *(Example of the script validating live connectivity before the lockout):*
+> ![Live Monitoring Script Execution](aks-monitor-execution.png)
 
 *(Your final, Zero-Trust Architecture cluster configuration):*
 ![Final Secured State - Local Accounts Disabled](aks-security-config-lockdown-complete.png)
