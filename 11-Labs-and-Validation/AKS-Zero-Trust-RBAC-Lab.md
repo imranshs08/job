@@ -1,4 +1,4 @@
-# 🔐 SRE Masterclass Lab: The Insider Threat (AKS Zero-Trust)
+# 🔐 SRE Masterclass Sandbox: The Insider Threat (AKS Zero-Trust)
 
 This lab is a cinematic, end-to-end execution guide demonstrating a classic "Insider Threat" scenario. We will simulate two engineers: a Senior Admin (`jamiaxpress@gmail.com`) and an invited engineer (`imranshs08@gmail.com`). We will prove mathematically why AKS Local Accounts represent a critical backdoor, and how to permanently board it up using Zero-Trust Architecture.
 
@@ -16,6 +16,9 @@ This lab is a cinematic, end-to-end execution guide demonstrating a classic "Ins
 ### Step 1 & 2: The Architect Deploys the Cluster (With The Backdoor)
 Log into your local CLI as **`jamiaxpress@gmail.com`**. We will deploy a standard AKS cluster. By default, this enables Azure RBAC *and* inherently leaves the Local Accounts (static certificates) wide open.
 
+> **Enterprise DO:** Always explicitly declare `--disable-local-accounts` during provisioning for production clusters.
+> **Enterprise DON'T:** Never assume Entra ID integration automatically secures the API Server. It fundamentally does not.
+
 ```bash
 # Define Constants
 RG_NAME="rg-gateway-api-lab"
@@ -31,6 +34,9 @@ az aks create     --resource-group "$RG_NAME"     --name "$CLUSTER_NAME"     --n
 
 ### Step 3 & 4: Inviting & Granting Permission to the Guest
 The Architect (`jamiaxpress`) now invites the Guest (`imranshs08`) to help manage the cluster.
+
+> **Enterprise DO:** Assign permissions strictly via Entra ID Security Groups, rather than individual direct user mapping.
+> **Enterprise DON'T:** Do not grant 'Cluster Admin' for trivial tasks; utilize granular Azure RBAC namespaces.
 
 ```bash
 # 3. Get the Object ID of the Guest User (imranshs08)
@@ -59,12 +65,48 @@ kubectl config current-context
 ```
 
 ### Step 6 & 7: The Guest Deploys the Workload
-To prove they have access, the Guest deploys a standard Nginx application and validates it locally.
+To prove they have access, the Guest deploys a standard Nginx application using declarative YAML and validates it locally.
+
+**Create `nginx-deployment.yaml`:**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-web
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-web
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+```
 
 ```bash
 # 6. Deploy Nginx
-kubectl create deployment nginx-web --image=nginx
-kubectl expose deployment nginx-web --port=80 --type=ClusterIP
+kubectl apply -f nginx-deployment.yaml
 
 # 7. Validate via Port-Forward
 kubectl port-forward svc/nginx-web 8080:80
@@ -86,12 +128,12 @@ az role assignment delete   --role "Azure Kubernetes Service RBAC Cluster Admin"
 ### Step 9: The Malicious Sabotage
 In a perfectly locked-down Zero-Trust environment, `imranshs08` should be instantly locked out. 
 
-However, because they previously executed `--admin` to steal the `--local-accounts` certificate, their local kubeconfig **completely bypasses Azure Active Directory**. 
+However, because they previously executed `--admin` to steal the `--local-accounts` certificate (which is valid for 730 days!), their local kubeconfig **completely bypasses Azure Active Directory**. 
 
 The terminated Guest (`imranshs08`) opens their terminal and strikes the cluster:
 ```powershell
 # Guest acts maliciously
-kubectl delete deployment nginx-web
+kubectl delete -f nginx-deployment.yaml
 ```
 **💥 Result:** `deployment.apps "nginx-web" deleted.` 
 Even though they were fired from Azure, the static Kubeconfig certificate allowed them to murder the production workload!
@@ -102,6 +144,8 @@ Even though they were fired from Azure, the static Kubeconfig certificate allowe
 
 ### Step 10: The Architect Seals the Breach
 The Architect realizes they left the Kubernetes API Server exposed to static Local Accounts. They must immediately run the explicit remediation command to disable the backdoor vector.
+
+> **Enterprise Warning (Blast Radius):** Running this command will break any Jenkins or GitHub Actions pipelines still utilizing the `--admin` local kubeconfig format. They must be migrated to Azure Service Principals via `kubelogin`.
 
 ```bash
 # The Architect disables local accounts universally
