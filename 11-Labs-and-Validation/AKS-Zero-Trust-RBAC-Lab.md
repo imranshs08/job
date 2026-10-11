@@ -342,6 +342,98 @@ kubectl get all,configmaps,secrets,ingress,gateway,httproute -A -o yaml > .\aks-
 | **4. Maintenance Window** | Run rotation during off-peak hours | `az aks rotate-certs` |
 | **5. Credential Re-sync** | Update admin credentials with new CA | `az aks get-credentials --overwrite-existing` |
 
+---
+
+### 🚨 Production SRE Rollback Plan & Triage Matrix
+
+If `az aks rotate-certs` encounters a timeout, fails midway, or breaks your workloads, follow this 4-tier triage matrix to restore service availability:
+
+#### Tier 1: "Operation Timed Out / Cluster in 'Failed' State"
+If Azure CLI terminates with an ARM timeout or the cluster enters a `Failed` provisioning state:
+```bash
+# 1. Check current cluster provisioning state
+az aks show \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot \
+  --query "{ProvisioningState:provisioningState, PowerState:powerState.code}" \
+  -o table
+
+# 2. Trigger an ARM reconciliation loop to force Azure to heal pending state
+az aks update \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot
+
+# 3. If reconciliation succeeds, re-run rotation to resume control plane upgrade
+az aks rotate-certs \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot
+```
+
+#### Tier 2: "Worker Nodes NotReady / Kubelet TLS Handshake Failures"
+If the API Server rotated its CA, but worker nodes fail to reconnect or are stuck in `NotReady`:
+```bash
+# 1. Pull the fresh CA certificate down to your workstation first
+az aks get-credentials \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot \
+  --overwrite-existing
+
+# 2. Inspect node status
+kubectl get nodes -o wide
+
+# 3. Restart the worker node pool to re-inject the new CA into Kubelet
+az aks nodepool restart \
+  --resource-group rg-gateway-api-lab \
+  --cluster-name aks-agc-lab-spot \
+  --name nodepool1
+
+# Alternatively, trigger a node-image upgrade to roll fresh VM instances:
+az aks nodepool upgrade \
+  --resource-group rg-gateway-api-lab \
+  --cluster-name aks-agc-lab-spot \
+  --name nodepool1 \
+  --node-image-only
+```
+
+#### Tier 3: "Workloads / Pods Damaged or Evicted (Restore from Backup)"
+If the rolling drain corrupted application pods or state:
+
+* **Using Velero (1-Command Instant Restore):**
+  ```bash
+  velero restore create rollback-restore-$(date +%s) \
+    --from-backup pre-cert-rotation-backup \
+    --wait
+  ```
+
+* **Using Lightweight Manifest Dump (Option 3):**
+  ```powershell
+  kubectl apply -f .\aks-manifest-backup\cluster-workloads-snapshot.yaml
+  ```
+
+* **Using Azure Backup for AKS:**
+  Navigate to **Azure Portal** ➔ **Backup Center** ➔ **Backup Instances** ➔ Select your cluster ➔ Click **Restore** ➔ Select the `pre-cert-rotation` recovery point ➔ Choose target namespace and restore.
+
+#### Tier 4: The Disaster Recovery Failover (Standby Cluster Rebuild)
+If the cluster control plane is permanently bricked and unrecoverable:
+1. Deploy a clean, pre-hardened replacement cluster (Local accounts disabled at birth):
+   ```bash
+   az aks create \
+     --resource-group rg-gateway-api-lab \
+     --name aks-agc-lab-recovery \
+     --disable-local-accounts \
+     --enable-aad \
+     --enable-azure-rbac \
+     --node-count 1 \
+     --generate-ssh-keys
+   ```
+2. Restore all application workloads into the new cluster using your Velero backup or manifest snapshot:
+   ```bash
+   velero restore create dr-cluster-restore \
+     --from-backup pre-cert-rotation-backup
+   ```
+
+---
+
 ### Step 11: The Re-Validation (Hacker Defeated)
 The Hacker (`saifi`) attempts to launch a second attack using the exact same stolen local `kubeconfig` copy.
 
