@@ -239,6 +239,76 @@ az aks rotate-certs \
 > * **Credential Invalidation:** All legitimate operators must re-sync their local kubeconfig using:
 >   `az aks get-credentials -g rg-gateway-api-lab -n aks-agc-lab-spot --overwrite-existing`
 
+### 💾 Pre-Rotation Disaster Recovery & Backup Protocol (Rollback Safeguards)
+
+Before triggering a high-blast-radius operation like `az aks rotate-certs`, enterprise SRE teams implement a pre-flight disaster recovery backup.
+
+> ⚠️ **The Architectural Reality of AKS Backups:**
+> 1. **Managed Control Plane & etcd:** In AKS, Microsoft manages the master nodes and etcd inside an internal tenant. You cannot run `etcdctl snapshot` directly.
+> 2. **Irreversible CA Rotation:** Once the Certificate Authority private keys are rotated, you cannot "roll back" to the old certificate keys.
+> 3. **The Disaster Recovery Strategy:** Back up all **Kubernetes manifests** (Deployments, Services, ConfigMaps, Secrets, Ingress, CRDs) and **Persistent Volumes (PVs)** so workloads can be restored instantly if the node reboots or pod evictions fail.
+
+#### Option 1: Azure Backup for AKS (Managed Native Solution)
+Configures Microsoft's native backup extension (backed by Azure Backup Vault & Blob Storage) to take a full cluster state & CSI disk snapshot:
+
+```bash
+# 1. Create Backup Vault
+az data-protection backup-vault create \
+  --resource-group rg-gateway-api-lab \
+  --vault-name bv-aks-backup \
+  --location centralus \
+  --storage-settings type=LocallyRedundant datastore-type=VaultStore
+
+# 2. Install the AKS Backup extension
+az k8s-extension create \
+  --name azure-aks-backup \
+  --extension-type microsoft.dataprotection.kubernetes \
+  --scope cluster \
+  --cluster-type managedClusters \
+  --cluster-name aks-agc-lab-spot \
+  --resource-group rg-gateway-api-lab \
+  --release-train stable \
+  --configuration-settings \
+    blobContainer="aksbackup" \
+    storageAccount="stgaksbackuprg" \
+    storageAccountResourceGroup="rg-gateway-api-lab" \
+    storageAccountSubscriptionId="<SUBSCRIPTION_ID>"
+```
+
+#### Option 2: Velero (Industry-Standard Multi-Cloud Backup)
+If Velero is installed on your cluster:
+```bash
+# 1. Create an on-demand snapshot of all namespaces and volume snapshots
+velero backup create pre-cert-rotation-backup \
+  --include-namespaces '*' \
+  --snapshot-volumes \
+  --wait
+
+# 2. In case of node or pod failure during rotation, restore with:
+velero restore create --from-backup pre-cert-rotation-backup
+```
+
+#### Option 3: Lightweight SRE Manifest Export (5-Minute Quick Snapshot)
+If full backup tooling is not pre-configured, export all cluster manifests to local storage before executing rotation:
+```powershell
+# Create local backup directory
+New-Item -ItemType Directory -Force -Path ".\aks-manifest-backup"
+
+# Dump all running workload definitions across all namespaces
+kubectl get all,configmaps,secrets,ingress,gateway,httproute -A -o yaml > .\aks-manifest-backup\cluster-workloads-snapshot.yaml
+```
+
+---
+
+#### 📋 Pre-Rotation SRE Readiness Checklist:
+| Step | Action | Command / Validation |
+|---|---|---|
+| **1. Cluster Health** | Confirm all nodes are `Ready` and pods healthy | `kubectl get nodes,pods -A` |
+| **2. State Backup** | Create manifest & volume snapshot | Azure Backup for AKS / Velero / Manifest dump |
+| **3. PDB Verification** | Ensure workloads have PodDisruptionBudgets | `kubectl get pdb -A` |
+| **4. Maintenance Window** | Run rotation during off-peak hours | `az aks rotate-certs` |
+| **5. Credential Re-sync** | Update admin credentials with new CA | `az aks get-credentials --overwrite-existing` |
+
 ### Step 11: The Re-Validation (Hacker Defeated)
 The Hacker (`saifi`) attempts to launch a second attack using the exact same stolen local `kubeconfig` copy.
 
