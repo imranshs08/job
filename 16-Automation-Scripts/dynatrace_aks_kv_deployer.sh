@@ -137,18 +137,14 @@ spec:
 EOF
 log_success
 
-log_step "Installing Dynatrace Operator via Helm"
-helm repo add dynatrace https://raw.githubusercontent.com/Dynatrace/dynatrace-operator/master/config/helm/repos/stable > /dev/null 2>&1 || true
-helm repo update > /dev/null 2>&1 || true
-helm upgrade --install dynatrace-operator dynatrace/dynatrace-operator \
-  --namespace dynatrace \
-  --create-namespace \
-  --set "csi.enabled=true" > /dev/null 2>&1 || log_fail
+log_step "Installing Dynatrace Operator via Official YAML Manifests (v1.11.0)"
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.11.0/kubernetes-csi.yaml > /dev/null 2>&1 || log_fail
+kubectl wait --namespace dynatrace --for=condition=ready pod --selector=app.kubernetes.io/name=dynatrace-operator --timeout=300s > /dev/null 2>&1 || log_fail
 log_success
 
-log_step "Deploying DynaKube Custom Resource"
+log_step "Deploying DynaKube Custom Resource (API: dynatrace.com/v1beta6)"
 cat <<EOF | kubectl apply -f - > /dev/null 2>&1 || log_fail
-apiVersion: dynatrace.com/v1beta2
+apiVersion: dynatrace.com/v1beta6
 kind: DynaKube
 metadata:
   name: dynakube

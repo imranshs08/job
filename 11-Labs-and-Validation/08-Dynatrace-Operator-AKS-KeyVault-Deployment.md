@@ -214,33 +214,30 @@ kubectl get secret dynakube -n dynatrace -o yaml
 
 ---
 
-## Step 5: Install Dynatrace Operator
+## Step 5: Install Dynatrace Operator via Pure YAML Manifests
+
+We apply the official Kubernetes manifest for the latest stable Dynatrace Operator release (`v1.11.0`) with CSI Driver support:
 
 ```bash
-# 1. Add Dynatrace Helm repository
-helm repo add dynatrace https://raw.githubusercontent.com/Dynatrace/dynatrace-operator/master/config/helm/repos/stable
-helm repo update
+# 1. Apply the official release YAML manifests directly from GitHub
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.11.0/kubernetes-csi.yaml
 
-# 2. Install Operator with CSI DaemonSet enabled
-helm install dynatrace-operator dynatrace/dynatrace-operator \
-  --namespace dynatrace \
-  --create-namespace \
-  --set "csi.enabled=true"
-
-# 3. Wait for operator pod readiness
+# 2. Wait for operator pod readiness in namespace 'dynatrace'
 kubectl wait --namespace dynatrace \
   --for=condition=ready pod \
   --selector=app.kubernetes.io/name=dynatrace-operator \
-  --timeout=180s
+  --timeout=300s
 ```
 
 ---
 
-## Step 6: Deploy DynaKube Custom Resource
+## Step 6: Deploy DynaKube Custom Resource (Latest API: `dynatrace.com/v1beta6`)
+
+Apply the `DynaKube` Custom Resource using the latest supported beta API version (`v1beta6`), configured for full cloud-native stack observability:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: dynatrace.com/v1beta2
+apiVersion: dynatrace.com/v1beta6
 kind: DynaKube
 metadata:
   name: dynakube
@@ -248,12 +245,17 @@ metadata:
   annotations:
     feature.dynatrace.com/csi-daemonset: "true"
 spec:
+  # Dynatrace SaaS Tenant API endpoint
   apiUrl: "https://ybl31832.apps.dynatrace.com/api/v1"
+
+  # Reference to the K8s Secret populated from Azure Key Vault
   tokens: "dynakube"
 
+  # Cloud-native full-stack monitoring (automated injection + host monitoring)
   oneAgent:
     cloudNativeFullStack: {}
 
+  # Containerized ActiveGate for Kubernetes API monitoring and metric routing
   activeGate:
     capabilities:
       - routing
