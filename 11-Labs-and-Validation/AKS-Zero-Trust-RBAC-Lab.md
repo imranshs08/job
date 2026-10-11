@@ -252,28 +252,61 @@ Before triggering a high-blast-radius operation like `az aks rotate-certs`, ente
 Configures Microsoft's native backup extension (backed by Azure Backup Vault & Blob Storage) to take a full cluster state & CSI disk snapshot:
 
 ```bash
-# 1. Create Backup Vault
+# 1. Dynamically capture Subscription ID and set environment variables
+SUB_ID=$(az account show --query id -o tsv)
+RG_NAME="rg-gateway-api-lab"
+CLUSTER_NAME="aks-agc-lab-spot"
+LOCATION="centralus"
+VAULT_NAME="bv-aks-backup"
+# Storage account names must be globally unique, alphanumeric, 3-24 chars
+STORAGE_ACCOUNT="stgaksbackup$RANDOM"
+CONTAINER_NAME="aksbackup"
+
+# 2. Create Storage Account & Blob Container to hold cluster backups
+az storage account create \
+  --name "$STORAGE_ACCOUNT" \
+  --resource-group "$RG_NAME" \
+  --location "$LOCATION" \
+  --sku Standard_LRS
+
+az storage container create \
+  --name "$CONTAINER_NAME" \
+  --account-name "$STORAGE_ACCOUNT" \
+  --auth-mode login
+
+# 3. Create the Azure Backup Vault
 az data-protection backup-vault create \
-  --resource-group rg-gateway-api-lab \
-  --vault-name bv-aks-backup \
-  --location centralus \
+  --resource-group "$RG_NAME" \
+  --vault-name "$VAULT_NAME" \
+  --location "$LOCATION" \
   --storage-settings type=LocallyRedundant datastore-type=VaultStore
 
-# 2. Install the AKS Backup extension
+# 4. Install the AKS Backup extension using dynamic Subscription ID
 az k8s-extension create \
   --name azure-aks-backup \
   --extension-type microsoft.dataprotection.kubernetes \
   --scope cluster \
   --cluster-type managedClusters \
-  --cluster-name aks-agc-lab-spot \
-  --resource-group rg-gateway-api-lab \
+  --cluster-name "$CLUSTER_NAME" \
+  --resource-group "$RG_NAME" \
   --release-train stable \
   --configuration-settings \
-    blobContainer="aksbackup" \
-    storageAccount="stgaksbackuprg" \
-    storageAccountResourceGroup="rg-gateway-api-lab" \
-    storageAccountSubscriptionId="<SUBSCRIPTION_ID>"
+    blobContainer="$CONTAINER_NAME" \
+    storageAccount="$STORAGE_ACCOUNT" \
+    storageAccountResourceGroup="$RG_NAME" \
+    storageAccountSubscriptionId="$SUB_ID"
 ```
+
+> 💡 **PowerShell Equivalent to capture `$SUB_ID`:**
+> ```powershell
+> $SUB_ID = (az account show --query id -o tsv)
+> $RG_NAME = "rg-gateway-api-lab"
+> $CLUSTER_NAME = "aks-agc-lab-spot"
+> $LOCATION = "centralus"
+> $VAULT_NAME = "bv-aks-backup"
+> $STORAGE_ACCOUNT = "stgaksbackup$((Get-Random -Minimum 1000 -Maximum 9999))"
+> $CONTAINER_NAME = "aksbackup"
+> ```
 
 #### Option 2: Velero (Industry-Standard Multi-Cloud Backup)
 If Velero is installed on your cluster:
