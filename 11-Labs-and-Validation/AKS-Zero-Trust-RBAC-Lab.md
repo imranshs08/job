@@ -208,12 +208,36 @@ az aks update \
 ![Intermediate State - AAD Bound but Local Accounts Still Enabled](aks-security-config-aad-intermediate.png)
 
 ```bash
-# The Architect universally destroys all Local Account certificates
+# The Architect closes the Azure Management door for Local Accounts
 az aks update \
   --resource-group rg-gateway-api-lab \
   --name aks-agc-lab-spot \
   --disable-local-accounts
 ```
+
+> 🚨 **CRITICAL PRODUCTION TRAP (Existing Certificates In-The-Wild):**
+> Disabling local accounts via `az aks update --disable-local-accounts` **ONLY** blocks *new* credential generation through the Azure ARM control plane (`az aks get-credentials --admin` will be rejected with `BadRequest`).
+>
+> **HOWEVER, according to official Microsoft Documentation:**
+> *"After disabling local accounts on an existing cluster, you must rotate the cluster certificates to revoke any previously issued local credentials."*
+> If an attacker (or insider) already downloaded the static `kubeconfig` before you ran the command above, the Kubernetes API Server's internal Certificate Authority (CA) will **CONTINUE to trust their client certificate**!
+>
+> To forcefully and permanently invalidate all existing, stolen certificates in the wild, you **MUST** execute a cluster certificate rotation:
+
+```bash
+# The Mandatory Kill Switch: Revoke all existing, stolen X.509 certificates
+az aks rotate-certs \
+  --resource-group rg-gateway-api-lab \
+  --name aks-agc-lab-spot
+```
+
+> ⚠️ **SRE Blast Radius & Workload Impact Analysis:**
+> Rotating cluster certificates is an intrusive operation that carries operational consequences:
+> * **Control Plane Disruption (1–3 minutes):** The API Server regenerates its Certificate Authority and restarts. In-flight `kubectl` commands and CI/CD pipelines will temporarily fail.
+> * **Node Rolling Restarts (10–30 minutes):** Every node's `kubelet` must be re-keyed with the new CA. Azure sequentially cordons, drains, and reboots every worker node in the VMSS node pools.
+> * **Pod Evictions & Downtime Risk:** Running pods will be evicted. Applications with single replicas (`replicas: 1`) will experience downtime. Only workloads designed with High Availability (e.g., `replicas: 3+`, anti-affinity, and strict `PodDisruptionBudgets`) will survive with zero downtime.
+> * **Credential Invalidation:** All legitimate operators must re-sync their local kubeconfig using:
+>   `az aks get-credentials -g rg-gateway-api-lab -n aks-agc-lab-spot --overwrite-existing`
 
 ### Step 11: The Re-Validation (Hacker Defeated)
 The Hacker (`saifi`) attempts to launch a second attack using the exact same stolen local `kubeconfig` copy.
@@ -263,7 +287,7 @@ Remove-Item -Recurse -Force ~/.kube/cache/kubelogin/
 
 **Scenario 1: The Hacker Stole the `--admin` Local Certificate Backdoor**
 If `--disable-local-accounts` was never executed, the hacker would have unrestricted god-mode access to the cluster for **2 straight years**. There is no native way to revoke or track those credentials because the Kubernetes API Server implicitly trusts local certificates.
-However, because the lockdown command was executed, Azure orchestrated a rolling reboot of the master nodes and physically deleted the X.509 validation module. Even if the hacker retains the `kubeconfig` file on their laptop, the API Server will instantly drop their connection with an `Unauthorized` error. The backdoor is permanently barricaded.
+Furthermore, as documented by Microsoft, simply running `--disable-local-accounts` only closes the front door against *new* credential requests via Azure CLI. The cluster's internal Certificate Authority (CA) will **continue to trust already-downloaded static certificates** until you execute `az aks rotate-certs`. Once `az aks rotate-certs` finishes rolling the cluster, the CA is regenerated, and the stolen certificate is permanently rejected with an `Unauthorized` error. The backdoor is fully destroyed.
 
 **Scenario 2: The Hacker Stole an Azure AD (Entra ID) Token**
 By killing the local certificates, you force *every single request* through Azure AD, where SecOps has the ultimate kill switch.
