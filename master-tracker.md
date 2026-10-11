@@ -218,4 +218,5 @@
 | 🎤 Interview Prep | [interview-prep.md](./06-Interview-Prep/interview-prep.md) |
 | 🌐 Cloudflare Tunnel Lab | [cloudflare-tunnel-lab.md](./11-Labs-and-Validation/cloudflare-tunnel-lab.md) |
 | 🚀 Gateway API Sprint | [gateway-api-sprint.md](./02-Weekly-Plan/gateway-api-sprint.md) |
+| 📊 Dynatrace Operator & Key Vault Lab | [08-Dynatrace-Operator-AKS-KeyVault-Deployment.md](./11-Labs-and-Validation/08-Dynatrace-Operator-AKS-KeyVault-Deployment.md) |
 | 🖨️ Print Sheet | [job-tracker.html](./print/job-tracker.html) |
