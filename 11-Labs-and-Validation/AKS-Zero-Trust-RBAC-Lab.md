@@ -351,10 +351,13 @@ export KUBECONFIG=insecure-kubeconfig
 kubectl get pods
 ```
 
-**🛡️ Expected Output:** 
+**🛡️ Expected Output (Hard TLS Cryptographic Rejection):** 
 ```text
-error: You must be logged in to the server (Unauthorized)
+Unable to connect to the server: tls: failed to verify certificate: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "ca")
 ```
+
+*(Live execution proof of the API Server's new CA mathematically rejecting the stolen client certificate):*
+![Cryptographic Lockdown - x509 Certificate Signed by Unknown Authority](aks-ca-mismatch-lockdown.png)
 
 > 💡 **SRE Pro-Tip (Live Validation):** To actively monitor the exact moment connectivity is severed during your lab, open a separate PowerShell terminal and execute `.\monitor-aks-lockdown.ps1` (included in this directory). It will continuously ping the API Server every 5 seconds and alert you the second your backend connection drops.
 >
