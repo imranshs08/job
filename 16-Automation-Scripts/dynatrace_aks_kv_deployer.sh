@@ -17,6 +17,9 @@
 #      Kubernetes API routing.
 #
 # TARGET ENVIRONMENT:
+#    Demo User:      dynatrace.tree925@passinbox.com
+#    Trial Window:   October 12, 2026 -> October 27, 2026 (15-Day Trial)
+#    Expiry Date:    October 27, 2026
 #    Tenant UI:      https://ybl31832.apps.dynatrace.com/ui
 #    Tenant API:     https://ybl31832.apps.dynatrace.com/api/v1
 #    AKS Cluster:    aks-agc-lab-spot (in resource group rg-gateway-api-lab)
@@ -59,6 +62,8 @@ log_fail()    { echo -e "${RED}✗ [FAILED]${RESET}"; exit 1; }
 
 echo -e "${YELLOW}================================================================${RESET}"
 echo -e "${YELLOW}  Dynatrace Operator & Key Vault CSI Integration for AKS        ${RESET}"
+echo -e "${YELLOW}  Account: dynatrace.tree925@passinbox.com                      ${RESET}"
+echo -e "${YELLOW}  Lifecycle Window: Oct 12, 2026 -> Oct 27, 2026 (15-Day Trial) ${RESET}"
 echo -e "${YELLOW}================================================================${RESET}"
 
 # ------------------------------------------------------------------------------

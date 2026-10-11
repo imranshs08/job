@@ -1,11 +1,20 @@
 # Lab 08: Enterprise Dynatrace Operator & DynaKube Deployment on AKS via Azure Key Vault CSI Driver
 
+> **Demo Account:** `dynatrace.tree925@passinbox.com`  
 > **Target Tenant:** [Dynatrace SaaS Tenant UI (ybl31832)](https://ybl31832.apps.dynatrace.com/ui)  
 > **API Endpoint:** `https://ybl31832.apps.dynatrace.com/api/v1`  
+> **Trial Window (15 Days):** `October 12, 2026` → `October 27, 2026`  
+> **Validation Expiry Date:** **October 27, 2026** (15-Day SaaS Lifecycle Target)  
 > **Target Cluster:** `aks-agc-lab-spot` (via `16-Automation-Scripts/azure_agc_lab_manager.sh`)  
 > **Operator Version:** `v1.11.0` (Official Kubernetes release manifest)  
 > **DynaKube API:** `dynatrace.com/v1beta6` (Latest stable Custom Resource API)  
 > **Security Standard:** Zero-Trust Secret Rotation with Azure Key Vault & Secrets Store CSI Driver
+
+> [!IMPORTANT]
+> **Demo Account Lifecycle & Expiration Notice:**  
+> - **Username:** `dynatrace.tree925@passinbox.com`  
+> - **Trial Valid Through:** **October 27, 2026**  
+> - Ensure all lab validation, metric harvesting, and API integration tests are completed before the expiration date. If recreating after this date, generate a new trial environment and update Key Vault tokens accordingly.
 
 ---
 
