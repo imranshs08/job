@@ -492,25 +492,70 @@ journalctl --vacuum-time=7d
 
 ### Pillar 2: Configure Dedicated Agent Logrotate Policies
 
-#### 1. Rundeck Logrotate (`/etc/logrotate.d/rundeck`)
+#### 🧠 The Architectural Challenge: The Java/JVM & Daemon File Locking Trap
+Java applications (like **Rundeck**, Jenkins, Elasticsearch) and continuous security agents (like **MDATP**) open their log files on startup and **never close their file handles**. 
+
+If standard logrotate moves or renames the active file (`mv service.log service.log.1`), the JVM continues writing to the old file descriptor pointing to the renamed file, completely ignoring the new file!
+- **Rookie "Fix":** Restart the application daemon after every rotation (`postrotate systemctl restart service`).
+- **Production Failure:** Restarting Rundeck or MDATP drops active automation pipelines, aborts in-flight deployments, and causes system interruptions.
+- **Enterprise SRE Solution:** Use **`copytruncate`**!
+
+---
+
+#### 1. Rundeck Enterprise Logrotate (`/etc/logrotate.d/rundeck`)
+
 ```bash
 cat << 'EOF' > /etc/logrotate.d/rundeck
 /var/log/rundeck/*.log {
+    # Frequency: Evaluated once per day by the system logrotate cron/timer
     daily
+    
+    # Retention Count: Retain 7 rotated log generations before permanently purging oldest
     rotate 7
+    
+    # Storage Optimization: Gzip compress (.gz) rotated archives to save ~85-90% disk space
     compress
+    
+    # Safety Buffer: Postpone compression of the most recent rotated file until next cycle
+    # (prevents corrupting files if processes take a few seconds to finish writing)
     delaycompress
+    
+    # Resiliency: Do not throw errors or fail execution if the log file is missing
     missingok
+    
+    # Efficiency: Do not rotate or create empty archives if the log contains 0 bytes
     notifempty
-    # copytruncate allows rotating active logs without restarting Rundeck JVM
+    
+    # ZERO-DOWNTIME ROTATION: Copy active file to archive, then truncate original in-place
+    # (JVM continues writing seamlessly; NO SERVICE RESTARTS REQUIRED!)
     copytruncate
-    # Force rotation as soon as file hits 100M even before daily schedule
+    
+    # EMERGENCY OVERRIDE: Force immediate rotation if file reaches 100MB even before daily schedule
     maxsize 100M
 }
 EOF
 ```
 
+---
+
+#### 🔍 Directive-by-Directive Breakdown & Production Impact Analysis:
+
+| Directive | What It Does (Technical Mechanism) | Production Impact & SRE Why |
+|---|---|---|
+| **`/var/log/rundeck/*.log`** | Wildcard path matching all log outputs in the directory. | Automatically captures newly introduced Rundeck project and service logs without manual updates. |
+| **`daily`** | Enforces evaluation on a daily schedule. | Prevents logs from growing unchecked across weeks; ensures fresh daily audit boundaries. |
+| **`rotate 7`** | Keeps exactly 7 historical archive files (`.1.gz` through `.7.gz`) and purges the 8th. | **Predictable Capacity Planning:** Caps total historical directory footprint (e.g., `7 * 100MB max = ~700MB` uncompressed, `<100MB` compressed). |
+| **`compress`** | Pipes rotated files through gzip compression. | **Saves 85% Disk Space:** Text logs compress exceptionally well, turning 100MB logs into ~10-15MB. |
+| **`delaycompress`** | Leaves `service.log.1` uncompressed; compresses it to `service.log.2.gz` on the *next* rotation. | **Prevents File Corruption:** Solves race conditions where daemons or tailing monitoring agents still read the tail of the rotated file during rotation. |
+| **`missingok`** | Suppresses logrotate failure codes if the file does not exist. | **Automation Safety:** Prevents cron alert noise and stops systemd logrotate timers from failing when jobs haven't logged yet. |
+| **`notifempty`** | Skips rotation if the file is 0 bytes. | **Avoids Clutter:** Prevents generating useless sequences of empty `.1.gz`, `.2.gz` files when systems are idle. |
+| **`copytruncate`** | 1. Copies active file to backup.<br>2. Immediately truncates original file to 0 bytes in-place (`truncate -s 0`). | **ZERO DOWNTIME / NO JVM RESTARTS:** The running JVM never loses its file descriptor. Production jobs never fail during log management. |
+| **`maxsize 100M`** | Triggers rotation if file hits 100MB, even if 24 hours haven't elapsed. | **Shield Against Log Explosions:** If Rundeck enters a debug loop generating gigabytes, `maxsize` rotates immediately before `/var` fills up! |
+
+---
+
 #### 2. Microsoft Defender for Endpoint Logrotate (`/etc/logrotate.d/mdatp`)
+
 ```bash
 cat << 'EOF' > /etc/logrotate.d/mdatp
 /var/opt/microsoft/mdatp/log/*.log {
