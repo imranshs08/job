@@ -699,6 +699,71 @@ echo "0 2 * * * root /usr/local/bin/rundeck-cleaner.sh > /dev/null 2>&1" > /etc/
 
 ---
 
+### 🤝 Cross-Team SRE Alignment & Questionnaires (Before Modifying Policies)
+
+In a production enterprise, an SRE cannot unilaterally change logrotate retention without consulting the application and security owners. Use these battle-tested questionnaires to gather their exact requirements:
+
+#### 📋 Questionnaire 1: To the Automation / Rundeck Platform Team
+```text
+Subject: RFC: Log Rotation & Retention Policy for Rundeck on RHEL Hosts
+
+Hi Rundeck Team,
+
+To prevent /var filesystem exhaustion while ensuring no loss of execution history, we are standardizing logrotate policies. Please confirm your requirements:
+
+1. Local Service Log Retention:
+   Current baseline: 7 days (rotate 7).
+   Question: Do you need more than 7 days of local /var/log/rundeck/service.log, or are these forwarded to centralized SIEM/Splunk/Elastic?
+
+2. Max Size Ceiling (maxsize):
+   Current baseline: 100MB (maxsize 100M).
+   Question: During month-end batch runs, is 100MB per file acceptable before triggering rotation?
+
+3. Execution Step History (/var/lib/rundeck/logs/):
+   Current baseline: 14 days purge via cron.
+   Question: Does compliance mandate keeping raw step execution logs on local disk for longer than 14 days? If so, can we offload them to S3/Azure Blob Storage?
+
+4. Zero-Downtime Verification:
+   Question: Confirm your JVM logging appender handles in-place truncation (copytruncate) without requiring service restarts.
+```
+
+#### 📋 Questionnaire 2: To the InfoSec / SOC Team (MDATP Owner)
+```text
+Subject: RFC: Microsoft Defender for Endpoint (mdatp) Log Rotation Limits
+
+Hi SecOps / SOC Team,
+
+To maintain CIS Benchmark storage compliance and prevent telemetry bursts from saturating /var, we are implementing a managed logrotate policy for /var/opt/microsoft/mdatp/log/. Please confirm:
+
+1. Local Telemetry Retention:
+   Current baseline: 5 days (rotate 5).
+   Question: What is the minimum local retention required for wdavdaemon.log, assuming real-time alerts are streamed to Microsoft Defender XDR?
+
+2. Max Size Ceiling:
+   Current baseline: 50MB (maxsize 50M).
+   Question: Is a 50MB per-file ceiling acceptable before forcing rotation?
+
+3. Crash Dump Retention (/var/opt/microsoft/mdatp/crashdumps/):
+   Question: Can we configure an auto-purge policy for diagnostic core dumps older than 48 hours once telemetry is submitted to Microsoft?
+
+4. Production Logging Level:
+   Question: Is Defender configured for 'info' or 'debug'? If currently in debug, when will it be reverted to standard info logging?
+```
+
+---
+
+#### 🎛️ How to Update Policies Based on Team Responses:
+
+| Team Feedback | Action to Take in Logrotate Configuration |
+|---|---|
+| **Rundeck Team:** *"We need 14 days of local history."* | Change `rotate 7` ➔ `rotate 14` in `/etc/logrotate.d/rundeck`. |
+| **Rundeck Team:** *"All logs are streamed to Splunk in real-time."* | Reduce `rotate 7` ➔ `rotate 3` (saves substantial disk space!). |
+| **Rundeck Team:** *"Month-end jobs write 500MB logs."* | Increase `maxsize 100M` ➔ `maxsize 200M`. |
+| **SOC Team:** *"Defender XDR stores all audit records in cloud."* | Keep `rotate 5` (or drop to `rotate 3`) with `maxsize 50M`. |
+| **SOC Team:** *"Regulatory compliance mandates 30 days of raw local logs."* | Set `rotate 30`, keep `compress` enabled, and expand the LVM volume (`lvextend -r -L +10G /dev/mapper/rootvg-varlv`). |
+
+---
+
 ### Pillar 4: LVM Online Filesystem Expansion (Without Downtime)
 
 When genuine workload growth requires extending `/var`:
