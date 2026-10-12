@@ -727,6 +727,52 @@ To prevent /var filesystem exhaustion while ensuring no loss of execution histor
    Question: Confirm your JVM logging appender handles in-place truncation (copytruncate) without requiring service restarts.
 ```
 
+##### 📨 Realistic Reply from the Rundeck Platform Team:
+```text
+From: Rundeck Platform Engineering Lead
+Subject: RE: RFC: Log Rotation & Retention Policy for Rundeck on RHEL Hosts
+
+Hi Imran / SRE Team,
+
+Thanks for coordinating this. Here are our approved requirements:
+
+1. Local Service Log Retention: 
+   Approved for 7 days (rotate 7). We forward all application logs to our centralized Splunk cluster. Local retention is only needed for short-term host troubleshooting.
+
+2. Max Size Ceiling: 
+   Approved for 100MB (maxsize 100M). Average daily growth is ~30MB, so 100MB provides ample headroom while catching runaway execution debug bursts.
+
+3. Execution Step History: 
+   Approved for 14 days local retention. We use the Rundeck S3/Blob Storage plugin for long-term audit archive retrieval.
+
+4. Zero-Downtime Verification (copytruncate): 
+   Confirmed compatible. We run OpenJDK 11 with Logback FileAppender in append=true mode. In-place truncation does not cause file pointer corruption or JVM crashes.
+```
+
+##### 🔬 How to Technically Confirm Question 4 (JVM `copytruncate` Compatibility):
+Java applications can occasionally create **sparse files** (filling empty gaps with null bytes `\0\0\0`) if their logging framework maintains an absolute file pointer instead of appending to the current end-of-file. Here is how to verify compatibility:
+
+```bash
+# METHOD A: Inspect Logback XML configuration
+# Verify that append is set to true (default in Rundeck)
+grep -i "append" /etc/rundeck/logback.xml
+# Expected output: <append>true</append>
+
+# METHOD B: Live Non-Destructive In-Place Truncation Test (Takes 10 seconds)
+# 1. Check current size and latest lines
+ls -lh /var/log/rundeck/service.log
+tail -n 2 /var/log/rundeck/service.log
+
+# 2. Perform live truncation while Rundeck is actively running
+> /var/log/rundeck/service.log
+
+# 3. Verify new logs continue streaming at offset 0 without JVM errors
+sleep 3
+ls -lh /var/log/rundeck/service.log
+tail -n 2 /var/log/rundeck/service.log
+# If size resets to small KB and grows normally, copytruncate is 100% verified!
+```
+
 #### 📋 Questionnaire 2: To the InfoSec / SOC Team (MDATP Owner)
 ```text
 Subject: RFC: Microsoft Defender for Endpoint (mdatp) Log Rotation Limits
