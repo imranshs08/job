@@ -377,34 +377,76 @@ A true enterprise solution prevents recurrence using a 5-pillar approach:
 └─────────────────┴─────────────────┴──────────────────┴──────────────────────┘
 ```
 
-### Pillar 1: Harden `systemd-journald`
-By default, journald can consume up to 10% of the filesystem or 4GB:
+### Pillar 1: Harden `systemd-journald` Retention & Storage Limits
+
+#### 🧠 The Underlying Architectural Problem: Default Journald Behavior
+By default on RHEL 8.10, `systemd-journald` uses an unconstrained rule:
+- It allows journal logs to consume **up to 10% of the entire filesystem** (capped at a massive **4GB**).
+- If your `/var` is 8GB, journald alone will greedily claim up to **800MB - 4GB**!
+- If noisy security agents (like MDATP or Qualys) log thousands of debug lines per minute, journald expands rapidly until it chokes out application write threads.
+
+#### 📁 Why Use Drop-In Configuration (`/etc/systemd/journald.conf.d/`)?
+In enterprise Linux engineering, **never directly edit `/etc/systemd/journald.conf`**:
+- Package upgrades via `dnf`/`yum` can overwrite `/etc/systemd/journald.conf` or trigger `.rpmnew` conflicts.
+- Creating a drop-in override (`00-disk-limits.conf` inside `journald.conf.d/`) ensures modular, immutable configuration that survives OS patch cycles and conforms to Infrastructure-as-Code (Ansible/Puppet) best practices.
 
 ```bash
-# Create drop-in directory for journald configuration
+# ------------------------------------------------------------------------------
+# STEP 6.1.1: CREATE SYSTEMD JOURNAL DROP-IN OVERRIDE DIRECTORY
+# ------------------------------------------------------------------------------
+# Any file ending in .conf inside this directory overrides default journal settings
 mkdir -p /etc/systemd/journald.conf.d
 
-# Apply hard size caps and retention periods
+# ------------------------------------------------------------------------------
+# STEP 6.1.2: APPLY HARD DISK LIMITS AND RETENTION POLICIES
+# ------------------------------------------------------------------------------
 cat << 'EOF' > /etc/systemd/journald.conf.d/00-disk-limits.conf
 [Journal]
-# Store logs persistently on disk in /var/log/journal
+# Enforces writing logs persistently to /var/log/journal/ (survives reboots)
 Storage=persistent
-# Enable log compression to conserve blocks
+
+# Compresses log data objects larger than default threshold using XZ/LZ4
 Compress=yes
-# Never allow system journal to exceed 500MB total
+
+# HARD MAXIMUM: Cap total journal storage across all archived files to 500MB
 SystemMaxUse=500M
-# Always reserve at least 500MB free on /var for other services
+
+# SAFETY BUFFER: Ensure journald stops writing if /var has less than 500MB free
 SystemKeepFree=500M
-# Cap individual rotated journal files at 50MB
+
+# ROTATION TRIGGER: Rotate active journal file once it reaches 50MB
 SystemMaxFileSize=50M
-# Automatically discard journal logs older than 14 days
+
+# RETENTION EXPIRATION: Automatically purge archived journals older than 14 days
 MaxRetentionSec=14day
 EOF
 
-# Restart journald and trigger immediate vacuum
+# ------------------------------------------------------------------------------
+# STEP 6.1.3: RESTART JOURNALD & PERFORM IMMEDIATE PHYSICAL VACUUM
+# ------------------------------------------------------------------------------
+# Restart daemon to compile and load the new drop-in rules
 systemctl restart systemd-journald
+
+# Force immediate garbage collection: purges oldest journal entries until disk usage <= 500M
 journalctl --vacuum-size=500M
+
+# (Alternative/Supplementary) Purge journals older than retention limit immediately
+journalctl --vacuum-time=14d
 ```
+
+---
+
+#### 🔍 Parameter-by-Parameter Breakdown & Production Impact Analysis:
+
+| Configuration Parameter | Value | Technical Mechanism | Production Impact & SRE Why |
+|---|---|---|---|
+| **`Storage=persistent`** | `persistent` | Stores journals under `/var/log/journal/`. | Ensures critical post-mortem crash logs survive unexpected kernel panics or power outages. |
+| **`Compress=yes`** | `yes` | Compresses binary log payloads using LZ4/ZSTD algorithms. | Reduces physical disk usage by up to **60-70%** for repetitive agent messages. |
+| **`SystemMaxUse`** | `500M` | Sets a strict ceiling on the total disk space all journal files can occupy. | **Prevents 100% Outage:** Stops journald from expanding to the 4GB default, saving `/var` from saturation. |
+| **`SystemKeepFree`** | `500M` | Instructs journald to stop writing if free space on `/var` drops below 500MB. | **Protects Other Daemons:** Guarantees a 500MB survival runway for `chronyd`, `sshd`, and PID files. |
+| **`SystemMaxFileSize`** | `50M` | Dictates the maximum size of a single journal file before it is sealed and rotated. | Prevents individual corrupt journal files from locking large chunks of disk space. |
+| **`MaxRetentionSec`** | `14day` | Time-based garbage collection: drops entries older than 2 weeks. | Enforces compliance data retention without manual cron scripts. |
+| **`journalctl --vacuum-size`** | `500M` | Synchronously executes garbage collection to truncate and delete old archived chunks. | **Instant Emergency Recovery:** Instantly frees multiple gigabytes of space during an active P1/P0 triage. |
 
 ---
 
