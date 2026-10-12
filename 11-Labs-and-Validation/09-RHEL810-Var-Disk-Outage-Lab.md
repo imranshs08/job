@@ -504,33 +504,51 @@ If standard logrotate moves or renames the active file (`mv service.log service.
 
 #### 1. Rundeck Enterprise Logrotate (`/etc/logrotate.d/rundeck`)
 
+In hardened enterprise production (CIS Benchmark / DISA-STIG compliance), raw logrotate policies must incorporate **security isolation (`su`)**, **file creation permissions (`create 0640`)**, and **ISO date stamps (`dateext`)**:
+
 ```bash
 cat << 'EOF' > /etc/logrotate.d/rundeck
 /var/log/rundeck/*.log {
-    # Frequency: Evaluated once per day by the system logrotate cron/timer
+    # 1. SECURITY & PERMISSIONS HARDENING (CIS Benchmark Compliance)
+    # Switch user to rundeck service account to prevent root privilege escalation exploits
+    su rundeck rundeck
+    
+    # Enforce strict file mode: rw-r----- owned by rundeck:rundeck (prohibits world-read)
+    create 0640 rundeck rundeck
+    
+    # 2. ROTATION SCHEDULE & RETENTION BOUNDARIES
+    # Evaluated daily by the system logrotate timer
     daily
     
-    # Retention Count: Retain 7 rotated log generations before permanently purging oldest
+    # Retain exactly 7 historical archive generations before purging the oldest
     rotate 7
     
-    # Storage Optimization: Gzip compress (.gz) rotated archives to save ~85-90% disk space
+    # 3. AUDIT & FORENSIC NAMING
+    # Append ISO-8601 timestamps (e.g. service.log-20261013.gz) instead of simple numbers (.1.gz)
+    dateext
+    dateformat -%Y%m%d
+    
+    # 4. STORAGE OPTIMIZATION
+    # Compress rotated archives using gzip to save ~85-90% disk space
     compress
     
-    # Safety Buffer: Postpone compression of the most recent rotated file until next cycle
-    # (prevents corrupting files if processes take a few seconds to finish writing)
+    # Postpone compression of the newest archive by 1 cycle to prevent file locking race conditions
     delaycompress
     
-    # Resiliency: Do not throw errors or fail execution if the log file is missing
+    # 5. RESILIENCY & CLEANLINESS
+    # Suppress errors if log files have not been generated yet
     missingok
     
-    # Efficiency: Do not rotate or create empty archives if the log contains 0 bytes
+    # Skip rotation cycle if the active file is 0 bytes (avoids empty archives)
     notifempty
     
-    # ZERO-DOWNTIME ROTATION: Copy active file to archive, then truncate original in-place
-    # (JVM continues writing seamlessly; NO SERVICE RESTARTS REQUIRED!)
+    # 6. ZERO-DOWNTIME JVM OPERATION
+    # Copy active file to archive, then truncate original in-place to 0 bytes
+    # (JVM continues writing seamlessly; ZERO SERVICE RESTARTS REQUIRED!)
     copytruncate
     
-    # EMERGENCY OVERRIDE: Force immediate rotation if file reaches 100MB even before daily schedule
+    # 7. EMERGENCY STORAGE SHIELD
+    # Force immediate rotation as soon as file reaches 100MB even before the daily run
     maxsize 100M
 }
 EOF
@@ -538,19 +556,16 @@ EOF
 
 ---
 
-#### 🔍 Directive-by-Directive Breakdown & Production Impact Analysis:
+#### 🔍 Enterprise Directive Breakdown & Production Standards Matrix:
 
-| Directive | What It Does (Technical Mechanism) | Production Impact & SRE Why |
-|---|---|---|
-| **`/var/log/rundeck/*.log`** | Wildcard path matching all log outputs in the directory. | Automatically captures newly introduced Rundeck project and service logs without manual updates. |
-| **`daily`** | Enforces evaluation on a daily schedule. | Prevents logs from growing unchecked across weeks; ensures fresh daily audit boundaries. |
-| **`rotate 7`** | Keeps exactly 7 historical archive files (`.1.gz` through `.7.gz`) and purges the 8th. | **Predictable Capacity Planning:** Caps total historical directory footprint (e.g., `7 * 100MB max = ~700MB` uncompressed, `<100MB` compressed). |
-| **`compress`** | Pipes rotated files through gzip compression. | **Saves 85% Disk Space:** Text logs compress exceptionally well, turning 100MB logs into ~10-15MB. |
-| **`delaycompress`** | Leaves `service.log.1` uncompressed; compresses it to `service.log.2.gz` on the *next* rotation. | **Prevents File Corruption:** Solves race conditions where daemons or tailing monitoring agents still read the tail of the rotated file during rotation. |
-| **`missingok`** | Suppresses logrotate failure codes if the file does not exist. | **Automation Safety:** Prevents cron alert noise and stops systemd logrotate timers from failing when jobs haven't logged yet. |
-| **`notifempty`** | Skips rotation if the file is 0 bytes. | **Avoids Clutter:** Prevents generating useless sequences of empty `.1.gz`, `.2.gz` files when systems are idle. |
-| **`copytruncate`** | 1. Copies active file to backup.<br>2. Immediately truncates original file to 0 bytes in-place (`truncate -s 0`). | **ZERO DOWNTIME / NO JVM RESTARTS:** The running JVM never loses its file descriptor. Production jobs never fail during log management. |
-| **`maxsize 100M`** | Triggers rotation if file hits 100MB, even if 24 hours haven't elapsed. | **Shield Against Log Explosions:** If Rundeck enters a debug loop generating gigabytes, `maxsize` rotates immediately before `/var` fills up! |
+| Directive | Enterprise Requirement | Technical Mechanism | Production Impact & SRE Why |
+|---|---|---|---|
+| **`su rundeck rundeck`** | **CIS Benchmark / STIG** | Executes log rotation under the service account instead of `root`. | **Eliminates Privilege Escalation:** Prevents malicious symlink race exploits where an attacker uses logrotate to gain root file control. |
+| **`create 0640 rundeck rundeck`** | **Least Privilege Standard** | Sets rotated file mode to `0640` (`rw-r-----`). | **Data Security:** Prevents unauthorized unprivileged users on the server from snooping through sensitive job parameters or execution tokens. |
+| **`dateext` & `dateformat`** | **Enterprise SIEM / Forensics** | Names rotated files with ISO dates (`-%Y%m%d`) instead of integers (`.1.gz`). | **Eliminates File Renaming Cascades:** Avoids renaming every file in the folder each night; integrates cleanly with Splunk/Logstash archive collectors. |
+| **`copytruncate`** | **High-Availability (HA) Standard** | 1. Copies active file.<br>2. Truncates original in-place (`truncate -s 0`). | **Zero Downtime:** JVM never loses its open file descriptor. No service restarts or pipeline interruptions. |
+| **`maxsize 100M`** | **Storage Sentinel Standard** | Forces rotation immediately if file hits 100MB before daily timer. | **Protection from Runaway Loops:** Protects `/var` if an application enters a verbose debug logging loop. |
+| **`compress` & `delaycompress`** | **Capacity Optimization** | Gzips files, delaying compression by 1 rotation cycle. | **Saves 85% Disk Space:** Avoids file corruption while ongoing writes finish flushing to disk. |
 
 ---
 
