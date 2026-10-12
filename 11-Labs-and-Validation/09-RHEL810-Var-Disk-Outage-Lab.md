@@ -520,8 +520,8 @@ cat << 'EOF' > /etc/logrotate.d/rundeck
     # Evaluated daily by the system logrotate timer
     daily
     
-    # Retain exactly 7 historical archive generations before purging the oldest
-    rotate 7
+    # Retain 30 historical archive generations (full 1-month audit retention within 5GB budget)
+    rotate 30
     
     # 3. AUDIT & FORENSIC NAMING
     # Append ISO-8601 timestamps (e.g. service.log-20261013.gz) instead of simple numbers (.1.gz)
@@ -547,12 +547,23 @@ cat << 'EOF' > /etc/logrotate.d/rundeck
     # (JVM continues writing seamlessly; ZERO SERVICE RESTARTS REQUIRED!)
     copytruncate
     
-    # 7. EMERGENCY STORAGE SHIELD
-    # Force immediate rotation as soon as file reaches 100MB even before the daily run
-    maxsize 100M
+    # 7. EMERGENCY STORAGE SHIELD (Configured for 5GB Storage Profile)
+    # Force immediate rotation as soon as file reaches 250MB even before the daily run
+    maxsize 250M
 }
 EOF
 ```
+
+---
+
+#### 🧮 5GB Storage Profile Capacity Breakdown (Option A - 30-Day Retention):
+
+| Component | State | Maximum Storage Allocated | Notes & Rationale |
+|---|---|---|---|
+| **Active Live Log** | Writing (`service.log`) | **250 MB** | Triggers instant rotation if it hits 250MB ceiling. |
+| **Archive #1** | Uncompressed (`delaycompress`) | **250 MB** | Kept raw for 24 hours to avoid active file contention. |
+| **Archives #2 to #30** | Gzipped (`.gz`) | **~870 MB** (29 × ~30MB) | 85-90% gzip compression ratio on text/JVM logs. |
+| **Total Max Storage** | **1-Month Footprint** | **~1.37 GB** | **Well within 5GB budget**, preserving a 3.6GB safety runway! |
 
 ---
 
@@ -562,6 +573,8 @@ EOF
 |---|---|---|---|
 | **`su rundeck rundeck`** | **CIS Benchmark / STIG** | Executes log rotation under the service account instead of `root`. | **Eliminates Privilege Escalation:** Prevents malicious symlink race exploits where an attacker uses logrotate to gain root file control. |
 | **`create 0640 rundeck rundeck`** | **Least Privilege Standard** | Sets rotated file mode to `0640` (`rw-r-----`). | **Data Security:** Prevents unauthorized unprivileged users on the server from snooping through sensitive job parameters or execution tokens. |
+| **`rotate 30`** | **Enterprise Compliance (5GB Budget)** | Retains 30 historical daily archives. | **Full Month Audit History:** Provides a full 30-day investigation window on the host while capping usage at ~1.37GB. |
+| **`maxsize 250M`** | **Storage Sentinel Standard** | Forces rotation immediately if file hits 250MB before daily timer. | **Protection from Runaway Loops:** Protects `/var` if an application enters a verbose debug logging loop. |
 | **`dateext` & `dateformat`** | **Enterprise SIEM / Forensics** | Names rotated files with ISO dates (`-%Y%m%d`) instead of integers (`.1.gz`). | **Eliminates File Renaming Cascades:** Avoids renaming every file in the folder each night; integrates cleanly with Splunk/Logstash archive collectors. |
 | **`copytruncate`** | **High-Availability (HA) Standard** | 1. Copies active file.<br>2. Truncates original in-place (`truncate -s 0`). | **Zero Downtime:** JVM never loses its open file descriptor. No service restarts or pipeline interruptions. |
 | **`maxsize 100M`** | **Storage Sentinel Standard** | Forces rotation immediately if file hits 100MB before daily timer. | **Protection from Runaway Loops:** Protects `/var` if an application enters a verbose debug logging loop. |
@@ -679,12 +692,13 @@ cat << 'EOF' > /usr/local/bin/rundeck-cleaner.sh
 set -euo pipefail
 
 LOG_DIR="/var/lib/rundeck/logs/rundeck"
-RETENTION_DAYS=14
+# 🎯 30-DAY RETENTION (Configured to match the 5GB Enterprise Storage Profile)
+RETENTION_DAYS=30
 
 echo "[$(date)] Starting Rundeck Execution Log Purge (> ${RETENTION_DAYS} days)..."
 
 if [ -d "$LOG_DIR" ]; then
-    # STEP 1: Purge execution log files older than 14 days
+    # STEP 1: Purge execution log files older than 30 days
     find "$LOG_DIR" -type f -name "*.log" -mtime +"$RETENTION_DAYS" -delete
     
     # STEP 2: Purge empty job subdirectories left behind (reclaims dentry directory inodes!)
@@ -707,7 +721,7 @@ echo "0 2 * * * root /usr/local/bin/rundeck-cleaner.sh > /dev/null 2>&1" > /etc/
 
 | Step / Command | Technical Mechanism | Production Impact & SRE Why |
 |---|---|---|
-| **`find ... -name "*.log" -mtime +14 -delete`** | Searches recursively and deletes execution traces older than 14 days. | **Frees Both Blocks & Inodes:** Keeps execution logs compliant with 2-week enterprise audit windows while removing dead files. |
+| **`find ... -name "*.log" -mtime +30 -delete`** | Searches recursively and deletes execution traces older than 30 days. | **Frees Both Blocks & Inodes:** Keeps full 30-day execution history accessible in the GUI while preventing runaway inode exhaustion. |
 | **`find ... -type d -empty -delete`** | Unlinks empty leaf directories recursively. | **Reclaims Inode Tables:** In Linux, every directory consumes an inode. Cleaning thousands of empty job folders prevents inode exhaustion. |
 | **`chmod 750`** | `rwxr-x---`: Read, write, execute for root; read/execute for root group; zero access for others. | **Enterprise Security Compliance:** Adheres to CIS Benchmark by locking administrative maintenance scripts against unauthorized tampering. |
 | **`0 2 * * *`** | Runs nightly at 02:00 AM off-peak hours. | **Zero Resource Contention:** Executes during minimum server workload, avoiding I/O spikes during business hours. |
