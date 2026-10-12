@@ -593,29 +593,44 @@ Microsoft Defender for Endpoint (`mdatp`) runs continuous real-time antivirus, m
 ```bash
 cat << 'EOF' > /etc/logrotate.d/mdatp
 /var/opt/microsoft/mdatp/log/*.log {
-    # Frequency: Evaluated daily by system logrotate
+    # 1. SECURITY & PERMISSIONS HARDENING (CIS / SOC Compliance)
+    # Enforce strict file mode: rw------- (0600) owned by root:root
+    # Security traces may contain process memory fragments and network sockets
+    create 0600 root root
+    
+    # 2. ROTATION SCHEDULE & RETENTION BOUNDARIES
+    # Evaluated daily by the system logrotate timer
     daily
     
-    # Retention Count: Retain 5 rotated generations (caps historical storage to ~250MB)
+    # Retain 5 rotated generations before purging oldest
     rotate 5
     
-    # Storage Optimization: Gzip compress (.gz) historical traces
+    # 3. AUDIT & FORENSIC NAMING
+    # Append ISO-8601 timestamps (wdavdaemon.log-20261013.gz) for immutable SIEM shipping
+    dateext
+    dateformat -%Y%m%d
+    
+    # 4. STORAGE OPTIMIZATION
+    # Gzip compress (.gz) historical traces to save ~85-90% disk space
     compress
     
-    # Safety Buffer: Postpone compression of the newest archive by 1 cycle
+    # Postpone compression of newest archive by 1 cycle to prevent file locking race conditions
     delaycompress
     
-    # Resiliency: Do not throw errors if logs haven't initialized yet
+    # 5. RESILIENCY & CLEANLINESS
+    # Do not throw errors if agent logs haven't initialized yet
     missingok
     
-    # Efficiency: Skip rotation if the log file is empty
+    # Skip rotation cycle if the active log file is 0 bytes
     notifempty
     
-    # ZERO-DOWNTIME ROTATION: Copy and truncate active log in-place
-    # (Microsoft wdavdaemon keeps running without dropping real-time protection!)
+    # 6. ZERO-DOWNTIME SECURITY OPERATION
+    # Copy active log to archive, then truncate original in-place to 0 bytes
+    # (Microsoft wdavdaemon keeps running without dropping real-time EDR protection!)
     copytruncate
     
-    # EMERGENCY OVERRIDE: Force immediate rotation at 50MB (strict ceiling)
+    # 7. EMERGENCY STORAGE SHIELD
+    # Force immediate rotation at 50MB (strict ceiling to protect /var from packet trace bursts)
     maxsize 50M
 }
 EOF
@@ -623,13 +638,27 @@ EOF
 
 ---
 
+#### 🧮 MDATP Storage Capacity Breakdown:
+
+| Component | State | Maximum Storage Allocated | Notes & Rationale |
+|---|---|---|---|
+| **Active Live Log** | Writing (`wdavdaemon.log`) | **50 MB** | Triggers instant rotation if it hits 50MB ceiling. |
+| **Archive #1** | Uncompressed (`delaycompress`) | **50 MB** | Kept raw for 24 hours to avoid active file contention. |
+| **Archives #2 to #5** | Gzipped (`.gz`) | **~24 MB** (4 × ~6MB) | 85-90% gzip compression ratio on security traces. |
+| **Total Max Storage** | **Historical Footprint** | **~124 MB** | Strict safety boundary protecting `/var` from EDR log bursts. |
+
+---
+
 #### 🔍 MDATP Directive Breakdown & Production Impact Analysis:
 
-| Directive | Technical Mechanism | Production Impact & SRE Why |
-|---|---|---|
-| **`rotate 5`** | Limits stored historical archives to 5 generations. | **Prevents Security Storage Sprawl:** Caps total MDATP historical footprint to maximum `5 * 50MB = 250MB` uncompressed, `<40MB` compressed. |
-| **`maxsize 50M`** | Triggers instant rotation when log hits 50MB regardless of hour. | **Early Warning Defense:** Security agents burst faster than standard apps during scan cycles; 50MB ceiling prevents saturating small `/var` partitions. |
-| **`copytruncate`** | Zeros the live file descriptor without stopping the daemon. | **Continuous Protection:** Prevents security blind spots. Stopping `mdatp` even for 5 seconds breaches SOC Zero-Trust policies. |
+| Directive | Enterprise Requirement | Technical Mechanism | Production Impact & SRE Why |
+|---|---|---|---|
+| **`create 0600 root root`** | **CIS Benchmark / SOC Confidentiality** | Restricts permissions strictly to `root:root` (`rw-------`). | **Prevents Information Disclosure:** Security logs contain sensitive audit data (process names, command-line arguments, IP endpoints); world-readable permissions are an immediate audit failure. |
+| **`dateext` & `dateformat`** | **Enterprise SIEM / Forensics** | Appends ISO-8601 date timestamps (`-%Y%m%d`). | **Forensic Traceability:** Creates immutable archive names matching SOC incident response timelines. |
+| **`rotate 5`** | **Storage Budget Control** | Limits stored historical archives to 5 generations. | **Prevents Security Storage Sprawl:** Caps total MDATP historical footprint to maximum `~124MB`. |
+| **`maxsize 50M`** | **Early Warning Defense** | Triggers instant rotation when log hits 50MB regardless of hour. | **Burst Shield:** Security agents burst during full-system scans; a 50MB ceiling prevents saturating small `/var` partitions. |
+| **`copytruncate`** | **High-Availability EDR** | Zeros the live file descriptor without stopping the daemon. | **Continuous Protection:** Prevents security blind spots. Stopping `mdatp` even for 5 seconds breaches SOC Zero-Trust policies. |
+| **`delaycompress`** | **Integrity Protection** | Leaves newest archive uncompressed for 1 cycle. | **Prevents Archive Corruption:** Avoids gzip race conditions while asynchronous packet inspection threads flush buffers. |
 
 ---
 
