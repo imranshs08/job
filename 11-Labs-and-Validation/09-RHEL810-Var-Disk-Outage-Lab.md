@@ -450,6 +450,46 @@ journalctl --vacuum-time=14d
 
 ---
 
+#### 📊 How to Check `systemd-journald` Disk Consumption at Any Given Moment:
+
+```bash
+# ------------------------------------------------------------------------------
+# METHOD 1: NATIVE SRE QUERY (Instant total of archived & active journals)
+# ------------------------------------------------------------------------------
+# Queries systemd-journald directly for total allocated disk footprint
+journalctl --disk-usage
+# Output example: Archived and active journals take up 320.0M in the file system.
+
+# ------------------------------------------------------------------------------
+# METHOD 2: PHYSICAL FILESYSTEM CONSUMPTION CHECK VIA DU
+# ------------------------------------------------------------------------------
+# Check total size of persistent journal directory on disk
+du -sh /var/log/journal/
+
+# List individual active and archived .journal files ordered by size
+ls -lhS /var/log/journal/$(cat /etc/machine-id)/
+
+# ------------------------------------------------------------------------------
+# METHOD 3: CHECK JOURNALD ACTIVE RUNTIME ENFORCEMENT & LOG LIMITS
+# ------------------------------------------------------------------------------
+# View live telemetry and cap enforcement calculated by the daemon
+systemctl status systemd-journald | grep -E "using|capped"
+# Output example:
+# System Journal (/var/log/journal/...) is currently using 320.0M.
+# Maximum System Journal size has been capped at 500.0M.
+
+# ------------------------------------------------------------------------------
+# METHOD 4: EMERGENCY ON-DEMAND VACUUM & VERIFICATION
+# ------------------------------------------------------------------------------
+# Immediately force journald to reclaim space down to 500MB
+journalctl --vacuum-size=500M
+
+# Purge any archived logs older than 7 days
+journalctl --vacuum-time=7d
+```
+
+---
+
 ### Pillar 2: Configure Dedicated Agent Logrotate Policies
 
 #### 1. Rundeck Logrotate (`/etc/logrotate.d/rundeck`)
