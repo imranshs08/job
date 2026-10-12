@@ -22,7 +22,7 @@ When `/var` hits **100% capacity**, the system experiences severe cascading fail
 
 You can provision RHEL 8.10 via **Azure CLI**, **AWS CLI**, or **Local Hyper-V / Vagrant / KVM / VirtualBox**.
 
-#### Option A: Azure CLI
+#### Option A: Azure CLI (Capacity-Resilient Multi-SKU Failover)
 ```bash
 # Set variables
 RESOURCE_GROUP="rg-devops-lab"
@@ -40,16 +40,27 @@ az network vnet create \
   --subnet-name $SUBNET_NAME \
   --subnet-prefix 10.0.1.0/24
 
-az vm create \
-  --resource-group $RESOURCE_GROUP \
-  --name $VM_NAME \
-  --image "RedHat:RHEL:8_10:latest" \
-  --size Standard_B2s \
-  --admin-username rheladmin \
-  --generate-ssh-keys \
-  --vnet-name $VNET_NAME \
-  --subnet $SUBNET_NAME \
-  --public-ip-sku Standard
+# Candidate SKUs ordered by availability & cost-efficiency
+CANDIDATE_SIZES=("Standard_D2s_v3" "Standard_B2ms" "Standard_D2as_v4" "Standard_D2s_v5" "Standard_B2s")
+
+for SIZE in "${CANDIDATE_SIZES[@]}"; do
+  echo "==> Attempting to provision VM with size: $SIZE..."
+  if az vm create \
+    --resource-group "$RESOURCE_GROUP" \
+    --name "$VM_NAME" \
+    --image "RedHat:RHEL:8_10:latest" \
+    --size "$SIZE" \
+    --admin-username rheladmin \
+    --generate-ssh-keys \
+    --vnet-name "$VNET_NAME" \
+    --subnet "$SUBNET_NAME" \
+    --public-ip-sku Standard; then
+      echo "✅ Successfully deployed $VM_NAME with size $SIZE!"
+      break
+  else
+    echo "⚠️ Capacity restricted for $SIZE in $LOCATION. Trying next SKU..."
+  fi
+done
 ```
 
 #### Option B: Local Hyper-V / KVM / VirtualBox (Vagrantfile)
