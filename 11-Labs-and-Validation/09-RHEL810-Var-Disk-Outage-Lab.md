@@ -80,41 +80,43 @@ end
 
 ### 1.2 Enterprise Disk Layout Setup (Dedicated `/var` LVM)
 
-To recreate standard enterprise security compliance (CIS Benchmark / DISA STIG), `/var` should reside on its own Logical Volume. For this lab simulation, let's create a dedicated 5GB or 10GB virtual disk or loopback mount for `/var` so it can be filled rapidly.
+> [!NOTE]
+> **Production Azure RHEL 8.10 Discovery**:
+> When provisioned from Azure's official image (`RedHat:RHEL:8_10:latest`), RHEL 8.10 **already partitions the OS with an enterprise-compliant dedicated LVM volume for `/var`**:
+> ```text
+> Filesystem                Type  Size  Used Avail Use% Mounted on
+> /dev/mapper/rootvg-varlv  xfs   8.0G  371M  7.7G   5% /var
+> ```
+> If you are on Azure, you **do not need any extra disk setup**—you can proceed directly to Phase 2 against `/dev/mapper/rootvg-varlv`.
+
+If you are on a bare-metal/custom VM where `/var` is not its own partition, you can configure a dedicated mount via loopback:
 
 ```bash
 # Connect as root
 sudo -i
 
-# Verify OS Version
+# Verify OS Version & current /var mount
 cat /etc/redhat-release
-# Output: Red Hat Enterprise Linux release 8.10 (Ootpa)
+df -hT /var
 
-# If /var is already part of root partition, create a dedicated 4GB loop device for /var
-# to accurately replicate a standalone /var partition:
+# (Optional: Only if /var is not on a dedicated LVM mount)
+# Create a dedicated 4GB loop device for /var:
 mkdir -p /mnt/var_disk_backing
 dd if=/dev/zero of=/mnt/var_disk_backing/var.img bs=1M count=4096
-
-# Setup Loopback device & LVM
 losetup /dev/loop10 /mnt/var_disk_backing/var.img
 pvcreate /dev/loop10
 vgcreate vg_var /dev/loop10
 lvcreate -l 100%FREE -n lv_var vg_var
 mkfs.xfs /dev/vg_var/lv_var
 
-# Temporarily migrate current /var content
 mkdir -p /mnt/new_var
 mount /dev/vg_var/lv_var /mnt/new_var
 rsync -avxHAX /var/ /mnt/new_var/
 umount /mnt/new_var
 
-# Mount as /var in /etc/fstab
 UUID=$(blkid -s UUID -o value /dev/vg_var/lv_var)
 echo "UUID=${UUID} /var xfs defaults 0 0" >> /etc/fstab
 mount -a
-
-# Confirm /var is on its own mount
-df -hT /var
 ```
 
 ---
