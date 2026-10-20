@@ -248,6 +248,219 @@
             color: var(--muted);
             font-size: 0.8rem;
         }
+
+        /* Blueprint Hero & Interactive Viewer Styles */
+        .blueprint-hero {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.12), rgba(192, 132, 252, 0.08));
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 18px;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .blueprint-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #34d399);
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-title-group h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+            line-height: 1.5;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.85rem 0 1.25rem;
+        }
+
+        .tag-pill {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+
+        .tag-pill.cyan { background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.35); color: #38bdf8; }
+        .tag-pill.green { background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.35); color: #34d399; }
+        .tag-pill.purple { background: rgba(192, 132, 252, 0.15); border-color: rgba(192, 132, 252, 0.35); color: #c084fc; }
+        .tag-pill.yellow { background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.35); color: #fbbf24; }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            color: #0b0f19;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* In-page Interactive Tabs */
+        .bp-container {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .bp-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .bp-tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--muted);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .bp-tab-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .bp-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .bp-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .domain-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .domain-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(129, 140, 248, 0.3);
+        }
+
+        .domain-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            margin-bottom: 0.4rem;
+        }
+
+        .domain-box-body {
+            font-size: 0.76rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .code-snippet {
+            background: #06080e;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: #34d399;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.5;
+            margin-top: 0.6rem;
+        }
     </style>
 </head>
 
@@ -281,8 +494,120 @@
         </div>
     </div>
 
+    <!-- NEW FEATURED BLUEPRINT HERO SECTION -->
+    <div class="blueprint-hero">
+        <div class="hero-top">
+            <div class="hero-title-group">
+                <h2>🤖 CCDV-F Free Study & Local Hands-On Blueprint</h2>
+                <div class="hero-subtitle">Comprehensive 1,049-Line Study Manual covering the 8-Hour freeCodeCamp Syllabus by Andrew Brown, Zero-Cost Local CLI Architecture, and $5 Console Credit Budgeting.</div>
+            </div>
+        </div>
+
+        <div class="hero-tags">
+            <span class="tag-pill cyan">⭐ Live Blueprint in Git</span>
+            <span class="tag-pill green">💰 Zero-Cost Local Framework</span>
+            <span class="tag-pill purple">🎥 8-Hour freeCodeCamp (8 Domains)</span>
+            <span class="tag-pill yellow">💵 $5 Credit Budget Lab</span>
+        </div>
+
+        <div class="hero-actions">
+            <a href="https://github.com/imranshs08/job/blob/main/10-AI-Learning-Roadmap/CCDV_F_FOUNDATIONS_TRACKER.md" target="_blank" class="btn btn-primary">
+                📖 View Full Manual on GitHub
+            </a>
+            <a href="10-AI-Learning-Roadmap/CCDV_F_FOUNDATIONS_TRACKER.md" target="_blank" class="btn btn-secondary">
+                📄 Open Raw Markdown
+            </a>
+            <button class="btn btn-secondary" onclick="toggleBlueprintViewer()">
+                ⚡ <span id="toggleText">Toggle In-Page Interactive Explorer</span>
+            </button>
+        </div>
+
+        <!-- Embedded Interactive Explorer -->
+        <div class="bp-container" id="blueprintInteractive">
+            <div class="bp-nav">
+                <button class="bp-tab-btn active" onclick="switchBpTab('domains', this)">🎥 1. freeCodeCamp 8 Domains</button>
+                <button class="bp-tab-btn" onclick="switchBpTab('local', this)">💻 2. Zero-Cost Local Framework</button>
+                <button class="bp-tab-btn" onclick="switchBpTab('budget', this)">💵 3. $5 Credit Budget Lab</button>
+            </div>
+
+            <!-- Tab 1: 8 Domains -->
+            <div class="bp-tab-content active" id="bp-domains">
+                <div class="domain-grid">
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D1: Agents & Loops</span> <span style="color: #34d399;">15%</span></div>
+                        <div class="domain-box-body">Orchestrator-Worker patterns, ReAct loops, Claude Agent SDK <code>query()</code> hooks, <code>PreToolUse</code> decision gate (<code>allow/deny/ask</code>).</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D2: Messages & SSE</span> <span style="color: #38bdf8;">33%</span></div>
+                        <div class="domain-box-body">Messages API payload spec, SSE event lifecycle (<code>message_start</code> → <code>delta</code> → <code>message_stop</code>), ephemeral prompt caching (0.1x read).</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D3: Claude Code CLI</span> <span style="color: #c084fc;">Local</span></div>
+                        <div class="domain-box-body">CLI architecture, workspace discovery, git dirty-state ingestion, <code>.claude/config.json</code>, compaction sliding window.</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D4: Error Taxonomy</span> <span style="color: #fbbf24;">Eval</span></div>
+                        <div class="domain-box-body">Transient HTTP 429/529 (jitter backoff) vs Reasoning/Context token overflows vs Tool execution failures (<code>is_error: true</code>).</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D5: Sampling Bounds</span> <span style="color: #f87171;">Controls</span></div>
+                        <div class="domain-box-body">Temperature (0.0–1.0), Nucleus Sampling (<code>top_p</code>), Adaptive Extended Thinking (<code>effort: medium/high</code>) vs Legacy (<code>budget &lt; max</code>).</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D6: XML Tag Engine</span> <span style="color: #34d399;">Content</span></div>
+                        <div class="domain-box-body">Semantic isolation with <code>&lt;context&gt;</code>, <code>&lt;rules&gt;</code>, <code>&lt;scratchpad&gt;</code>, system message separation against prompt bleeding.</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D7: Security Guardrails</span> <span style="color: #f87171;">Safety</span></div>
+                        <div class="domain-box-body">Direct/Indirect prompt injection defenses, client-side PII regex masking vault, blocking destructive commands (<code>rm -rf /</code>).</div>
+                    </div>
+                    <div class="domain-box">
+                        <div class="domain-box-header"><span>D8: Tools & MCP</span> <span style="color: #38bdf8;">30%</span></div>
+                        <div class="domain-box-body">JSON Schema 2020-12, <code>stop_reason: tool_use</code> loops, MCP Primitives (Tools, Resources, Prompts), stdio vs HTTP transport.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Local Framework -->
+            <div class="bp-tab-content" id="bp-local">
+                <div style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 0.5rem; font-weight: 600;">🛠️ Zero-API-Cost Local Workstation Commands:</div>
+                <div class="code-snippet"># 1. Install official Claude Code CLI
+npm install -g @anthropic-ai/claude-code
+
+# 2. Local diagnostic check (Zero API tokens consumed)
+claude doctor
+
+# 3. Production CLAUDE.md Hierarchy Precedence:
+~/.claude/CLAUDE.md (User global)
+└── ./CLAUDE.md (Repository root rules)
+    └── ./services/api/CLAUDE.md (Subtree scoped)
+
+# 4. Local Stdio MCP Server Execution:
+python mcp_local_server.py  # Communicates via stdin/stdout JSON-RPC 2.0</div>
+            </div>
+
+            <!-- Tab 3: Budget Lab -->
+            <div class="bp-tab-content" id="bp-budget">
+                <div style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 0.5rem; font-weight: 600;">💵 Anthropic Console $5 Credit Optimization Parameters:</div>
+                <div class="code-snippet">• Model: claude-3-5-haiku-20241022 ($0.80/MTok Base In | $4.00/MTok Out)
+• Max Yield: Over 6.25M base input tokens or 62.5M cached read tokens!
+• Prompt Caching: 90% discount on cache hits (0.1x multiplier = $0.08 / MTok)
+• Cache Writes: 5-Min TTL (1.25x) vs 1-Hour TTL (2.0x) | Exactly 4 breakpoints max
+• Batch API: 50% discount on non-urgent requests (/v1/messages/batches)
+• Validation Regex: ^[a-zA-Z0-9_-]{1,64}$ for custom_id batch constraints</div>
+            </div>
+        </div>
+    </div>
+
     <div class="section-label">📋 Quick References</div>
     <div class="grid">
+        <a class="card featured" href="https://github.com/imranshs08/job/blob/main/10-AI-Learning-Roadmap/CCDV_F_FOUNDATIONS_TRACKER.md" target="_blank" style="border-color: rgba(56, 189, 248, 0.4); background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.05));">
+            <div class="card-icon">🤖</div>
+            <h2>CCDV-F Foundations Blueprint <span class="weight">1,049 lines</span></h2>
+            <p>Official freeCodeCamp 8-Hour Syllabus tracker, Zero-Cost Local Engineering Framework (Claude CLI, CLAUDE.md hierarchy, stdio MCP Server), and $5 Free Credit Budget Optimization Laboratory.</p>
+            <span class="badge badge-blue">⭐ Live Blueprint</span>
+            <span class="badge badge-green" style="margin-left: 0.4rem;">100% Free Tier</span>
+        </a>
         <a class="card" href="10-AI-Learning-Roadmap/Cram+Sheet+(Print).pdf" target="_blank">
             <div class="card-icon">⚡</div>
             <h2>Cram Sheet <span class="weight">6 pages</span></h2>
@@ -439,6 +764,27 @@
                 target="_blank" style="color: var(--accent);">View Study Plan</a></p>
     </footer>
 
+    <script>
+        function switchBpTab(tabId, btn) {
+            document.querySelectorAll('.bp-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.bp-tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            const target = document.getElementById('bp-' + tabId);
+            if (target) target.classList.add('active');
+        }
+
+        function toggleBlueprintViewer() {
+            const container = document.getElementById('blueprintInteractive');
+            const toggleText = document.getElementById('toggleText');
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                toggleText.innerText = 'Hide In-Page Interactive Explorer';
+            } else {
+                container.style.display = 'none';
+                toggleText.innerText = 'Show In-Page Interactive Explorer';
+            }
+        }
+    </script>
 </body>
 
 </html>
