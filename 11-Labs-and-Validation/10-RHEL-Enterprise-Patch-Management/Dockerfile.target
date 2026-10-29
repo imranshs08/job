@@ -1,0 +1,34 @@
+FROM almalinux:8.10
+
+# Metadata
+LABEL maintainer="Enterprise DevOps Team"
+LABEL description="RHEL 8.10 Compatible Target Node for Patching Simulation"
+
+# Install OpenSSH Server, Sudo, Core Utilities, and DNF Plugins
+RUN dnf install -y \
+    openssh-server \
+    sudo \
+    iproute \
+    procps-ng \
+    dnf-plugins-core \
+    cronie \
+    findutils \
+    which \
+    passwd && \
+    dnf clean all && \
+    ssh-keygen -A
+
+# Configure root and ansible user
+RUN echo 'root:RedHat123!' | chpasswd && \
+    useradd -m -s /bin/bash ansible && \
+    echo 'ansible:ansible' | chpasswd && \
+    echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/ansible && \
+    chmod 0440 /etc/sudoers.d/ansible
+
+# SSH daemon configuration
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

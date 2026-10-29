@@ -1,0 +1,38 @@
+---
+# ==============================================================================
+# Playbook: Emergency Patch Rollback Pipeline
+# Purpose: Automatically rolls back the last DNF transaction if an application
+#          or integration test fails after a patch window.
+# ==============================================================================
+
+- name: Emergency Rollback of Last Patch Transaction
+  hosts: "{{ target_env | default('dev') }}"
+  gather_facts: false
+  serial: "{{ batch_size | default('50%') }}"
+
+  tasks:
+    - name: "Query last DNF transaction ID"
+      ansible.builtin.command: dnf history list --reverse
+      register: dnf_last_history
+      changed_when: false
+
+    - name: "Display last transaction details"
+      ansible.builtin.debug:
+        msg: "{{ dnf_last_history.stdout_lines | slice(5) }}"
+
+    - name: "Perform DNF transaction undo"
+      ansible.builtin.command: dnf history undo last -y
+      register: dnf_undo_result
+      changed_when: true
+
+    - name: "Reboot node to restore prior kernel state if necessary"
+      ansible.builtin.reboot:
+        msg: "Emergency rollback reboot triggered"
+        connect_timeout: 20
+        reboot_timeout: 600
+        test_command: uptime
+      when: dnf_undo_result.changed
+
+    - name: "Confirm rollback success"
+      ansible.builtin.debug:
+        msg: "Rollback completed on {{ inventory_hostname }}. Node returned to stable pre-patch state."

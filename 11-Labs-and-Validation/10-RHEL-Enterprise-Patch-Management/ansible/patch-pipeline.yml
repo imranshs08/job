@@ -1,0 +1,157 @@
+---
+# ==============================================================================
+# Playbook: Enterprise Deterministic Linux Patching Pipeline
+# Features:
+#   1. Pre-flight health checks (disk space, pre-existing reboot flags)
+#   2. Enforced frozen snapshot repo lock (no drift across lower & prod)
+#   3. DNF Security advisory update
+#   4. Post-update reboot check (needs-restarting -r)
+#   5. Safe rolling reboot with health verification
+# ==============================================================================
+
+- name: Enterprise Deterministic Linux Patching Pipeline
+  hosts: "{{ target_env | default('dev') }}"
+  gather_facts: true
+  serial: "{{ batch_size | default('50%') }}"
+
+  tasks:
+    # -------------------------------------------------------------------------
+    # PHASE 1: PRE-FLIGHT CHECKS & SYSTEM TELEMETRY
+    # -------------------------------------------------------------------------
+    - name: "Phase 1.1: Capture Pre-Patch OS and Kernel Baseline"
+      ansible.builtin.debug:
+        msg: >
+          [PRE-CHECK] Node: {{ inventory_hostname }} |
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }} |
+          Kernel: {{ ansible_kernel }} |
+          Uptime: {{ ansible_uptime_seconds }}s
+
+    - name: "Phase 1.2: Verify minimum free disk space on / and /var (>= 2.5 GB)"
+      ansible.builtin.assert:
+        that:
+          - item.size_available >= (min_free_space_bytes | default(2684354560))
+        fail_msg: >
+          CRITICAL: Mount point {{ item.mount }} on {{ inventory_hostname }} has only
+          {{ (item.size_available / 1024 / 1024) | round(2) }} MB available! Aborting to prevent bricking.
+      loop: "{{ ansible_mounts }}"
+      when: item.mount in ['/', '/var']
+
+    - name: "Phase 1.3: Inspect if node already had a reboot pending prior to patching"
+      ansible.builtin.command: needs-restarting -r
+      register: pre_patch_reboot_check
+      failed_when: false
+      changed_when: false
+
+    - name: "Phase 1.4: Warn if uncompleted prior reboot exists"
+      ansible.builtin.debug:
+        msg: "WARNING: {{ inventory_hostname }} had an unresolved reboot pending before this window!"
+      when: pre_patch_reboot_check.rc != 0
+
+    # -------------------------------------------------------------------------
+    # PHASE 2: ENFORCE FROZEN REPOSITORY SNAPSHOT (IMMUTABLE BASELINE)
+    # -------------------------------------------------------------------------
+    - name: "Phase 2.1: Lock BaseOS repository to the active monthly snapshot"
+      ansible.builtin.yum_repository:
+        name: "frozen-baseos"
+        description: "Frozen BaseOS Snapshot - {{ active_patch_snapshot }}"
+        baseurl: "{{ repo_server_url }}/{{ active_patch_snapshot }}/BaseOS/"
+        gpgcheck: false
+        enabled: true
+      notify: Clean DNF Cache
+
+    - name: "Phase 2.2: Lock AppStream repository to the active monthly snapshot"
+      ansible.builtin.yum_repository:
+        name: "frozen-appstream"
+        description: "Frozen AppStream Snapshot - {{ active_patch_snapshot }}"
+        baseurl: "{{ repo_server_url }}/{{ active_patch_snapshot }}/AppStream/"
+        gpgcheck: false
+        enabled: true
+      notify: Clean DNF Cache
+
+    - name: "Phase 2.3: Disable public dynamic upstream mirrors (Eliminate drift)"
+      ansible.builtin.command: dnf config-manager --set-disabled baseos appstream extras appstream-source baseos-source
+      failed_when: false
+      changed_when: false
+
+    - name: Flush handlers to ensure cache is cleaned immediately
+      ansible.builtin.meta: flush_handlers
+
+    # -------------------------------------------------------------------------
+    # PHASE 3: SECURITY ADVISORY / PATCH EXECUTION
+    # -------------------------------------------------------------------------
+    - name: "Phase 3.1: Query pending security advisories from frozen snapshot"
+      ansible.builtin.command: dnf check-update --security
+      register: dnf_check_security
+      failed_when: dnf_check_security.rc not in [0, 100]
+      changed_when: false
+
+    - name: "Phase 3.2: Log security advisory status"
+      ansible.builtin.debug:
+        msg: "{{ 'Security patches are AVAILABLE and will be installed.' if dnf_check_security.rc == 100 else 'System is clean. No security patches needed.' }}"
+
+    - name: "Phase 3.3: Apply Security Patches via DNF"
+      ansible.builtin.dnf:
+        name: "*"
+        security: true
+        state: latest
+        update_cache: true
+      register: dnf_upgrade_result
+      when: dnf_check_security.rc == 100
+
+    - name: "Phase 3.4: Display patched package audit log"
+      ansible.builtin.debug:
+        var: dnf_upgrade_result.results
+      when: dnf_check_security.rc == 100 and dnf_upgrade_result.results is defined
+
+    # -------------------------------------------------------------------------
+    # PHASE 4: REBOOT EVALUATION & CONDITIONAL ROLLING REBOOT
+    # -------------------------------------------------------------------------
+    - name: "Phase 4.1: Query if upgraded packages require a kernel reboot"
+      ansible.builtin.command: needs-restarting -r
+      register: post_patch_reboot_check
+      failed_when: false
+      changed_when: false
+
+    - name: "Phase 4.2: Perform safe rolling reboot if kernel or glibc was patched"
+      ansible.builtin.reboot:
+        msg: "Reboot triggered by Enterprise Patching Automation (Kernel / Security Advisory)"
+        connect_timeout: 20
+        reboot_timeout: 600
+        pre_reboot_delay: 5
+        post_reboot_delay: 15
+        test_command: uptime
+      when: post_patch_reboot_check.rc != 0
+
+    # -------------------------------------------------------------------------
+    # PHASE 5: POST-FLIGHT TELEMETRY & SYSTEM VALIDATION
+    # -------------------------------------------------------------------------
+    - name: "Phase 5.1: Verify node responsiveness and uptime post-patch"
+      ansible.builtin.command: uptime
+      register: post_uptime
+      changed_when: false
+
+    - name: "Phase 5.2: Verify core critical daemon states"
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+      loop:
+        - sshd
+        - crond
+
+    - name: "Phase 5.3: Check for any broken library dependencies"
+      ansible.builtin.command: dnf check
+      register: dnf_check_integrity
+      failed_when: dnf_check_integrity.rc != 0
+      changed_when: false
+
+    - name: "Phase 5.4: Patching Pipeline Completion Sign-Off"
+      ansible.builtin.debug:
+        msg: >
+          SUCCESS: {{ inventory_hostname }} [Tier: {{ env_tier | default('unknown') }}]
+          is fully patched against Snapshot {{ active_patch_snapshot }}.
+          System Integrity: HEALTHY. Uptime: {{ post_uptime.stdout }}
+
+  handlers:
+    - name: Clean DNF Cache
+      ansible.builtin.command: dnf clean all
+      changed_when: true
